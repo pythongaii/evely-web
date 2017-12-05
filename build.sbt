@@ -1,4 +1,4 @@
-name := "Play2-mongodb-silhouette-activator-template"
+name := "evely-web"
 
 version := "1.0"
 
