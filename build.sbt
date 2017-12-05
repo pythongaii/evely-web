@@ -2,9 +2,9 @@ name := "Play2-mongodb-silhouette-activator-template"
 
 version := "1.0"
 
-lazy val `mechanics` = (project in file(".")).enablePlugins(PlayScala)
-
 scalaVersion := "2.11.7"
+
+lazy val `evely-web` = (project in file(".")).enablePlugins(PlayScala)
 
 val reactiveMongoVersion = "0.11.14"
 
