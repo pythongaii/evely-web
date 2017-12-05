@@ -1,0 +1,41 @@
+@import forms.ForgotPass.Password
+@(form: Form[Password])(implicit messages: Messages)
+@import helpers.PlainHelper.myFields
+<!DOCTYPE html>
+<head>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="@routes.Assets.at("/mdl/material.min.css")">
+    <link rel="stylesheet" href="@routes.Assets.at("/stylesheets/forgotpassreset.css")">
+    <script defer src="@routes.Assets.at("/mdl/material.min.js")"></script>
+</head>
+<body>
+        <!-- Always shows a header, even in smaller screens. -->
+    @views.html.common.header()(messages)
+    <main class="mdl-layout__content">
+        <div id="page-content">
+            <h2>@messages("forgotpassreset.title")</h2>
+            <hr>
+            <div id="form_block">
+                <div class="mdl-card mdl-shadow--6dp">
+                    @messages("forgotpassreset.message1")
+                    <div class="mdl-card__supporting-text">
+                        @helper.form(action = routes.ForgotPasswordController.forgotpass()) {
+                            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                                @helper.inputPassword(form("password"), 'class -> "mdl-textfield__input")
+                                <label class="mdl-textfield__label" for="sample3">@Messages("forgotpassreset.password")</label>
+                            </div>
+                            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                                @helper.inputPassword(form("passwordConfirm"), 'class -> "mdl-textfield__input")
+                                <label class="mdl-textfield__label" for="sample3">@Messages("forgotpassreset.confirm")</label>
+                            </div>
+                            <div>
+                                <button class="mdl-button mdl-button--raised mdl-js-button mdl-js-ripple-effect" type="submit" name="action">@Messages("forgotpassreset.submitbutton")</button>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    @views.html.common.footer()(messages)
+</body>

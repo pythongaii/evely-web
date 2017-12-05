@@ -1,0 +1,21 @@
+# access to top page
+GET         /                           controllers.TopController.index()
+
+# signup用
+GET         /signupstart                controllers.SignUpController.startSignup
+POST        /signupmail                 controllers.SignUpController.signupmail
+GET         /signup                     controllers.SignUpController.signup
+POST        /signupconfirm              controllers.SignUpController.signupConfirm
+POST        /signupped                  controllers.SignUpController.signupped
+
+# signin用
+POST        /signinstart                controllers.SignInController.startSignin
+POST        /signin                     controllers.SignInController.signin
+GET         /forgotpass                 controllers.ForgotPasswordController.startForgotPass
+POST        /forgotmail                 controllers.ForgotPasswordController.forgotpassMail
+GET         /forgotpass/reset           controllers.ForgotPasswordController.forgotpassreset
+POST        /forgotpass                 controllers.ForgotPasswordController.forgotpass
+
+
+GET         /assets/*file               controllers.Assets.at(path="/public", file)
+

@@ -1,0 +1,26 @@
+@()(implicit messages: Messages)
+@import helpers.PlainHelper.myFields
+<!DOCTYPE html>
+<head>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="@routes.Assets.at("/mdl/material.min.css")">
+    <link rel="stylesheet" href="@routes.Assets.at("/stylesheets/signupmailsent.css")">
+    <script defer src="@routes.Assets.at("/mdl/material.min.js")"></script>
+</head>
+<body>
+    @views.html.common.header()(messages)
+    <main class="mdl-layout__content">
+        <div id="page-content">
+            <h3>@messages("signupmail.title")</h3>
+            <hr>
+            <div id="step"></div>
+            <div id="message">
+                <span>@messages("signupmail.messa1")<br>
+                @messages("signupmail.messa2")</span><br>
+                @messages("signupmail.messa3")<br>
+                @messages("signupmail.messa4")<br>
+            </div>
+        </div>
+    </main>
+    @views.html.common.footer()(messages)
+</body>

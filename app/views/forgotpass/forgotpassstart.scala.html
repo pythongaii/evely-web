@@ -1,0 +1,39 @@
+@import forms.ForgotPass.form
+@()(implicit messages: Messages)
+@import helpers.PlainHelper.myFields
+
+<!DOCTYPE html>
+<head>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="@routes.Assets.at("/mdl/material.min.css")">
+    <link rel="stylesheet" href="@routes.Assets.at("/stylesheets/forgotpassstart.css")">
+    <script defer src="@routes.Assets.at("/mdl/material.min.js")"></script>
+</head>
+<body>
+        <!-- Always shows a header, even in smaller screens. -->
+    @views.html.common.header()(messages)
+    <main class="mdl-layout__content">
+        <div id="page-content">
+            <h2>@messages("forgotpassstart.title")</h2>
+            <hr>
+            <div id="form_block">
+                <div class="mdl-card mdl-shadow--6dp">
+                    <div class="mdl-card__supporting-text">
+                        @messages("forgotpassstart.message1")<br>
+                        @messages("forgotpassstart.message2")
+                        @helper.form(action = routes.ForgotPasswordController.forgotpassMail()) {
+                            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                                @helper.inputText(form("mail"), 'class -> "mdl-textfield__input")
+                                <label class="mdl-textfield__label" for="sample3">@Messages("forgotpassstart.mailaddress")</label>
+                            </div>
+                            <div>
+                                <button class="mdl-button mdl-button--raised mdl-js-button mdl-js-ripple-effect" type="submit" name="action">@Messages("forgotpassstart.submitbutton")</button>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    @views.html.common.footer()(messages)
+</body>

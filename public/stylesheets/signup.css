@@ -1,0 +1,40 @@
+@import "common.css";
+
+#step{
+    margin-right: auto;
+    margin-left: auto;
+    background: url(../images/signup_step2.png) 0 0 no-repeat;
+    height: 100px;
+    width: 800px;
+    padding-bottom: 20px;
+}
+
+#form_block{
+    margin-left: auto;
+    margin-right: auto;
+    width: 435px;
+    margin-top: 30px;
+    margin-bottom: 60px;
+}
+
+.mdl-card.mdl-shadow--6dp {
+    padding-top: 10px;
+    width: 435px;
+    padding-left: 50px;
+    padding-right: 50px;
+    padding-bottom: 10px;
+}
+
+#sub{
+    margin-top: 10px;
+}
+
+.signup_title{
+    margin-bottom: 10px;
+}
+
+hr {
+    margin: 0px;
+    border-width: 3px;
+    width: 100%;
+}

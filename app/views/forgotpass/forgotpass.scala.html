@@ -1,0 +1,23 @@
+@()(implicit messages: Messages)
+@import helpers.PlainHelper.myFields
+<!DOCTYPE html>
+<head>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="@routes.Assets.at("/mdl/material.min.css")">
+    <link rel="stylesheet" href="@routes.Assets.at("/stylesheets/forgotpass.css")">
+    <script defer src="@routes.Assets.at("/mdl/material.min.js")"></script>
+</head>
+<body>
+    @views.html.common.header()(messages)
+    <main class="mdl-layout__content">
+        <div id="page-content">
+            <h2>@messages("forgotpass.title")</h2>
+            <hr>
+            <div id="message">
+                <span>@messages("forgotpass.message1")<br>
+                @messages("forgotpass.message2")</span><br>
+            </div>
+        </div>
+    </main>
+    @views.html.common.footer()(messages)
+</body>

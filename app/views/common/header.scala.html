@@ -1,0 +1,40 @@
+@import helper._
+
+@()(implicit messages: Messages)
+
+<div id="header">
+    <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+        <header class="mdl-layout__header">
+            <div class="mdl-layout__header-row">
+                    <!-- Title -->
+                <span class="mdl-layout-title">@Messages("toppage.title")</span>
+                    <!-- Add spacer, to align navigation to the right -->
+                <div class="mdl-layout-spacer"></div>
+                @*<div class="mdl-textfield mdl-js-textfield" style="width: 250px">*@
+                    @*<div class="">*@
+                        @*<input class="mdl-textfield__input" type="text" name="sample"*@
+                        @*id="waterfall-exp" placeholder="">*@
+                    @*</div>*@
+                @*</div>*@
+                @*<label class="mdl-button mdl-js-button mdl-button--icon"*@
+                @*for="waterfall-exp">*@
+                    @*<i class="material-icons">search</i>*@
+                @*</label>*@
+                    @*<!-- Navigation. We hide it in small screens. -->*@
+                @*<nav class="mdl-navigation mdl-layout--large-screen-only" style="font-weight: bold">*@
+                    @*<a class="mdl-navigation__link" href="">@Messages("header.searchArea")</a>*@
+                    @*<a class="mdl-navigation__link" href="">@Messages("header.searchCategory")</a>*@
+                @*</nav>*@
+                <div class="mdl-layout-spacer"></div>
+                <nav class="mdl-navigation mdl-layout--large-screen-only">
+                    @helper.form(action = routes.SignInController.startSignin(), 'name->"signinForm") {
+
+                    }
+                    <a class="mdl-navigation__link" href="signinStart" onclick="document.signinForm.submit(); return false;" >@Messages("header.signIn")</a>
+                    /
+                    <a class="mdl-navigation__link" name="signuplink" href="@routes.SignUpController.startSignup()">@Messages("header.signUp")</a>
+                </nav>
+            </div>
+        </header>
+    </div>
+</div>

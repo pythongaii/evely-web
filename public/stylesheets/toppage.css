@@ -1,0 +1,62 @@
+@import "common.css";
+
+.mdl-layout__content {
+    width: 100%;
+}
+
+#toppage_head_content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(-135deg,#05FBFF, #1E00FF);
+    width: auto;
+    height: 300px;
+}
+
+#toppage_main_content{
+    margin-left: auto;
+    margin-right: auto;
+    width: 1024px;
+}
+
+#left_column {
+    margin-left: 12px;
+    float: left;
+    overflow: hidden;
+    width: 800px;
+}
+
+#right_column {
+    margin-right: 12px;
+    width: 200px;
+    overflow: hidden;
+    float: left;
+}
+
+#news_list {
+    margin-top: 20px;
+    width: 150px;
+    height: 200px;
+    background-color: #454545;
+}
+
+#list_header {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+hr {
+    margin: 0px;
+    border-width: 3px;
+    width: 30%;
+}
+
+.mdl-list__item {
+    width: 900px;
+    margin: 2px;
+}
+
+.event-card-wide.mdl-card {
+    height:250px;
+    width: 700px;
+}

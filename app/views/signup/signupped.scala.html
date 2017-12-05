@@ -1,0 +1,27 @@
+@()(implicit messages: Messages)
+@import helpers.PlainHelper.myFields
+<!DOCTYPE html>
+<head>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="@routes.Assets.at("/mdl/material.min.css")">
+    <link rel="stylesheet" href="@routes.Assets.at("/stylesheets/signupped.css")">
+    <script defer src="@routes.Assets.at("/mdl/material.min.js")"></script>
+</head>
+<body>
+    @views.html.common.header()(messages)
+    <main class="mdl-layout__content">
+        <div id="page-content">
+            <h3>@messages("signupped.title")</h3>
+            <hr>
+            <div id="step"></div>
+            <div id="message">
+                <span>@messages("signupped.messa1")<br>
+                    @messages("signupped.messa2")</span><br>
+                <br>
+                20秒後に自動でトップページで移動します。移動しない場合は
+                <a href="http://localhost:9000">こちら</a>をクリックしてください。
+            </div>
+        </div>
+    </main>
+    @views.html.common.footer()(messages)
+</body>

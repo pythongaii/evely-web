@@ -1,0 +1,56 @@
+@import forms.SignUpForm.RegisterdData
+@(form: Form[RegisterdData])(implicit messages: Messages)
+@import helpers.PlainHelper.myFields
+<!DOCTYPE html>
+<head>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="@routes.Assets.at("/mdl/material.min.css")">
+    <link rel="stylesheet" href="@routes.Assets.at("/stylesheets/signup.css")">
+    <script defer src="@routes.Assets.at("/mdl/material.min.js")"></script>
+</head>
+<body>
+        <!-- Always shows a header, even in smaller screens. -->
+    @views.html.common.header()(messages)
+    <main class="mdl-layout__content">
+        <div id="page-content">
+            <h3>@messages("signup.title")</h3>
+            <hr>
+            <div id="step"></div>
+            <div id="form_block">
+                <div class="mdl-card mdl-shadow--6dp">
+                    <div class="mdl-card__supporting-text">
+                        <div class="signup_title" >
+                            すべての項目を入力してください。
+                        </div>
+                        @helper.form(action = routes.SignUpController.signupConfirm()) {
+                            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                                @helper.inputText(form("mailaddress"), 'class -> "mdl-textfield__input")
+                                <label class="mdl-textfield__label" for="sample3">@Messages("signup.mailaddress")</label>
+                            </div>
+                            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                                @helper.inputText(form("realName"), 'class -> "mdl-textfield__input")
+                                <label class="mdl-textfield__label" for="sample3">@Messages("signup.userName")</label>
+                            </div>
+                            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                                @helper.inputText(form("userName"), 'class -> "mdl-textfield__input")
+                                <label class="mdl-textfield__label" for="sample3">@Messages("signup.userID")</label>
+                            </div>
+                            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                                @helper.inputPassword(form("password"), 'class -> "mdl-textfield__input")
+                                <label class="mdl-textfield__label" for="sample3">@Messages("signup.password")</label>
+                            </div>
+                            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                                @helper.inputPassword(form("password"), 'class -> "mdl-textfield__input")
+                                <label class="mdl-textfield__label" for="sample3">@Messages("signup.password.confirm")</label>
+                            </div>
+                            <div id="sub">
+                                <button class="mdl-button mdl-button--raised mdl-js-button mdl-js-ripple-effect" type="submit" name="action">@Messages("signup.submitbutton")</button>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    @views.html.common.footer()(messages)
+</body>
