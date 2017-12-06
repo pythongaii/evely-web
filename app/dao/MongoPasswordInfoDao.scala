@@ -39,7 +39,7 @@ class MongoPasswordInfoDao @Inject() (reactiveMongoApi: ReactiveMongoApi) extend
   /**
     * 認証用のPasswordInfoを取得する
     * @param loginInfo PasswordInfoに紐づいたユーザのLogin情報
-    * @return ユーザの登録したパスワードのハッシュ化した情報
+    * @return ユーザの登録したパスワードをハッシュ化した情報
     */
   override def find(loginInfo: LoginInfo): Future[Option[PasswordInfo]] = ???
 
