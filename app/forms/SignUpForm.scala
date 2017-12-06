@@ -1,6 +1,5 @@
 package forms
 
-import model.user.{RegisterdUser, RegistringUser}
 import play.api.data.Form
 import play.api.data.Forms._
 
@@ -19,7 +18,10 @@ object SignUpForm {
     mapping(
       "userName" -> nonEmptyText,
       "realName" -> nonEmptyText,
-      "password" -> nonEmptyText,
+      "password" -> tuple(
+        "password1" -> nonEmptyText(minLength = 6),
+        "password2" -> nonEmptyText(minLength = 6)
+      ).verifying(passwords => passwords._1 == passwords._2),
       "mailaddress" -> nonEmptyText,
       "tel" -> optional(text)
     )(RegisterdData.apply)(RegisterdData.unapply)
@@ -27,7 +29,7 @@ object SignUpForm {
 
   case class RegisterdData(userName: String,
                            realName: String,
-                           password: String,
+                           password: (String, String),
                            mailaddress: String,
                            tel: Option[String])
 }
