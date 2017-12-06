@@ -11,5 +11,5 @@ trait SignUpTokenDAO {
   def save(token: SignUpToken): Future[SignUpToken]
   def add(token: SignUpToken): Future[SignUpToken]
   def update(token: SignUpToken): Future[SignUpToken]
-  def remove(token: SignUpToken): Future[SignUpToken]
+  def remove(tokenId: UUID): Future[Unit]
 }
