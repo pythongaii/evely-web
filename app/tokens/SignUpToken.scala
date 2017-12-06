@@ -7,7 +7,10 @@ import play.api.libs.json.Json
 
 case class SignUpToken(tokenID: UUID, mailAddress: String,
                          expirationTime: DateTime
-                        )
+                        ) {
+  // 一時トークンの期限が切れているか確認
+  def isExpired = expirationTime.isBeforeNow
+}
 
 object SignUpToken {
   implicit val SignUpTokenJsonFormat = Json.format[SignUpToken]

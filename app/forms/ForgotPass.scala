@@ -11,15 +11,16 @@ object ForgotPass {
     )(Data.apply)(Data.unapply)
   )
 
-  val resetForm = Form(
+  val resetForm = Form[Password](
     mapping(
-      "password" -> nonEmptyText,
-      "passwordConfirm" -> nonEmptyText
+      "password" -> tuple(
+        "password1" -> nonEmptyText,
+        "password2" -> nonEmptyText
+      ).verifying(passwords => passwords._1 == passwords._2),
     )(Password.apply)(Password.unapply)
   )
 
-  case class Password(password: String,
-                      passwordConfirm: String)
+  case class Password(password: (String, String))
 
   case class Data(password: String)
 }
