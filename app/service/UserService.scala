@@ -5,31 +5,35 @@ import javax.inject.Inject
 
 import com.mohiva.play.silhouette.api.LoginInfo
 import com.mohiva.play.silhouette.api.services.IdentityService
-import model.user.RegisterdUser
+import dao.UserDAO
+import model.user.RegisteredUser
 
 import scala.concurrent.Future
 
+trait UserService extends IdentityService[RegisteredUser] {
 
-abstract class UserService extends IdentityService[RegisterdUser] {
+  def save(user: RegisteredUser): Future[Option[RegisteredUser]]
 
+  def find(loginInfo: LoginInfo): Future[Option[RegisteredUser]]
 
-  def save(user: RegisterdUser): Future[Option[RegisterdUser]] = ???
+  def find(userName: String): Future[Option[RegisteredUser]]
 
-  def find(loginInfo: LoginInfo): Future[Option[RegisterdUser]] = ???
+  def update(user: RegisteredUser): Future[RegisteredUser]
 
-  def find(userName: String): Future[Option[RegisterdUser]] = ???
-
-  def Update(user: RegisterdUser): Future[RegisterdUser] = ???
-
-  def retrieve: Future[Option[RegisterdUser]] = ???
-
-  def delete(loginInfo: LoginInfo): Future[Unit] = ???
+  def remove(loginInfo: LoginInfo): Future[Unit]
 }
 
-class UserServiceImpl @Inject() extends UserService {
-  override def retrieve(loginInfo: LoginInfo): Future[Option[RegisterdUser]] = ???
-  def retrieved(id: UUID): Future[Option[RegisterdUser]] = ???
+class UserServiceImpl @Inject()(userDAO: UserDAO) extends UserService {
+  override def retrieve(loginInfo: LoginInfo): Future[Option[RegisteredUser]] = userDAO.find(loginInfo)
 
-  override def save(user: RegisterdUser) = ???
+  override def find(loginInfo: LoginInfo): Future[Option[RegisteredUser]]  = userDAO.find(loginInfo)
+
+  override def find(userName: String): Future[Option[RegisteredUser]] = userDAO.find(userName)
+
+  override def update(user: RegisteredUser): Future[RegisteredUser] = userDAO.update(user)
+
+  override def remove(loginInfo: LoginInfo): Future[Unit] = userDAO.remove(loginInfo)
+
+  override def save(user: RegisteredUser): Future[RegisteredUser] = userDAO.save(user)
 }
 
