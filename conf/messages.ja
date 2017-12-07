@@ -29,7 +29,7 @@ signup.password.confirm=パスワード(確認用)
 signup.submitbutton=確認画面へ
 signup.mailError=ちゃんと打て
 signup.userNameError=本間にそんな名前？？
-signup.passError=英数字大文字小文字が各1文字以上で、パスワードの文字数は8文字以上らしいです
+signup.passError=8文字以上の英数字(大小別)らしいです
 
 
 signupstart.mail_title=メールアドレスで新規会員登録
