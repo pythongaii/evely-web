@@ -4,6 +4,7 @@ import java.util.UUID
 import javax.inject.Inject
 
 import dao.{MongoSignUpTokenDAO, SignUpTokenDAO}
+import org.joda.time.DateTime
 import tokens.SignUpToken
 
 import scala.concurrent.Future
@@ -11,7 +12,10 @@ import scala.concurrent.Future
 
 class SignUpTokenService @Inject() (mongoSignUpTokenDAO: MongoSignUpTokenDAO) {
 
-  def createUserToken(email: String): Void = ???
+  def createUserToken(mailaddress: String, isSignUp: Boolean): SignUpToken = {
+    SignUpToken(UUID.randomUUID(), mailaddress, new DateTime().plusHours(24), isSignUp)
+  }
+
 
   def save(signUpToken: SignUpToken): Future[SignUpToken] = mongoSignUpTokenDAO.save(signUpToken)
 

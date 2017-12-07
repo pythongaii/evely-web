@@ -4,7 +4,7 @@ GET         /                           controllers.TopController.index()
 # signup用
 GET         /signup                     controllers.SignUpController.signupStart
 POST        /signupmail                 controllers.SignUpController.signupMail
-GET         /signup/:token              controllers.SignUpController.signup
+GET         /signup/:token              controllers.SignUpController.signup(tokenID: String)
 POST        /signup/confirm             controllers.SignUpController.signupConfirm
 POST        /signup/finish              controllers.SignUpController.signupFinish
 
