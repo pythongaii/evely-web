@@ -47,7 +47,7 @@ class MongoUserDAO @Inject()(reactiveMongoApi: ReactiveMongoApi) extends UserDAO
   override def save(user: RegisteredUser): Future[RegisteredUser] = {
     find(user.userName).flatMap {
       case None => add(user)
-      case Some(signUpToken) => update(user)
+      case Some(registeredUser) => update(user)
     }
   }
 
@@ -70,11 +70,10 @@ class MongoUserDAO @Inject()(reactiveMongoApi: ReactiveMongoApi) extends UserDAO
     */
   override def update(user: RegisteredUser): Future[RegisteredUser] = for {
     users <- userCollection
-    _ <- users.update(Json.obj(
+    registeredUser <- users.update(Json.obj(
       "userName" -> user.userName
-    ), Json.obj("$set" -> Json.obj("$" -> user)))
-    registeredUser <- find(user.userName)
-  } yield registeredUser.get
+    ), Json.obj("$set" -> Json.obj("$" -> user))).map(_ => user)
+  } yield registeredUser
 
   /**
     * 登録したユーザ情報を削除する

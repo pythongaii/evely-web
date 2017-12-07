@@ -3,11 +3,10 @@ package dao
 import javax.inject.Inject
 
 import play.api.libs.json.Json
-
 import com.mohiva.play.silhouette.api.LoginInfo
 import com.mohiva.play.silhouette.api.util.PasswordInfo
+import model.user.RegisteredUser
 import play.modules.reactivemongo.ReactiveMongoApi
-
 import play.modules.reactivemongo.json._
 import reactivemongo.play.json.collection.JSONCollection
 
@@ -34,29 +33,37 @@ object PersistentPasswordInfo {
 class MongoPasswordInfoDao @Inject() (reactiveMongoApi: ReactiveMongoApi) extends PasswordInfoDAO {
 
   // password コレクションの参照を持つ
-  val passwords = reactiveMongoApi.database.map(_.collection[JSONCollection]("password"))
+  val passwordCollection = reactiveMongoApi.database.map(_.collection[JSONCollection]("password"))
 
   /**
     * 認証用のPasswordInfoを取得する
     * @param loginInfo PasswordInfoに紐づいたユーザのLogin情報
     * @return ユーザの登録したパスワードをハッシュ化した情報
     */
-  override def find(loginInfo: LoginInfo): Future[Option[PasswordInfo]] = ???
-
+  override def find(loginInfo: LoginInfo): Future[Option[PasswordInfo]] = for {
+    passwords <- passwordCollection
+    password<- passwords.find(Json.obj("loginInfo" -> loginInfo)).one[PasswordInfo]
+  } yield password
   /**
     * loginInfoとPasswoedInfoを関連付けて新規追加する
     * @param loginInfo PasswordInfoに紐づいたユーザのLogin情報
     * @param authInfo ユーザ入力したパスワードをハッシュ化した情報
     * @return 登録したPassworfInfo
     */
-  override def add(loginInfo: LoginInfo, authInfo: PasswordInfo): Future[PasswordInfo] = ???
+  override def add(loginInfo: LoginInfo, authInfo: PasswordInfo): Future[PasswordInfo] =  for {
+    passwords <- passwordCollection
+    password <- passwords.insert(PersistentPasswordInfo(loginInfo, authInfo)).map(_ => authInfo)
+  } yield password
 
   /**
     * 登録したPasswordInfoを削除する
     * @param loginInfo 削除したいPassworInfoに紐づいたユーザのLoginInfo
     * @return Unit型なので無し
     */
-  override def remove(loginInfo: LoginInfo): Future[Unit] = ???
+  override def remove(loginInfo: LoginInfo): Future[Unit] = for {
+    passwords <- passwordCollection
+    password <- passwords.remove(Json.obj("loginInfo" -> loginInfo))
+  } yield password
 
   /**
     * 登録した LoginInfo と PassworInfo を保存する
@@ -67,7 +74,12 @@ class MongoPasswordInfoDao @Inject() (reactiveMongoApi: ReactiveMongoApi) extend
     * @param authInfo 保存したい LoginInfo に紐づいた PasswordInfo
     * @return 保存した PasswordInfo
     */
-  override def save(loginInfo: LoginInfo, authInfo: PasswordInfo): Future[PasswordInfo] = ???
+  override def save(loginInfo: LoginInfo, authInfo: PasswordInfo): Future[PasswordInfo] = {
+    find(loginInfo).flatMap {
+      case None => add(loginInfo, authInfo)
+      case Some(authInfo) => update(loginInfo, authInfo)
+    }
+  }
 
   /**
     * 登録された PasswordInfo の情報を更新する
@@ -76,6 +88,12 @@ class MongoPasswordInfoDao @Inject() (reactiveMongoApi: ReactiveMongoApi) extend
     * @param authInfo 新しい PasswordInfo
     * @return 更新した PasswordInfo
     */
-  override def update(loginInfo: LoginInfo, authInfo: PasswordInfo): Future[PasswordInfo] = ???
+  override def update(loginInfo: LoginInfo, authInfo: PasswordInfo): Future[PasswordInfo] = for {
+    passwords <- passwordCollection
+    password <- passwords.update(Json.obj(
+      "loginInfo" -> loginInfo
+    ), Json.obj("$set" -> Json.obj("$" -> PersistentPasswordInfo(loginInfo, authInfo)))).map(_ => authInfo)
+  } yield password
+
 
 }
