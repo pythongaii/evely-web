@@ -26,6 +26,7 @@ libraryDependencies ++= Seq(
   "org.scalatestplus.play" %% "scalatestplus-play" % "2.0.1" % "test",
   "org.mockito" % "mockito-all" % "1.10.19" % "test",
   "net.codingwell" %% "scala-guice" % scalaGuiceVersion,
+  "com.typesafe.play" %% "play-mailer" % "5.0.0-M1",
   "net.ceedubs" %% "ficus" % ficusVersion
 )
 
