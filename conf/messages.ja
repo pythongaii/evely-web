@@ -27,6 +27,10 @@ signup.userID=ユーザーネーム
 signup.password=パスワード
 signup.password.confirm=パスワード(確認用)
 signup.submitbutton=確認画面へ
+signup.mailError=ちゃんと打て
+signup.userNameError=本間にそんな名前？？
+signup.passError=英数字大文字小文字が各1文字以上で、パスワードの文字数は8文字以上らしいです
+
 
 signupstart.mail_title=メールアドレスで新規会員登録
 signupstart.external_title=他のサービスのアカウントで新規会員登録
@@ -61,3 +65,4 @@ forgotpassreset.submitbutton=再設定
 forgotpass.title=パスワードの再設定完了
 forgotpass.message1=パスワードの再設定が完了しました。
 forgotpass.message2=新しいパスワードを使用してサインインしてください。
+

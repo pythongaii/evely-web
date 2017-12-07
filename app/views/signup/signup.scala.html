@@ -25,23 +25,27 @@
                         @helper.form(action = routes.SignUpController.signupConfirm()) {
                             <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
                                 @helper.inputText(form("mailaddress"), 'class -> "mdl-textfield__input")
-                                <label class="mdl-textfield__label" for="sample3">@Messages("signup.mailaddress")</label>
+                                <label class="mdl-textfield__label" for="sample3">@Messages("signup.mailaddress", 'pattern -> "")</label>
                             </div>
                             <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                                @helper.inputText(form("realName"), 'class -> "mdl-textfield__input")
+                                @helper.inputText(form("realName"), 'class -> "mdl-textfield__input", 'pattern -> "(-?[ぁ-んァ-ン一-龠a-zA-Z]*)(\\.[一-龠a-zA-Z]+)?")
                                 <label class="mdl-textfield__label" for="sample3">@Messages("signup.userName")</label>
+                                <span class="mdl-textfield__error">@Messages("signup.userNameError")</span>
+
                             </div>
                             <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
                                 @helper.inputText(form("userName"), 'class -> "mdl-textfield__input")
                                 <label class="mdl-textfield__label" for="sample3">@Messages("signup.userID")</label>
                             </div>
                             <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                                @helper.inputPassword(form("password"), 'class -> "mdl-textfield__input")
+                                @helper.inputPassword(form("password"), 'class -> "mdl-textfield__input", 'pattern -> "^(?=.*[0-9])(?=.*[A-Z])(?=.*[a-z])[\\w]{8,}$")
                                 <label class="mdl-textfield__label" for="sample3">@Messages("signup.password")</label>
+                                <span class="mdl-textfield__error">@Messages("signup.passError")</span>
                             </div>
                             <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                                @helper.inputPassword(form("password"), 'class -> "mdl-textfield__input")
+                                @helper.inputPassword(form("password"), 'class -> "mdl-textfield__input", 'pattern -> "^(?=.*[0-9])(?=.*[A-Z])(?=.*[a-z])[\\w]{8,}$")
                                 <label class="mdl-textfield__label" for="sample3">@Messages("signup.password.confirm")</label>
+                                <span class="mdl-textfield__error">@Messages("signup.passError")</span>
                             </div>
                             <div id="sub">
                                 <button class="mdl-button mdl-button--raised mdl-js-button mdl-js-ripple-effect" type="submit" name="action">@Messages("signup.submitbutton")</button>
