@@ -4,7 +4,7 @@ GET         /                           controllers.TopController.index()
 # signup用
 GET         /signup                     controllers.SignUpController.signupStart
 POST        /signupmail                 controllers.SignUpController.signupMail
-GET         /signup/:token              controllers.SignUpController.signup(tokenID: String)
+GET         /signup/input               controllers.SignUpController.signup(tokenID: String)
 POST        /signup/confirm             controllers.SignUpController.signupConfirm
 POST        /signup/finish              controllers.SignUpController.signupFinish
 
@@ -16,6 +16,10 @@ POST        /forgotmail                 controllers.ForgotPasswordController.for
 GET         /forgotpass/reset           controllers.ForgotPasswordController.forgotpassreset
 POST        /forgotpass                 controllers.ForgotPasswordController.forgotpass
 
+GET         /secured                    controllers.TopController.secured
+
+# signout用
+GET         /signout                    controllers.TopController.signout
 
 GET         /assets/*file               controllers.Assets.at(path="/public", file)
 

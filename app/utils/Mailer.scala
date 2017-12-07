@@ -3,13 +3,16 @@ package utils
 import javax.inject.Inject
 
 import play.api.i18n.Messages
+import scala.language.postfixOps
 
 import scala.concurrent.Future
 import play.api.libs.mailer._
 
+import scala.concurrent.ExecutionContext.Implicits.global
+
 class Mailer @Inject()(configuration: SMTPConfiguration, mailer: MailerClient){
-  val from = configuration.host
-  val replyTo = configuration.user
+  val from = "sugorokuyarou@gmail.com"
+  val replyTo = "sugorokuyarou@gmail.com"
 
   def sendEmailAsync(recipients: String*)(subject: String,
                       bodyHtml: Option[String],
@@ -25,7 +28,7 @@ class Mailer @Inject()(configuration: SMTPConfiguration, mailer: MailerClient){
   def sendEmail(recipients: String*)(subject: String,
                  bodyHtml: Option[String], bodyText: Option[String]
                 ) = {
-    val email = Email(subject, from, recipients, bodyText, bodyHtml, replyTo = replyTo)
+    val email = Email(subject = subject, from = from, to = recipients, bodyHtml = bodyHtml, bodyText = bodyText)
     mailer.send(email)
   }
 

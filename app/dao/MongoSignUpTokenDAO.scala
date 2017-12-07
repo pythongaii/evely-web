@@ -4,10 +4,12 @@ import javax.inject.Inject
 
 import play.api.libs.json.Json
 import play.modules.reactivemongo.ReactiveMongoApi
+import play.modules.reactivemongo.json._
 import reactivemongo.play.json.collection.JSONCollection
 import tokens.SignUpToken
 
 import scala.concurrent.Future
+import scala.concurrent.ExecutionContext.Implicits.global
 
 class MongoSignUpTokenDAO @Inject()(reactiveMongoApi: ReactiveMongoApi) extends SignUpTokenDAO {
 

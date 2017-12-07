@@ -6,9 +6,11 @@ import com.mohiva.play.silhouette.api.LoginInfo
 import model.user.RegisteredUser
 import play.api.libs.json.Json
 import play.modules.reactivemongo.ReactiveMongoApi
+import play.modules.reactivemongo.json._
 import reactivemongo.play.json.collection.JSONCollection
 
 import scala.concurrent.Future
+import scala.concurrent.ExecutionContext.Implicits.global
 
 class MongoUserDAO @Inject()(reactiveMongoApi: ReactiveMongoApi) extends UserDAO {
 
@@ -22,8 +24,8 @@ class MongoUserDAO @Inject()(reactiveMongoApi: ReactiveMongoApi) extends UserDAO
     */
   override def find(loginInfo: LoginInfo): Future[Option[RegisteredUser]] = for {
     users <- userCollection
-    registerdUser <- users.find(Json.obj("loginInfo" -> loginInfo)).one[RegisteredUser]
-  } yield registerdUser
+    registeredUser <- users.find(Json.obj("loginInfo" -> loginInfo)).one[RegisteredUser]
+  } yield registeredUser
 
   /**
     * userName を元にユーザ情報をDBから取得する
@@ -33,8 +35,8 @@ class MongoUserDAO @Inject()(reactiveMongoApi: ReactiveMongoApi) extends UserDAO
     */
   override def find(userName: String): Future[Option[RegisteredUser]] = for {
     users <- userCollection
-    registerdUser <- users.find(Json.obj("userName" -> userName)).one[RegisteredUser]
-  } yield registerdUser
+    registeredUser <- users.find(Json.obj("mailAddress.mailAddress" -> userName)).one[RegisteredUser]
+  } yield registeredUser
 
   /**
     * 引数で渡されたRegisterUserオブジェクトを保存する
@@ -47,7 +49,7 @@ class MongoUserDAO @Inject()(reactiveMongoApi: ReactiveMongoApi) extends UserDAO
   override def save(user: RegisteredUser): Future[RegisteredUser] = {
     find(user.userName).flatMap {
       case None => add(user)
-      case Some(registeredUser) => update(user)
+      case Some(_) => update(user)
     }
   }
 
@@ -71,8 +73,8 @@ class MongoUserDAO @Inject()(reactiveMongoApi: ReactiveMongoApi) extends UserDAO
   override def update(user: RegisteredUser): Future[RegisteredUser] = for {
     users <- userCollection
     registeredUser <- users.update(Json.obj(
-      "userName" -> user.userName
-    ), Json.obj("$set" -> Json.obj("$" -> user))).map(_ => user)
+      "mailAddress.mailAddress" -> user.mailAddress.mailAddress
+    ), user).map(_ => user)
   } yield registeredUser
 
   /**

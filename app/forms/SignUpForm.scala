@@ -21,15 +21,17 @@ object SignUpForm {
       "password" -> tuple(
         "password1" -> nonEmptyText(minLength = 6),
         "password2" -> nonEmptyText(minLength = 6)
-      ).verifying(passwords => passwords._1 == passwords._2),
+      ).verifying("password",passwords => passwords._1 == passwords._2),
       "mailaddress" -> nonEmptyText,
+      "tokenID" -> nonEmptyText,
       "tel" -> optional(text)
     )(RegisterdData.apply)(RegisterdData.unapply)
   )
 
-  case class RegisterdData(userName: String,
-                           realName: String,
-                           password: (String, String),
+  case class RegisterdData(userName: String = "",
+                           realName: String = "",
+                           password: (String, String) = ("", ""),
                            mailaddress: String,
-                           tel: Option[String])
+                           tokenID: String,
+                           tel: Option[String] = Option.empty[String])
 }

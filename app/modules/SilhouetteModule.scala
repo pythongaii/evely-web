@@ -32,6 +32,8 @@ class SilhouetteModule extends AbstractModule with ScalaModule {
   override def configure(): Unit = {
     bind[Silhouette[CookieEnv]].to[SilhouetteProvider[CookieEnv]]
     bind[UserDAO].to[MongoUserDAO]
+    bind[PasswordInfoDAO].to[MongoPasswordInfoDao]
+    bind[UserService].to[UserServiceImpl]
 //    bind[DB].toInstance {
 //      import com.typesafe.config.ConfigFactory
 //

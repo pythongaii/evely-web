@@ -31,17 +31,23 @@
                             <div class="header">@messages("signup.userID")</div>
                             <div class="inputvalue">@form("userName").value</div>
                             <div class="header">@messages("signup.password")</div>
-                            <div class="inputvalue">@form("password").value</div>
+                            <div class="inputvalue">@form("password.password1").value</div>
                             <div class="form_bottom_spacer10"></div>
                             <div id="actionButtons">
-                                <div class="submitbutton">
-                                @helper.form(action = routes.SignUpController.signupped) {
-                                    <button class="mdl-button mdl-button--raised mdl-js-button mdl-js-ripple-effect" type="submit" name="action">@Messages("signupconfirm.submitbutton")</button>
+                                <div class="editbutton">
+                                @helper.form(action = routes.SignUpController.signupStart()) {
+                                    <button class="mdl-button mdl-button--raised mdl-js-button mdl-js-ripple-effect" type="submit" name="action">@Messages("signupconfirm.editbutton")</button>
                                 }
                                 </div>
-                                <div class="editbutton">
-                                @helper.form(action = routes.SignUpController.signup) {
-                                    <button class="mdl-button mdl-button--raised mdl-js-button mdl-js-ripple-effect" type="submit" name="action">@Messages("signupconfirm.editbutton")</button>
+                                <div class="submitbutton">
+                                @helper.form(action = routes.SignUpController.signupFinish()) {
+                                    <input type="hidden" id="mailaddress" name="mailaddress" value="@form("mailaddress").value"/>
+                                    <input type="hidden" id="realName" name="realName" value="@form("realName").value"/>
+                                    <input type="hidden" id="userName" name="userName" value="@form("userName").value"/>
+                                    <input type="hidden" id="password.password1" name="password.password1" value="@form("password.password1").value"/>
+                                    <input type="hidden" id="password.password2" name="password.password2" value="@form("password.password1").value"/>
+                                    <input id="tokenID" name="tokenID" type="hidden" value="@form("tokenID").value" />
+                                    <button class="mdl-button mdl-button--raised mdl-js-button mdl-js-ripple-effect" type="submit" name="action">@Messages("signupconfirm.submitbutton")</button>
                                 }
                                 </div>
                             </div>

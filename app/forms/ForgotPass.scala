@@ -16,7 +16,7 @@ object ForgotPass {
       "password" -> tuple(
         "password1" -> nonEmptyText,
         "password2" -> nonEmptyText
-      ).verifying(passwords => passwords._1 == passwords._2),
+      ).verifying(passwords => passwords._1 == passwords._2)
     )(Password.apply)(Password.unapply)
   )
 

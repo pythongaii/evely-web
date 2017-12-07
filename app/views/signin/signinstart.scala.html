@@ -1,5 +1,5 @@
 @import forms.SignInForm.SignInData
-@(form: Form[SignInData])(implicit messages: Messages)
+@(form: Form[SignInData])(implicit messages: Messages, requestHeader: RequestHeader)
 @import helpers.PlainHelper.myFields
 <!DOCTYPE html>
 <head>
@@ -11,6 +11,9 @@
 <body>
         <!-- Always shows a header, even in smaller screens. -->
     @views.html.common.header()(messages)
+    @requestHeader.flash.get("error").map { msg =>
+        @errors.alert(msg, "error")
+    }
     <main class="mdl-layout__content">
         <div id="page-content">
             <h3>@messages("signin.title")</h3>
@@ -24,16 +27,16 @@
                             </div>
                             @helper.form(action = routes.SignInController.signin()) {
                                 <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                                    @helper.inputText(form("mail"), 'class -> "mdl-textfield__input")
+                                    @helper.inputText(form("userName"), 'class -> "mdl-textfield__input")
                                     <label class="mdl-textfield__label" for="sample3">@Messages("signin.userName")</label>
                                 </div>
                                 <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                                    @helper.inputText(form("userName"), 'class -> "mdl-textfield__input")
+                                    @helper.inputText(form("password"), 'class -> "mdl-textfield__input")
                                     <label class="mdl-textfield__label" for="sample3">@Messages("signin.password")</label>
                                     <a href="@routes.ForgotPasswordController.startForgotPass()"><span style="display: block; text-align: right; font-size: 10px">@messages("signin.forgotPass")</span></a>
                                 </div>
                                 <div>
-                                    <button class="mdl-button mdl-button--raised mdl-js-button mdl-js-ripple-effect" type="submit" name="action">@Messages("signup.submitbutton")</button>
+                                    <button class="mdl-button mdl-button--raised mdl-js-button mdl-js-ripple-effect" type="submit" name="action">@Messages("signin.submitbutton")</button>
                                 </div>
                             }
                         </div>

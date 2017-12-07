@@ -2,10 +2,10 @@ package dao
 
 import javax.inject.Inject
 
-import play.api.libs.json.Json
 import com.mohiva.play.silhouette.api.LoginInfo
 import com.mohiva.play.silhouette.api.util.PasswordInfo
 import model.user.RegisteredUser
+import play.api.libs.json.Json
 import play.modules.reactivemongo.ReactiveMongoApi
 import play.modules.reactivemongo.json._
 import reactivemongo.play.json.collection.JSONCollection
@@ -20,17 +20,14 @@ import scala.concurrent.ExecutionContext.Implicits.global
   */
 case class PersistentPasswordInfo(loginInfo: LoginInfo, authInfo: PasswordInfo)
 
-object PersistentPasswordInfo {
-  // PersitentPasswordInfo の JsonParser
-  implicit val persistentPasswordInfoFormat = Json.format[PersistentPasswordInfo]
-}
-
-
 /**
   * MongoDBにアクセスして、ユーザの PasswordInfo のCRUD操作を行う実装クラス
   * @param reactiveMongoApi mongoDBにアクセスするため
   */
 class MongoPasswordInfoDao @Inject() (reactiveMongoApi: ReactiveMongoApi) extends PasswordInfoDAO {
+
+  implicit val passwordInfo = Json.format[PasswordInfo]
+  implicit val persistentPasswordInfo =Json.format[PersistentPasswordInfo]
 
   // password コレクションの参照を持つ
   val passwordCollection = reactiveMongoApi.database.map(_.collection[JSONCollection]("password"))
@@ -42,8 +39,8 @@ class MongoPasswordInfoDao @Inject() (reactiveMongoApi: ReactiveMongoApi) extend
     */
   override def find(loginInfo: LoginInfo): Future[Option[PasswordInfo]] = for {
     passwords <- passwordCollection
-    password<- passwords.find(Json.obj("loginInfo" -> loginInfo)).one[PasswordInfo]
-  } yield password
+    password<- passwords.find(Json.obj("loginInfo" -> loginInfo)).one[PersistentPasswordInfo]
+  } yield password.map(_.authInfo)
   /**
     * loginInfoとPasswoedInfoを関連付けて新規追加する
     * @param loginInfo PasswordInfoに紐づいたユーザのLogin情報
@@ -92,7 +89,7 @@ class MongoPasswordInfoDao @Inject() (reactiveMongoApi: ReactiveMongoApi) extend
     passwords <- passwordCollection
     password <- passwords.update(Json.obj(
       "loginInfo" -> loginInfo
-    ), Json.obj("$set" -> Json.obj("$" -> PersistentPasswordInfo(loginInfo, authInfo)))).map(_ => authInfo)
+    ), PersistentPasswordInfo(loginInfo, authInfo)).map(_ => authInfo)
   } yield password
 
 

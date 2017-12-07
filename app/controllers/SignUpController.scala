@@ -5,6 +5,7 @@ import javax.inject.Inject
 
 import com.mohiva.play.silhouette.api.{LoginInfo, Silhouette}
 import com.mohiva.play.silhouette.api.util.PasswordHasher
+import com.mohiva.play.silhouette.impl.exceptions.IdentityNotFoundException
 import com.mohiva.play.silhouette.impl.providers.CredentialsProvider
 import forms.SignUpForm
 import model.formaction.MailAddress
@@ -17,6 +18,7 @@ import service.{PasswordInfoService, SignUpTokenService, UserService}
 import utils.Mailer
 
 import scala.concurrent.Future
+import scala.concurrent.ExecutionContext.Implicits.global
 
 /**
   * SignUp処理に関するActionが定義されています
@@ -41,12 +43,12 @@ class SignUpController @Inject()(val silhouette: Silhouette[CookieEnv],
   // 仮登録メールの送信確認画面の表示
   def signupMail = Action.async { implicit request =>
     SignUpForm.registringDataForm.bindFromRequest.fold(
-      bogusForm => Future.successful(BadRequest(views.html.signup.startsignup())),
+      bogusForm => Future.successful(Ok("")),
       signUpData => {
         val loginInfo = LoginInfo(CredentialsProvider.ID, signUpData.mailaddress)
         userService.retrieve(loginInfo).flatMap {
           case Some(_) =>
-            Future.successful(Redirect(routes.SignUpController.startsignup()).flashing(
+            Future.successful(Redirect(routes.SignUpController.signupStart()).flashing(
               "error" -> "error"))
           case None =>
             val registeredUser = RegisteredUser(
@@ -54,7 +56,8 @@ class SignUpController @Inject()(val silhouette: Silhouette[CookieEnv],
               mailAddress = MailAddress(signUpData.mailaddress),
               realName = "",
               tel = Option.empty,
-              loginInfo = loginInfo
+              loginInfo = loginInfo,
+              mailConfirmed = false
             )
             for {
 //              avatarUrl <- avatarService.retrieveURL(signUpData.email)
@@ -71,7 +74,9 @@ class SignUpController @Inject()(val silhouette: Silhouette[CookieEnv],
 
   // アカウント本登録画面の表示
   def signup(tokenID: String) = Action.async {
-    Future.successful(Ok(views.html.signup.signup(SignUpForm.registerdDataForm)))
+    val mailAddress = signUpTokenService.find(UUID.fromString(tokenID)).map(signUpToken =>  signUpToken.get.mailAddress)
+    val form = SignUpForm.registerdDataForm
+    Future.successful(Ok(views.html.signup.signup(form, tokenID)))
   }
 
   // アカウント登録、入力情報確認画面の表示
@@ -89,7 +94,63 @@ class SignUpController @Inject()(val silhouette: Silhouette[CookieEnv],
 
   // アカウント登録完了画面の表示
   def signupFinish = Action.async { implicit request =>
-    Future.successful(Ok(views.html.signup.signupped()))
+    val form = SignUpForm.registerdDataForm
+    form.bindFromRequest().fold(
+      errorForm => {
+        Future.successful(Ok("error"))
+      },
+      requestForm => {
+        val tokenID = UUID.fromString(requestForm.tokenID)
+        signUpTokenService.find(tokenID).flatMap {
+          case None =>
+            Future.successful(Ok("token not found"))
+          case Some(token) if !token.isSignUp && !token.isExpired =>
+            userService.find(token.mailAddress).flatMap {
+              case None => Future.failed(new IdentityNotFoundException(Messages("error.noUser")))
+              case Some(user) =>
+                val loginInfo = LoginInfo(CredentialsProvider.ID, token.mailAddress)
+                val registeredUser = RegisteredUser(
+                  userName = requestForm.userName,
+                  mailAddress = user.mailAddress,
+                  realName = requestForm.realName,
+                  tel = Option.empty[String],
+                  loginInfo = loginInfo,
+                  mailConfirmed = true
+                )
+                for {
+                  authenticator <- silhouette.env.authenticatorService.create(loginInfo)
+                  value <- silhouette.env.authenticatorService.init(authenticator)
+                  _ <- userService.update(registeredUser)
+                  _ <- signUpTokenService.remove(tokenID)
+                  _ <- passwordInfoService.save(loginInfo, passwordHasher.hash(requestForm.password._1))
+                  result <- silhouette.env.authenticatorService.embed(value, Redirect(routes.TopController.index()))
+                } yield result
+            }
+          case Some(token) =>
+            signUpTokenService.remove(tokenID).map {_ => NotFound(views.html.errors.notFound(request))}
+        }
+      }
+    )
   }
+//    userTokenService.find(id).flatMap {
+//      case None =>
+//        Future.successful(NotFound(views.html.errors.notFound(request)))
+//      case Some(token) if token.isSignUp && !token.isExsavepired =>
+//        userService.find(token.userId).flatMap {
+//          case None => Future.failed(new IdentityNotFoundException(Messages("error.noUser")))
+//          case Some(user) =>
+//            val loginInfo = LoginInfo(CredentialsProvider.ID, token.email)
+//            for {
+//              authenticator <- env.authenticatorService.create(loginInfo)
+//              value <- env.authenticatorService.init(authenticator)
+//              _ <- userService.confirm(loginInfo)
+//              _ <- userTokenService.remove(id)
+//              result <- env.authenticatorService.embed(value, Redirect(routes.Application.index()))
+//            } yield result
+//        }
+//      case Some(token) =>
+//        userTokenService.remove(id).map {_ => NotFound(views.html.errors.notFound(request))}
+//    }
+
 
 }

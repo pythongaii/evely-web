@@ -12,7 +12,7 @@ import scala.concurrent.Future
 
 trait UserService extends IdentityService[RegisteredUser] {
 
-  def save(user: RegisteredUser): Future[Option[RegisteredUser]]
+  def save(user: RegisteredUser): Future[RegisteredUser]
 
   def find(loginInfo: LoginInfo): Future[Option[RegisteredUser]]
 
