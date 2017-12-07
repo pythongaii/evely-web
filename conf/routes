@@ -2,11 +2,11 @@
 GET         /                           controllers.TopController.index()
 
 # signup用
-GET         /signupstart                controllers.SignUpController.startSignup
-POST        /signupmail                 controllers.SignUpController.signupmail
-GET         /signup                     controllers.SignUpController.signup
-POST        /signupconfirm              controllers.SignUpController.signupConfirm
-POST        /signupped                  controllers.SignUpController.signupped
+GET         /signup                     controllers.SignUpController.signupStart
+POST        /signupmail                 controllers.SignUpController.signupMail
+GET         /signup/:token              controllers.SignUpController.signup
+POST        /signup/confirm             controllers.SignUpController.signupConfirm
+POST        /signup/finish              controllers.SignUpController.signupFinish
 
 # signin用
 POST        /signinstart                controllers.SignInController.startSignin

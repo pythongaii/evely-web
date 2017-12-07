@@ -14,7 +14,7 @@ import com.mohiva.play.silhouette.password.BCryptPasswordHasher
 import com.mohiva.play.silhouette.persistence.daos.DelegableAuthInfoDAO
 import com.mohiva.play.silhouette.persistence.repositories.DelegableAuthInfoRepository
 import dao._
-import model.user.RegisterdUser
+import model.user.RegisteredUser
 import net.codingwell.scalaguice.ScalaModule
 import play.api.Configuration
 import play.api.libs.concurrent.Execution.Implicits._
@@ -24,7 +24,7 @@ import net.ceedubs.ficus.readers.ArbitraryTypeReader._
 import reactivemongo.api.{DB, MongoConnectionOptions, MongoDriver}
 
 trait CookieEnv extends Env {
-  type I = RegisterdUser
+  type I = RegisteredUser
   type A = CookieAuthenticator
 }
 
@@ -32,7 +32,6 @@ class SilhouetteModule extends AbstractModule with ScalaModule {
   override def configure(): Unit = {
     bind[Silhouette[CookieEnv]].to[SilhouetteProvider[CookieEnv]]
     bind[UserDAO].to[MongoUserDAO]
-    bind[UserService].to[UserServiceImpl]
 //    bind[DB].toInstance {
 //      import com.typesafe.config.ConfigFactory
 //
