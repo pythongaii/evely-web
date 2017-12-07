@@ -56,11 +56,10 @@ class MongoSignUpTokenDAO @Inject()(reactiveMongoApi: ReactiveMongoApi) extends 
     */
   override def update(token: SignUpToken): Future[SignUpToken] = for {
     tokens <- signupTokenCollection
-    _ <- tokens.update(Json.obj(
+    signUpToken <- tokens.update(Json.obj(
       "tokenID" -> token.tokenID
-    ), Json.obj("$set" -> Json.obj("$" -> token)))
-    signupToken <- find(token.tokenID)
-  } yield signupToken.get
+    ), Json.obj("$set" -> Json.obj("$" -> token))).map(_ => token)
+  } yield signUpToken
 
   /**
     * 登録したトークンの削除を行う

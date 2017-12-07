@@ -1,21 +1,23 @@
 package service
 
 import java.util.UUID
-import java.util.concurrent.Future
+import javax.inject.Inject
 
-import forms.SignUpForm
+import dao.{MongoSignUpTokenDAO, SignUpTokenDAO}
 import tokens.SignUpToken
 
+import scala.concurrent.Future
 
-class SignUpTokenService{
+
+class SignUpTokenService @Inject() (mongoSignUpTokenDAO: MongoSignUpTokenDAO) {
 
   def createUserToken(email: String): Void = ???
 
-  def save(signUpToken: SignUpToken): Future[SignUpToken] = ???
+  def save(signUpToken: SignUpToken): Future[SignUpToken] = mongoSignUpTokenDAO.save(signUpToken)
 
-  def find(tokenID: UUID): Future[SignUpToken] = ???
+  def find(tokenID: UUID): Future[Option[SignUpToken]] = mongoSignUpTokenDAO.find(tokenID)
 
-  def delete(tokenID: UUID): Future[Unit] = ???
+  def remove(tokenID: UUID): Future[Unit] = mongoSignUpTokenDAO.remove(tokenID)
 
 }
 
