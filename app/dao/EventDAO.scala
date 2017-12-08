@@ -26,4 +26,6 @@ class EventDAO @Inject()(reactiveMongoApi: ReactiveMongoApi){
   } yield event
 
 
+
+
 }
