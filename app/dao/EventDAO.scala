@@ -19,13 +19,10 @@ class EventDAO @Inject()(reactiveMongoApi: ReactiveMongoApi){
 
   val eventCollection = reactiveMongoApi.database.map(_.collection[JSONCollection]("event"))
 
-  def find(eventId: Int):Future[Option[Event]] = for {
-    events <- eventCollection
-    event <- events.find(Json.obj("eventId" ->
-      eventId)).one[Event]
-  } yield event
-
-
-
+//  def find(eventId: Int):Future[Option[Event]] = for {
+//    events <- eventCollection
+//    event <- events.find(Json.obj("eventId" ->
+//      eventId)).one[Event]
+//  } yield event
 
 }
