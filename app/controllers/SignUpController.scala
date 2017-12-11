@@ -123,7 +123,7 @@ class SignUpController @Inject()(val silhouette: Silhouette[CookieEnv],
                   _ <- userService.update(registeredUser)
                   _ <- signUpTokenService.remove(tokenID)
                   _ <- passwordInfoService.save(loginInfo, passwordHasher.hash(requestForm.password._1))
-                  result <- silhouette.env.authenticatorService.embed(value, Redirect(routes.TopController.index()))
+                  result <- silhouette.env.authenticatorService.embed(value, Redirect(routes.TopController.secured()))
                 } yield result
             }
           case Some(token) =>

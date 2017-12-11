@@ -30,7 +30,7 @@
                             <div class="form_bottom_spacer22"></div>
                             @helper.form(action = routes.SignUpController.signupMail()) {
                                 <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                                    @helper.inputText(form("mail"), 'class -> "mdl-textfield__input", 'type -> "email")
+                                    @helper.inputText(form("mailaddress"), 'class -> "mdl-textfield__input")
                                     <label class="mdl-textfield__label" for="sample3" >@Messages("signup.mailaddress")</label>
                                     <span class="mdl-textfield__error">@Messages("signup.mailError")</span>
                                 </div>

@@ -38,7 +38,7 @@
                                 <label class="mdl-textfield__label" for="sample3">@Messages("signup.userID")</label>
                             </div>
                             <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                                @helper.inputPassword(form("password"), 'class -> "mdl-textfield__input", 'pattern -> "^(?=.*[0-9])(?=.*[A-Z])(?=.*[a-z])[\\.[0-9a-zA-Z]{8,}$")
+                                @helper.inputPassword(form("password.password1"), 'class -> "mdl-textfield__input", 'pattern -> "^(?=.*[0-9])(?=.*[A-Z])(?=.*[a-z])[\\.[0-9a-zA-Z]{8,}$")
                                 <label class="mdl-textfield__label" for="sample3">@Messages("signup.password")</label>
                                 <span class="mdl-textfield__error">@Messages("signup.passError")</span>
                             </div>
