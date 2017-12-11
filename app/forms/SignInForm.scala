@@ -7,7 +7,7 @@ object SignInForm {
 
   val signInForm = Form[SignInData](
     mapping(
-      "userName" -> nonEmptyText,
+      "userID" -> nonEmptyText,
       "password" -> nonEmptyText
     )(SignInData.apply)(SignInData.unapply)
   )

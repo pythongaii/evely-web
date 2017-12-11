@@ -6,7 +6,22 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" href="@routes.Assets.at("/mdl/material.min.css")">
     <link rel="stylesheet" href="@routes.Assets.at("/stylesheets/signup.css")">
-    <script defer src="@routes.Assets.at("/mdl/material.min.js")"></script>
+    <script defer src="@routes.Assets.at("/mdl/material.min.js")">
+            $("#signupform").validationMessage({
+
+//                rules: {
+//                    example4: {email:true, required: true},
+//                    example5: {required: true}
+//                },
+                messages: {
+                    password: "Just check the box<h5 class='text-danger'>You aren't going to read the EULA</h5>"
+                }
+//                tooltip_options: {
+//                    example4: {trigger:'focus'},
+//                    example5: {placement:'right',html:true}
+//                },
+            });
+    </script>
 </head>
 <body>
         <!-- Always shows a header, even in smaller screens. -->
@@ -22,7 +37,7 @@
                         <div class="signup_title" >
                             すべての項目を入力してください。
                         </div>
-                        @helper.form(action = routes.SignUpController.signupConfirm()) {
+                        @helper.form(action = routes.SignUpController.signupConfirm(), 'id -> "signupform") {
                             <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
                                 @helper.inputText(form("mailaddress"), 'class -> "mdl-textfield__input")
                                 <label class="mdl-textfield__label" for="sample3">@Messages("signup.mailaddress")</label>
