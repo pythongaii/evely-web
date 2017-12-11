@@ -2,11 +2,11 @@
 GET         /                           controllers.TopController.index()
 
 # signup用
-GET         /signupstart                controllers.SignUpController.startSignup
-POST        /signupmail                 controllers.SignUpController.signupmail
-GET         /signup                     controllers.SignUpController.signup
-POST        /signupconfirm              controllers.SignUpController.signupConfirm
-POST        /signupped                  controllers.SignUpController.signupped
+GET         /signup                     controllers.SignUpController.signupStart
+POST        /signupmail                 controllers.SignUpController.signupMail
+GET         /signup/input               controllers.SignUpController.signup(tokenID: String)
+POST        /signup/confirm             controllers.SignUpController.signupConfirm
+POST        /signup/finish              controllers.SignUpController.signupFinish
 
 # signin用
 POST        /signinstart                controllers.SignInController.startSignin
@@ -22,6 +22,11 @@ GET         /testnearby                 controllers.TopController.testNearby
 GET         /testnotification           controllers.TopController.testNotification
 GET         /testbookmark               controllers.TopController.testBookmark
 
+
+GET         /secured                    controllers.TopController.secured
+
+# signout用
+GET         /signout                    controllers.TopController.signout
 
 GET         /assets/*file               controllers.Assets.at(path="/public", file)
 

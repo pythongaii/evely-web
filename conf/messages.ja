@@ -1,7 +1,5 @@
 toppage.title=Evely
 
-header.searchCategory=カテゴリで探す
-header.searchArea=エリアで探す
 header.signIn=Sign in
 header.signUp=Sign up
 
@@ -13,6 +11,7 @@ signin.password=パスワード
 signin.forgotPass=パスワードを忘れましたか？
 signin.signInEvely=ユーザーネームとパスワードでサインイン
 signin.signInOthers=他のサービスのアカウントでサインイン
+signin.submitbutton=サインイン
 
 signupmail.title=会員登録メール受信の確認
 signupmail.messa1=ご登録のメールアドレスに、メールをお送りいたしました。
@@ -66,3 +65,8 @@ forgotpass.title=パスワードの再設定完了
 forgotpass.message1=パスワードの再設定が完了しました。
 forgotpass.message2=新しいパスワードを使用してサインインしてください。
 
+mail.confirm.subject=【会員登録メール】Evely 会員登録メール
+mail.confirm=この度はEvelyへの、会員登録手続きを行っていただき、ありがとうございます。{0}
+
+mail.resetpassword.subject=【パスワード再設定】Evely パスワード再設定メール
+mail.resetpassword=パスワードの再設定を行います。{0}

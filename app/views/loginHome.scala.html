@@ -1,0 +1,62 @@
+@(event_list: List[String])(implicit messages: Messages)
+
+<!DOCTYPE html>
+<head>
+    <title>test123</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="@routes.Assets.at("/mdl/material.min.css")">
+    <link rel="stylesheet" href="@routes.Assets.at("/stylesheets/toppage.css")">
+    <script src="@routes.Assets.at("mdl/material.min.js")"></script>
+</head>
+
+<body>
+    @views.html.common.secured()(messages)
+    <main class="mdl-layout__content">
+        <div class="page-content">
+            <div id="toppage_head_content">
+                ・welcome message ・Evelyの簡単な説明 ・Evelyの使い方などを表示したい
+            </div>
+            <div id="toppage_main_content">
+                <div id="left_column">
+                    <ul id="my_new_event_list mdl-list">
+                        <div id="list_header">
+                            新着イベント一覧
+                            <hr/>
+                        </div>
+                            <!-- 以下動的に作成 -->
+                        @for(event_item <- event_list) {
+                            <li class="mdl-list__item">
+                                <span class="mdl-list__item-primary-content">
+                                    <div class="event-card-wide mdl-card mdl-shadow--2dp">
+                                        <div class="mdl-card__title">
+                                            <h2 class="mdl-card__title-text">@event_item</h2>
+                                        </div>
+                                        <div class="mdl-card__supporting-text">
+                                                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                                            Mauris sagittis pellentesque lacus eleifend lacinia...
+                                        </div>
+                                        <div class="mdl-card__actions mdl-card--border">
+                                            <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
+                                                    Get Started
+                                            </a>
+                                        </div>
+                                        <div class="mdl-card__menu">
+                                            <button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
+                                                <i class="material-icons">share</i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </span>
+                            </li>
+                        }
+                    </ul>
+                </div>
+                <div id="right_column">
+                    <div id="news_list">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    @views.html.common.footer()(messages)
+</body>
