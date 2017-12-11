@@ -6,13 +6,13 @@ import java.util.Date
 import model._
 import model.body.Body
 import model.formaction.{FormAction, VerificationNeeded}
-import model.user.RegisterdUser
+import model.user.RegisteredUser
 import play.api.libs.json.Json
 
 
 case class Event(eventID: Int,
                    title: String,
-                   holder: RegisterdUser,
+                   holder: RegisteredUser,
                    body: Body,
                    place: Location,
                    updateDate: Date,

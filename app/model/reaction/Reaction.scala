@@ -1,5 +1,5 @@
 package model.reaction
 
-import model.user.RegisterdUser
+import model.user.RegisteredUser
 
-abstract class Reaction(val who: RegisterdUser)
+abstract class Reaction(val who: RegisteredUser)

@@ -1,5 +1,5 @@
 @import forms.SignUpForm.RegistringData
-@(form: Form[RegistringData])(implicit messages: Messages)
+@(form: Form[RegistringData])(implicit messages: Messages, requestHeader: RequestHeader)
 @import helpers.PlainHelper.myFields
 <!DOCTYPE html>
 <head>
@@ -12,7 +12,9 @@
 <body>
         <!-- ヘッダー -->
     @views.html.common.header()(messages)
-    <main class="mdl-layout__content">
+    @requestHeader.flash.get("error").map { msg =>
+        @errors.alert(msg, "error")
+    }    <main class="mdl-layout__content">
         <div id="page-content">
             <h3>新規会員登録</h3>
             <hr>
@@ -26,9 +28,9 @@
                             @Messages("signupstart.mail_title")
                             </div>
                             <div class="form_bottom_spacer22"></div>
-                            @helper.form(action = routes.SignUpController.signupmail()) {
+                            @helper.form(action = routes.SignUpController.signupMail()) {
                                 <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                                    @helper.inputText(form("mail"), 'class -> "mdl-textfield__input")
+                                    @helper.inputText(form("mailaddress"), 'class -> "mdl-textfield__input")
                                     <label class="mdl-textfield__label" for="sample3" >@Messages("signup.mailaddress")</label>
                                 </div>
                                 <div class="form_bottom_spacer10"></div>

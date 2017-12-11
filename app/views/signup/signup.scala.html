@@ -1,5 +1,5 @@
 @import forms.SignUpForm.RegisterdData
-@(form: Form[RegisterdData])(implicit messages: Messages)
+@(form: Form[RegisterdData], tokenID: String)(implicit messages: Messages)
 @import helpers.PlainHelper.myFields
 <!DOCTYPE html>
 <head>
@@ -36,13 +36,14 @@
                                 <label class="mdl-textfield__label" for="sample3">@Messages("signup.userID")</label>
                             </div>
                             <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                                @helper.inputPassword(form("password"), 'class -> "mdl-textfield__input")
+                                @helper.inputPassword(form("password.password1"), 'class -> "mdl-textfield__input")
                                 <label class="mdl-textfield__label" for="sample3">@Messages("signup.password")</label>
                             </div>
                             <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                                @helper.inputPassword(form("password"), 'class -> "mdl-textfield__input")
+                                @helper.inputPassword(form("password.password2"), 'class -> "mdl-textfield__input")
                                 <label class="mdl-textfield__label" for="sample3">@Messages("signup.password.confirm")</label>
                             </div>
+                            <input id="tokenID" name="tokenID" type="hidden" value="@tokenID" />
                             <div id="sub">
                                 <button class="mdl-button mdl-button--raised mdl-js-button mdl-js-ripple-effect" type="submit" name="action">@Messages("signup.submitbutton")</button>
                             </div>

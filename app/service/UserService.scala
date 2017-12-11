@@ -1,37 +1,39 @@
-//package service
-//
-//import java.util.UUID
-//import javax.inject.Inject
-//
-//import com.mohiva.play.silhouette.api.LoginInfo
-//import com.mohiva.play.silhouette.api.services.IdentityService
-//import model.User
-//import model.user.RegisterdUser
-//import modules.CookieEnv
-//
-//import scala.concurrent.Future
-//
-//
-//abstract class UserService extends IdentityService[User] {
-//
-//
-////  def save(user: RegisterdUser): Future[Option[RegisterdUser]] = ???
-////
-////  def find(loginInfo: LoginInfo): Future[Option[RegisterdUser]] = ???
-////
-////  def find(userName: String): Future[Option[RegisterdUser]] = ???
-////
-////  def Update(user: RegisterdUser): Future[RegisterdUser] = ???
-////
-////  def retrieve: Future[Option[RegisterdUser]] = ???
-////
-////  def delete(loginInfo: LoginInfo): Future[Unit] = ???
-//}
-//
-//class UserServiceImpl @Inject() extends UserService {
-//  override def retrieve(loginInfo: LoginInfo): Future[Option[User]] = ???
-//  def retrieved(id: UUID): Future[Option[User]] = ???
-//
-//  def save(user: User) = ???
-//}
-//
+package service
+
+import java.util.UUID
+import javax.inject.Inject
+
+import com.mohiva.play.silhouette.api.LoginInfo
+import com.mohiva.play.silhouette.api.services.IdentityService
+import dao.UserDAO
+import model.user.RegisteredUser
+
+import scala.concurrent.Future
+
+trait UserService extends IdentityService[RegisteredUser] {
+
+  def save(user: RegisteredUser): Future[RegisteredUser]
+
+  def find(loginInfo: LoginInfo): Future[Option[RegisteredUser]]
+
+  def find(userName: String): Future[Option[RegisteredUser]]
+
+  def update(user: RegisteredUser): Future[RegisteredUser]
+
+  def remove(loginInfo: LoginInfo): Future[Unit]
+}
+
+class UserServiceImpl @Inject()(userDAO: UserDAO) extends UserService {
+  override def retrieve(loginInfo: LoginInfo): Future[Option[RegisteredUser]] = userDAO.find(loginInfo)
+
+  override def find(loginInfo: LoginInfo): Future[Option[RegisteredUser]]  = userDAO.find(loginInfo)
+
+  override def find(userName: String): Future[Option[RegisteredUser]] = userDAO.find(userName)
+
+  override def update(user: RegisteredUser): Future[RegisteredUser] = userDAO.update(user)
+
+  override def remove(loginInfo: LoginInfo): Future[Unit] = userDAO.remove(loginInfo)
+
+  override def save(user: RegisteredUser): Future[RegisteredUser] = userDAO.save(user)
+}
+

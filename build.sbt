@@ -1,10 +1,10 @@
-name := "Play2-mongodb-silhouette-activator-template"
+name := "evely-web"
 
 version := "1.0"
 
-lazy val `mechanics` = (project in file(".")).enablePlugins(PlayScala)
-
 scalaVersion := "2.11.7"
+
+lazy val `evely-web` = (project in file(".")).enablePlugins(PlayScala)
 
 val reactiveMongoVersion = "0.11.14"
 
@@ -26,6 +26,7 @@ libraryDependencies ++= Seq(
   "org.scalatestplus.play" %% "scalatestplus-play" % "2.0.1" % "test",
   "org.mockito" % "mockito-all" % "1.10.19" % "test",
   "net.codingwell" %% "scala-guice" % scalaGuiceVersion,
+  "com.typesafe.play" %% "play-mailer" % "5.0.0-M1",
   "net.ceedubs" %% "ficus" % ficusVersion
 )
 
