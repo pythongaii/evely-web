@@ -1,9 +1,5 @@
 package dao
 
-<<<<<<< HEAD
-class APIAuthenticator {
-
-=======
 import javax.inject.Inject
 
 import forms.{SignInData, SignInForm}
@@ -30,12 +26,11 @@ class APIAuthenticator @Inject()(ws: WSClient) {
       "password" -> signInForm.get.password
     ))
     val response = request.post(jsonObject)
-    response.map{
+    response.map {
       case res => res.body
       case _ => ""
     }
   }
 
   def signout() = ???
->>>>>>> feature/auth_func
 }

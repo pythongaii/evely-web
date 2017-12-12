@@ -2,7 +2,7 @@ import javax.inject.Inject
 
 import com.mohiva.play.silhouette.api.Silhouette
 import com.mohiva.play.silhouette.impl.providers.CredentialsProvider
-import controllers.{SignInController, TopController}
+import controllers.SignInController
 import modules.CookieEnv
 import org.mockito.Mockito
 import org.scalatest.mockito.MockitoSugar
