@@ -11,7 +11,7 @@ class RegisteredHomeController @Inject()()(implicit val messagesApi: MessagesApi
 
 
   def home = Action.async { implicit request =>
-    Future.successful(Ok(views.html.test.home())
+    Future.successful(Ok(views.html.test.home()))
   }
 
   def index = Action.async { implicit request =>
