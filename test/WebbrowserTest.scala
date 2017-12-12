@@ -1,6 +1,7 @@
 import dao.APIAuthenticator
 import forms.SignInForm
-import forms.SignInForm.SignInData
+import forms.SignInData
+import org.scalatest.AsyncFeatureSpec
 import org.scalatest.mockito.MockitoSugar
 import org.scalatestplus.play._
 import play.api.mvc.Results
@@ -20,7 +21,7 @@ class WebbrowserTest extends PlaySpec with OneBrowserPerSuite with ChromeFactory
     "connection test" must {
       "test" in {
         val authenticator = mock[APIAuthenticator]
-        val form = SignInForm.signInForm.fill(SignInData("abc", "123"))
+        val form = SignInForm.signInForm.fill(SignInData("yKicchan", "password"))
 
         val response = authenticator.signin(form)
         response mustBe null

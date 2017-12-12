@@ -1,9 +1,5 @@
 package forms
 
-<<<<<<< Updated upstream
-=======
-import model.user.{RegisteredUser, RegistringUser}
->>>>>>> Stashed changes
 import play.api.data.Form
 import play.api.data.Forms._
 
