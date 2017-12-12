@@ -12,10 +12,10 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
             <!-- Font Awesome -->
-        <link rel="stylesheet" href="../../../../SampleWebEvery/vendor/font-awesome-4.7.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="@routes.Assets.at("/vendor/font-awesome-4.7.0/css/font-awesome.min.css")">
             <!-- My javascript & css files -->
         <script src="../js/master.js" charset="utf-8"></script>
-        <link rel="stylesheet" href="../../../../SampleWebEvery/css/master.css">
+        <link rel="stylesheet" href="@routes.Assets.at("/css/master.css")">
     </head>
     <body>
             <!-- App bar START -->
@@ -59,7 +59,7 @@
                     <!-- Search box END -->
                     <!-- Profile nav START -->
                 <div class="dropdown-group profile-nav">
-                    <img class="dropdown-toggle" src="../images/icon/icon.png" alt="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <img class="dropdown-toggle" src="@routes.Assets.at("images/icon.png")" alt="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                         <li><a href="#">アイコンと名前とID</a></li>
                         <li role="separator" class="divider"></li>

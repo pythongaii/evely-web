@@ -13,12 +13,12 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
             <!-- Font Awesome -->
-        <link rel="stylesheet" href="../../../../SampleWebEvery/vendor/font-awesome-4.7.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="@routes.Assets.at("/vendor/font-awesome-4.7.0/css/font-awesome.min.css")">
             <!-- My javascript & css files -->
         <script src="../js/master.js" charset="utf-8"></script>
-        <link rel="stylesheet" href="../../../../SampleWebEvery/css/master.css">
-        <link rel="stylesheet" href="../../../../SampleWebEvery/css/nearby.css">
-        <link rel="stylesheet" href="../../../../SampleWebEvery/css/bookmark.css">
+        <link rel="stylesheet" href="@routes.Assets.at("/css/master.css")">
+        <link rel="stylesheet" href="@routes.Assets.at("/css/nearby.css")">
+        <link rel="stylesheet" href="@routes.Assets.at("/css/bookmark.css")">
     </head>
     <body>
             <!-- App bar START -->
@@ -65,7 +65,7 @@
                     <img class="dropdown-toggle" src="../images/icon/icon.png" alt="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                         <li class="profile-container">
-                            <img src="../images/icon/icon.png" alt="">
+                            <img src="@routes.Assets.at("/images/icon/icon.png")" alt="">
                             <div class="profile-info">
                                 <p class="name">むらた ゆきや</p>
                                 <p class="id">@@yKicchan</p>
@@ -92,7 +92,7 @@
                 <div class="bookmark on"></div>
                 <div class="event-card-header">
                     <div class="image">
-                        <img src="../images/sample/sample1.jpg" alt="">
+                        <img src="@routes.Assets.at("/images/sample/sample1.jpg")" alt="">
                     </div>
                     <div class="title">
                         イベントイベントイベントイベントイベント
@@ -101,7 +101,7 @@
                 <div class="event-card-body">
                     <div class="detail-container">
                         <div class="detail">
-                            <img src="../images/sample/sample2.jpg" alt="">
+                            <img src="@routes.Assets.at("/images/sample/sample2.jpg")" alt="">
                             <div class="info">
                                 <p class="main">Yukiya Murata</p>
                                 <p>@@yKicchan</p>
@@ -149,7 +149,7 @@
                 <div class="event-card-body">
                     <div class="detail-container">
                         <div class="detail">
-                            <img src="../images/sample/sample2.jpg" alt="">
+                            <img src="@routes.Assets.at("/images/sample/sample2.jpg")" alt="">
                             <div class="info">
                                 <p class="main">Yukiya Murata</p>
                                 <p>@@yKicchan</p>

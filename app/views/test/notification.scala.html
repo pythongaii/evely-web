@@ -11,10 +11,10 @@
             <!-- GoogleMap API -->
         <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
             <!-- Font Awesome -->
-        <link rel="stylesheet" href="../../../../SampleWebEvery/vendor/font-awesome-4.7.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="@routes.Assets.at("/vendor/font-awesome-4.7.0/css/font-awesome.min.css")">
             <!-- My javascript & css files -->
-        <script src="../js/master.js" charset="utf-8"></script>
-        <link rel="stylesheet" href="../../../../SampleWebEvery/css/master.css">
+        <script src="@routes.Assets.at("/javascripts/master.js")" charset="utf-8"></script>
+        <link rel="stylesheet" href="@routes.Assets.at("/css/master.css")">
     </head>
     <body>
             <!-- App bar START -->
@@ -59,7 +59,7 @@
                     <!-- Profile nav START -->
                 <div class="profile-nav">
                     <a href="./index.html">
-                        <img src="../images/icon/icon.png" alt="profile icon">
+                        <img src="@routes.Assets.at("/images/icon/icon.png")" alt="profile icon">
                     </a>
                 </div>
                     <!-- Profile nav END -->

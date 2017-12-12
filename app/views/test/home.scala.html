@@ -10,10 +10,10 @@
             <!-- GoogleMap API -->
         <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
             <!-- Font Awesome -->
-        <link rel="stylesheet" href="../../../../SampleWebEvery/vendor/font-awesome-4.7.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="@routes.Assets.at("/vendor/font-awesome-4.7.0/css/font-awesome.min.css")">
             <!-- My javascript & css files -->
-        <script src="../js/master.js" charset="utf-8"></script>
-        <link rel="stylesheet" href="../../../../SampleWebEvery/css/master.css">
+        <script src="@routes.Assets.at("/javascripts/master.js")" charset="utf-8"></script>
+        <link rel="stylesheet" href="@routes.Assets.at("/stylesheets/css/master.css")">
     </head>
     <body>
             <!-- App bar START -->
@@ -22,25 +22,25 @@
             <ul class="tab-container">
                     <!-- Home -->
                 <li>
-                    <a href="home.html" class="tab is-active">
+                    <a href="@routes.TopController.testHome()" class="tab is-active">
                         <i class="fa fa-home" aria-hidden="true"></i>Home
                     </a>
                 </li>
                     <!-- Nearby -->
                 <li>
-                    <a href="./nearby.html" class="tab">
+                    <a href="@routes.TopController.Nearby()" class="tab">
                         <i class="fa fa-map-marker" aria-hidden="true"></i>Nearby
                     </a>
                 </li>
                     <!-- Bookmark -->
                 <li>
-                    <a href="./bookmark.html" class="tab">
+                    <a href="@routes.TopController.Bookmark()" class="tab">
                         <i class="fa fa-bookmark" aria-hidden="true"></i>bookmark
                     </a>
                 </li>
                     <!-- Notification -->
                 <li>
-                    <a href="./notification.html" class="tab">
+                    <a href="@routes.TopController.Notification()" class="tab">
                         <i class="fa fa-bell" aria-hidden="true"></i>notification
                     </a>
                 </li>
@@ -57,8 +57,8 @@
                     <!-- Search box END -->
                     <!-- Profile nav START -->
                 <div class="profile-nav">
-                    <a href="./index.html">
-                        <img src="../images/icon/icon.png" alt="profile icon">
+                    <a href="@routes.TopController.Index()">
+                        <img src="@routes.Assets.at("/images/icon/icon.png")" alt="profile icon">
                     </a>
                 </div>
                     <!-- Profile nav END -->
