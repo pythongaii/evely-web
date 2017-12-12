@@ -28,5 +28,7 @@ GET         /secured                    controllers.TopController.secured
 # signout用
 GET         /signout                    controllers.TopController.signout
 
+GET         /signin/api                 controllers.SignInController.apisignin
+
 GET         /assets/*file               controllers.Assets.at(path="/public", file)
 

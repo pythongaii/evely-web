@@ -2,18 +2,22 @@ package forms
 
 import play.api.data.Form
 import play.api.data.Forms._
+import play.api.libs.json.Json
 
 object SignInForm {
 
   val signInForm = Form[SignInData](
     mapping(
-      "userName" -> nonEmptyText,
+      "id" -> nonEmptyText,
       "password" -> nonEmptyText
     )(SignInData.apply)(SignInData.unapply)
   )
 
-  case class SignInData(userName:String,
-                        password:String)
+}
+case class SignInData(userName: String,
+                      password: String)
 
+object SignInData{
+  implicit val formtter = Json.format[SignInData]
 }
 

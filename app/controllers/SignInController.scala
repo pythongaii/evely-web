@@ -6,10 +6,12 @@ import com.mohiva.play.silhouette.api.Silhouette
 import com.mohiva.play.silhouette.api.exceptions.ProviderException
 import com.mohiva.play.silhouette.api.util.Credentials
 import com.mohiva.play.silhouette.impl.providers.CredentialsProvider
-import forms.SignInForm
+import dao.APIAuthenticator
+import forms.{SignInData, SignInForm}
 import modules.CookieEnv
 import org.joda.time.DateTime
 import play.api.i18n.{I18nSupport, Messages, MessagesApi}
+import play.api.libs.ws.WSClient
 import play.api.mvc.Action
 import play.api.mvc.Controller
 import service.{PasswordInfoService, UserService}
@@ -24,7 +26,8 @@ import scala.concurrent.duration.FiniteDuration
 class SignInController @Inject()(val silhouette: Silhouette[CookieEnv],
                                  userService: UserService,
                                  passwordInfoService: PasswordInfoService,
-                                 credentialsProvider: CredentialsProvider
+                                 credentialsProvider: CredentialsProvider,
+                                 ws: WSClient
                                 )(implicit val messagesApi: MessagesApi) extends Controller with I18nSupport {
 
   // サインイン画面の表示
@@ -59,4 +62,12 @@ class SignInController @Inject()(val silhouette: Silhouette[CookieEnv],
       })
   }
 
+  def apisignin = Action.async { implicit request =>
+    val api : APIAuthenticator = new APIAuthenticator(ws)
+    val res = api.signin(SignInForm.signInForm.fill(SignInData("yKicchan", "password")))
+    res.map{
+      case respo => Ok(respo)
+      case _ => Ok("")
+    }
+  }
 }
