@@ -26,15 +26,4 @@ class TopController @Inject()(ws: WSClient, silhouette: Silhouette[CookieEnv])(i
 //    Json.parse(events.value.get.get)
 //  }
 
-  def index() = Action.async {
-    Future.successful(Ok(views.html.top(List("event1", "event2", "event3", "event4"))))
-  }
-
-  def secured = silhouette.SecuredAction.async { implicit request =>
-    Future.successful(Ok(views.html.loginHome(List("event1", "event2", "event3", "event4"))))
-  }
-
-  def signout = silhouette.SecuredAction.async { implicit request =>
-    silhouette.env.authenticatorService.discard(request.authenticator, Redirect(routes.TopController.index()))
-  }
 }

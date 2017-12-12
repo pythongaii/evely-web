@@ -9,7 +9,6 @@ import scala.concurrent.Future
 
 class RegisteredHomeController @Inject()()(implicit val messagesApi: MessagesApi) extends Controller with I18nSupport{
 
-
   def home = Action.async { implicit request =>
     Future.successful(Ok(views.html.test.home()))
   }
