@@ -1,8 +1,5 @@
 package dao
-<<<<<<< HEAD
 
-class APIUserDAO {
-=======
 import com.mohiva.play.silhouette.api.LoginInfo
 import model.user.RegisteredUser
 
@@ -23,6 +20,5 @@ abstract class APIUserDAO extends UserDAO{
 //  override def save(user: RegisteredUser): Future[RegisteredUser] = ???
 //
 //  override def update(user: RegisteredUser): Future[RegisteredUser] = ???
->>>>>>> feature/auth_func
 
 }
