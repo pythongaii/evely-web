@@ -88,4 +88,6 @@ iconnameid=アイコンと名前とID
 like=好き
 comment=コメント
 share=シェア
-
+owner=主催者: 
+otherdate=他の{0}日程
+otherpicture=他{0}枚の画像
