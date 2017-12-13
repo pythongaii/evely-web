@@ -35,7 +35,7 @@ class SignUpController @Inject()(val silhouette: Silhouette[CookieEnv],
   // 仮登録メール送信画面の表示
   def signupStart = silhouette.UserAwareAction.async { implicit request =>
     Future.successful(request.identity match {
-      case Some(user) => Redirect(routes.TopController.index())
+      case Some(user) => Redirect(routes.GuestHomeController.index())
       case None => Ok(views.html.signup.signupstart(SignUpForm.registringDataForm))
     })
   }
@@ -123,7 +123,7 @@ class SignUpController @Inject()(val silhouette: Silhouette[CookieEnv],
                   _ <- userService.update(registeredUser)
                   _ <- signUpTokenService.remove(tokenID)
                   _ <- passwordInfoService.save(loginInfo, passwordHasher.hash(requestForm.password._1))
-                  result <- silhouette.env.authenticatorService.embed(value, Redirect(routes.TopController.secured()))
+                  result <- silhouette.env.authenticatorService.embed(value, Redirect(routes.GuestHomeController.secured()))
                 } yield result
             }
           case Some(token) =>

@@ -13,7 +13,7 @@ import scala.concurrent.Future
 class GuestHomeController @Inject()(ws: WSClient, silhouette: Silhouette[CookieEnv])(implicit val messagesApi: MessagesApi) extends Controller with I18nSupport {
 
   def index() = Action.async {
-    Future.successful(Ok(views.html.top(List("event1", "event2", "event3", "event4"))))
+    Future.successful(Ok(views.html.top(List("event1", "event2", "event3", "event4"))).withHeaders(("Authorization", "bearear tokens")))
   }
 
   def secured = silhouette.SecuredAction.async { implicit request =>
@@ -21,7 +21,7 @@ class GuestHomeController @Inject()(ws: WSClient, silhouette: Silhouette[CookieE
   }
 
   def signout = silhouette.SecuredAction.async { implicit request =>
-    silhouette.env.authenticatorService.discard(request.authenticator, Redirect(routes.TopController.index()))
+    silhouette.env.authenticatorService.discard(request.authenticator, Redirect(routes.GuestHomeController.index()))
   }
 
 

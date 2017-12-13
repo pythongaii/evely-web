@@ -33,7 +33,7 @@ class SignInController @Inject()(val silhouette: Silhouette[CookieEnv],
   // サインイン画面の表示
   def startSignin = silhouette.UserAwareAction.async { implicit request =>
     Future.successful(request.identity match {
-      case Some(_) => Redirect(routes.TopController.index())
+      case Some(_) => Redirect(routes.GuestHomeController.index())
       case None => Ok(views.html.signin.signinstart(SignInForm.signInForm))
     })
   }
@@ -53,7 +53,7 @@ class SignInController @Inject()(val silhouette: Silhouette[CookieEnv],
                 case authenticator => authenticator
               }
               value <- silhouette.env.authenticatorService.init(authenticator)
-              result <- silhouette.env.authenticatorService.embed(value, Redirect(routes.TopController.secured()))
+              result <- silhouette.env.authenticatorService.embed(value, Redirect(routes.GuestHomeController.secured()))
             } yield result
           }
         }.recover {
