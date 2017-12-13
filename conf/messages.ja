@@ -27,6 +27,10 @@ signup.userID=ユーザーネーム
 signup.password=パスワード
 signup.password.confirm=パスワード(確認用)
 signup.submitbutton=確認画面へ
+signup.mailError=ちゃんと打て
+signup.userNameError=本間にそんな名前？？
+signup.passError=8文字以上の英数字(大小別)らしいです
+
 
 signupstart.mail_title=メールアドレスで新規会員登録
 signupstart.external_title=他のサービスのアカウントで新規会員登録
@@ -61,3 +65,27 @@ forgotpassreset.submitbutton=再設定
 forgotpass.title=パスワードの再設定完了
 forgotpass.message1=パスワードの再設定が完了しました。
 forgotpass.message2=新しいパスワードを使用してサインインしてください。
+
+profile=プロフィール
+settings=設定
+notification=通知
+bookmark=ブックマーク
+group=グループ
+help=ヘルプ
+trend=トレンド
+logout=ログアウト
+contact=連絡先
+info=詳細情報
+schedule=開催予定日
+home=ホーム
+nearby=近くのイベント
+higelite=ハイライト
+sleep=おやすみモード
+placeholder=検索...
+seeall=See all dates...
+keyword=キーワード
+iconnameid=アイコンと名前とID
+like=好き
+comment=コメント
+share=シェア
+

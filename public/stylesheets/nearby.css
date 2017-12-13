@@ -1,0 +1,488 @@
+/* Google Map */
+
+#map {
+    height: 100%;
+    width: 100%;
+}
+
+/* 検索ボックス */
+
+.search-box-container {
+    position: absolute;
+    margin: 12px 0 12px 8px;
+    width: 392px;
+    height: 48px;
+    left: 0px;
+    top: 48px;
+    z-index: 1;
+}
+
+.search-box {
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2), 0 -1px 0px rgba(0,0,0,0.02);
+    position: relative;
+    background: #fff;
+    border-radius: 2px;
+    box-sizing: border-box;
+    width: 392px;
+    height: 48px;
+    border-bottom: 1px solid transparent;
+    border-radius: 3px;
+    padding: 12px 104px 11px 64px;
+    opacity: 1;
+    transition: opacity .3s;
+}
+
+.search-box input {
+    font-size: 15px;
+    margin: 0 !important;
+    padding: 0 !important;
+    width: 100%;
+    height: 24px !important;
+    line-height: 24px;
+    border: none;
+    z-index: 6;
+    left: 0px;
+    outline: none;
+    background-color: transparent;
+}
+
+.search-box-btn {
+    position: absolute;
+    height: 48px;
+    width: 56px;
+    z-index: 1;
+    font-size: 1.25em;
+    line-height: 2.4;
+    text-align: center;
+    color: gray;
+    cursor: pointer;
+    transition: all .3s ease-in-out;
+    -webkit-transition: all .3s ease-in-out;
+}
+
+.search-box-btn.search {
+    top: 0;
+    right: 54px;
+}
+
+.search-box-separator {
+    position: absolute;
+    height: 34px;
+    border-left: 1px solid #acacac;
+    top: 8px;
+    right: 55px;
+}
+
+.search-box-btn.filter {
+    top: 0;
+    right: 0;
+}
+
+.search-box-btn i {
+    display: block;
+    height: 0.9em;
+    position: absolute;
+    margin: auto;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+}
+
+/* 詳細エリア */
+
+.side-nav {
+    position: absolute;
+    height: 100%;
+    width: 408px;
+    box-sizing: border-box;
+    padding-top: 48px;
+    top: 0;
+    left: -408px;
+    opacity: 0;
+    background: #fff;
+    overflow: scroll;
+    transition: all .2s ease-in-out;
+    -webkit-transition: all .2s ease-in-out;
+}
+
+.side-nav.visible {
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+    left: 0px;
+    opacity: 1;
+}
+
+.side-nav-btn.close {
+    background-color: beige;
+    width: 56px;
+    height: 48px;
+}
+
+/* イベントの詳細 */
+
+.event-container {
+    height: 100%;
+    width: 100%;
+    padding: 0px 15px;
+    box-sizing: border-box;
+    display: inline-block;
+}
+
+.event-header-image {
+    width: 100%;
+    height: 250px;
+    overflow: hidden;
+}
+
+.event-header-image img {
+    width: 100%;
+}
+
+.event-title {
+    position: relative;
+}
+
+.event-title h2 {
+    margin: 15px 44px 5px 0;
+    opacity: 0.87;
+}
+
+.event-owner {
+    width: 100%;
+    height: 56px;
+    padding-bottom: 5px;
+}
+
+.event-owner img {
+    display: inline-block;
+    float: left;
+    margin: 5px 10px 5px 0;
+    height: 44px;
+    width: 44px;
+    border-radius: 50%;
+}
+
+.event-owner-detail {
+    margin-top: 10px;
+    display: inline-block;
+    line-height: 1;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    width: calc(100% - 54px);
+}
+
+.event-owner-name {
+    width: 100%;
+    margin-bottom: 4px;
+    opacity: 0.87;
+}
+
+.event-owner-id {
+    width: 100%;
+    opacity: 0.54;
+}
+
+.action-bookmark {
+    width: 36px;
+    height: 36px;
+    cursor: pointer;
+    transition: all .2s ease-in-out;
+    -webkit-transition: all .2s ease-in-out;
+    background-image: url(../images/icon/bookmark-off.svg);
+    background-repeat: no-repeat;
+    box-sizing: border-box;
+    background-origin: content-box;
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+.action-bookmark:hover {
+    opacity: 0.7;
+}
+
+.action-bookmark.on {
+    background-image: url("../images/icon/bookmark-on.svg");
+}
+
+.side-nav-separator1 {
+    height: 3px;
+    width: calc(100% + 30px);
+    margin: 0 -15px;
+    border-top: 1px solid #acacac;
+    border-bottom: 1px solid #acacac;
+    background-image: linear-gradient(
+        -45deg,
+        #fff 25%,
+        #acacac 25%, #acacac 50%,
+        #fff 50%, #fff 75%,
+        #acacac 75%, #acacac 100%);
+    background-size: 3px 4px;
+}
+
+.side-nav-separator2 {
+    border-top: 1px solid #8e8e8e;
+}
+
+.rate-container {
+
+}
+
+.star-container {
+    margin: 10px 0 10px 8px;
+}
+
+.star {
+    display: inline-block;
+    width: 22px;
+    height: 22px;
+    background-image: url("../images/icon/star.svg");
+}
+
+.rate-wrapper {
+
+}
+
+.action-btn-container {
+    margin: 10px 0;
+    white-space: nowrap;
+}
+
+.action-btn {
+    display: inline-block;
+    width: 33%;
+    text-align: center;
+    opacity: 0.7;
+    cursor: pointer;
+}
+
+.action-btn:hover {
+    opacity: 1;
+}
+
+.action-btn > .like {
+    margin: 0 5px;
+    width: 24px;
+    height: 24px;
+    background-image: url(../images/icon/like.svg);
+    display: inline-block;
+    vertical-align: middle;
+    background-size: 24px;
+}
+
+.action-btn > .comment {
+    margin: 0 5px;
+    width: 24px;
+    height: 24px;
+    background-image: url(../images/icon/comment.svg);
+    display: inline-block;
+    vertical-align: middle;
+    background-size: 24px;
+}
+
+.action-btn > .share {
+    margin: 0 5px;
+    width: 24px;
+    height: 24px;
+    background-image: url(../images/icon/share.svg);
+    display: inline-block;
+    vertical-align: middle;
+    background-size: 24px;
+}
+
+.action-btn > p {
+    margin: 5px 0;
+    display: inline-block;
+    font-size: 1.1em;
+}
+
+/* イベントの詳細情報 */
+.event-info-container {
+    margin-bottom: 15px;
+}
+
+.event-info-wrapper {
+    margin-top: 18px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    position: relative;
+}
+
+.event-info-wrapper > .clock {
+    height: 28px;
+    width: 28px;
+    position: absolute;
+    margin-top: 7px;
+    margin-left: 7px;
+    background-image: url(../images/icon/clock.svg);
+}
+
+.event-info-wrapper > .location {
+    height: 28px;
+    width: 28px;
+    position: absolute;
+    margin-top: 7px;
+    margin-left: 7px;
+    background-image: url(../images/icon/location.svg);
+}
+
+.event-info-wrapper > .phone {
+    height: 28px;
+    width: 28px;
+    position: absolute;
+    margin-top: 7px;
+    margin-left: 7px;
+    background-image: url(../images/icon/phone.svg);
+}
+
+.event-info {
+    display: inline-block;
+    width: 86%;
+    margin-left: 40px;
+}
+
+.event-info-title {
+    font-weight: bold;
+    margin-bottom: 3px !important;
+    opacity: 0.87;
+}
+
+.event-info p {
+    margin: 0 0 0 7px;
+    width: 100%;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    opacity: 0.54;
+}
+
+.event-info-main {
+    font-size: 1.2em;
+    opacity: 0.87 !important;
+}
+
+.event-detail-container {
+    margin: 10px 0;
+}
+
+.event-detail-container > h3 {
+    opacity: 0.87;
+}
+
+.event-detail {
+    margin-top: 10px;
+    margin-left: 7px;
+}
+
+.event-detail > p {
+    opacity: 0.87;
+}
+
+.event-images {
+    margin-left: -15px;
+    height: 200px;
+    width: calc(100% + 30px);
+    overflow: hidden;
+    text-align: center;
+    white-space: nowrap;
+    position: relative;
+    cursor: pointer;
+}
+
+.event-other-image {
+    position: absolute;
+    display: inline-block;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    text-align: right;
+    color: #fffc;
+    height: 50%;
+    width: 100%;
+    background-image: linear-gradient(transparent , #000a);
+    margin: auto;
+    line-height: 12;
+    padding-right: 10px;
+    box-sizing: border-box;
+    transition: all .1s;
+}
+
+.event-image {
+    height: 100%;
+    width: 100%;
+    display: inline-block;
+    box-sizing: border-box;
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+
+.event-image img {
+    width: 100%;
+}
+
+.review-container {
+    height: 250px;
+}
+
+.review-container > h3 {
+    opacity: 0.87;
+}
+
+.upcoming-date-container {
+
+}
+
+.upcoming-date-container > h3 {
+    opacity: 0.87;
+}
+
+.upcoming-date-wrapper {
+    margin: 18px 7px 0 0;
+    position: relative;
+}
+
+.upcoming-date-wrapper p {
+    margin: 0;
+}
+
+.upcoming-date {
+    display: inline-block;
+    width: 64px;
+    text-align: center;
+}
+
+.upcoming-date > .month {
+    font-size: 1.3em;
+}
+
+.upcoming-date > .day {
+    font-size: 1.1em;
+}
+
+.upcoming-date-info {
+    display: inline-block;
+}
+
+.upcoming-date-info > .info {
+    opacity: 0.87;
+}
+
+.upcoming-date-info > .host {
+    opacity: 0.54;
+}
+
+.upcoming-date-see-all {
+    margin: 0;
+    font-size: 1.1em;
+    opacity: 0.87;
+    text-align: center;
+    line-height: 2.5;
+    background-color: #0000000a;
+    cursor: pointer;
+    font-style: italic;
+    font-family: serif;
+    margin-left: -15px;
+    width: calc(100% + 30px);
+}
