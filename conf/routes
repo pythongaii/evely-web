@@ -16,12 +16,11 @@ POST        /forgotmail                 controllers.ForgotPasswordController.for
 GET         /forgotpass/reset           controllers.ForgotPasswordController.forgotpassreset
 POST        /forgotpass                 controllers.ForgotPasswordController.forgotpass
 
-GET         /testhome                   controllers.TopController.testHome
-GET         /testindex                  controllers.TopController.testIndex
-GET         /testnearby                 controllers.TopController.testNearby
-GET         /testnotification           controllers.TopController.testNotification
-GET         /testbookmark               controllers.TopController.testBookmark
-
+GET         /home                   controllers.TopController.Home
+GET         /index                  controllers.TopController.Index
+GET         /nearby                 controllers.TopController.Nearby
+GET         /notification           controllers.TopController.Notification
+GET         /bookmark               controllers.TopController.Bookmark
 
 GET         /assets/*file               controllers.Assets.at(path="/public", file)
 
