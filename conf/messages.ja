@@ -70,3 +70,26 @@ mail.confirm=この度はEvelyへの、会員登録手続きを行っていた�
 
 mail.resetpassword.subject=【パスワード再設定】Evely パスワード再設定メール
 mail.resetpassword=パスワードの再設定を行います。{0}
+
+profile=プロフィール
+settings=設定
+notification=通知
+bookmark=ブックマーク
+group=グループ
+help=ヘルプ
+trend=トレンド
+logout=ログアウト
+contact=連絡先
+info=詳細情報
+schedule=開催予定日
+home=ホーム
+nearby=近くのイベント
+higelite=ハイライト
+sleep=おやすみモード
+placeholder=検索...
+seeall=See all dates...
+keyword=キーワード
+iconnameid=アイコンと名前とID
+like=好き
+comment=コメント
+share=シェア
