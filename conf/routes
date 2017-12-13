@@ -22,6 +22,5 @@ GET         /nearby                 controllers.TopController.Nearby
 GET         /notification           controllers.TopController.Notification
 GET         /bookmark               controllers.TopController.Bookmark
 
-
 GET         /assets/*file               controllers.Assets.at(path="/public", file)
 
