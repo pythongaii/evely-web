@@ -15,14 +15,14 @@ class TopController @Inject()(implicit val messagesApi: MessagesApi) extends Con
     Future.successful(Ok(views.html.top(List("event1", "event2", "event3", "event4"))))
   }
 
-  def testHome = Action.async(Future.successful(Ok(views.html.test.home())))
+  def Home = Action.async(Future.successful(Ok(views.html.test.home())))
 
-  def testIndex = Action.async(Future.successful(Ok(views.html.test.index())))
+  def Index = Action.async(Future.successful(Ok(views.html.test.index())))
 
-  def testBookmark = Action.async(Future.successful(Ok(views.html.test.bookmark())))
+  def Bookmark = Action.async(Future.successful(Ok(views.html.test.bookmark())))
 
-  def testNotification = Action.async(Future.successful(Ok(views.html.test.notification())))
+  def Notification = Action.async(Future.successful(Ok(views.html.test.notification())))
 
-  def testNearby = Action.async(Future.successful(Ok(views.html.test.nearby())))
+  def Nearby = Action.async(Future.successful(Ok(views.html.test.nearby())))
 
 }

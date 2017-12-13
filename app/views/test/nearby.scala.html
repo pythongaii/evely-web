@@ -1,4 +1,5 @@
 
+@()(implicit messages: Messages)
 
 <!DOCTYPE html>
 <html>
@@ -13,7 +14,7 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
             <!-- Font Awesome -->
-        <link rel="stylesheet" href="../../../../SampleWebEvery/vendor/font-awesome-4.7.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="@routes.Assets.at("/vendor/font-awesome-4.7.0/css/font-awesome.min.css")">
             <!-- My javascript & css files -->
         <script src="@routes.Assets.at("/javascripts/master.js")" charset="utf-8"></script>
         <script src="@routes.Assets.at("/javascripts/nearby.js")" charset="utf-8"></script>
@@ -27,8 +28,8 @@
             <ul class="tab-container">
                     <!-- Home -->
                 <li>
-                    <a href="home.html" class="tab">
-                        <i class="fa fa-home" aria-hidden="true"></i>ホーム
+                    <a href="@routes.TopController.Home()" class="tab">
+                        <i class="fa fa-home" aria-hidden="true"></i>@Messages("home")
                     </a>
                 </li>
                     <!-- Nearby -->
@@ -39,14 +40,14 @@
             </li> -->
                     <!-- Bookmark -->
                 <li>
-                    <a href="bookmark.html" class="tab">
-                        <i class="fa fa-bookmark" aria-hidden="true"></i>ブックマーク
+                    <a href="@routes.TopController.Bookmark()" class="tab">
+                        <i class="fa fa-bookmark" aria-hidden="true"></i>@Messages("bookmark")
                     </a>
                 </li>
                     <!-- Notification -->
                 <li>
-                    <a href="notification.html" class="tab">
-                        <i class="fa fa-bell" aria-hidden="true"></i>通知
+                    <a href="@routes.TopController.Notification()" class="tab">
+                        <i class="fa fa-bell" aria-hidden="true"></i>@Messages("notification")
                     </a>
                 </li>
             </ul>
@@ -56,30 +57,30 @@
                     <!-- Search box START -->
                 <div class="search">
                     <form class="" action="nearby.html" method="post">
-                        <input type="text" name="" placeholder="検索...">
+                        <input type="text" name="" placeholder=@Messages("placeholder")>
                     </form>
                 </div>
                     <!-- Search box END -->
                     <!-- Profile nav START -->
                 <div class="dropdown-group profile-nav">
-                    <img class="dropdown-toggle" src="../images/icon/icon.png" alt="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <img class="dropdown-toggle" src="@routes.Assets.at("/images/icon/icon.png")" alt="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                         <li class="profile-container">
-                            <img src="../images/icon/icon.png" alt="">
+                            <img src="@routes.Assets.at("/images/icon/icon.png")" alt="">
                             <div class="profile-info">
                                 <p class="name">むらた ゆきや</p>
                                 <p class="id">@@yKicchan</p>
                             </div>
                         </li>
                         <li role="separator" class="divider"></li>
-                        <li><a href="#">プロフィール</a></li>
-                        <li><a href="#">グループ</a></li>
-                        <li><a href="#">トレンド</a></li>
+                        <li><a href="#">@Messages("profile")</a></li>
+                        <li><a href="#">@Messages("group")</a></li>
+                        <li><a href="#">@Messages("trend")</a></li>
                         <li role="separator" class="divider"></li>
-                        <li><a href="#">設定</a></li>
-                        <li><a href="#">ヘルプ</a></li>
+                        <li><a href="#">@Messages("settings")</a></li>
+                        <li><a href="#">@Messages("help")</a></li>
                         <li role="separator" class="divider"></li>
-                        <li><a href="#">ログアウト</a></li>
+                        <li><a href="#">@Messages("logout")</a></li>
                     </ul>
                 </div>
                     <!-- Profile nav END -->
@@ -97,7 +98,7 @@
                     <i class="fa fa-bars" aria-hidden="true"></i>
                 </div>
                 <div class="search-box">
-                    <input type="text" placeholder="キーワード...">
+                    <input type="text" placeholder=@Messages("keyword")>
                     <div class="search-box-btn search">
                         <i class="fa fa-search" aria-hidden="true"></i>
                     </div>
@@ -115,7 +116,7 @@
             </div> -->
                     <!-- Event header image -->
                 <div class="event-header-image">
-                    <img src="../images/sample/sample1.jpg" alt="">
+                    <img src="@routes.Assets.at("/images/sample/sample1.jpg")" alt="">
                 </div>
                     <!-- Event detail START -->
                 <div class="event-container">
@@ -128,7 +129,7 @@
                         <!-- Owner detail START -->
                     <div class="event-owner">
                             <!-- Icon -->
-                        <img src="../images/icon/icon.png" alt="">
+                        <img src="@routes.Assets.at("/images/icon/icon.png")" alt="">
                             <!-- Name -->
                         <div class="event-owner-detail">
                             <p class="event-owner-name">むらた ゆきや</p>
@@ -152,15 +153,15 @@
                     <div class="action-btn-container">
                         <div class="action-btn">
                             <div class="like"></div>
-                            <p>Like</p>
+                            <p>@Messages("like")</p>
                         </div>
                         <div class="action-btn">
                             <div class="comment"></div>
-                            <p>Comment</p>
+                            <p>@Messages("comment")</p>
                         </div>
                         <div class="action-btn">
                             <div class="share"></div>
-                            <p>Share</p>
+                            <p>@Messages("share")</p>
                         </div>
                     </div>
                     <div class="side-nav-separator2"></div>
@@ -182,17 +183,17 @@
                         <div class="event-info-wrapper">
                             <div class="phone"></div>
                             <div class="event-info">
-                                <p>連絡先</p>
+                                <p>@Messages("contact")</p>
                                 <p class="event-info-main">090-0000-0000</p>
                             </div>
                         </div>
                     </div>
                     <div class="side-nav-separator1"></div>
                     <div class="event-detail-container">
-                        <h3>詳細情報</h3>
+                        <h3>@Messages("info")</h3>
                         <div class="event-images">
                             <div class="event-image">
-                                <img src="../images/sample/sample1.jpg" alt="">
+                                <img src="@routes.Assets.at("/images/sample/sample1.jpg")" alt="">
                             </div>
                             <div class="event-other-image">
                                 他3枚の画像
@@ -209,7 +210,7 @@
                     </div>
                     <div class="side-nav-separator1"></div>
                     <div class="upcoming-date-container">
-                        <h3>開催予定日</h3>
+                        <h3>@Messages("schedule")</h3>
                         <div class="side-nav-separator2"></div>
                         <div class="upcoming-date-wrapper">
                             <div class="upcoming-date">
@@ -245,7 +246,7 @@
                             <div class="action-bookmark"></div>
                         </div>
                         <div class="side-nav-separator2"></div>
-                        <div class="upcoming-date-see-all">See all dates...</div>
+                        <div class="upcoming-date-see-all">@Messages("seeall")</div>
                     </div>
                     <div class="side-nav-separator1"></div>
                 </div>

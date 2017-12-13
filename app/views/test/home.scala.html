@@ -1,4 +1,5 @@
 
+@()(implicit messages: Messages)
 
 <!DOCTYPE html>
 <html>
@@ -13,7 +14,7 @@
         <link rel="stylesheet" href="@routes.Assets.at("/vendor/font-awesome-4.7.0/css/font-awesome.min.css")">
             <!-- My javascript & css files -->
         <script src="@routes.Assets.at("/javascripts/master.js")" charset="utf-8"></script>
-        <link rel="stylesheet" href="@routes.Assets.at("/stylesheets/css/master.css")">
+        <link rel="stylesheet" href="@routes.Assets.at("/stylesheets/master.css")">
     </head>
     <body>
             <!-- App bar START -->
@@ -22,26 +23,26 @@
             <ul class="tab-container">
                     <!-- Home -->
                 <li>
-                    <a href="@routes.TopController.testHome()" class="tab is-active">
-                        <i class="fa fa-home" aria-hidden="true"></i>Home
+                    <a href="@routes.TopController.Home()" class="tab is-active">
+                        <i class="fa fa-home" aria-hidden="true"></i>@Messages("home")
                     </a>
                 </li>
                     <!-- Nearby -->
                 <li>
                     <a href="@routes.TopController.Nearby()" class="tab">
-                        <i class="fa fa-map-marker" aria-hidden="true"></i>Nearby
+                        <i class="fa fa-map-marker" aria-hidden="true"></i>@Messages("nearby")
                     </a>
                 </li>
                     <!-- Bookmark -->
                 <li>
                     <a href="@routes.TopController.Bookmark()" class="tab">
-                        <i class="fa fa-bookmark" aria-hidden="true"></i>bookmark
+                        <i class="fa fa-bookmark" aria-hidden="true"></i>@Messages("bookmark")
                     </a>
                 </li>
                     <!-- Notification -->
                 <li>
                     <a href="@routes.TopController.Notification()" class="tab">
-                        <i class="fa fa-bell" aria-hidden="true"></i>notification
+                        <i class="fa fa-bell" aria-hidden="true"></i>@Messages("notification")
                     </a>
                 </li>
             </ul>
@@ -51,7 +52,7 @@
                     <!-- Search box START -->
                 <div class="search">
                     <form class="" action="" method="post">
-                        <input type="text" name="" placeholder="検索...">
+                        <input type="text" name="" placeholder=@Messages("placeholder")>
                     </form>
                 </div>
                     <!-- Search box END -->

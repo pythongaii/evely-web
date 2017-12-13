@@ -1,5 +1,5 @@
 
-
+@()(implicit messages: Messages)
 
 <!DOCTYPE html>
 <html>
@@ -14,7 +14,7 @@
         <link rel="stylesheet" href="@routes.Assets.at("/vendor/font-awesome-4.7.0/css/font-awesome.min.css")">
             <!-- My javascript & css files -->
         <script src="@routes.Assets.at("/javascripts/master.js")" charset="utf-8"></script>
-        <link rel="stylesheet" href="@routes.Assets.at("/css/master.css")">
+        <link rel="stylesheet" href="@routes.Assets.at("/stylesheets/master.css")">
     </head>
     <body>
             <!-- App bar START -->
@@ -23,26 +23,26 @@
             <ul class="tab-container">
                     <!-- Home -->
                 <li>
-                    <a href="home.html" class="tab">
-                        <i class="fa fa-home" aria-hidden="true"></i>Home
+                    <a href="@routes.TopController.Home()" class="tab">
+                        <i class="fa fa-home" aria-hidden="true"></i>@Messages("home")
                     </a>
                 </li>
                     <!-- Nearby -->
                 <li>
-                    <a href="./nearby.html" class="tab">
-                        <i class="fa fa-map-marker" aria-hidden="true"></i>Nearby
+                    <a href="@routes.TopController.Nearby()" class="tab">
+                        <i class="fa fa-map-marker" aria-hidden="true"></i>@Messages("nearby")
                     </a>
                 </li>
                     <!-- Bookmark -->
                 <li>
-                    <a href="bookmark.html" class="tab">
-                        <i class="fa fa-bookmark" aria-hidden="true"></i>bookmark
+                    <a href="@routes.TopController.Bookmark()" class="tab">
+                        <i class="fa fa-bookmark" aria-hidden="true"></i>@Messages("bookmark")
                     </a>
                 </li>
                     <!-- Notification -->
                 <li>
-                    <a href="notification.html" class="tab is-active">
-                        <i class="fa fa-bell" aria-hidden="true"></i>notification
+                    <a href="@routes.TopController.Notification()" class="tab is-active">
+                        <i class="fa fa-bell" aria-hidden="true"></i>@Messages("notification")
                     </a>
                 </li>
             </ul>
@@ -52,13 +52,13 @@
                     <!-- Search box START -->
                 <div class="search">
                     <form class="" action="" method="post">
-                        <input type="text" name="" placeholder="検索...">
+                        <input type="text" name="" placeholder=@Messages("placeholder")>
                     </form>
                 </div>
                     <!-- Search box END -->
                     <!-- Profile nav START -->
                 <div class="profile-nav">
-                    <a href="./index.html">
+                    <a href="@routes.TopController.Index()">
                         <img src="@routes.Assets.at("/images/icon/icon.png")" alt="profile icon">
                     </a>
                 </div>

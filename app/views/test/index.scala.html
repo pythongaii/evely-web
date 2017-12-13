@@ -1,4 +1,6 @@
 
+@()(implicit messages: Messages)
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -14,7 +16,7 @@
             <!-- Font Awesome -->
         <link rel="stylesheet" href="@routes.Assets.at("/vendor/font-awesome-4.7.0/css/font-awesome.min.css")">
             <!-- My javascript & css files -->
-        <script src="../js/master.js" charset="utf-8"></script>
+        <script src="@routes.Assets.at("/javascripts/master.js")" charset="utf-8"></script>
         <link rel="stylesheet" href="@routes.Assets.at("/css/master.css")">
     </head>
     <body>
@@ -24,26 +26,26 @@
             <ul class="tab-container">
                     <!-- Home -->
                 <li>
-                    <a href="home.html" class="tab">
-                        <i class="fa fa-home" aria-hidden="true"></i>Home
+                    <a href="@routes.TopController.Home()" class="tab">
+                        <i class="fa fa-home" aria-hidden="true"></i>@Messages("home")
                     </a>
                 </li>
                     <!-- Nearby -->
                 <li>
-                    <a href="nearby.html" class="tab">
-                        <i class="fa fa-map-marker" aria-hidden="true"></i>Nearby
+                    <a href="@routes.TopController.Nearby()" class="tab">
+                        <i class="fa fa-map-marker" aria-hidden="true"></i>@Messages("nearby")
                     </a>
                 </li>
                     <!-- Bookmark -->
                 <li>
-                    <a href="bookmark.html" class="tab">
-                        <i class="fa fa-bookmark" aria-hidden="true"></i>bookmark
+                    <a href="@routes.TopController.Bookmark()" class="tab">
+                        <i class="fa fa-bookmark" aria-hidden="true"></i>@Messages("bookmark")
                     </a>
                 </li>
                     <!-- Notification -->
                 <li>
-                    <a href="notification.html" class="tab">
-                        <i class="fa fa-bell" aria-hidden="true"></i>notification
+                    <a href="@routes.TopController.Notification()" class="tab">
+                        <i class="fa fa-bell" aria-hidden="true"></i>@Messages("notification")
                     </a>
                 </li>
             </ul>
@@ -53,25 +55,25 @@
                     <!-- Search box START -->
                 <div class="search">
                     <form class="" action="" method="post">
-                        <input type="text" name="" placeholder="検索...">
+                        <input type="text" name="" placeholder=@Messages("placeholder")>
                     </form>
                 </div>
                     <!-- Search box END -->
                     <!-- Profile nav START -->
                 <div class="dropdown-group profile-nav">
-                    <img class="dropdown-toggle" src="@routes.Assets.at("images/icon.png")" alt="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <img class="dropdown-toggle" src="@routes.Assets.at("/images/icon.png")" alt="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                        <li><a href="#">アイコンと名前とID</a></li>
+                        <li><a href="#">@Messages("iconnameid")</a></li>
                         <li role="separator" class="divider"></li>
-                        <li><a href="#">ホーム</a></li>
-                        <li><a href="#">プロフィール</a></li>
-                        <li><a href="#">ハイライト</a></li>
+                        <li><a href="#">@Messages("home")</a></li>
+                        <li><a href="#">@Messages("profile")</a></li>
+                        <li><a href="#">@Messages("higelite")</a></li>
                         <li role="separator" class="divider"></li>
-                        <li><a href="#">設定</a></li>
-                        <li><a href="#">ヘルプ</a></li>
-                        <li><a id="night-mode">おやすみモード</a></li>
+                        <li><a href="#">@Messages("settings")</a></li>
+                        <li><a href="#">@Messages("help")</a></li>
+                        <li><a id="night-mode">@Messages("sleep")</a></li>
                         <li role="separator" class="divider"></li>
-                        <li><a href="#">ログアウト</a></li>
+                        <li><a href="#">@Messages("logout")</a></li>
                     </ul>
                 </div>
                     <!-- Profile nav END -->
