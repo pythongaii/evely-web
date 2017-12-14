@@ -28,30 +28,29 @@
             <ul class="tab-container">
                     <!-- Home -->
                 <li>
-                    <a href="@routes.TopController.Home()" class="tab">
+                    <a href="@routes.RegisteredHomeController.home()" class="tab">
                         <i class="fa fa-home" aria-hidden="true"></i>@Messages("home")
                     </a>
                 </li>
                     <!-- Nearby -->
                     <!-- <li>
-                <a href="./nearby.html" class="tab is-active">
+                <a href="./nearby.html" class="tab">
                     <i class="fa fa-map-marker" aria-hidden="true"></i>近くのイベント
                 </a>
             </li> -->
                     <!-- Bookmark -->
                 <li>
-                    <a href="@routes.TopController.Bookmark()" class="tab">
+                    <a href="@routes.RegisteredHomeController.bookmark()" class="tab is-active">
                         <i class="fa fa-bookmark" aria-hidden="true"></i>@Messages("bookmark")
                     </a>
                 </li>
                     <!-- Notification -->
                 <li>
-                    <a href="@routes.TopController.Notification()" class="tab">
+                    <a href="@routes.RegisteredHomeController.notification()" class="tab">
                         <i class="fa fa-bell" aria-hidden="true"></i>@Messages("notification")
                     </a>
                 </li>
-            </ul>
-                <!-- Tab END -->
+            </ul>                <!-- Tab END -->
                 <!-- App bar extras START -->
             <div class="nav-extras">
                     <!-- Search box START -->

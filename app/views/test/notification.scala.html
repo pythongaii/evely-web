@@ -23,30 +23,29 @@
             <ul class="tab-container">
                     <!-- Home -->
                 <li>
-                    <a href="@routes.TopController.Home()" class="tab">
+                    <a href="@routes.RegisteredHomeController.home()" class="tab">
                         <i class="fa fa-home" aria-hidden="true"></i>@Messages("home")
                     </a>
                 </li>
                     <!-- Nearby -->
-                <li>
-                    <a href="@routes.TopController.Nearby()" class="tab">
-                        <i class="fa fa-map-marker" aria-hidden="true"></i>@Messages("nearby")
-                    </a>
-                </li>
+                    <!-- <li>
+                <a href="./nearby.html" class="tab">
+                    <i class="fa fa-map-marker" aria-hidden="true"></i>近くのイベント
+                </a>
+            </li> -->
                     <!-- Bookmark -->
                 <li>
-                    <a href="@routes.TopController.Bookmark()" class="tab">
+                    <a href="@routes.RegisteredHomeController.bookmark()" class="tab is-active">
                         <i class="fa fa-bookmark" aria-hidden="true"></i>@Messages("bookmark")
                     </a>
                 </li>
                     <!-- Notification -->
                 <li>
-                    <a href="@routes.TopController.Notification()" class="tab is-active">
+                    <a href="@routes.RegisteredHomeController.notification()" class="tab">
                         <i class="fa fa-bell" aria-hidden="true"></i>@Messages("notification")
                     </a>
                 </li>
-            </ul>
-                <!-- Tab END -->
+            </ul>                <!-- Tab END -->
                 <!-- App bar extras START -->
             <div class="nav-extras">
                     <!-- Search box START -->
@@ -58,7 +57,7 @@
                     <!-- Search box END -->
                     <!-- Profile nav START -->
                 <div class="profile-nav">
-                    <a href="@routes.TopController.Index()">
+                    <a href="@routes.RegisteredHomeController.index()">
                         <img src="@routes.Assets.at("/images/icon/icon.png")" alt="profile icon">
                     </a>
                 </div>

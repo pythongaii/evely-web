@@ -28,7 +28,7 @@
             <ul class="tab-container">
                     <!-- Home -->
                 <li>
-                    <a href="@routes.TopController.Home()" class="tab">
+                    <a href="@routes.RegisteredHomeController.home()" class="tab">
                         <i class="fa fa-home" aria-hidden="true"></i>@Messages("home")
                     </a>
                 </li>
@@ -40,13 +40,13 @@
             </li> -->
                     <!-- Bookmark -->
                 <li>
-                    <a href="@routes.TopController.Bookmark()" class="tab is-active">
+                    <a href="@routes.RegisteredHomeController.bookmark()" class="tab is-active">
                         <i class="fa fa-bookmark" aria-hidden="true"></i>@Messages("bookmark")
                     </a>
                 </li>
                     <!-- Notification -->
                 <li>
-                    <a href="@routes.TopController.Notification()" class="tab">
+                    <a href="@routes.RegisteredHomeController.notification()" class="tab">
                         <i class="fa fa-bell" aria-hidden="true"></i>@Messages("notification")
                     </a>
                 </li>
