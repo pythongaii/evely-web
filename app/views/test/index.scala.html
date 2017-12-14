@@ -1,83 +1,744 @@
-
+@import forms.SignUpForm.RegisterdData
+@import model.event.APIEvent
+@(form: Form[APIEvent])(implicit messages: Messages, flash: Flash)
+@import helpers.PlainHelper.myFields
 <!DOCTYPE html>
 <html>
     <head>
         <meta charset="utf-8">
-        <title>Index</title>
+        <title>index</title>
             <!-- jQuery -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+        <script src="@routes.Assets.at("/javascripts/jquery.validationEngine.js")" charset="utf-8"></script>
+        <script src="@routes.Assets.at("/javascripts/jquery.validationEngine-ja.js")" charset="utf-8"></script>
+        <link rel="stylesheet" href="@routes.Assets.at("/stylesheets/jquery.datetimepicker.css")">
+        <link rel="stylesheet" href="@routes.Assets.at("/stylesheets/validationEngine.jquery.css")">
             <!-- GoogleMap API -->
         <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
             <!-- Bootstrap -->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/css/bootstrap-datetimepicker.min.css" />
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.6/moment.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/js/bootstrap-datetimepicker.min.js"></script>
             <!-- Font Awesome -->
-        <link rel="stylesheet" href="../../../../SampleWebEvery/vendor/font-awesome-4.7.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="../vendor/font-awesome-4.7.0/css/font-awesome.min.css">
             <!-- My javascript & css files -->
-        <script src="../js/master.js" charset="utf-8"></script>
-        <link rel="stylesheet" href="../../../../SampleWebEvery/css/master.css">
+        <script src="@routes.Assets.at("/javascripts/master.js")" charset="utf-8">
+                {
+                    alert(@flash.get("created").getOrElse("error"))
+                }
+        </script>
+        <link rel="stylesheet" href="@routes.Assets.at("/stylesheets/master.css")">
+        <link rel="stylesheet" href="@routes.Assets.at("/stylesheets/nearby.css")">
     </head>
     <body>
             <!-- App bar START -->
-        <header class="app-bar">
+        <header class="app-bar row">
                 <!-- Tab START -->
             <ul class="tab-container">
                     <!-- Home -->
                 <li>
-                    <a href="home.html" class="tab">
-                        <i class="fa fa-home" aria-hidden="true"></i>Home
+                    <a href="./index.html" class="tab is-active">
+                        <i class="fa fa-home" aria-hidden="true"></i>ホーム
                     </a>
                 </li>
                     <!-- Nearby -->
+                    <!-- <li>
+                <a href="./nearby.html" class="tab">
+                    <i class="fa fa-map-marker" aria-hidden="true"></i>近くのイベント
+                </a>
+            </li> -->
+                    <!-- Pin -->
                 <li>
-                    <a href="nearby.html" class="tab">
-                        <i class="fa fa-map-marker" aria-hidden="true"></i>Nearby
-                    </a>
-                </li>
-                    <!-- Bookmark -->
-                <li>
-                    <a href="bookmark.html" class="tab">
-                        <i class="fa fa-bookmark" aria-hidden="true"></i>bookmark
+                    <a href="./pin.html" class="tab">
+                        <i class="fa fa-thumb-tack" aria-hidden="true"></i>ピン
                     </a>
                 </li>
                     <!-- Notification -->
                 <li>
-                    <a href="notification.html" class="tab">
-                        <i class="fa fa-bell" aria-hidden="true"></i>notification
+                    <a href="./notification.html" class="tab">
+                        <i class="fa fa-bell" aria-hidden="true"></i>通知
                     </a>
                 </li>
             </ul>
                 <!-- Tab END -->
                 <!-- App bar extras START -->
-            <div class="nav-extras">
+            <ul class="nav-extras right">
                     <!-- Search box START -->
-                <div class="search">
-                    <form class="" action="" method="post">
+                <li class="search">
+                    <form class="" action="nearby.html" method="post">
                         <input type="text" name="" placeholder="検索...">
                     </form>
-                </div>
+                </li>
                     <!-- Search box END -->
                     <!-- Profile nav START -->
-                <div class="dropdown-group profile-nav">
+                <li class="dropdown-group profile-nav">
                     <img class="dropdown-toggle" src="../images/icon/icon.png" alt="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                        <li><a href="#">アイコンと名前とID</a></li>
+                        <li class="profile-container">
+                            <img src="../images/icon/icon.png" alt="">
+                            <div class="profile-info">
+                                <p class="name">むらた ゆきや</p>
+                                <p class="id">@@yKicchan</p>
+                            </div>
+                        </li>
                         <li role="separator" class="divider"></li>
-                        <li><a href="#">ホーム</a></li>
                         <li><a href="#">プロフィール</a></li>
-                        <li><a href="#">ハイライト</a></li>
+                        <li><a href="#">グループ</a></li>
+                        <li><a href="#">トレンド</a></li>
                         <li role="separator" class="divider"></li>
                         <li><a href="#">設定</a></li>
                         <li><a href="#">ヘルプ</a></li>
-                        <li><a id="night-mode">おやすみモード</a></li>
                         <li role="separator" class="divider"></li>
-                        <li><a href="#">ログアウト</a></li>
+                        <li><a href="@routes.RegisteredHomeController.signout()">ログアウト</a></li>
                     </ul>
-                </div>
-                    <!-- Profile nav END -->
-            </div>
+                        <!-- Profile nav END -->
+            <li>
+                <span id="create-btn" class="glyphicon glyphicon-plus btn btn-default" data-toggle="modal" data-target="#modal"></span>
+            </li>
+            </ul>
                 <!-- App bar extras END -->
         </header>
             <!-- App bar END -->
+            <!-- モーダルウィンドウ表示項目  -->
+        <div class="modal fade" id="modal">
+            <div class="modal-dialog" role="dialog">
+                <div class="modal-content validate[group]">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title">新しいイベントを作成</h4>
+                    </div>
+                    <div class="modal-body">
+                        @helper.form(action = routes.RegisteredHomeController.create(), 'id -> "create-form"){
+                            <div class="form-group">
+                                @helper.inputText(form("title"),
+                                    'class -> "form-control validate[required]",
+                                    'size -> "20",
+                                    'name -> "data[title]",
+                                    'placeholder -> "1時間限定タイムセール!!")
+                                <label for="title"><span class="red">*</span>タイトル</label>
+                            </div>
+                            <div class="form-group">
+                                <label for="body">説明</label>
+                                @helper.textarea(form("body"),
+                                    'class -> "form-control",
+                                    'size -> "1000",
+                                    'name -> "data[body]",
+                                    'placeholder -> "1000文字以内")
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-xs-6">
+                                    <label for="upcomingDate.startDate">開始日</label>
+                                    @helper.inputText(form("upcomingDate.startDate"),
+                                        'class -> "form-control",
+                                        'name -> "data[upcomingDate][startDate]")
+                                </div>
+                                <div class="col-xs-6">
+                                    <label for="upcomingDate.endDate">終了日</label>
+                                    @helper.inputText(form("upcomingDate.endDate"),
+                                        'class -> "form-control",
+                                        'name -> "data[upcomingDate][endDate]")
+                                </div>
+                            </div>
+                            <label>開催場所</label>
+                            <div class="form-group row">
+                                <div class="col-xs-4">
+                                    <div class="input-group">
+                                        <span class="input-group-addon" id="place-addon">〒</span>
+                                        <input id="zipcode" class="form-control" type="text" maxlength="8" aria-describedby="place-addon" placeholder="520-25XX">
+                                    </div>
+                                </div>
+                                <div class="pull-left middle">
+                                    <button id="addr-btn" type="button" class="btn btn-default">住所検索</button>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                @helper.inputText(form("place.name"),
+                                    'class -> "form-control",
+                                    'name -> "data[plcase][name]")
+                            </div>
+
+                            <input type="hidden" name="place.lat" id="place.lat" value="12.02154">
+                            <input type="hidden" name="place.lng" id="place.lng" value="10.05014">
+                            <input type="hidden" name="mail" id="mail" value="sugorokuyarou@@gmail.com">
+                            <input type="hidden" name="url" id="url" value="http://yahoo.co.jp">
+                            <input type="hidden" name="tel" id="tel" value="090-1234-5678">
+
+                        </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">キャンセル</button>
+                        <button type="button" class="btn btn-success" id="create-submit">作成</button>
+                    </div>
+                    }
+                </div>
+            </div>
+        </div>
+        <script type="text/javascript">
+        $(function () {
+            var opt = {
+                minDate: "moment",
+                toolbarPlacement: "top",
+                format: 'YYYY-MM-DDTHH:mm:ss'
+            };
+            $("#upcomingDate_startDate").datetimepicker(opt);
+            $("#upcomingDate_endDate").datetimepicker(opt);
+            $("#create-submit").on("click", function () {
+                $("#create-form").submit();
+            });
+
+            $("#create-form").validationEngine('attach', {
+                // 以下のパラメータは任意
+                promptPosition: "topRight",//エラー文の表示位置
+                focusFirstField: false,
+                scroll: false,
+                addFailureCssClassToField: "error"
+            });
+
+            $("#zipcode").on("keydown", function (e) {
+                if (e.keyCode === 13) {
+                    $("#addr-btn").trigger("click");
+                }
+            });
+
+            $('#addr-btn').click(function () {
+                var zipcode = $("#zipcode").val().replace("-", "")
+                $.ajax({
+                    url: 'http://api.zipaddress.net?callback=?',
+                    type: "get",
+                    dataType: "json",
+                    data: {'zipcode': zipcode},
+                    success: function (json) {
+                        $('#address').val(json.fullAddress);
+                    }
+                });
+            });
+        });
+    </script>
+        <main class="container">
+            <div class="happening-event-container">
+                <h2>開催中のイベント</h2>
+                <div class="event-card">
+                    <div class="event-card-header">
+                        <div class="image">
+                            <img src="../images/sample/sample1.jpg" alt="">
+                        </div>
+                        <h2 class="title">イベントイベントイベントイベントイベント</h2>
+                        <div class="pin"></div>
+                    </div>
+                    <div class="event-card-body">
+                        <div class="detail-container">
+                            <div class="detail">
+                                <img src="../images/sample/sample2.jpg" alt="">
+                                <div class="info">
+                                    <p class="main">Yukiya Murata</p>
+                                    <p>@@yKicchan</p>
+                                </div>
+                            </div>
+                            <div class="detail">
+                                <div class="clock"></div>
+                                <div class="info">
+                                    <p class="main">2月25日(金) 10:00</p>
+                                    <p>他5件の開催日程</p>
+                                </div>
+                            </div>
+                            <div class="detail">
+                                <div class="location"></div>
+                                <div class="info">
+                                    <p>〒000-0000</p>
+                                    <p class="main">滋賀県蒲生郡竜王町大字田中000-000番地</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="event-card-footer">
+                        <div class="action-btn-container">
+                            <div class="action-btn">
+                                <div class="like"></div>
+                            </div>
+                            <div class="action-btn">
+                                <div class="comment"></div>
+                            </div>
+                            <div class="action-btn">
+                                <div class="share"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="event-card">
+                    <div class="event-card-header">
+                        <div class="image">
+                            <img src="../images/sample/sample1.jpg" alt="">
+                        </div>
+                        <h2 class="title">イベントイベントイベントイベントイベント</h2>
+                        <div class="pin"></div>
+                    </div>
+                    <div class="event-card-body">
+                        <div class="detail-container">
+                            <div class="detail">
+                                <img src="../images/sample/sample2.jpg" alt="">
+                                <div class="info">
+                                    <p class="main">Yukiya Murata</p>
+                                    <p>@@yKicchan</p>
+                                </div>
+                            </div>
+                            <div class="detail">
+                                <div class="clock"></div>
+                                <div class="info">
+                                    <p class="main">2月25日(金) 10:00</p>
+                                    <p>他5件の開催日程</p>
+                                </div>
+                            </div>
+                            <div class="detail">
+                                <div class="location"></div>
+                                <div class="info">
+                                    <p>〒000-0000</p>
+                                    <p class="main">滋賀県蒲生郡竜王町大字田中000-000番地</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="event-card-footer">
+                        <div class="action-btn-container">
+                            <div class="action-btn">
+                                <div class="like"></div>
+                            </div>
+                            <div class="action-btn">
+                                <div class="comment"></div>
+                            </div>
+                            <div class="action-btn">
+                                <div class="share"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="event-card">
+                    <div class="event-card-header">
+                        <div class="image">
+                            <img src="../images/sample/sample1.jpg" alt="">
+                        </div>
+                        <h2 class="title">イベントイベントイベントイベントイベント</h2>
+                        <div class="pin"></div>
+                    </div>
+                    <div class="event-card-body">
+                        <div class="detail-container">
+                            <div class="detail">
+                                <img src="../images/sample/sample2.jpg" alt="">
+                                <div class="info">
+                                    <p class="main">Yukiya Murata</p>
+                                    <p>@@yKicchan</p>
+                                </div>
+                            </div>
+                            <div class="detail">
+                                <div class="clock"></div>
+                                <div class="info">
+                                    <p class="main">2月25日(金) 10:00</p>
+                                    <p>他5件の開催日程</p>
+                                </div>
+                            </div>
+                            <div class="detail">
+                                <div class="location"></div>
+                                <div class="info">
+                                    <p>〒000-0000</p>
+                                    <p class="main">滋賀県蒲生郡竜王町大字田中000-000番地</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="event-card-footer">
+                        <div class="action-btn-container">
+                            <div class="action-btn">
+                                <div class="like"></div>
+                            </div>
+                            <div class="action-btn">
+                                <div class="comment"></div>
+                            </div>
+                            <div class="action-btn">
+                                <div class="share"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="event-card">
+                    <div class="event-card-header">
+                        <div class="image">
+                            <img src="../images/sample/sample1.jpg" alt="">
+                        </div>
+                        <h2 class="title">イベントイベントイベントイベントイベント</h2>
+                        <div class="pin"></div>
+                    </div>
+                    <div class="event-card-body">
+                        <div class="detail-container">
+                            <div class="detail">
+                                <img src="../images/sample/sample2.jpg" alt="">
+                                <div class="info">
+                                    <p class="main">Yukiya Murata</p>
+                                    <p>@@yKicchan</p>
+                                </div>
+                            </div>
+                            <div class="detail">
+                                <div class="clock"></div>
+                                <div class="info">
+                                    <p class="main">2月25日(金) 10:00</p>
+                                    <p>他5件の開催日程</p>
+                                </div>
+                            </div>
+                            <div class="detail">
+                                <div class="location"></div>
+                                <div class="info">
+                                    <p>〒000-0000</p>
+                                    <p class="main">滋賀県蒲生郡竜王町大字田中000-000番地</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="event-card-footer">
+                        <div class="action-btn-container">
+                            <div class="action-btn">
+                                <div class="like"></div>
+                            </div>
+                            <div class="action-btn">
+                                <div class="comment"></div>
+                            </div>
+                            <div class="action-btn">
+                                <div class="share"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="my-event-container">
+                <h2>作成したイベント</h2>
+                <div class="event-card">
+                    <div class="event-card-header">
+                        <div class="image">
+                            <img src="../images/sample/sample1.jpg" alt="">
+                        </div>
+                        <h2 class="title">イベントイベントイベントイベントイベント</h2>
+                        <div class="pin"></div>
+                    </div>
+                    <div class="event-card-body">
+                        <div class="detail-container">
+                            <div class="detail">
+                                <img src="../images/sample/sample2.jpg" alt="">
+                                <div class="info">
+                                    <p class="main">Yukiya Murata</p>
+                                    <p>@@yKicchan</p>
+                                </div>
+                            </div>
+                            <div class="detail">
+                                <div class="clock"></div>
+                                <div class="info">
+                                    <p class="main">2月25日(金) 10:00</p>
+                                    <p>他5件の開催日程</p>
+                                </div>
+                            </div>
+                            <div class="detail">
+                                <div class="location"></div>
+                                <div class="info">
+                                    <p>〒000-0000</p>
+                                    <p class="main">滋賀県蒲生郡竜王町大字田中000-000番地</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="event-card-footer">
+                        <div class="action-btn-container">
+                            <div class="action-btn">
+                                <div class="like"></div>
+                            </div>
+                            <div class="action-btn">
+                                <div class="comment"></div>
+                            </div>
+                            <div class="action-btn">
+                                <div class="share"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="event-card">
+                    <div class="event-card-header">
+                        <div class="image">
+                            <img src="../images/sample/sample1.jpg" alt="">
+                        </div>
+                        <h2 class="title">イベントイベントイベントイベントイベント</h2>
+                        <div class="pin"></div>
+                    </div>
+                    <div class="event-card-body">
+                        <div class="detail-container">
+                            <div class="detail">
+                                <img src="../images/sample/sample2.jpg" alt="">
+                                <div class="info">
+                                    <p class="main">Yukiya Murata</p>
+                                    <p>@@yKicchan</p>
+                                </div>
+                            </div>
+                            <div class="detail">
+                                <div class="clock"></div>
+                                <div class="info">
+                                    <p class="main">2月25日(金) 10:00</p>
+                                    <p>他5件の開催日程</p>
+                                </div>
+                            </div>
+                            <div class="detail">
+                                <div class="location"></div>
+                                <div class="info">
+                                    <p>〒000-0000</p>
+                                    <p class="main">滋賀県蒲生郡竜王町大字田中000-000番地</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="event-card-footer">
+                        <div class="action-btn-container">
+                            <div class="action-btn">
+                                <div class="like"></div>
+                            </div>
+                            <div class="action-btn">
+                                <div class="comment"></div>
+                            </div>
+                            <div class="action-btn">
+                                <div class="share"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="event-card">
+                    <div class="event-card-header">
+                        <div class="image">
+                            <img src="../images/sample/sample1.jpg" alt="">
+                        </div>
+                        <h2 class="title">イベントイベントイベントイベントイベント</h2>
+                        <div class="pin"></div>
+                    </div>
+                    <div class="event-card-body">
+                        <div class="detail-container">
+                            <div class="detail">
+                                <img src="../images/sample/sample2.jpg" alt="">
+                                <div class="info">
+                                    <p class="main">Yukiya Murata</p>
+                                    <p>@@yKicchan</p>
+                                </div>
+                            </div>
+                            <div class="detail">
+                                <div class="clock"></div>
+                                <div class="info">
+                                    <p class="main">2月25日(金) 10:00</p>
+                                    <p>他5件の開催日程</p>
+                                </div>
+                            </div>
+                            <div class="detail">
+                                <div class="location"></div>
+                                <div class="info">
+                                    <p>〒000-0000</p>
+                                    <p class="main">滋賀県蒲生郡竜王町大字田中000-000番地</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="event-card-footer">
+                        <div class="action-btn-container">
+                            <div class="action-btn">
+                                <div class="like"></div>
+                            </div>
+                            <div class="action-btn">
+                                <div class="comment"></div>
+                            </div>
+                            <div class="action-btn">
+                                <div class="share"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="event-card">
+                    <div class="event-card-header">
+                        <div class="image">
+                            <img src="../images/sample/sample1.jpg" alt="">
+                        </div>
+                        <h2 class="title">イベントイベントイベントイベントイベント</h2>
+                        <div class="pin"></div>
+                    </div>
+                    <div class="event-card-body">
+                        <div class="detail-container">
+                            <div class="detail">
+                                <img src="../images/sample/sample2.jpg" alt="">
+                                <div class="info">
+                                    <p class="main">Yukiya Murata</p>
+                                    <p>@@yKicchan</p>
+                                </div>
+                            </div>
+                            <div class="detail">
+                                <div class="clock"></div>
+                                <div class="info">
+                                    <p class="main">2月25日(金) 10:00</p>
+                                    <p>他5件の開催日程</p>
+                                </div>
+                            </div>
+                            <div class="detail">
+                                <div class="location"></div>
+                                <div class="info">
+                                    <p>〒000-0000</p>
+                                    <p class="main">滋賀県蒲生郡竜王町大字田中000-000番地</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="event-card-footer">
+                        <div class="action-btn-container">
+                            <div class="action-btn">
+                                <div class="like"></div>
+                            </div>
+                            <div class="action-btn">
+                                <div class="comment"></div>
+                            </div>
+                            <div class="action-btn">
+                                <div class="share"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="event-card">
+                    <div class="event-card-header">
+                        <div class="image">
+                            <img src="../images/sample/sample1.jpg" alt="">
+                        </div>
+                        <h2 class="title">イベントイベントイベントイベントイベント</h2>
+                        <div class="pin"></div>
+                    </div>
+                    <div class="event-card-body">
+                        <div class="detail-container">
+                            <div class="detail">
+                                <img src="../images/sample/sample2.jpg" alt="">
+                                <div class="info">
+                                    <p class="main">Yukiya Murata</p>
+                                    <p>@@yKicchan</p>
+                                </div>
+                            </div>
+                            <div class="detail">
+                                <div class="clock"></div>
+                                <div class="info">
+                                    <p class="main">2月25日(金) 10:00</p>
+                                    <p>他5件の開催日程</p>
+                                </div>
+                            </div>
+                            <div class="detail">
+                                <div class="location"></div>
+                                <div class="info">
+                                    <p>〒000-0000</p>
+                                    <p class="main">滋賀県蒲生郡竜王町大字田中000-000番地</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="event-card-footer">
+                        <div class="action-btn-container">
+                            <div class="action-btn">
+                                <div class="like"></div>
+                            </div>
+                            <div class="action-btn">
+                                <div class="comment"></div>
+                            </div>
+                            <div class="action-btn">
+                                <div class="share"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="event-card">
+                    <div class="event-card-header">
+                        <div class="image">
+                            <img src="../images/sample/sample1.jpg" alt="">
+                        </div>
+                        <h2 class="title">イベントイベントイベントイベントイベント</h2>
+                        <div class="pin"></div>
+                    </div>
+                    <div class="event-card-body">
+                        <div class="detail-container">
+                            <div class="detail">
+                                <img src="../images/sample/sample2.jpg" alt="">
+                                <div class="info">
+                                    <p class="main">Yukiya Murata</p>
+                                    <p>@@yKicchan</p>
+                                </div>
+                            </div>
+                            <div class="detail">
+                                <div class="clock"></div>
+                                <div class="info">
+                                    <p class="main">2月25日(金) 10:00</p>
+                                    <p>他5件の開催日程</p>
+                                </div>
+                            </div>
+                            <div class="detail">
+                                <div class="location"></div>
+                                <div class="info">
+                                    <p>〒000-0000</p>
+                                    <p class="main">滋賀県蒲生郡竜王町大字田中000-000番地</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="event-card-footer">
+                        <div class="action-btn-container">
+                            <div class="action-btn">
+                                <div class="like"></div>
+                            </div>
+                            <div class="action-btn">
+                                <div class="comment"></div>
+                            </div>
+                            <div class="action-btn">
+                                <div class="share"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="event-card">
+                    <div class="event-card-header">
+                        <div class="image">
+                            <img src="../images/sample/sample1.jpg" alt="">
+                        </div>
+                        <h2 class="title">イベントイベントイベントイベントイベント</h2>
+                        <div class="pin"></div>
+                    </div>
+                    <div class="event-card-body">
+                        <div class="detail-container">
+                            <div class="detail">
+                                <img src="../images/sample/sample2.jpg" alt="">
+                                <div class="info">
+                                    <p class="main">Yukiya Murata</p>
+                                    <p>@@yKicchan</p>
+                                </div>
+                            </div>
+                            <div class="detail">
+                                <div class="clock"></div>
+                                <div class="info">
+                                    <p class="main">2月25日(金) 10:00</p>
+                                    <p>他5件の開催日程</p>
+                                </div>
+                            </div>
+                            <div class="detail">
+                                <div class="location"></div>
+                                <div class="info">
+                                    <p>〒000-0000</p>
+                                    <p class="main">滋賀県蒲生郡竜王町大字田中000-000番地</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="event-card-footer">
+                        <div class="action-btn-container">
+                            <div class="action-btn">
+                                <div class="like"></div>
+                            </div>
+                            <div class="action-btn">
+                                <div class="comment"></div>
+                            </div>
+                            <div class="action-btn">
+                                <div class="share"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
     </body>
 </html>

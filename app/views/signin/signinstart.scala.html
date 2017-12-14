@@ -27,7 +27,7 @@
                             </div>
                             @helper.form(action = routes.SignInController.signin()) {
                                 <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                                    @helper.inputText(form("userName"), 'class -> "mdl-textfield__input")
+                                    @helper.inputText(form("id"), 'class -> "mdl-textfield__input")
                                     <label class="mdl-textfield__label" for="sample3">@Messages("signin.userName")</label>
                                 </div>
                                 <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">

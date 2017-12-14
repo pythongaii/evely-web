@@ -11,19 +11,18 @@ import play.api.libs.json.Json
 
 
 case class Event(eventID: Int,
-                   title: String,
-                   holder: RegisteredUser,
-                   body: Body,
-                   place: Location,
-                   updateDate: Date,
-                   upcomingDates: List[UpcomingDate],
-                   url: Option[FormAction],
-                   tel: Option[VerificationNeeded],
-                   mailAddress: Option[VerificationNeeded],
-                   topImage: Option[Image]
-                  )
+                 title: String,
+                 holder: RegisteredUser,
+                 body: String,
+                 place: Location,
+                 updateDate: Date,
+                 upcomingDates: List[UpcomingDate],
+                 url: Option[FormAction],
+                 tel: Option[VerificationNeeded],
+                 mail: Option[VerificationNeeded],
+                 topImage: Option[Image]
+                )
 
 object Event {
-  // 一時コメントアウト
 //  implicit val EventJsonFormat = Json.format[Event]
 }

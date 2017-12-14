@@ -14,7 +14,7 @@ object SignInForm {
   )
 
 }
-case class SignInData(userName: String,
+case class SignInData(id: String,
                       password: String)
 
 object SignInData{

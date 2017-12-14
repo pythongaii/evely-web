@@ -10,7 +10,7 @@
                 <span class="mdl-layout-title">@Messages("toppage.title")</span>
                     <!-- Add spacer, to align navigation to the right -->
                 <div class="mdl-layout-spacer"></div>
-                <a href="@routes.GuestHomeController.secured()">a</a>
+                <a href="@routes.SignInController.secured()">a</a>
                 <div class="mdl-layout-spacer"></div>
                 @*<div class="mdl-textfield mdl-js-textfield" style="width: 250px">*@
                 @*<div class="">*@
@@ -29,7 +29,7 @@
                 @*</nav>*@
                 <div class="mdl-layout-spacer"></div>
                 <nav class="mdl-navigation mdl-layout--large-screen-only">
-                    <a href="@routes.GuestHomeController.signout()">Sign Out</a>
+                    <a href="@routes.RegisteredHomeController.signout()">Sign Out</a>
                 </nav>
             </div>
         </header>

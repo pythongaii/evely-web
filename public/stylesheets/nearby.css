@@ -183,13 +183,13 @@
     opacity: 0.54;
 }
 
-.action-bookmark {
+.action-pin {
     width: 36px;
     height: 36px;
     cursor: pointer;
     transition: all .2s ease-in-out;
     -webkit-transition: all .2s ease-in-out;
-    background-image: url(../images/icon/bookmark-off.svg);
+    /*background-image: url(../images/icon/pin-off.svg);*/
     background-repeat: no-repeat;
     box-sizing: border-box;
     background-origin: content-box;
@@ -198,12 +198,12 @@
     right: 0;
 }
 
-.action-bookmark:hover {
+.action-pin:hover {
     opacity: 0.7;
 }
 
-.action-bookmark.on {
-    background-image: url("../images/icon/bookmark-on.svg");
+.action-pin.on {
+    /*background-image: url(../images/icon/pin-on.svg);*/
 }
 
 .side-nav-separator1 {

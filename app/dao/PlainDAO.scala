@@ -2,14 +2,15 @@ package dao
 
 import java.util.UUID
 
+import play.api.mvc.RequestHeader
 import tokens.SignUpToken
 
 import scala.concurrent.Future
 
-trait PlainDAO[T, U, V] {
-  def find(key: U): Future[Option[SignUpToken]]
-  def save(obj: V): Future[SignUpToken]
-  def add(obj: V): Future[SignUpToken]
-  def update(obj: V): Future[SignUpToken]
-  def remove(obj: U): Future[Unit]
+trait PlainDAO[U, V, T] {
+  def find(key: U): Future[Option[T]]
+  def save(obj: V, request: RequestHeader): Future[T]
+  def add(obj: V): Future[T]
+  def update(obj: V): Future[T]
+  def remove(key: U): Future[Unit]
 }
