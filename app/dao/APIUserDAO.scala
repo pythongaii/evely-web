@@ -1,4 +1,6 @@
 package dao
+import com.mohiva.play.silhouette.api.LoginInfo
+import model.user.RegisteredUser
 
 import com.mohiva.play.silhouette.api.LoginInfo
 import model.user.RegisteredUser

@@ -74,7 +74,12 @@ class SignUpController @Inject()(val silhouette: Silhouette[CookieEnv],
 
   // アカウント本登録画面の表示
   def signup(tokenID: String) = Action.async {
-    val mailAddress = signUpTokenService.find(UUID.fromString(tokenID)).map(signUpToken =>  signUpToken.get.mailAddress)
+    val form = SignUpForm.registerdDataForm
+    Future.successful(Ok(views.html.signup.signup(form, tokenID)))
+  }
+
+  def signup() = Action.async {
+    val tokenID = ""
     val form = SignUpForm.registerdDataForm
     Future.successful(Ok(views.html.signup.signup(form, tokenID)))
   }
@@ -100,8 +105,7 @@ class SignUpController @Inject()(val silhouette: Silhouette[CookieEnv],
         Future.successful(Ok("error"))
       },
       requestForm => {
-        val tokenID = UUID.fromString(requestForm.tokenID)
-        signUpTokenService.find(tokenID).flatMap {
+        signUpTokenService.find(UUID.fromString("")).flatMap {
           case None =>
             Future.successful(Ok("token not found"))
           case Some(token) if !token.isSignUp && !token.isExpired =>
@@ -110,9 +114,9 @@ class SignUpController @Inject()(val silhouette: Silhouette[CookieEnv],
               case Some(user) =>
                 val loginInfo = LoginInfo(CredentialsProvider.ID, token.mailAddress)
                 val registeredUser = RegisteredUser(
-                  userName = requestForm.userName,
+                  userName = requestForm.id,
                   mailAddress = user.mailAddress,
-                  realName = requestForm.realName,
+                  realName = requestForm.name,
                   tel = Option.empty[String],
                   loginInfo = loginInfo,
                   mailConfirmed = true
@@ -121,13 +125,13 @@ class SignUpController @Inject()(val silhouette: Silhouette[CookieEnv],
                   authenticator <- silhouette.env.authenticatorService.create(loginInfo)
                   value <- silhouette.env.authenticatorService.init(authenticator)
                   _ <- userService.update(registeredUser)
-                  _ <- signUpTokenService.remove(tokenID)
+                  _ <- signUpTokenService.remove(UUID.fromString(""))
                   _ <- passwordInfoService.save(loginInfo, passwordHasher.hash(requestForm.password._1))
                   result <- silhouette.env.authenticatorService.embed(value, Redirect(routes.SignInController.secured()))
                 } yield result
             }
           case Some(token) =>
-            signUpTokenService.remove(tokenID).map {_ => NotFound(views.html.errors.notFound(request))}
+            signUpTokenService.remove(UUID.fromString("")).map {_ => NotFound(views.html.errors.notFound(request))}
         }
       }
     )

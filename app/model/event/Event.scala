@@ -13,7 +13,7 @@ import play.api.libs.json.Json
 case class Event(eventID: Int,
                  title: String,
                  holder: RegisteredUser,
-                 body: String,
+                 body: Body,
                  place: Location,
                  updateDate: Date,
                  upcomingDates: List[UpcomingDate],
