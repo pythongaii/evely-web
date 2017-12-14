@@ -1,5 +1,7 @@
 toppage.title=Evely
 
+error=エラー
+
 header.signIn=Sign in
 header.signUp=Sign up
 

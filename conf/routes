@@ -1,33 +1,35 @@
 # access to top page
-GET         /                           controllers.TopController.index()
+GET         /                           controllers.GuestHomeController.index()
 
 # signup用
 GET         /signup                     controllers.SignUpController.signupStart
-POST        /signupmail                 controllers.SignUpController.signupMail
+POST        /signup/mail                controllers.SignUpController.signupMail
 GET         /signup/input               controllers.SignUpController.signup(tokenID: String)
 POST        /signup/confirm             controllers.SignUpController.signupConfirm
-POST        /signup/finish              controllers.SignUpController.signupFinish
+POST        /signup/regist              controllers.SignUpController.signupFinish
 
 # signin用
-POST        /signinstart                controllers.SignInController.startSignin
+GET         /signin                     controllers.SignInController.startSignin
 POST        /signin                     controllers.SignInController.signin
 GET         /forgotpass                 controllers.ForgotPasswordController.startForgotPass
-POST        /forgotmail                 controllers.ForgotPasswordController.forgotpassMail
+POST        /forgotpass/mail            controllers.ForgotPasswordController.forgotpassMail
 GET         /forgotpass/reset           controllers.ForgotPasswordController.forgotpassreset
 POST        /forgotpass                 controllers.ForgotPasswordController.forgotpass
 
-GET         /home                   controllers.TopController.Home
-GET         /index                  controllers.TopController.Index
-GET         /nearby                 controllers.TopController.Nearby
-GET         /notification           controllers.TopController.Notification
-GET         /bookmark               controllers.TopController.Bookmark
+GET         /home                       controllers.RegisteredHomeController.home
+GET         /index                      controllers.RegisteredHomeController.index
+GET         /nearby                     controllers.RegisteredHomeController.nearBy
+GET         /notification               controllers.RegisteredHomeController.notification
+GET         /bookmark                   controllers.RegisteredHomeController.bookmark
 
-GET         /secured                    controllers.TopController.secured
+GET         /secured                    controllers.SignInController.secured
+
+POST        /events                     controllers.RegisteredHomeController.create
 
 # signout用
-GET         /signout                    controllers.TopController.signout
+GET         /signout                    controllers.RegisteredHomeController.signout
 
-GET         /signin/api                 controllers.SignInController.apisignin
+#GET         /signin/api                 controllers.SignInController.apisignin
 
 GET         /assets/*file               controllers.Assets.at(path="/public", file)
 

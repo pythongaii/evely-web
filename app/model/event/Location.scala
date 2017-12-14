@@ -1,3 +1,9 @@
 package model.event
 
-class Location(name: String, address: String, latlng: String)
+import play.api.libs.json.Json
+
+case class Location(name: String, address: String, latlng: String)
+
+object Location{
+  implicit val locationFormat = Json.format[Location]
+}
