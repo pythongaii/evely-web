@@ -1,6 +1,6 @@
-@import forms.SignUpForm.RegisterdData
+@import forms.SignUpForm.RegisteredData
 @import model.event.APIEvent
-@(form: Form[APIEvent])(implicit messages: Messages, flash: Flash)
+@(form: Form[APIEvent])(implicit messages: Messages, request: RequestHeader)
 @import helpers.PlainHelper.myFields
 <!DOCTYPE html>
 <html>
@@ -25,9 +25,6 @@
         <link rel="stylesheet" href="../vendor/font-awesome-4.7.0/css/font-awesome.min.css">
             <!-- My javascript & css files -->
         <script src="@routes.Assets.at("/javascripts/master.js")" charset="utf-8">
-                {
-                    alert(@flash.get("created").getOrElse("error"))
-                }
         </script>
         <link rel="stylesheet" href="@routes.Assets.at("/stylesheets/master.css")">
         <link rel="stylesheet" href="@routes.Assets.at("/stylesheets/nearby.css")">
@@ -216,6 +213,9 @@
         });
     </script>
         <main class="container">
+            @request.flash.get("error").map { msg =>
+                @errors.alert(msg, "error")
+            }
             <div class="happening-event-container">
                 <h2>開催中のイベント</h2>
                 <div class="event-card">

@@ -1,5 +1,5 @@
-@import forms.SignUpForm.RegisterdData
-@(form: Form[RegisterdData], tokenID: String)(implicit messages: Messages)
+@import forms.SignUpForm.RegisteredData
+@(form: Form[RegisteredData])(implicit messages: Messages)
 @import helpers.PlainHelper.myFields
 <!DOCTYPE html>
 <head>
@@ -38,21 +38,25 @@
                             すべての項目を入力してください。
                         </div>
                         @helper.form(action = routes.SignUpController.signupConfirm(), 'id -> "signupform") {
+
                             <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
                                 @helper.inputText(form("id"), 'class -> "mdl-textfield__input")
                                 <label class="mdl-textfield__label" for="sample3">@Messages("signup.userID")</label>
                             </div>
-                            <input type"hidden" name="mail" id="mail" value="yKicchanApp@@gmail.com"/>
+
                             <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                                @helper.inputText(form("realName"), 'class -> "mdl-textfield__input", 'pattern -> "(-?[ぁ-んァ-ン一-龠a-zA-Z]*)(\\.[一-龠a-zA-Z]+)?")
+                                @helper.inputText(form("mail"), 'class -> "mdl-textfield__input")
+                                <label class="mdl-textfield__label" for="sample3">@Messages("signup.mailaddress")</label>
+                            </div>
+                            @*<input type="hidden" name="mail" id="mail" value="yKicchanApp@@gmail.com"/>*@
+
+                            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                                @helper.inputText(form("name"), 'class -> "mdl-textfield__input", 'pattern -> "(-?[ぁ-んァ-ン一-龠a-zA-Z]*)(\\.[一-龠a-zA-Z]+)?")
                                 <label class="mdl-textfield__label" for="sample3">@Messages("signup.userName")</label>
                                 <span class="mdl-textfield__error">@Messages("signup.userNameError")</span>
 
                             </div>
-                            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                                @helper.inputText(form("userName"), 'class -> "mdl-textfield__input")
-                                <label class="mdl-textfield__label" for="sample3">@Messages("signup.userID")</label>
-                            </div>
+
                             <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
                                 @helper.inputPassword(form("password.password1"), 'class -> "mdl-textfield__input", 'pattern -> "^(?=.*[0-9])(?=.*[A-Z])(?=.*[a-z])[\\.[0-9a-zA-Z]{8,}$")
                                 <label class="mdl-textfield__label" for="sample3">@Messages("signup.password")</label>
@@ -61,8 +65,16 @@
                             <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
                                 @helper.inputPassword(form("password.password2"), 'class -> "mdl-textfield__input")
                                 <label class="mdl-textfield__label" for="sample3">@Messages("signup.password.confirm")</label>
+                                <span class="mdl-textfield__error">@Messages("signup.passError")</span>
                             </div>
-                            <input id="tokenID" name="tokenID" type="hidden" value="@tokenID" />
+                            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                                @helper.inputText(form("tel"), 'class -> "mdl-textfield__input")
+                                <label class="mdl-textfield__label" for="sample3">@Messages("signup.userName")</label>
+                                <span class="mdl-textfield__error">@Messages("signup.userNameError")</span>
+
+                            </div>
+
+
                             <div id="sub">
                                 <button class="mdl-button mdl-button--raised mdl-js-button mdl-js-ripple-effect" type="submit" name="action">@Messages("signup.submitbutton")</button>
                             </div>

@@ -1,5 +1,5 @@
-@import forms.SignUpForm.RegisterdData
-@(form: Form[RegisterdData])(implicit messages: Messages)
+@import forms.SignUpForm.RegisteredData
+@(form: Form[RegisteredData])(implicit messages: Messages, request:RequestHeader)
 @import helpers.PlainHelper.myFields
 <!DOCTYPE html>
 <head>
@@ -9,6 +9,9 @@
     <script defer src="@routes.Assets.at("/mdl/material.min.js")"></script>
 </head>
 <body>
+    @request.flash.get("error").map { msg =>
+      @errors.alert(msg, "error")
+    }
         <!-- Always shows a header, even in smaller screens. -->
     @views.html.common.header()(messages)
     <main class="mdl-layout__content">
@@ -31,7 +34,7 @@
                             <div class="header">@messages("signup.userID")</div>
                             <div class="inputvalue">@form("userName").value</div>
                             <div class="header">@messages("signup.password")</div>
-                            <div class="inputvalue">@form("password.password1").value</div>
+                            <div class="inputvalue">@for(i <- 1 to form("password.password1").value.get.length){*}</div>
                             <div class="form_bottom_spacer10"></div>
                             <div id="actionButtons">
                                 <div class="editbutton">
@@ -41,12 +44,12 @@
                                 </div>
                                 <div class="submitbutton">
                                 @helper.form(action = routes.SignUpController.signupFinish()) {
-                                    <input type="hidden" id="mailaddress" name="mailaddress" value="@form("mailaddress").value"/>
-                                    <input type="hidden" id="realName" name="realName" value="@form("realName").value"/>
-                                    <input type="hidden" id="userName" name="userName" value="@form("userName").value"/>
+                                    <input type="hidden" id="id" name="id" value="@form("id").value"/>
+                                    <input type="hidden" id="mail" name="mail" value="@form("mail").value"/>
+                                    <input type="hidden" id="name" name="name" value="@form("name").value"/>
                                     <input type="hidden" id="password.password1" name="password.password1" value="@form("password.password1").value"/>
                                     <input type="hidden" id="password.password2" name="password.password2" value="@form("password.password1").value"/>
-                                    <input id="tokenID" name="tokenID" type="hidden" value="@form("tokenID").value" />
+                                    <input id="tel" name="tel" type="hidden" value="@form("tel").value" />
                                     <button class="mdl-button mdl-button--raised mdl-js-button mdl-js-ripple-effect" type="submit" name="action">@Messages("signupconfirm.submitbutton")</button>
                                 }
                                 </div>

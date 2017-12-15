@@ -19,25 +19,20 @@ import model.user.RegisteredUser
 import net.codingwell.scalaguice.ScalaModule
 import play.api.Configuration
 import play.api.libs.concurrent.Execution.Implicits._
-import service.{UserService, UserServiceImpl}
+//import service.{UserService, UserServiceImpl}
 import net.ceedubs.ficus.Ficus._
 import net.ceedubs.ficus.readers.ArbitraryTypeReader._
 import play.api.libs.ws.WSResponse
 import reactivemongo.api.{DB, MongoConnectionOptions, MongoDriver}
 
-trait CookieEnv extends Env {
-  type I = RegisteredUser
-  type A = CookieAuthenticator
-}
-
 class SilhouetteModule extends AbstractModule with ScalaModule {
   override def configure(): Unit = {
-    bind[Silhouette[CookieEnv]].to[SilhouetteProvider[CookieEnv]]
-    bind[UserDAO].to[MongoUserDAO]
+//    bind[UserDAO].to[MongoUserDAO]
     bind[PlainDAO[String,APIEvent,WSResponse]].to[APIEventDAO]
     bind[PasswordInfoDAO].to[MongoPasswordInfoDao]
-    bind[UserService].to[UserServiceImpl]
+//    bind[UserService].to[UserServiceImpl]
     bind[Authen].to[APIAuthenticator]
+    bind[PlainDAO[String,RegisteredUser,WSResponse]].to[APIUserDAO]
 //    bind[DB].toInstance {
 //      import com.typesafe.config.ConfigFactory
 //
@@ -63,96 +58,5 @@ class SilhouetteModule extends AbstractModule with ScalaModule {
     bind[Clock].toInstance(Clock())
   }
 
-  @Provides def provideEnvironment(
-                                    userService: UserService,
-                                    authenticatorService: AuthenticatorService[CookieAuthenticator],
-                                    eventBus: EventBus): Environment[CookieEnv] = {
-    Environment[CookieEnv](userService, authenticatorService, Seq(), eventBus)
-  }
 
-  /**
-    * Provides the cookie signer for the authenticator.
-    *
-    * @param configuration The Play configuration.
-    * @return The cookie signer for the authenticator.
-    */
-  @Provides
-  def provideAuthenticatorCookieSigner(configuration: Configuration): CookieSigner = {
-    val config = configuration.underlying.as[JcaCookieSignerSettings]("silhouette.authenticator.cookie.signer")
-    new JcaCookieSigner(config)
-  }
-
-  /**
-    * Provides the crypter for the authenticator.
-    *
-    * @param configuration The Play configuration.
-    * @return The crypter for the authenticator.
-    */
-  @Provides
-  def provideAuthenticatorCrypter(configuration: Configuration): Crypter = {
-    val config = configuration.underlying.as[JcaCrypterSettings]("silhouette.authenticator.crypter")
-    new JcaCrypter(config)
-  }
-
-  /**
-    * Provides the auth info repository.
-    *
-    * @param passwordInfoDAO The implementation of the delegable password auth info DAO.
-    * @return The auth info repository instance.
-    */
-  @Provides
-  def provideAuthInfoRepository(passwordInfoDAO: DelegableAuthInfoDAO[PasswordInfo]): AuthInfoRepository = {
-    new DelegableAuthInfoRepository(passwordInfoDAO)
-  }
-
-  /**
-    * Provides the authenticator service.
-    *
-    * @param cookieSigner The cookie signer implementation.
-    * @param crypter The crypter implementation.
-    * @param fingerprintGenerator The fingerprint generator implementation.
-    * @param idGenerator The ID generator implementation.
-    * @param configuration The Play configuration.
-    * @param clock The clock instance.
-    * @return The authenticator service.
-    */
-  @Provides
-  def provideAuthenticatorService(
-                                   cookieSigner: CookieSigner,
-                                   crypter: Crypter,
-                                   fingerprintGenerator: FingerprintGenerator,
-                                   idGenerator: IDGenerator,
-                                   configuration: Configuration,
-                                   clock: Clock
-                                 ): AuthenticatorService[CookieAuthenticator] = {
-    val config = configuration.underlying.as[CookieAuthenticatorSettings]("silhouette.authenticator")
-    val encoder = new CrypterAuthenticatorEncoder(crypter)
-    new CookieAuthenticatorService(config, None, cookieSigner, encoder, fingerprintGenerator, idGenerator, clock)
-  }
-
-  /**
-    * Provides the password hasher registry.
-    *
-    * @param passwordHasher The default password hasher implementation.
-    * @return The password hasher registry.
-    */
-  @Provides
-  def providePasswordHasherRegistry(passwordHasher: PasswordHasher): PasswordHasherRegistry = {
-    new PasswordHasherRegistry(passwordHasher)
-  }
-
-  /**
-    * Provides the credentials provider.
-    *
-    * @param authInfoRepository The auth info repository implementation.
-    * @param passwordHasherRegistry The password hasher registry.
-    * @return The credentials provider.
-    */
-  @Provides
-  def provideCredentialsProvider(
-                                  authInfoRepository: AuthInfoRepository,
-                                  passwordHasherRegistry: PasswordHasherRegistry
-                                ): CredentialsProvider = {
-    new CredentialsProvider(authInfoRepository, passwordHasherRegistry)
-  }
 }

@@ -2,32 +2,23 @@ package controllers
 
 import javax.inject.Inject
 
-import com.mohiva.play.silhouette.api.Silhouette
-import com.mohiva.play.silhouette.api.exceptions.ProviderException
-import com.mohiva.play.silhouette.api.util.Credentials
 import com.mohiva.play.silhouette.impl.providers.CredentialsProvider
 import dao.{APIAuthenticator, Authen}
 import forms.{CreateEventForm, SignInData, SignInForm}
 import model.Token
-import modules.CookieEnv
 import org.joda.time.DateTime
 import play.api.i18n.{I18nSupport, Messages, MessagesApi}
 import play.api.libs.json.Json
 import play.api.libs.ws.WSClient
 import play.api.mvc.{Action, Controller, Cookie}
-import service.{PasswordInfoService, UserService}
+import service.{PasswordInfoService}
 
 import scala.concurrent.Future
 import scala.concurrent.ExecutionContext.Implicits.global
-import scala.concurrent.duration.FiniteDuration
 import dao.AuthModule
 import play.api.cache.CacheApi
 
-class SignInController @Inject()(val silhouette: Silhouette[CookieEnv],
-                                 userService: UserService,
-                                 passwordInfoService: PasswordInfoService,
-                                 credentialsProvider: CredentialsProvider,
-                                 ws: WSClient,
+class SignInController @Inject()(val ws: WSClient,
                                  apiAuthenticator: Authen,
                                  cache: CacheApi
                                 )(implicit val messagesApi: MessagesApi) extends AuthModule(cache) with I18nSupport {

@@ -49,7 +49,7 @@ class RegisteredHomeController @Inject()(cache: CacheApi,
       },
       eventData => {
         apiEventDAO.save(eventData, request).map {
-          case res => Redirect(routes.RegisteredHomeController.index()).flashing(("created", "イベントを作成しました"))
+          case res => Redirect(routes.RegisteredHomeController.index()).flashing(("error", "イベントを作成しました"))
           case _ => Redirect(routes.GuestHomeController.index())
         }
       }

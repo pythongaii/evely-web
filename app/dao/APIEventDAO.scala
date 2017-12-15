@@ -16,7 +16,6 @@ class APIEventDAO @Inject()(ws: WSClient) extends PlainDAO[String, APIEvent, WSR
   val COOKIE_NAME = "evely_auth"
 
 
-  override def add(obj: APIEvent): Future[WSResponse] = ???
 
   override def find(key: String): Future[Option[WSResponse]] = ???
 
@@ -61,5 +60,7 @@ class APIEventDAO @Inject()(ws: WSClient) extends PlainDAO[String, APIEvent, WSR
     }
   }
 
-  override def update(obj: APIEvent): Future[WSResponse] = ???
+  override def add(obj: APIEvent, request: RequestHeader): Future[WSResponse] = ???
+
+  override def update(obj: APIEvent, request: RequestHeader): Future[WSResponse] = ???
 }

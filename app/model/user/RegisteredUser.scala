@@ -9,8 +9,8 @@ import model.formaction.MailAddress
 import play.api.libs.json.Json
 
 
-case class RegisteredUser(userName: String, mailAddress: MailAddress,
-                          realName: String, tel: Option[String]
+case class RegisteredUser(id: String, mail: MailAddress,
+                          name: String, password: String, tel: String
                           )
 
 object RegisteredUser {

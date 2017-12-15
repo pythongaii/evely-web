@@ -15,7 +15,7 @@ object SignUpForm {
 
   case class RegistringData(mailaddress: String)
 
-  val registerdDataForm = Form[RegisterdData](
+  val registeredDataForm = Form[RegisteredData](
     mapping(
       "id" -> nonEmptyText,
       "mail" -> nonEmptyText,
@@ -25,10 +25,10 @@ object SignUpForm {
         "password2" -> nonEmptyText(minLength = 6)
       ).verifying("password",passwords => passwords._1 == passwords._2),
       "tel" -> nonEmptyText
-    )(RegisterdData.apply)(RegisterdData.unapply)
+    )(RegisteredData.apply)(RegisteredData.unapply)
   )
 
-  case class RegisterdData(id: String,
+  case class RegisteredData(id: String,
                            mail: String,
                            name: String,
                            password: (String, String),
