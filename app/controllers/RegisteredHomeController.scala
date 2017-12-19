@@ -21,7 +21,7 @@ class RegisteredHomeController @Inject()(cache: CacheApi,
   }
 
   def index = withAuth { username => implicit request =>
-    Future.successful(Ok(views.html.test.index(CreateEventForm.createEventForm)))
+    Future.successful(Ok(views.html.test.index(CreateEventForm.createEventForm)("id")("name")))
   }
 
   def bookmark = withAuth { username => implicit request =>
@@ -44,12 +44,11 @@ class RegisteredHomeController @Inject()(cache: CacheApi,
   def create = withAuth { username => implicit request =>
     CreateEventForm.createEventForm.bindFromRequest().fold(
       errorForm => {
-        errorForm
         Future.successful(Redirect(routes.GuestHomeController.index()))
       },
       eventData => {
         apiEventDAO.save(eventData, request).map {
-          case res => Redirect(routes.RegisteredHomeController.index()).flashing(("error", "イベントを作成しました"))
+          case res => Redirect(routes.RegisteredHomeController.index())
           case _ => Redirect(routes.GuestHomeController.index())
         }
       }

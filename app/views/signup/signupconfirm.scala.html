@@ -3,6 +3,7 @@
 @import helpers.PlainHelper.myFields
 <!DOCTYPE html>
 <head>
+    <title>サインアップ</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" href="@routes.Assets.at("/mdl/material.min.css")">
     <link rel="stylesheet" href="@routes.Assets.at("/stylesheets/signupconfirm.css")">
@@ -28,13 +29,15 @@
                                 よろしければ「登録する」ボタンを押してください。
                             </div>
                             <div class="header">@messages("signup.mailaddress")</div>
-                            <div class="inputvalue">@form("mailaddress").value</div>
-                            <div class="header">@messages("signup.userName")</div>
-                            <div class="inputvalue">@form("realName").value</div>
+                            <div class="inputvalue">@form("mail").value</div>
+                            <div class="header">@messages("signup.name")</div>
+                            <div class="inputvalue">@form("name").value</div>
                             <div class="header">@messages("signup.userID")</div>
-                            <div class="inputvalue">@form("userName").value</div>
+                            <div class="inputvalue">@form("id").value</div>
                             <div class="header">@messages("signup.password")</div>
                             <div class="inputvalue">@for(i <- 1 to form("password.password1").value.get.length){*}</div>
+                            <div class="header">@messages("signup.tel")</div>
+                            <div class="inputvalue">@form("tel").value</div>
                             <div class="form_bottom_spacer10"></div>
                             <div id="actionButtons">
                                 <div class="editbutton">

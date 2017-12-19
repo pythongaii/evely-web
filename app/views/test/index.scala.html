@@ -1,6 +1,6 @@
 @import forms.SignUpForm.RegisteredData
 @import model.event.APIEvent
-@(form: Form[APIEvent])(implicit messages: Messages, request: RequestHeader)
+@(form: Form[APIEvent])(userID: String)(userName: String)(implicit messages: Messages, request: RequestHeader)
 @import helpers.PlainHelper.myFields
 <!DOCTYPE html>
 <html>
@@ -48,13 +48,13 @@
             </li> -->
                     <!-- Pin -->
                 <li>
-                    <a href="./pin.html" class="tab">
+                    <a href="#" class="tab">
                         <i class="fa fa-thumb-tack" aria-hidden="true"></i>ピン
                     </a>
                 </li>
                     <!-- Notification -->
                 <li>
-                    <a href="./notification.html" class="tab">
+                    <a href="#" class="tab">
                         <i class="fa fa-bell" aria-hidden="true"></i>通知
                     </a>
                 </li>
@@ -64,7 +64,7 @@
             <ul class="nav-extras right">
                     <!-- Search box START -->
                 <li class="search">
-                    <form class="" action="nearby.html" method="post">
+                    <form class="" action="@routes.RegisteredHomeController.index()" method="get">
                         <input type="text" name="" placeholder="検索...">
                     </form>
                 </li>
@@ -74,10 +74,10 @@
                     <img class="dropdown-toggle" src="../images/icon/icon.png" alt="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                         <li class="profile-container">
-                            <img src="../images/icon/icon.png" alt="">
+                            <img src="@routes.Assets.at("/images/icon/icon.png")" alt="">
                             <div class="profile-info">
-                                <p class="name">むらた ゆきや</p>
-                                <p class="id">@@yKicchan</p>
+                                <p class="name">@userName</p>
+                                <p class="id">@userID</p>
                             </div>
                         </li>
                         <li role="separator" class="divider"></li>
@@ -158,7 +158,7 @@
 
                             <input type="hidden" name="place.lat" id="place.lat" value="12.02154">
                             <input type="hidden" name="place.lng" id="place.lng" value="10.05014">
-                            <input type="hidden" name="mail" id="mail" value="sugorokuyarou@@gmail.com">
+                            <input type="hidden" name="mail" id="mail" value="example@@example.com">
                             <input type="hidden" name="url" id="url" value="http://yahoo.co.jp">
                             <input type="hidden" name="tel" id="tel" value="090-1234-5678">
 
@@ -221,7 +221,7 @@
                 <div class="event-card">
                     <div class="event-card-header">
                         <div class="image">
-                            <img src="../images/sample/sample1.jpg" alt="">
+                            <img src="@routes.Assets.at("/images/sample/sample1.jpg")" alt="">
                         </div>
                         <h2 class="title">イベントイベントイベントイベントイベント</h2>
                         <div class="pin"></div>
@@ -229,7 +229,7 @@
                     <div class="event-card-body">
                         <div class="detail-container">
                             <div class="detail">
-                                <img src="../images/sample/sample2.jpg" alt="">
+                                <img src="@routes.Assets.at("/images/sample/sample2.jpg")" alt="">
                                 <div class="info">
                                     <p class="main">Yukiya Murata</p>
                                     <p>@@yKicchan</p>
@@ -268,7 +268,7 @@
                 <div class="event-card">
                     <div class="event-card-header">
                         <div class="image">
-                            <img src="../images/sample/sample1.jpg" alt="">
+                            <img src="@routes.Assets.at("/images/sample/sample1.jpg")" alt="">
                         </div>
                         <h2 class="title">イベントイベントイベントイベントイベント</h2>
                         <div class="pin"></div>
@@ -276,7 +276,7 @@
                     <div class="event-card-body">
                         <div class="detail-container">
                             <div class="detail">
-                                <img src="../images/sample/sample2.jpg" alt="">
+                                <img src="@routes.Assets.at("/images/sample/sample2.jpg")" alt="">
                                 <div class="info">
                                     <p class="main">Yukiya Murata</p>
                                     <p>@@yKicchan</p>
@@ -315,7 +315,7 @@
                 <div class="event-card">
                     <div class="event-card-header">
                         <div class="image">
-                            <img src="../images/sample/sample1.jpg" alt="">
+                            <img src="@routes.Assets.at("/images/sample/sample1.jpg")" alt="">
                         </div>
                         <h2 class="title">イベントイベントイベントイベントイベント</h2>
                         <div class="pin"></div>
@@ -323,7 +323,7 @@
                     <div class="event-card-body">
                         <div class="detail-container">
                             <div class="detail">
-                                <img src="../images/sample/sample2.jpg" alt="">
+                                <img src="@routes.Assets.at("/images/sample/sample2.jpg")" alt="">
                                 <div class="info">
                                     <p class="main">Yukiya Murata</p>
                                     <p>@@yKicchan</p>
@@ -362,7 +362,7 @@
                 <div class="event-card">
                     <div class="event-card-header">
                         <div class="image">
-                            <img src="../images/sample/sample1.jpg" alt="">
+                            <img src="@routes.Assets.at("/images/sample/sample1.jpg")" alt="">
                         </div>
                         <h2 class="title">イベントイベントイベントイベントイベント</h2>
                         <div class="pin"></div>
@@ -370,7 +370,7 @@
                     <div class="event-card-body">
                         <div class="detail-container">
                             <div class="detail">
-                                <img src="../images/sample/sample2.jpg" alt="">
+                                <img src="@routes.Assets.at("/images/sample/sample2.jpg")" alt="">
                                 <div class="info">
                                     <p class="main">Yukiya Murata</p>
                                     <p>@@yKicchan</p>
@@ -412,7 +412,7 @@
                 <div class="event-card">
                     <div class="event-card-header">
                         <div class="image">
-                            <img src="../images/sample/sample1.jpg" alt="">
+                            <img src="@routes.Assets.at("/images/sample/sample1.jpg")" alt="">
                         </div>
                         <h2 class="title">イベントイベントイベントイベントイベント</h2>
                         <div class="pin"></div>
@@ -420,7 +420,7 @@
                     <div class="event-card-body">
                         <div class="detail-container">
                             <div class="detail">
-                                <img src="../images/sample/sample2.jpg" alt="">
+                                <img src="@routes.Assets.at("/images/sample/sample2.jpg")" alt="">
                                 <div class="info">
                                     <p class="main">Yukiya Murata</p>
                                     <p>@@yKicchan</p>
@@ -459,7 +459,7 @@
                 <div class="event-card">
                     <div class="event-card-header">
                         <div class="image">
-                            <img src="../images/sample/sample1.jpg" alt="">
+                            <img src="@routes.Assets.at("/images/sample/sample1.jpg")" alt="">
                         </div>
                         <h2 class="title">イベントイベントイベントイベントイベント</h2>
                         <div class="pin"></div>
@@ -467,7 +467,7 @@
                     <div class="event-card-body">
                         <div class="detail-container">
                             <div class="detail">
-                                <img src="../images/sample/sample2.jpg" alt="">
+                                <img src="@routes.Assets.at("/images/sample/sample2.jpg")" alt="">
                                 <div class="info">
                                     <p class="main">Yukiya Murata</p>
                                     <p>@@yKicchan</p>
@@ -506,7 +506,7 @@
                 <div class="event-card">
                     <div class="event-card-header">
                         <div class="image">
-                            <img src="../images/sample/sample1.jpg" alt="">
+                            <img src="@routes.Assets.at("/images/sample/sample1.jpg")" alt="">
                         </div>
                         <h2 class="title">イベントイベントイベントイベントイベント</h2>
                         <div class="pin"></div>
@@ -514,7 +514,7 @@
                     <div class="event-card-body">
                         <div class="detail-container">
                             <div class="detail">
-                                <img src="../images/sample/sample2.jpg" alt="">
+                                <img src="@routes.Assets.at("/images/sample/sample2.jpg")" alt="">
                                 <div class="info">
                                     <p class="main">Yukiya Murata</p>
                                     <p>@@yKicchan</p>
@@ -553,7 +553,7 @@
                 <div class="event-card">
                     <div class="event-card-header">
                         <div class="image">
-                            <img src="../images/sample/sample1.jpg" alt="">
+                            <img src="@routes.Assets.at("/images/sample/sample1.jpg")" alt="">
                         </div>
                         <h2 class="title">イベントイベントイベントイベントイベント</h2>
                         <div class="pin"></div>
@@ -561,7 +561,7 @@
                     <div class="event-card-body">
                         <div class="detail-container">
                             <div class="detail">
-                                <img src="../images/sample/sample2.jpg" alt="">
+                                <img src="@routes.Assets.at("/images/sample/sample2.jpg")" alt="">
                                 <div class="info">
                                     <p class="main">Yukiya Murata</p>
                                     <p>@@yKicchan</p>
@@ -600,7 +600,7 @@
                 <div class="event-card">
                     <div class="event-card-header">
                         <div class="image">
-                            <img src="../images/sample/sample1.jpg" alt="">
+                            <img src="@routes.Assets.at("/images/sample/sample1.jpg")" alt="">
                         </div>
                         <h2 class="title">イベントイベントイベントイベントイベント</h2>
                         <div class="pin"></div>
@@ -608,7 +608,7 @@
                     <div class="event-card-body">
                         <div class="detail-container">
                             <div class="detail">
-                                <img src="../images/sample/sample2.jpg" alt="">
+                                <img src="@routes.Assets.at("/images/sample/sample2.jpg")" alt="">
                                 <div class="info">
                                     <p class="main">Yukiya Murata</p>
                                     <p>@@yKicchan</p>
@@ -647,7 +647,7 @@
                 <div class="event-card">
                     <div class="event-card-header">
                         <div class="image">
-                            <img src="../images/sample/sample1.jpg" alt="">
+                            <img src="@routes.Assets.at("/images/sample/sample1.jpg")" alt="">
                         </div>
                         <h2 class="title">イベントイベントイベントイベントイベント</h2>
                         <div class="pin"></div>
@@ -655,7 +655,7 @@
                     <div class="event-card-body">
                         <div class="detail-container">
                             <div class="detail">
-                                <img src="../images/sample/sample2.jpg" alt="">
+                                <img src="@routes.Assets.at("/images/sample/sample2.jpg")" alt="">
                                 <div class="info">
                                     <p class="main">Yukiya Murata</p>
                                     <p>@@yKicchan</p>
@@ -694,7 +694,7 @@
                 <div class="event-card">
                     <div class="event-card-header">
                         <div class="image">
-                            <img src="../images/sample/sample1.jpg" alt="">
+                            <img src="@routes.Assets.at("/images/sample/sample1.jpg")" alt="">
                         </div>
                         <h2 class="title">イベントイベントイベントイベントイベント</h2>
                         <div class="pin"></div>
@@ -702,7 +702,7 @@
                     <div class="event-card-body">
                         <div class="detail-container">
                             <div class="detail">
-                                <img src="../images/sample/sample2.jpg" alt="">
+                                <img src="@routes.Assets.at("/images/sample/sample2.jpg")" alt="">
                                 <div class="info">
                                     <p class="main">Yukiya Murata</p>
                                     <p>@@yKicchan</p>

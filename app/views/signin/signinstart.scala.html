@@ -3,6 +3,7 @@
 @import helpers.PlainHelper.myFields
 <!DOCTYPE html>
 <head>
+    <title>サインイン</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" href="@routes.Assets.at("/mdl/material.min.css")">
     <link rel="stylesheet" href="@routes.Assets.at("/stylesheets/signinstart.css")">
@@ -34,7 +35,7 @@
                                     @helper.inputPassword(form("password"), 'class -> "mdl-textfield__input")
                                     <label class="mdl-textfield__label" for="password">@Messages("signin.password")</label>
                                 </div>
-                                    <a href="@routes.ForgotPasswordController.startForgotPass()"><span style="display: block; text-align: right; font-size: 10px">@messages("signin.forgotPass")</span></a>
+                                    <a href="#"><span style="display: block; text-align: right; font-size: 10px">@messages("signin.forgotPass")</span></a>
                                 <div>
                                     <button class="mdl-button mdl-button--raised mdl-js-button mdl-js-ripple-effect" type="submit" name="action">@Messages("signin.submitbutton")</button>
                                 </div>

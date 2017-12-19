@@ -3,24 +3,11 @@
 @import helpers.PlainHelper.myFields
 <!DOCTYPE html>
 <head>
+    <title>サインアップ</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" href="@routes.Assets.at("/mdl/material.min.css")">
     <link rel="stylesheet" href="@routes.Assets.at("/stylesheets/signup.css")">
     <script defer src="@routes.Assets.at("/mdl/material.min.js")">
-            $("#signupform").validationMessage({
-
-//                rules: {
-//                    example4: {email:true, required: true},
-//                    example5: {required: true}
-//                },
-                messages: {
-                    password: "Just check the box<h5 class='text-danger'>You aren't going to read the EULA</h5>"
-                }
-//                tooltip_options: {
-//                    example4: {trigger:'focus'},
-//                    example5: {placement:'right',html:true}
-//                },
-            });
     </script>
 </head>
 <body>
@@ -45,16 +32,13 @@
                             </div>
 
                             <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                                @helper.inputText(form("mail"), 'class -> "mdl-textfield__input")
+                                @helper.inputText(form("mail"), 'class -> "mdl-textfield__input", 'readonly -> "readonly")
                                 <label class="mdl-textfield__label" for="sample3">@Messages("signup.mailaddress")</label>
                             </div>
-                            @*<input type="hidden" name="mail" id="mail" value="yKicchanApp@@gmail.com"/>*@
 
                             <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                                @helper.inputText(form("name"), 'class -> "mdl-textfield__input", 'pattern -> "(-?[ぁ-んァ-ン一-龠a-zA-Z]*)(\\.[一-龠a-zA-Z]+)?")
-                                <label class="mdl-textfield__label" for="sample3">@Messages("signup.userName")</label>
-                                <span class="mdl-textfield__error">@Messages("signup.userNameError")</span>
-
+                                @helper.inputText(form("name"), 'class -> "mdl-textfield__input")
+                                <label class="mdl-textfield__label" for="sample3">@Messages("signup.name")</label>
                             </div>
 
                             <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
@@ -69,9 +53,7 @@
                             </div>
                             <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
                                 @helper.inputText(form("tel"), 'class -> "mdl-textfield__input")
-                                <label class="mdl-textfield__label" for="sample3">@Messages("signup.userName")</label>
-                                <span class="mdl-textfield__error">@Messages("signup.userNameError")</span>
-
+                                <label class="mdl-textfield__label" for="sample3">@Messages("signup.tel")</label>
                             </div>
 
 

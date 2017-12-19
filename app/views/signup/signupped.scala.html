@@ -2,10 +2,11 @@
     @import helpers.PlainHelper.myFields
 <!DOCTYPE html>
     <head>
+        <title>サインアップ</title>
         <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
         <link rel="stylesheet" href="@routes.Assets.at("/mdl/material.min.css")">
         <link rel="stylesheet" href="@routes.Assets.at("/stylesheets/signupped.css")">
-        <meta http-equiv="refresh" content="20;URL=@routes.GuestHomeController.index()">
+        <meta http-equiv="refresh" content="10;URL=@routes.GuestHomeController.index()">
         <script defer src="@routes.Assets.at("/mdl/material.min.js")"></script>
     </head>
     <body>
@@ -20,7 +21,7 @@
                 @messages("signupped.messa2")</span>
                 <br>
                 <br>
-                20秒後に自動でトップページで移動します。移動しない場合は
+                秒後に自動でトップページで移動します。移動しない場合は
                 <a href="@routes.GuestHomeController.index()">こちら</a>をクリックしてください。
             </div>
         </div>

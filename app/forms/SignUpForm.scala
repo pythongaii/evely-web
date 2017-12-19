@@ -9,7 +9,7 @@ object SignUpForm {
 
   val registringDataForm = Form[RegistringData](
     mapping(
-      "mailaddress" -> nonEmptyText
+      "mail" -> nonEmptyText
     )(RegistringData.apply)(RegistringData.unapply)
   )
 
@@ -17,12 +17,12 @@ object SignUpForm {
 
   val registeredDataForm = Form[RegisteredData](
     mapping(
-      "id" -> nonEmptyText,
+      "id" -> nonEmptyText(minLength = 4, maxLength = 15),
       "mail" -> nonEmptyText,
-      "name" -> nonEmptyText,
+      "name" -> nonEmptyText(minLength = 1, maxLength = 50),
       "password" -> tuple(
-        "password1" -> nonEmptyText(minLength = 6),
-        "password2" -> nonEmptyText(minLength = 6)
+        "password1" -> nonEmptyText(minLength = 8),
+        "password2" -> nonEmptyText(minLength = 8)
       ).verifying("password",passwords => passwords._1 == passwords._2),
       "tel" -> nonEmptyText
     )(RegisteredData.apply)(RegisteredData.unapply)
@@ -32,5 +32,5 @@ object SignUpForm {
                            mail: String,
                            name: String,
                            password: (String, String),
-                           tel: String)
+                           tel: String = "")
 }
