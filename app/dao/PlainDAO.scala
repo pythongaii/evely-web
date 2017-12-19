@@ -9,8 +9,8 @@ import scala.concurrent.Future
 
 trait PlainDAO[U, V, T] {
   def find(key: U): Future[Option[T]]
-  def save(obj: V, request: RequestHeader): Future[T]
-  def add(obj: V): Future[T]
-  def update(obj: V): Future[T]
+  def save(obj: V,request: RequestHeader): Future[T]
+  def add(obj: V, request: RequestHeader): Future[T]
+  def update(obj: V, request: RequestHeader): Future[T]
   def remove(key: U): Future[Unit]
 }

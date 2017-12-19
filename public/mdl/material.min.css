@@ -2749,7 +2749,7 @@ ul, ol {
 }
 
 .mdl-color--primary {
-    background-color: rgb(139, 195, 74) !important
+    background-color: #FFFFFF !important
 }
 
 .mdl-color--primary-contrast {
@@ -2757,11 +2757,11 @@ ul, ol {
 }
 
 .mdl-color--primary-dark {
-    background-color: rgb(104, 159, 56) !important
+    background-color: #1a3840 !important
 }
 
 .mdl-color--accent {
-    background-color: rgb(105, 240, 174) !important
+    background-color: #d90050 !important
 }
 
 .mdl-color--accent-contrast {
@@ -4710,7 +4710,7 @@ fieldset[disabled] .mdl-checkbox .mdl-checkbox__ripple-container .mdl-ripple, .m
 
 .mdl-layout__header .mdl-layout__drawer-button {
     position: absolute;
-    color: rgb(66, 66, 66);
+    color: #ffffff;
     background-color: inherit
 }
 

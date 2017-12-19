@@ -33,12 +33,12 @@ class ControllerTestTemplate extends PlaySpec with Results with I18nSupport with
   "test pageName" should {
     "test 条件" in {
       // テストしたいControllerのオブジェクトの作成
-//      val targetController = new GuestHomeController(silhouette,userService)
-
-      // 作成したControllerのActionメソッドを実行。引数にリクエストのダミーを渡す
-//      val result:Future[Result] = targetController.apisignin().apply(FakeRequest())
-
-      // リザルトを取得
+<//      val targetController = new TopController()
+//
+//      // 作成したControllerのActionメソッドを実行。引数にリクエストのダミーを渡す
+//      val result:Future[Result] = targetController.index().apply(FakeRequest())
+//
+//      // リザルトを取得
 //      val bodyText = contentAsString(result)
 //
 //      // 期待するテスト条件を確かめる

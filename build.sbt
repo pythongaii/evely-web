@@ -27,7 +27,9 @@ libraryDependencies ++= Seq(
   "org.mockito" % "mockito-all" % "1.10.19" % "test",
   "net.codingwell" %% "scala-guice" % scalaGuiceVersion,
   "com.typesafe.play" %% "play-mailer" % "5.0.0-M1",
-  "net.ceedubs" %% "ficus" % ficusVersion
+  "net.ceedubs" %% "ficus" % ficusVersion,
+  "com.pauldijou" %% "jwt-play" % "0.14.1",
+  "com.pauldijou" %% "jwt-play-json" % "0.14.1"
 )
 
 unmanagedResourceDirectories in Test <+= baseDirectory(_ / "target/web/public/test")

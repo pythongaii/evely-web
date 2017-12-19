@@ -3,6 +3,7 @@ package dao
 import javax.inject.Inject
 
 import model.event.APIEvent
+import play.api.http.Status._
 import play.api.libs.json.Json
 import play.api.libs.ws.{WSClient, WSRequest, WSResponse}
 import play.api.mvc.{Cookie, RequestHeader}
@@ -15,7 +16,6 @@ class APIEventDAO @Inject()(ws: WSClient) extends PlainDAO[String, APIEvent, WSR
   val COOKIE_NAME = "evely_auth"
 
 
-  override def add(obj: APIEvent): Future[WSResponse] = ???
 
   override def find(key: String): Future[Option[WSResponse]] = ???
 
@@ -46,9 +46,13 @@ class APIEventDAO @Inject()(ws: WSClient) extends PlainDAO[String, APIEvent, WSR
         )
 
         val response = ws.url("http://160.16.140.145:8888/api/develop/v1/events").
-          withHeaders(("Content-Type" -> "application/json"), ("Authorization", "Bearer " + tokenString)).withMethod("POST").withBody(jso).execute()
+          withHeaders(("Content-Type" -> "application/json"), ("Authorization", "Bearer " + tokenString)).
+          withMethod("POST").
+          withBody(jso).
+          execute()
+
         response.flatMap {
-          case res => {
+          case res if res.status == CREATED => {
             Future.successful(res)
           }
         }
@@ -56,5 +60,7 @@ class APIEventDAO @Inject()(ws: WSClient) extends PlainDAO[String, APIEvent, WSR
     }
   }
 
-  override def update(obj: APIEvent): Future[WSResponse] = ???
+  override def add(obj: APIEvent, request: RequestHeader): Future[WSResponse] = ???
+
+  override def update(obj: APIEvent, request: RequestHeader): Future[WSResponse] = ???
 }
