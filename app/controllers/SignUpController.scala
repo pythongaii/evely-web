@@ -1,29 +1,23 @@
 package controllers
 
-import java.util.UUID
 import javax.inject.Inject
 
-import com.mohiva.play.silhouette.api.{LoginInfo, Silhouette}
 import com.mohiva.play.silhouette.api.util.PasswordHasher
-import com.mohiva.play.silhouette.impl.exceptions.IdentityNotFoundException
-import com.mohiva.play.silhouette.impl.providers.CredentialsProvider
-import dao.{APIUserDAO, PlainDAO}
-import forms.{CreateEventForm, SignUpForm}
+import dao.PlainDAO
+import forms.SignUpForm
 import model.Token
 import model.formaction.MailAddress
 import model.user.RegisteredUser
-import play.api.cache
+import pdi.jwt.{JwtAlgorithm, JwtJson}
 import play.api.cache.CacheApi
-import play.api.i18n.{I18nSupport, Messages, MessagesApi}
+import play.api.i18n.{I18nSupport, MessagesApi}
 import play.api.libs.json.{JsPath, Json}
 import play.api.libs.ws.{WSClient, WSRequest, WSResponse}
-import play.api.mvc.{Action, Controller, Cookie}
-import pdi.jwt.{JwtAlgorithm, JwtJson, JwtSession}
-import service.{PasswordInfoService, SignUpTokenService}
+import play.api.mvc.{Action, Controller}
 import utils.Mailer
 
-import scala.concurrent.Future
 import scala.concurrent.ExecutionContext.Implicits.global
+import scala.concurrent.Future
 
 /**
   * SignUp処理に関するActionが定義されています

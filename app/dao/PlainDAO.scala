@@ -7,10 +7,10 @@ import tokens.SignUpToken
 
 import scala.concurrent.Future
 
-trait PlainDAO[U, V, T] {
-  def find(key: U): Future[Option[T]]
+trait PlainDAO[V, T] {
+  def find(key: String): Future[Option[T]]
   def save(obj: V,request: RequestHeader): Future[T]
   def add(obj: V, request: RequestHeader): Future[T]
   def update(obj: V, request: RequestHeader): Future[T]
-  def remove(key: U): Future[Unit]
+  def remove(key: String): Future[Unit]
 }
