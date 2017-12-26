@@ -5,28 +5,27 @@ import javax.inject.Inject
 import model.event.APIEvent
 import play.api.http.Status._
 import play.api.libs.json.Json
-import play.api.libs.ws.{WSClient, WSRequest, WSResponse}
-import play.api.mvc.{Cookie, RequestHeader}
+import play.api.libs.ws.{WSClient, WSResponse}
+import play.api.mvc.RequestHeader
+import utils.ConfigProvider._
 
-import scala.concurrent.{Await, Future}
 import scala.concurrent.ExecutionContext.Implicits.global
-import scala.concurrent.duration.Duration
+import scala.concurrent.Future
 
-class APIEventDAO @Inject()(ws: WSClient) extends PlainDAO[String, APIEvent, WSResponse] {
-  val COOKIE_NAME = "evely_auth"
-
-
+class APIEventDAO @Inject()(ws: WSClient) extends PlainDAO[APIEvent, WSResponse] {
 
   override def find(key: String): Future[Option[WSResponse]] = ???
 
-  override def remove(key: String): Future[Unit] = ???
+  override def remove(key: String, request: RequestHeader): Future[Unit] = ???
 
   override def save(obj: APIEvent, request: RequestHeader): Future[WSResponse] = {
-    val optionCookie: Option[Cookie] = request.cookies.get(COOKIE_NAME)
-    optionCookie match {
+
+    val optionalCookie = request.cookies.get(COOKIE_NAME)
+
+    optionalCookie match {
       case Some(cookie) => {
         val tokenString = cookie.value
-        val jso = Json.obj(
+        val jsObject = Json.obj(
           "body" -> obj.body,
           "mail" -> obj.mail,
           "place" ->
@@ -45,17 +44,14 @@ class APIEventDAO @Inject()(ws: WSClient) extends PlainDAO[String, APIEvent, WSR
           "url" -> obj.url
         )
 
-        val response = ws.url("http://160.16.140.145:8888/api/develop/v1/events").
+        val response = ws.url(EVENT_URL).
           withHeaders(("Content-Type" -> "application/json"), ("Authorization", "Bearer " + tokenString)).
-          withMethod("POST").
-          withBody(jso).
-          execute()
+          withBody(jsObject).
+          post()
 
-        response.flatMap {
-          case res if res.status == CREATED => {
-            Future.successful(res)
-          }
-        }
+        response
+          .filter(res => res.status == CREATED)
+          .flatMap(res => Future.successful(res))
       }
     }
   }

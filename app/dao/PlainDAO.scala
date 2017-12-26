@@ -1,9 +1,6 @@
 package dao
 
-import java.util.UUID
-
 import play.api.mvc.RequestHeader
-import tokens.SignUpToken
 
 import scala.concurrent.Future
 
@@ -12,5 +9,5 @@ trait PlainDAO[V, T] {
   def save(obj: V,request: RequestHeader): Future[T]
   def add(obj: V, request: RequestHeader): Future[T]
   def update(obj: V, request: RequestHeader): Future[T]
-  def remove(key: String): Future[Unit]
+  def remove(key: String, requestHeader: RequestHeader): Future[Unit]
 }

@@ -1,4 +1,4 @@
-package model
+package tokens
 
 import play.api.libs.json.Json
 

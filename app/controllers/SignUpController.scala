@@ -2,10 +2,8 @@ package controllers
 
 import javax.inject.Inject
 
-import com.mohiva.play.silhouette.api.util.PasswordHasher
 import dao.PlainDAO
 import forms.SignUpForm
-import model.Token
 import model.formaction.MailAddress
 import model.user.RegisteredUser
 import pdi.jwt.{JwtAlgorithm, JwtJson}
@@ -14,6 +12,7 @@ import play.api.i18n.{I18nSupport, MessagesApi}
 import play.api.libs.json.{JsPath, Json}
 import play.api.libs.ws.{WSClient, WSRequest, WSResponse}
 import play.api.mvc.{Action, Controller}
+import tokens.Token
 import utils.Mailer
 
 import scala.concurrent.ExecutionContext.Implicits.global
@@ -24,12 +23,8 @@ import scala.concurrent.Future
   *
   * @param messagesApi 　多言語対応に必要
   */
-class SignUpController @Inject()(val
-                                 passwordInfoService: PasswordInfoService,
-                                 passwordHasher: PasswordHasher,
-                                 signUpTokenService: SignUpTokenService,
-                                 mailer: Mailer,
-                                 aPIUserDAO: PlainDAO[String, RegisteredUser, WSResponse],
+class SignUpController @Inject()(val mailer: Mailer,
+                                 aPIUserDAO: PlainDAO[RegisteredUser, WSResponse],
                                  cache: CacheApi,
                                  ws: WSClient
                                 )(implicit val messagesApi: MessagesApi) extends Controller with I18nSupport {
