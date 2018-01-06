@@ -4,7 +4,7 @@ GET         /                           controllers.GuestHomeController.index()
 # signup用
 GET         /signup                     controllers.SignUpController.signupStart
 POST        /signup/mail                controllers.SignUpController.signupMail
-GET         /verify_email               controllers.SignUpController.signup(token: String)
+GET         /signup/verify_email        controllers.SignUpController.signup(token: String)
 POST        /signup/confirm             controllers.SignUpController.signupConfirm
 POST        /signup/regist              controllers.SignUpController.signupFinish
 
@@ -22,12 +22,11 @@ GET         /nearby                     controllers.RegisteredHomeController.nea
 GET         /notification               controllers.RegisteredHomeController.notification
 GET         /bookmark                   controllers.RegisteredHomeController.bookmark
 
+GET         /event                     controllers.RegisteredHomeController.find
 POST        /events                     controllers.RegisteredHomeController.create
 
 # signout用
 GET         /signout                    controllers.RegisteredHomeController.signout
-
-#GET         /signin/api                 controllers.SignInController.apisignin
 
 GET         /assets/*file               controllers.Assets.at(path="/public", file)
 

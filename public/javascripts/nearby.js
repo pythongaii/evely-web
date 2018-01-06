@@ -1,7 +1,7 @@
 $(function() {
-    var map; // Googleマップインスタンス
+    var map; // Googleマッフ?インスタンス
     var geo; // 地名-緯度経度のためのgeocodeインスタンス
-    // Google Mapで利用する初期設定用の変数
+    // Google Mapて?利用する初期設定用の変数
     var latlng = new google.maps.LatLng(34.7065867, 135.5021337);
     var opts = {
         zoom: 15,
@@ -9,12 +9,12 @@ $(function() {
         center: latlng,
         disableDefaultUI: true
     };
-    // id="map"を示すタグからget(0)メソッドで最初の要素を取出しmapにセット
+    // id="map"を示すタク?からget(0)メソット?て?最初の要素を取出しmapにセット
     map = new google.maps.Map($("#map").get(0), opts);
-    // ジオコードリクエストを送信するGeocoderの作成
+    // シ?オコート?リクエストを送信するGeocoderの作成
     geo = new google.maps.Geocoder();
 
-    // ジオコードリクエストが成功したときに呼び出されるコールバック関数
+    // シ?オコート?リクエストか?成功したときに呼ひ?出されるコールハ?ック関数
     var geoResultCallback = function (result, status) {
         if (status != google.maps.GeocoderStatus.OK) {
             alert(status);
@@ -29,6 +29,15 @@ $(function() {
     $('.search-box-btn.menu').click(function() {
         $('.side-nav').toggleClass('visible');
         if ($('.side-nav').hasClass('visible')) {
+            $('.search-box').css('opacity', 0.85);
+        } else {
+            $('.search-box').css('opacity', 1);
+        }
+    });
+
+    $('.event-header-image').click(function() {
+        $('.side-nav2').toggleClass('visible');
+        if ($('.side-nav2').hasClass('visible')) {
             $('.search-box').css('opacity', 0.85);
         } else {
             $('.search-box').css('opacity', 1);
@@ -70,4 +79,27 @@ $(function() {
             });
         }
     );
+
+	$('.sidenavopen').click(
+
+/* Set the width of the side navigation to 250px */
+function() {
+    document.getElementById("mySidenav").style.width = "392px";
+});
+
+/* Set the width of the side navigation to 0 */
+function closeNav() {
+    document.getElementById("mySidenav").style.width = "0";
+}
+
+    $('.detail-box').click(function () {
+        $('.detail-box').animate({height: 'hide'}, 400,"easeInOutCubic",
+        function () {
+        $('.event-list').animate({width: 'show'}, 400,"easeInOutCubic");});
+    });
+    $('.event-card').click(function () {
+        $('.event-list').animate({width: 'hide'}, 400,"easeInOutCubic",
+        function () {
+        $('.detail-box').animate({height: 'show'}, 400,"easeInOutCubic");});
+    });
 });

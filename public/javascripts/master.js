@@ -14,7 +14,6 @@ $(function() {
             });
         }
     });
-
     $('#night-mode').click(function() {
         $(this).toggleClass('on');
         if ($(this).hasClass('on')) {
@@ -74,12 +73,12 @@ $(function() {
         }
     });
 
-    // ピン
-    $('.action-pin').click(function() {
+    // ブックマーク
+    $('.action-bookmark').click(function() {
         $(this).toggleClass('on');
     });
 
-    $(".pin").on('click', function(){
+    $(".bookmark").on('click', function(){
         $(this).toggleClass('on');
     });
 });

@@ -1,4 +1,4 @@
-/* Google Map */
+﻿/* Google Map */
 
 #map {
     height: 100%;
@@ -16,36 +16,6 @@
     top: 48px;
     z-index: 1;
 }
-
-.search-box {
-    box-shadow: 0 2px 4px rgba(0,0,0,0.2), 0 -1px 0px rgba(0,0,0,0.02);
-    position: relative;
-    background: #fff;
-    border-radius: 2px;
-    box-sizing: border-box;
-    width: 392px;
-    height: 48px;
-    border-bottom: 1px solid transparent;
-    border-radius: 3px;
-    padding: 12px 104px 11px 64px;
-    opacity: 1;
-    transition: opacity .3s;
-}
-
-.search-box input {
-    font-size: 15px;
-    margin: 0 !important;
-    padding: 0 !important;
-    width: 100%;
-    height: 24px !important;
-    line-height: 24px;
-    border: none;
-    z-index: 6;
-    left: 0px;
-    outline: none;
-    background-color: transparent;
-}
-
 .search-box-btn {
     position: absolute;
     height: 48px;
@@ -58,11 +28,6 @@
     cursor: pointer;
     transition: all .3s ease-in-out;
     -webkit-transition: all .3s ease-in-out;
-}
-
-.search-box-btn.search {
-    top: 0;
-    right: 54px;
 }
 
 .search-box-separator {
@@ -91,14 +56,11 @@
 
 /* 詳細エリア */
 
-.side-nav {
+.side-nav.visible{
     position: absolute;
     height: 100%;
-    width: 408px;
     box-sizing: border-box;
-    padding-top: 48px;
     top: 0;
-    left: -408px;
     opacity: 0;
     background: #fff;
     overflow: scroll;
@@ -108,6 +70,7 @@
 
 .side-nav.visible {
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+    top: 48px;
     left: 0px;
     opacity: 1;
 }
@@ -116,6 +79,12 @@
     background-color: beige;
     width: 56px;
     height: 48px;
+}
+
+.side-nav-contents {
+    position: relative;
+    height: 100%;
+    width: 392px;
 }
 
 /* イベントの詳細 */
@@ -183,13 +152,13 @@
     opacity: 0.54;
 }
 
-.action-pin {
+.action-bookmark {
     width: 36px;
     height: 36px;
     cursor: pointer;
     transition: all .2s ease-in-out;
     -webkit-transition: all .2s ease-in-out;
-    /*background-image: url(../images/icon/pin-off.svg);*/
+    background-image: url(../images/icon/bookmark-off.svg);
     background-repeat: no-repeat;
     box-sizing: border-box;
     background-origin: content-box;
@@ -198,12 +167,12 @@
     right: 0;
 }
 
-.action-pin:hover {
+.action-bookmark:hover {
     opacity: 0.7;
 }
 
-.action-pin.on {
-    /*background-image: url(../images/icon/pin-on.svg);*/
+.action-bookmark.on {
+    background-image: url("../images/icon/bookmark-on.svg");
 }
 
 .side-nav-separator1 {
@@ -485,4 +454,89 @@
     font-family: serif;
     margin-left: -15px;
     width: calc(100% + 30px);
+}
+
+/* The side navigation menu */
+.sidenav {
+    height: 100%; /* 100% Full-height */
+    width: 450px; /* 0 width - change this with JavaScript */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Stay on top */
+    top: 0; /* Stay at the top */
+    left: 0;
+    overflow-x: hidden; /* Disable horizontal scroll */
+    padding-top: 60px; /* Place content 60px from the top */
+    transition: 0.5s; /* 0.5 second transition effect to slide in the sidenav */
+}
+
+/* The navigation menu links */
+.sidenav a {
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 25px;
+    color: #818181;
+    display: block;
+    transition: 0.3s;
+}
+
+/* When you mouse over the navigation links, change their color */
+.sidenav a:hover {
+    color: #f1f1f1;
+}
+
+/* Position and style the close button (top right corner) */
+.sidenav .closebtn {
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 36px;
+    margin-left: 50px;
+}
+
+/* Style page content - use this if you want to push the page content to the right when you open the side navigation */
+#main {
+    transition: margin-left .5s;
+    padding: 20px;
+}
+
+/* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
+@media screen and (max-height: 450px) {
+    .sidenav {padding-top: 15px;}
+    .sidenav a {font-size: 18px;}
+}
+
+.search-keyword {
+    position: absolute;
+    top: 0px;
+    padding-left: 5px;
+    background-color: aqua; 
+    font-size: 1.8rem;
+    height:30px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+}
+.search-filters {
+    position: absolute;
+    top: 30px;
+    height: 32px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    border-top: 1px solid #acacac;
+    border-bottom: 1px solid #acacac;
+}
+
+.btn.btn-default.dropdown-toggle {
+    position: relative;
+    margin-left: 5px;
+    border-radius: 5%;
+    padding: 0;
+    font-size: 1.3rem;
+}
+
+.card-list {
+    position: absolute;
+    top: 62px;
+    height: 100%
 }

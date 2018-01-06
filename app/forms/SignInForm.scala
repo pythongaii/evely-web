@@ -14,10 +14,7 @@ object SignInForm {
   )
 
 }
+
 case class SignInData(id: String,
                       password: String)
-
-object SignInData{
-  implicit val formtter = Json.format[SignInData]
-}
 

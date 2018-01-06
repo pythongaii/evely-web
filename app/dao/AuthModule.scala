@@ -7,6 +7,7 @@ import play.api.cache.{Cache, CacheApi}
 import play.api.libs.ws.WSClient
 import play.api.mvc._
 import play.api.mvc.Security
+import utils.ConfigProvider
 
 import scala.concurrent.Future
 import scala.concurrent.duration.Duration
@@ -15,15 +16,10 @@ import scala.concurrent.duration.Duration
   * Web側だけで認証を済ませる用のクラス
   * @param cache キャッシュに保存したtokenを
   */
-class AuthModule @Inject()(val cache: CacheApi) extends Controller {
-
-  /**
-    * トークン保存に使ったクッキー名
-    */
-  val COOKIE_NAME = "evely_auth"
+class AuthModule @Inject()(val cache: CacheApi, configProvider: ConfigProvider) extends Controller {
 
   def username(request: RequestHeader) = {
-    val optionCookie:Option[Cookie] = request.cookies.get(COOKIE_NAME)
+    val optionCookie:Option[Cookie] = request.cookies.get(configProvider.COOKIE_NAME)
     optionCookie match {
       case None => Option.empty[String]
       case Some(cookie) => {
@@ -41,7 +37,7 @@ class AuthModule @Inject()(val cache: CacheApi) extends Controller {
   }
 
   def removeAuthInfo(request: RequestHeader) = {
-    val optionCookie = request.cookies.get(COOKIE_NAME)
+    val optionCookie = request.cookies.get(configProvider.COOKIE_NAME)
     optionCookie match {
       case None => UNAUTHORIZED
       case Some(cookie) => cache.remove(cookie.value)
@@ -49,7 +45,7 @@ class AuthModule @Inject()(val cache: CacheApi) extends Controller {
   }
 
   def onUnauthorized(request: RequestHeader) = {
-    Redirect(routes.SignInController.startSignin()).discardingCookies(DiscardingCookie(COOKIE_NAME))
+    Redirect(routes.SignInController.startSignin()).discardingCookies(DiscardingCookie(configProvider.COOKIE_NAME))
   }
 
   def withAuth(f: => String => Request[AnyContent] => Future[Result]) = {

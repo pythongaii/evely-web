@@ -2,7 +2,7 @@ package model.formaction
 
 import play.api.libs.json.Json
 
-case class MailAddress(mailAddress: String) extends VerificationNeeded {
+case class MailAddress(mailAddress: String = "") extends VerificationNeeded {
 
   def doAction(): Void = ???
 

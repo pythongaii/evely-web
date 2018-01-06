@@ -22,7 +22,7 @@ class ForgotPasswordController @Inject()(implicit val messagesApi: MessagesApi) 
 
   // パスワードの再設定画面の表示
   def forgotpassreset = Action.async {implicit request =>
-    Future.successful(Ok(views.html.forgotpass.forgotpassreset(forms.ForgotPass.resetForm)))
+    Future.successful(Ok(views.html.forgotpass.forgotpassreset(forms.ForgotPassForm.resetForm)))
   }
 
   // パスワード再設定の完了

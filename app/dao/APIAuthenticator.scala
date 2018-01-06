@@ -5,6 +5,7 @@ import javax.inject.Inject
 import forms.SignInData
 import play.api.libs.json.Json
 import play.api.libs.ws.{WSClient, WSResponse}
+import utils.ConfigProvider
 
 import scala.concurrent.Future
 
@@ -14,7 +15,7 @@ trait Authenticator {
   def signout()
 }
 
-class APIAuthenticator @Inject()(ws: WSClient) extends Authenticator {
+class APIAuthenticator @Inject()(ws: WSClient, configProvider: ConfigProvider) extends Authenticator {
 
   def signup() = ???
 
@@ -27,7 +28,7 @@ class APIAuthenticator @Inject()(ws: WSClient) extends Authenticator {
       "password" -> signInData.password
     ))
 
-    ws.url("http://160.16.140.145:8888/api/develop/v1/auth/signin").
+    ws.url(configProvider.SIGNIN_URL).
       withHeaders("Content-Type" -> "application/json")
       .post(jsonObject)
   }

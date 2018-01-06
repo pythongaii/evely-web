@@ -1,18 +1,36 @@
 package utils
 
+import javax.inject.Inject
+
 import play.api.Configuration
 
-trait Config extends Injecter {
-  val config = injecter.getInstance(classOf[Configuration])
+trait ConfigProvider {
+  def COOKIE_NAME:String
+
+  def PUBLICKEY:String
+
+  def EVENT_URL:String
+
+  def SIGNUP_URL:String
+  def SIGNUP_MAIL_URL:String
+
+  def SIGNIN_URL:String
+
+  def VERIFY_TOKEN_URL:String
 }
 
-object ConfigProvider extends Config {
+case class ConfigProviderImpl @Inject()(config: Configuration) extends ConfigProvider {
 
-  val COOKIE_NAME = config.getString("session.CookieName").get
+  def COOKIE_NAME = config.getString("session.cookieName").get
 
-  val PUBLICKEY = config.getString("api.publicKey").get
+  def PUBLICKEY = config.getString("api.publicKey").get
 
-  val EVENT_URL = config.getString("api.eventURL").get
+  def EVENT_URL = config.getString("api.eventURL").get
 
-  val SIGNUP_URL = config.getString("api.signUpURL").get
+  def SIGNUP_URL = config.getString("api.signUpURL").get
+  def SIGNUP_MAIL_URL= config.getString("api.signUpMail").get
+
+  def SIGNIN_URL = config.getString("api.signInURL").get
+
+  def VERIFY_TOKEN_URL = config.getString("api.verifyTokenURL").get
 }

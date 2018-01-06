@@ -4,10 +4,19 @@ import model.event.{APIEvent, APIPlace, UpcomingDate}
 import play.api.data.Form
 import play.api.data.Forms._
 import play.api.data.format.Formats._
+import play.api.libs.json.Json
+
+case class CreateEventData(body: String,
+                    mail: Option[String],
+                    place: APIPlace,
+                    tel: Option[String],
+                    title: String,
+                    upcomingDate: UpcomingDate,
+                    url: Option[String])
 
 object CreateEventForm {
 
-  val createEventForm = Form(
+  val createEventForm = Form[CreateEventData](
     mapping(
       "body" -> nonEmptyText(maxLength = 1000),
       "mail" -> optional(text),
@@ -23,7 +32,7 @@ object CreateEventForm {
         "startDate" -> nonEmptyText
       )(UpcomingDate.apply)(UpcomingDate.unapply),
       "url" -> optional(text)
-    )(APIEvent.apply)(APIEvent.unapply)
+    )(CreateEventData.apply)(CreateEventData.unapply)
   )
 
 

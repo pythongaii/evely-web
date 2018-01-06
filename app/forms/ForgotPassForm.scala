@@ -3,7 +3,7 @@ package forms
 import play.api.data.Form
 import play.api.data.Forms._
 
-object ForgotPass {
+object ForgotPassForm {
 
   val form = Form(
     mapping(
@@ -20,7 +20,7 @@ object ForgotPass {
     )(Password.apply)(Password.unapply)
   )
 
-  case class Password(password: (String, String))
-
-  case class Data(password: String)
 }
+case class Password(password: (String, String))
+
+case class Data(password: String)
