@@ -7,88 +7,63 @@
 
 /* 検索ボックス */
 
-.search-box-container {
+.search-keyword {
     position: absolute;
-    margin: 12px 0 12px 8px;
-    width: 392px;
-    height: 48px;
-    left: 0px;
-    top: 48px;
-    z-index: 1;
+    top: 0px;
+    padding-left: 5px;
+    background-color: #cde0eb;
+    font-size: 2.0rem;
+    font-weight: bold;
+    height:40px;
+    width: 100%;
+    display: flex;
+    align-items: center;
 }
-.search-box-btn {
+.search-filters {
     position: absolute;
-    height: 48px;
-    width: 56px;
-    z-index: 1;
-    font-size: 1.25em;
-    line-height: 2.4;
-    text-align: center;
-    color: gray;
-    cursor: pointer;
-    transition: all .3s ease-in-out;
-    -webkit-transition: all .3s ease-in-out;
-}
-
-.search-box-separator {
-    position: absolute;
-    height: 34px;
-    border-left: 1px solid #acacac;
-    top: 8px;
-    right: 55px;
+    top: 40px;
+    height: 40px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    border-top: 1px solid #acacac;
 }
 
-.search-box-btn.filter {
-    top: 0;
-    right: 0;
+.search-filters .btn.btn-default.dropdown-toggle {
+    margin-left: 5px;
+    font-size: 1.3rem;
 }
 
-.search-box-btn i {
-    display: block;
-    height: 0.9em;
+.card-list {
     position: absolute;
-    margin: auto;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    right: 0;
+    top: 80px;
 }
 
 /* 詳細エリア */
 
 .side-nav.visible{
-    position: absolute;
+    position: fixed;
     height: 100%;
     box-sizing: border-box;
-    top: 0;
-    opacity: 0;
     background: #fff;
     overflow: scroll;
     transition: all .2s ease-in-out;
     -webkit-transition: all .2s ease-in-out;
-}
-
-.side-nav.visible {
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
     top: 48px;
     left: 0px;
     opacity: 1;
 }
 
-.side-nav-btn.close {
-    background-color: beige;
-    width: 56px;
-    height: 48px;
-}
-
 .side-nav-contents {
     position: relative;
-    height: 100%;
     width: 392px;
 }
 
 /* イベントの詳細 */
-
+.event-list {
+    position: relative;
+}
 .event-container {
     height: 100%;
     width: 100%;
@@ -98,6 +73,10 @@
 }
 
 .event-header-image {
+    position: relative;
+    top: 0;
+    left: 0;
+    z-index: 1;
     width: 100%;
     height: 250px;
     overflow: hidden;
@@ -267,6 +246,26 @@
 }
 
 /* イベントの詳細情報 */
+.back_btn {
+    position: absolute;
+    top: 0;
+right: 0;
+    margin-top: 5px;
+    margin-right: 5px;
+    width: 20px;
+    height: 20px;
+    z-index: 2;
+    opacity: 0.87;
+    background: url(../images/ic_cross_tinted.png) no-repeat;
+    background-size:contain;
+    cursor: pointer;
+    -webkit-filter: invert(100%);
+    -moz-filter: invert(100%);
+    -o-filter: invert(100%);
+    -ms-filter: invert(100%);
+    filter: invert(100%);
+}
+
 .event-info-container {
     margin-bottom: 15px;
 }
@@ -444,7 +443,7 @@
 
 .upcoming-date-see-all {
     margin: 0;
-    font-size: 1.1em;
+    font-size: 1.1rem;
     opacity: 0.87;
     text-align: center;
     line-height: 2.5;
@@ -458,7 +457,7 @@
 
 /* The side navigation menu */
 .sidenav {
-    height: 100%; /* 100% Full-height */
+    height: 100%;/* 100% Full-height */
     width: 450px; /* 0 width - change this with JavaScript */
     position: fixed; /* Stay in place */
     z-index: 1; /* Stay on top */
@@ -505,38 +504,4 @@
     .sidenav a {font-size: 18px;}
 }
 
-.search-keyword {
-    position: absolute;
-    top: 0px;
-    padding-left: 5px;
-    background-color: aqua; 
-    font-size: 1.8rem;
-    height:30px;
-    width: 100%;
-    display: flex;
-    align-items: center;
-}
-.search-filters {
-    position: absolute;
-    top: 30px;
-    height: 32px;
-    width: 100%;
-    display: flex;
-    align-items: center;
-    border-top: 1px solid #acacac;
-    border-bottom: 1px solid #acacac;
-}
 
-.btn.btn-default.dropdown-toggle {
-    position: relative;
-    margin-left: 5px;
-    border-radius: 5%;
-    padding: 0;
-    font-size: 1.3rem;
-}
-
-.card-list {
-    position: absolute;
-    top: 62px;
-    height: 100%
-}

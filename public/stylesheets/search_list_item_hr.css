@@ -3,12 +3,17 @@
     display: inline-block;
     width: 392px;
     height: 162px;
-    box-shadow:
-        0 2px 2px 0 rgba(0,0,0,.14),
-        0 3px 1px -2px rgba(0,0,0,.2),
-        0 1px 5px 0 rgba(0,0,0,.12);
-    position: relative;
+    /*box-shadow:*/
+        /*0 2px 2px 0 rgba(0,0,0,.14),*/
+        /*0 3px 1px -2px rgba(0,0,0,.2),*/
+        /*0 1px 5px 0 rgba(0,0,0,.12);*/
 }
+
+.side-nav-separator3 {
+    width: 100%;
+    border-top: 1px solid #8e8e8e;
+}
+
 
 .event-card .title:hover {
     text-decoration: underline;
@@ -53,7 +58,7 @@
     margin: 0px 13px 0px 13px;
 }
 
-.event-card-header > .title {
+.event-card-header > .list-item-title {
     font-weight: bold;
     font-size:1.8rem;
     opacity: 1;

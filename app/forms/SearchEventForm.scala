@@ -5,8 +5,12 @@ import play.api.data.Forms._
 
 object SearchEventForm {
   val form = Form[Keyword](
-    mapping("keyword" -> text)(Keyword.apply)(Keyword.unapply)
+    mapping(
+      "keyword" -> text,
+      "limit" -> text,
+      "offset" -> text
+    )(Keyword.apply)(Keyword.unapply)
   )
 }
 
-case class Keyword(keyword: String)
+case class Keyword(keyword: String, limit: String, offset:String)

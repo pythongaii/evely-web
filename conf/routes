@@ -22,8 +22,10 @@ GET         /nearby                     controllers.RegisteredHomeController.nea
 GET         /notification               controllers.RegisteredHomeController.notification
 GET         /bookmark                   controllers.RegisteredHomeController.bookmark
 
-GET         /event                     controllers.RegisteredHomeController.find
-POST        /events                     controllers.RegisteredHomeController.create
+GET         /event                      controllers.EventController.search
+GET         /event/findoffset           controllers.EventController.findOffset
+GET         /event/:uid/:eventId              controllers.EventController.findOne(uid:String,eventId:String)
+POST        /events                     controllers.EventController.create
 
 # signout用
 GET         /signout                    controllers.RegisteredHomeController.signout

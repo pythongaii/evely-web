@@ -1,5 +1,6 @@
 @import model.event.Event
 @(event: Event)
+<div class="side-nav-separator3"></div>
 <div class="event-card">
     <div class="bookmark on"></div>
     <div class="event-card-header">
@@ -9,7 +10,7 @@
                 <p class="main">@event.host.name</p>
             </div>
         </div>
-        <div class="title">
+        <div class="list-item-title" host-id="@event.host.id" event-id="@event.id">
             @event.title
         </div>
         <div class="event-card-body">

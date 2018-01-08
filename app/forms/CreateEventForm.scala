@@ -1,10 +1,9 @@
 package forms
 
-import model.event.{APIEvent, APIPlace, UpcomingDate}
+import model.event.{APIPlace, UpcomingDate}
 import play.api.data.Form
 import play.api.data.Forms._
 import play.api.data.format.Formats._
-import play.api.libs.json.Json
 
 case class CreateEventData(body: String,
                     mail: Option[String],
@@ -28,8 +27,8 @@ object CreateEventForm {
       "tel" -> optional(text),
       "title" -> nonEmptyText,
       "upcomingDate" -> mapping(
-        "endDate" -> nonEmptyText,
-        "startDate" -> nonEmptyText
+        "endDate" -> optional(nonEmptyText),
+        "startDate" -> optional(nonEmptyText)
       )(UpcomingDate.apply)(UpcomingDate.unapply),
       "url" -> optional(text)
     )(CreateEventData.apply)(CreateEventData.unapply)

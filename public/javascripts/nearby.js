@@ -1,4 +1,4 @@
-$(function() {
+$(function () {
     var map; // Googleマッフ?インスタンス
     var geo; // 地名-緯度経度のためのgeocodeインスタンス
     // Google Mapて?利用する初期設定用の変数
@@ -21,12 +21,12 @@ $(function() {
             return;
         }
         latlng = result[0].geometry.location;
-        marker = new google.maps.Marker({position:latlng, map:map}); // マーカをセット
+        marker = new google.maps.Marker({position: latlng, map: map}); // マーカをセット
         map.setCenter(marker.position); // マーカー位置を中心にセット
     }
 
     // [三]をクリックでイベント詳細が左から出てくる
-    $('.search-box-btn.menu').click(function() {
+    $('.search-box-btn.menu').click(function () {
         $('.side-nav').toggleClass('visible');
         if ($('.side-nav').hasClass('visible')) {
             $('.search-box').css('opacity', 0.85);
@@ -35,7 +35,7 @@ $(function() {
         }
     });
 
-    $('.event-header-image').click(function() {
+    $('.event-header-image').click(function () {
         $('.side-nav2').toggleClass('visible');
         if ($('.side-nav2').hasClass('visible')) {
             $('.search-box').css('opacity', 0.85);
@@ -45,7 +45,7 @@ $(function() {
     });
 
     $('.search-box-btn').hover(
-        function() {
+        function () {
             if ($('#night-mode').hasClass('on')) {
                 $(this).css({
                     'color': 'white'
@@ -56,7 +56,7 @@ $(function() {
                 });
             }
         },
-        function() {
+        function () {
             $(this).css({
                 'color': 'gray'
             });
@@ -64,14 +64,14 @@ $(function() {
     );
 
     $('.event-images').hover(
-        function() {
+        function () {
             $('.event-other-image').css({
                 'color': '#fffe',
                 'height': '75%',
                 'line-height': '18'
             });
         },
-        function() {
+        function () {
             $('.event-other-image').css({
                 'color': '#fffc',
                 'height': '50%',
@@ -80,26 +80,53 @@ $(function() {
         }
     );
 
-	$('.sidenavopen').click(
+    $('.sidenavopen').click(
+        /* Set the width of the side navigation to 250px */
+        function () {
+            document.getElementById("mySidenav").style.width = "392px";
+        });
 
-/* Set the width of the side navigation to 250px */
-function() {
-    document.getElementById("mySidenav").style.width = "392px";
+    /* Set the width of the side navigation to 0 */
+    function closeNav() {
+        document.getElementById("mySidenav").style.width = "0";
+    }
+
+    $(document).on("click", ".back_btn", function () {
+        $('.detail-box').animate({height: 'hide'}, 400, "easeInOutCubic",
+            function () {
+                $('.event-list').animate({width: 'show'}, 400, "easeInOutCubic");
+            });
+        history.back();
+    });
+
+    /* infinite scroll */
+
+
+    // addPage(++page);
+
+
+    $(document).on("click",'.list-item-title', function (){
+        var uid = $(this).attr("host-id");
+        var eventid = $(this).attr("event-id");
+        $.ajax({
+            url: '/event/' + uid + '/' + eventid,
+            type: 'GET'
+        }).done(function (html) {
+            $('.detail-box').replaceWith(html);
+            showDetail();
+            history.pushState('','','event/' +uid + '/' + eventid);
+        });
+
+    });
+
+    function showDetail() {
+        $('.event-list').animate({width: 'hide'}, 400, "easeInOutCubic",
+            function () {
+                $('.detail-box').animate({height: 'show'}, 400, "easeInOutCubic");
+            });
+    }
+
+
 });
 
-/* Set the width of the side navigation to 0 */
-function closeNav() {
-    document.getElementById("mySidenav").style.width = "0";
-}
 
-    $('.detail-box').click(function () {
-        $('.detail-box').animate({height: 'hide'}, 400,"easeInOutCubic",
-        function () {
-        $('.event-list').animate({width: 'show'}, 400,"easeInOutCubic");});
-    });
-    $('.event-card').click(function () {
-        $('.event-list').animate({width: 'hide'}, 400,"easeInOutCubic",
-        function () {
-        $('.detail-box').animate({height: 'show'}, 400,"easeInOutCubic");});
-    });
-});

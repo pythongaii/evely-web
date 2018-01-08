@@ -14,18 +14,16 @@ import scala.concurrent.Future
 
 class APIEventDAO @Inject()(ws: WSClient, configProvider: ConfigProvider) extends PlainDAO[CreateEventData, WSResponse] {
 
-  override def find(key: String): Future[Option[WSResponse]] = {
-    val re = ws.url(configProvider.EVENT_URL).
-      withQueryString(("keyword", key),("limit", "5"), ("offset", "0"))
-
-    val response = re.get()
+  override def find(key: (String,String)*): Future[Option[WSResponse]] = {
+    val response = ws.url(key.head._2).
+      withQueryString(key.tail:_*).get()
 
     response
       .filter(res => res.status == OK)
       .flatMap(res => Future.successful(Option(res)))
   }
 
-  override def remove(key: String, request: RequestHeader): Future[Unit] = ???
+  override def remove(request: RequestHeader,key: (String, String)*): Future[Unit] = ???
 
   override def save(obj: CreateEventData, request: RequestHeader): Future[WSResponse] = {
 
@@ -47,8 +45,8 @@ class APIEventDAO @Inject()(ws: WSClient, configProvider: ConfigProvider) extend
           "title" -> obj.title,
           "upcomingDate" ->
             Json.obj(
-              "endDate" -> obj.upcomingDate.endDate.concat("Z"),
-              "startDate" -> obj.upcomingDate.startDate.concat("Z")
+              "endDate" -> obj.upcomingDate.endDate.get.concat("Z"),
+              "startDate" -> obj.upcomingDate.startDate.get.concat("Z")
             ),
           "url" -> obj.url
         )
