@@ -30,7 +30,7 @@
     </head>
     <body>
             <!-- App bar START -->
-            @views.html.secured.memberPageHeader(userID)(userName)
+            @views.html.secured.memberPageHeader("gotohell")(userName)
             <!-- App bar END -->
         <main class="container">
             @request.flash.get("error").map { msg =>
@@ -51,7 +51,7 @@
                             <div class="detail">
                                 <img src="@routes.Assets.at("/images/sample/sample2.jpg")" alt="">
                                 <div class="info">
-                                    <p class="main">Yukiya Murata</p>
+                                    <p class="main">hhhh@userID</p>
                                     <p>@@yKicchan</p>
                                 </div>
                             </div>

@@ -23,7 +23,7 @@ class RegisteredHomeController @Inject()(cache: CacheApi,
 
   def index = withAuth { username =>
     implicit request =>
-      Future.successful(Ok(views.html.secured.index(CreateEventForm.createEventForm)("id")("name")))
+      Future.successful(Ok(views.html.secured.index(CreateEventForm.createEventForm)(username)("name")))
   }
 
   def bookmark = withAuth { username =>

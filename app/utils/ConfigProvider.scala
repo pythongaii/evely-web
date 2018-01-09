@@ -28,7 +28,7 @@ case class ConfigProviderImpl @Inject()(config: Configuration) extends ConfigPro
   def EVENT_URL = config.getString("api.eventURL").get
 
   def SIGNUP_URL = config.getString("api.signUpURL").get
-  def SIGNUP_MAIL_URL= config.getString("api.signUpMail").get
+  def SIGNUP_MAIL_URL= config.getString("api.signUpMailURL").get
 
   def SIGNIN_URL = config.getString("api.signInURL").get
 
