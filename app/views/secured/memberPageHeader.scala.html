@@ -1,6 +1,6 @@
-@import forms.{CreateEventForm, SearchEventForm}
+@@import forms.{CreateEventForm, SearchEventForm}
 @(userID: String)(userName: String)(implicit messages: Messages, request: RequestHeader)
-@import helpers.PlainHelper.myFields
+@@import helpers.PlainHelper.myFields
 @form = @{CreateEventForm.createEventForm}
     <header class="app-bar row">
         <!-- Tab START -->
@@ -36,9 +36,8 @@
             </a>
         </li>
     </ul>
-        <!-- Tab END -->
-        <!-- App bar extras START -->
-    <ul class="nav-extras right">
+
+    <ul class="nav-extras center">
             <!-- Search box START -->
         <li class="search">
         @helper.form(action = routes.EventController.search(), 'class -> "search_form") {
@@ -47,10 +46,14 @@
             <input type="hidden" name="offset" value="0"/>
             @*<button class="mdl-button mdl-js-button mdl-button--icon"*@
             @*for="waterfall-exp" type="submit" name="action">*@
-                @*<i class="material-icons">search</i>*@
+            @*<i class="material-icons">search</i>*@
             @*</button>*@
         }
         </li>
+    </ul>
+        <!-- Tab END -->
+        <!-- App bar extras START -->
+    <ul class="nav-extras right">
 
             <!-- Search box END -->
             <!-- Profile nav START -->
@@ -61,8 +64,8 @@
                 <li class="profile-container">
                     <img src="@routes.Assets.at("/images/icon/icon.png")" alt="">
                     <div class="profile-info">
-                        <p class="name">@userName</p>
-                        <p class="id">jk@userID</p>
+                        <p class="name"></p>
+                        <p class="id">@userID</p>
                     </div>
                 </li>
                 <li role="separator" class="divider"></li>

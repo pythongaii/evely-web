@@ -1,8 +1,7 @@
-@import forms.SearchEventForm
+@@import forms.SearchEventForm
 @()(implicit messages: Messages)
-@import helpers.PlainHelper.myFields
+@@import helpers.PlainHelper.myFields
 @form = @{SearchEventForm.form}
-<div id="header">
     <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
         <header class="mdl-layout__header">
             <div class="mdl-layout__header-row">
@@ -32,7 +31,7 @@
                     @helper.form(action = routes.SignInController.startSignin(), 'name -> "signinForm") {
 
                     }
-                    <a class="mdl-navigation__link" href="signinStart" onclick="document.signinForm.submit();
+                    <a class="mdl-navigation__link" href="/signin" onclick="document.signinForm.submit();
                     return false;" >@Messages("header.signIn")</a>
                     /
                     <a class="mdl-navigation__link" name="signuplink" href="@routes.SignUpController.signupStart()">@Messages("header.signUp")</a>
@@ -40,4 +39,3 @@
             </div>
         </header>
     </div>
-</div>

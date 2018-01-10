@@ -106,4 +106,5 @@ class SignUpController @Inject()(val mailer: Mailer,
       }
     )
   }
+
 }

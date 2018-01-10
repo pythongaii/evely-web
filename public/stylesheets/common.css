@@ -1,5 +1,10 @@
-#header {
-    padding-bottom: 65px;
+.mdl-layout__header{
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    z-index: 1000;
+    min-width: 670px;
 }
 
 #footer {
