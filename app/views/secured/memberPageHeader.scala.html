@@ -1,6 +1,6 @@
-@@import forms.{CreateEventForm, SearchEventForm}
+@import forms.{CreateEventForm, SearchEventForm}
 @(userID: String)(userName: String)(implicit messages: Messages, request: RequestHeader)
-@@import helpers.PlainHelper.myFields
+@import helpers.PlainHelper.myFields
 @form = @{CreateEventForm.createEventForm}
     <header class="app-bar row">
         <!-- Tab START -->
