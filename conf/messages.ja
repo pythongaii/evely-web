@@ -1,7 +1,7 @@
 toppage.title=Evely
 
-header.searchCategory=カテゴリで探す
-header.searchArea=エリアで探す
+error=エラー
+
 header.signIn=Sign in
 header.signUp=Sign up
 
@@ -13,6 +13,7 @@ signin.password=パスワード
 signin.forgotPass=パスワードを忘れましたか？
 signin.signInEvely=ユーザーネームとパスワードでサインイン
 signin.signInOthers=他のサービスのアカウントでサインイン
+signin.submitbutton=サインイン
 
 signupmail.title=会員登録メール受信の確認
 signupmail.messa1=ご登録のメールアドレスに、メールをお送りいたしました。
@@ -22,15 +23,14 @@ signupmail.messa4=そのURLをクリックし、会員登録のお手続きを�
 
 signup.title=会員情報の入力
 signup.mailaddress=メールアドレス
-signup.userName=氏名
-signup.userID=ユーザーネーム
+signup.name=氏名
+signup.userID=ユーザーID
 signup.password=パスワード
 signup.password.confirm=パスワード(確認用)
+signup.tel=電場番号
 signup.submitbutton=確認画面へ
-signup.mailError=ちゃんと打て
-signup.userNameError=本間にそんな名前？？
-signup.passError=8文字以上の英数字(大小別)らしいです
-
+signup.mailError=メールアドレスが正しくありません
+signup.passError=8文字以上の半角英数字大文字小文字
 
 signupstart.mail_title=メールアドレスで新規会員登録
 signupstart.external_title=他のサービスのアカウントで新規会員登録
@@ -66,6 +66,12 @@ forgotpass.title=パスワードの再設定完了
 forgotpass.message1=パスワードの再設定が完了しました。
 forgotpass.message2=新しいパスワードを使用してサインインしてください。
 
+mail.confirm.subject=【会員登録メール】Evely 会員登録メール
+mail.confirm=この度はEvelyへの、会員登録手続きを行っていただき、ありがとうございます。{0}
+
+mail.resetpassword.subject=【パスワード再設定】Evely パスワード再設定メール
+mail.resetpassword=パスワードの再設定を行います。{0}
+
 profile=プロフィール
 settings=設定
 notification=通知
@@ -89,3 +95,6 @@ like=好き
 comment=コメント
 share=シェア
 
+mailCannotUse.Title=メール送信エラー
+mailCannotUse.messa1=ご入力いただいたメールアドレスはご使用いただけません。
+mailCannotUse.messa2=10秒後にホーム画面へ戻ります。

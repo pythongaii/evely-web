@@ -1,4 +1,4 @@
-/* Google Map */
+﻿/* Google Map */
 
 #map {
     height: 100%;
@@ -7,119 +7,63 @@
 
 /* 検索ボックス */
 
-.search-box-container {
+.search-keyword {
     position: absolute;
-    margin: 12px 0 12px 8px;
-    width: 392px;
-    height: 48px;
-    left: 0px;
-    top: 48px;
-    z-index: 1;
-}
-
-.search-box {
-    box-shadow: 0 2px 4px rgba(0,0,0,0.2), 0 -1px 0px rgba(0,0,0,0.02);
-    position: relative;
-    background: #fff;
-    border-radius: 2px;
-    box-sizing: border-box;
-    width: 392px;
-    height: 48px;
-    border-bottom: 1px solid transparent;
-    border-radius: 3px;
-    padding: 12px 104px 11px 64px;
-    opacity: 1;
-    transition: opacity .3s;
-}
-
-.search-box input {
-    font-size: 15px;
-    margin: 0 !important;
-    padding: 0 !important;
+    top: 0px;
+    padding-left: 5px;
+    background-color: #cde0eb;
+    font-size: 2.0rem;
+    font-weight: bold;
+    height:40px;
     width: 100%;
-    height: 24px !important;
-    line-height: 24px;
-    border: none;
-    z-index: 6;
-    left: 0px;
-    outline: none;
-    background-color: transparent;
+    display: flex;
+    align-items: center;
 }
-
-.search-box-btn {
+.search-filters {
     position: absolute;
-    height: 48px;
-    width: 56px;
-    z-index: 1;
-    font-size: 1.25em;
-    line-height: 2.4;
-    text-align: center;
-    color: gray;
-    cursor: pointer;
-    transition: all .3s ease-in-out;
-    -webkit-transition: all .3s ease-in-out;
+    top: 40px;
+    height: 40px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    border-top: 1px solid #acacac;
 }
 
-.search-box-btn.search {
-    top: 0;
-    right: 54px;
+.search-filters .btn.btn-default.dropdown-toggle {
+    margin-left: 5px;
+    font-size: 1.3rem;
 }
 
-.search-box-separator {
+.card-list {
     position: absolute;
-    height: 34px;
-    border-left: 1px solid #acacac;
-    top: 8px;
-    right: 55px;
-}
-
-.search-box-btn.filter {
-    top: 0;
-    right: 0;
-}
-
-.search-box-btn i {
-    display: block;
-    height: 0.9em;
-    position: absolute;
-    margin: auto;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    right: 0;
+    top: 80px;
 }
 
 /* 詳細エリア */
 
-.side-nav {
-    position: absolute;
+.side-nav.visible{
+    position: fixed;
     height: 100%;
-    width: 408px;
     box-sizing: border-box;
-    padding-top: 48px;
-    top: 0;
-    left: -408px;
-    opacity: 0;
     background: #fff;
     overflow: scroll;
     transition: all .2s ease-in-out;
     -webkit-transition: all .2s ease-in-out;
-}
-
-.side-nav.visible {
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+    top: 48px;
     left: 0px;
     opacity: 1;
 }
 
-.side-nav-btn.close {
-    background-color: beige;
-    width: 56px;
-    height: 48px;
+.side-nav-contents {
+    position: relative;
+    width: 392px;
 }
 
 /* イベントの詳細 */
-
+.event-list {
+    position: relative;
+}
 .event-container {
     height: 100%;
     width: 100%;
@@ -129,6 +73,10 @@
 }
 
 .event-header-image {
+    position: relative;
+    top: 0;
+    left: 0;
+    z-index: 1;
     width: 100%;
     height: 250px;
     overflow: hidden;
@@ -223,6 +171,7 @@
 
 .side-nav-separator2 {
     border-top: 1px solid #8e8e8e;
+    opaciity: 0.87;
 }
 
 .rate-container {
@@ -298,6 +247,26 @@
 }
 
 /* イベントの詳細情報 */
+.back_btn {
+    position: absolute;
+    top: 0;
+right: 0;
+    margin-top: 5px;
+    margin-right: 5px;
+    width: 20px;
+    height: 20px;
+    z-index: 2;
+    opacity: 0.87;
+    background: url(../images/ic_cross_tinted.png) no-repeat;
+    background-size:contain;
+    cursor: pointer;
+    -webkit-filter: invert(100%);
+    -moz-filter: invert(100%);
+    -o-filter: invert(100%);
+    -ms-filter: invert(100%);
+    filter: invert(100%);
+}
+
 .event-info-container {
     margin-bottom: 15px;
 }
@@ -475,7 +444,7 @@
 
 .upcoming-date-see-all {
     margin: 0;
-    font-size: 1.1em;
+    font-size: 1.1rem;
     opacity: 0.87;
     text-align: center;
     line-height: 2.5;
@@ -486,3 +455,54 @@
     margin-left: -15px;
     width: calc(100% + 30px);
 }
+
+/* The side navigation menu */
+.sidenav {
+    height: 100%;/* 100% Full-height */
+    width: 450px; /* 0 width - change this with JavaScript */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Stay on top */
+    top: 0; /* Stay at the top */
+    left: 0;
+    overflow-x: hidden; /* Disable horizontal scroll */
+    padding-top: 60px; /* Place content 60px from the top */
+    transition: 0.5s; /* 0.5 second transition effect to slide in the sidenav */
+}
+
+/* The navigation menu links */
+.sidenav a {
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 25px;
+    color: #818181;
+    display: block;
+    transition: 0.3s;
+}
+
+/* When you mouse over the navigation links, change their color */
+.sidenav a:hover {
+    color: #f1f1f1;
+}
+
+/* Position and style the close button (top right corner) */
+.sidenav .closebtn {
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 36px;
+    margin-left: 50px;
+}
+
+/* Style page content - use this if you want to push the page content to the right when you open the side navigation */
+#main {
+    transition: margin-left .5s;
+    padding: 20px;
+}
+
+/* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
+@media screen and (max-height: 450px) {
+    .sidenav {padding-top: 15px;}
+    .sidenav a {font-size: 18px;}
+}
+
+

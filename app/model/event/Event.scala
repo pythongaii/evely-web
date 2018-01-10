@@ -1,29 +1,43 @@
 package model.event
 
-import java.awt.Image
-import java.util.Date
-
-import model._
 import model.body.Body
-import model.formaction.{FormAction, VerificationNeeded}
-import model.user.RegisterdUser
-import play.api.libs.json.Json
+import model.user.RegisteredUser
+import play.api.libs.json.Reads._
+import play.api.libs.json.{Reads, _}
 
 
-case class Event(eventID: Int,
-                   title: String,
-                   holder: RegisterdUser,
-                   body: Body,
-                   place: Location,
-                   updateDate: Date,
-                   upcomingDates: List[UpcomingDate],
-                   url: Option[FormAction],
-                   tel: Option[VerificationNeeded],
-                   mailAddress: Option[VerificationNeeded],
-                   topImage: Option[Image]
-                  )
+case class Event(id: String,
+                 title: String,
+                 host: RegisteredUser,
+                 body: Body,
+                 place: Location,
+                 updateDate: Option[String],
+                 upcomingDate: List[UpcomingDate],
+                 url: Option[String],
+                 tel: Option[String],
+                 mail: Option[String],
+                 topImage: Option[String]
+                )
 
 object Event {
-  // 一時コメントアウト
+  implicit val eventReader:Reads[Event] = new Reads[Event] {
+    override def reads(json: JsValue): JsResult[Event] = {
+      JsSuccess(
+        Event(
+          (json \ "id").as[String],
+          (json \ "title").as[String],
+          RegisteredUser((json \ "host" \ "id").as[String],Option.empty,(json \ "host" \ "name").as[String],Option.empty, Option.empty),
+          Body((json \ "body").asOpt[String]),
+          Location((json \ "place"\ "name").as[String],"",(json \ "place"\ "lat").as[Double].toString(), (json \ "place"\ "lng").as[Double].toString()),
+          (json \ "updateDate").asOpt[String],
+          List[UpcomingDate](UpcomingDate((json \ "upcomingDate"\ "endDate").asOpt[String],(json \ "upcomingDate"\ "endDate").asOpt[String])),
+          (json \ "url").asOpt[String],
+          (json \ "tel").asOpt[String],
+          (json \ "mail").asOpt[String],
+          (json \ "topImage").asOpt[String]
+      ))
+    }
+  }
+
 //  implicit val EventJsonFormat = Json.format[Event]
 }

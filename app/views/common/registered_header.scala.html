@@ -1,0 +1,69 @@
+@import helper._
+
+@()(implicit messages: Messages)
+
+<!-- App bar START -->
+<header class="app-bar">
+        <!-- Tab START -->
+    <ul class="tab-container">
+            <!-- Home -->
+        <li>
+            <a href="home.html" class="tab">
+                <i class="fa fa-home" aria-hidden="true"></i>ホーム
+            </a>
+        </li>
+            <!-- Nearby -->
+            <!-- <li>
+                <a href="./nearby.html" class="tab is-active">
+                    <i class="fa fa-map-marker" aria-hidden="true"></i>近くのイベント
+                </a>
+            </li> -->
+            <!-- Bookmark -->
+        <li>
+            <a href="bookmark.html" class="tab">
+                <i class="fa fa-bookmark" aria-hidden="true"></i>ブックマーク
+            </a>
+        </li>
+            <!-- Notification -->
+        <li>
+            <a href="notification.html" class="tab">
+                <i class="fa fa-bell" aria-hidden="true"></i>通知
+            </a>
+        </li>
+    </ul>
+        <!-- Tab END -->
+        <!-- App bar extras START -->
+    <div class="nav-extras">
+            <!-- Search box START -->
+        <div class="search">
+            <form class="" action="nearby.html" method="post">
+                <input type="text" name="" placeholder="検索...">
+            </form>
+        </div>
+            <!-- Search box END -->
+            <!-- Profile nav START -->
+        <div class="dropdown-group profile-nav">
+            <img class="dropdown-toggle" src="../images/icon/icon.png" alt="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <li class="profile-container">
+                    <img src="../images/icon/icon.png" alt="">
+                    <div class="profile-info">
+                        <p class="name">むらた ゆきや</p>
+                        <p class="id">@@yKicchan</p>
+                    </div>
+                </li>
+                <li role="separator" class="divider"></li>
+                <li><a href="#">プロフィール</a></li>
+                <li><a href="#">グループ</a></li>
+                <li><a href="#">トレンド</a></li>
+                <li role="separator" class="divider"></li>
+                <li><a href="#">設定</a></li>
+                <li><a href="#">ヘルプ</a></li>
+                <li role="separator" class="divider"></li>
+                <li><a href="#">ログアウト</a></li>
+            </ul>
+        </div>
+            <!-- Profile nav END -->
+    </div>
+        <!-- App bar extras END -->
+</header>

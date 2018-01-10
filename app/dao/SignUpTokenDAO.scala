@@ -1,3 +1,0 @@
-package dao
-
-trait SignUpTokenDAO

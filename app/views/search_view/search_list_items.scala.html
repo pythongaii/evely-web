@@ -1,0 +1,6 @@
+@import model.event.Event
+@(template: Event => Html )(eventList: List[Event])
+
+@for(event <- eventList) {
+    @template(event)
+}

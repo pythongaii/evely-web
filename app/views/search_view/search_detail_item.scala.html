@@ -1,0 +1,140 @@
+@import model.event.Event
+@(event: Event)
+
+<div class="detail-box" style="display: none;">
+    <div class="back_btn"></div>
+    <div class="event-header-image">
+        <img src="@routes.Assets.at("/images/sample/sample1.jpg")" alt="">
+    </div>
+        <!-- Event detail START -->
+    <div class="event-container">
+        <div class="side-nav-separator1"></div>
+            <!-- Title -->
+        <div class="event-title">
+            <h2>@event.title</h2>
+            <div class="action-bookmark"></div>
+        </div>
+            <!-- Owner detail START -->
+        <div class="event-owner">
+                <!-- Icon -->
+            <img src="@routes.Assets.at("/images/icon/icon.png")" alt="">
+                <!-- Name -->
+            <div class="event-owner-detail">
+                <p class="event-owner-name">@event.host.name</p>
+                <p class="event-owner-id">@event.host.id</p>
+            </div>
+        </div>
+        <div class="side-nav-separator2"></div>
+            <!-- Owners detail END -->
+        <div class="rate-container">
+            <div class="star-container">
+                <div class="star"></div>
+                <div class="star"></div>
+                <div class="star"></div>
+                <div class="star"></div>
+                <div class="star"></div>
+            </div>
+            <div class="rate-wrapper">
+
+            </div>
+        </div>
+        <div class="action-btn-container">
+            <div class="action-btn">
+                <div class="like"></div>
+                <p>Like</p>
+            </div>
+            <div class="action-btn">
+                <div class="comment"></div>
+                <p>Comment</p>
+            </div>
+            <div class="action-btn">
+                <div class="share"></div>
+                <p>Share</p>
+            </div>
+        </div>
+        <div class="side-nav-separator2"></div>
+        <div class="event-info-container">
+            <div class="event-info-wrapper">
+                <div class="clock"></div>
+                <div class="event-info">
+                    <p class="event-info-main">@event.upcomingDate.head.startDate</p>
+                    <p>他23件の日程</p>
+                </div>
+            </div>
+            <div class="event-info-wrapper">
+                <div class="location"></div>
+                <div class="event-info">
+                    <p>〒520-0000</p>
+                    <p class="event-info-main" onmouseover="$(this).attr('title', $(this).text())">
+                        @event.place.name</p>
+                </div>
+            </div>
+            <div class="event-info-wrapper">
+                <div class="phone"></div>
+                <div class="event-info">
+                    <p>連絡先</p>
+                    <p class="event-info-main">@event.tel.get</p>
+                </div>
+            </div>
+        </div>
+        <div class="side-nav-separator1"></div>
+        <div class="event-detail-container">
+            <h3>詳細情報</h3>
+            <div class="event-images">
+                <div class="event-image">
+                    <img src="/images/sample/sample1.jpg" alt="">
+                </div>
+                <div class="event-other-image">
+                    他3枚の画像
+                </div>
+            </div>
+            <div class="event-detail">
+                <p>
+                    @event.body.body
+                </p>
+            </div>
+        </div>
+        <div class="side-nav-separator1"></div>
+        <div class="upcoming-date-container">
+            <h3>開催予定日</h3>
+            <div class="side-nav-separator2"></div>
+            <div class="upcoming-date-wrapper">
+                <div class="upcoming-date">
+                    <p class="month">Feb</p>
+                    <p class="day">25</p>
+                </div>
+                <div class="upcoming-date-info">
+                    <p class="info">Fri 10:00 a.m.</p>
+                    <p class="host">主催者: xxxxxxx</p>
+                </div>
+                <div class="action-bookmark"></div>
+            </div>
+            <div class="upcoming-date-wrapper">
+                <div class="upcoming-date">
+                    <p class="month">Feb</p>
+                    <p class="day">25</p>
+                </div>
+                <div class="upcoming-date-info">
+                    <p class="info">Fri 10:00 a.m.</p>
+                    <p class="host">主催者: xxxxxxx</p>
+                </div>
+                <div class="action-bookmark"></div>
+            </div>
+            <div class="upcoming-date-wrapper">
+                <div class="upcoming-date">
+                    <p class="month">Feb</p>
+                    <p class="day">25</p>
+                </div>
+                <div class="upcoming-date-info">
+                    <p class="info">Fri 10:00 a.m.</p>
+                    <p class="host">主催者: xxxxxxx</p>
+                </div>
+                <div class="action-bookmark"></div>
+            </div>
+            <div class="side-nav-separator2"></div>
+            <div class="upcoming-date-see-all">See all dates...</div>
+        </div>
+        <div class="side-nav-separator1"></div>
+    </div>
+        <!-- Event detail END -->
+</div>

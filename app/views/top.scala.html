@@ -2,6 +2,8 @@
 
 <!DOCTYPE html>
 <head>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="viewport" content="target-densitydpi=device-dpi, width=1024, maximum-scale=1.0, user-scalable=yes">
     <title>test123</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" href="@routes.Assets.at("/mdl/material.min.css")">
@@ -14,7 +16,6 @@
         <main class="mdl-layout__content">
             <div class="page-content">
                 <div id="toppage_head_content">
-                    ・welcome message ・Evelyの簡単な説明 ・Evelyの使い方などを表示したい
                 </div>
                 <div id="toppage_main_content">
                     <div id="left_column">
@@ -50,10 +51,9 @@
                                 </li>
                             }
                         </ul>
+                        <a href="@routes.EventController.search()">get</a>
                     </div>
                     <div id="right_column">
-                        <div id="news_list">
-                        </div>
                     </div>
                 </div>
             </div>

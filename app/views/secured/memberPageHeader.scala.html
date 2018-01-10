@@ -1,0 +1,204 @@
+@import forms.{CreateEventForm, SearchEventForm}
+@(userID: String)(userName: String)(implicit messages: Messages, request: RequestHeader)
+@import helpers.PlainHelper.myFields
+@form = @{CreateEventForm.createEventForm}
+    <header class="app-bar row">
+        <!-- Tab START -->
+    <ul class="tab-container">
+            <!-- Home -->
+        <li>
+            <a href="@routes.RegisteredHomeController.home()" class="tab">
+                <i class="fa fa-home" aria-hidden="true"></i><span class="header-messa" media="(max-width: 700px)">@Messages("home")</span>
+            </a>
+        </li>
+            <!-- Nearby -->
+            <!-- <li>
+                <a href="./nearby.html" class="tab">
+                    <i class="fa fa-map-marker" aria-hidden="true"></i>近くのイベント
+                </a>
+            </li> -->
+            <!-- Pin -->
+        <li>
+            <a href="#" class="tab">
+                <i class="fa fa-map-marker" aria-hidden="true"></i><span class="header-messa">@Messages("nearby")</span>
+            </a>
+        </li>
+            <!-- Bookmark -->
+        <li>
+            <a href="#" class="tab">
+                <i class="fa fa-bookmark" aria-hidden="true"></i><span class="header-messa">@Messages("bookmark")</span>
+            </a>
+        </li>
+            <!-- Notification -->
+        <li>
+            <a href="#" class="tab">
+                <i class="fa fa-bell" aria-hidden="true"></i><span class="header-messa">通知</span>
+            </a>
+        </li>
+    </ul>
+
+    <ul class="nav-extras center">
+            <!-- Search box START -->
+        <li class="search">
+        @helper.form(action = routes.EventController.search(), 'class -> "search_form") {
+            @helper.inputText(SearchEventForm.form("keyword"), 'class -> "mdl-textfield__input")
+            <input type="hidden" name="limit" value="10"/>
+            <input type="hidden" name="offset" value="0"/>
+            @*<button class="mdl-button mdl-js-button mdl-button--icon"*@
+            @*for="waterfall-exp" type="submit" name="action">*@
+            @*<i class="material-icons">search</i>*@
+            @*</button>*@
+        }
+        </li>
+    </ul>
+        <!-- Tab END -->
+        <!-- App bar extras START -->
+    <ul class="nav-extras right">
+
+            <!-- Search box END -->
+            <!-- Profile nav START -->
+        <div class="dropdown-group profile-nav">
+            <img class="dropdown-toggle" src="@routes.Assets.at("/images/icon.png")" alt="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <li><a href="#">@Messages("iconnameid")</a></li>
+                <li class="profile-container">
+                    <img src="@routes.Assets.at("/images/icon/icon.png")" alt="">
+                    <div class="profile-info">
+                        <p class="name"></p>
+                        <p class="id">@userID</p>
+                    </div>
+                </li>
+                <li role="separator" class="divider"></li>
+                <li><a href="#">@Messages("home")</a></li>
+                <li><a href="#">@Messages("profile")</a></li>
+                <li><a href="#">@Messages("higelite")</a></li>
+                <li role="separator" class="divider"></li>
+                <li><a href="#">@Messages("settings")</a></li>
+                <li><a href="#">@Messages("help")</a></li>
+                <li><a id="night-mode">@Messages("sleep")</a></li>
+                <li role="separator" class="divider"></li>
+                <li><a href="#">@Messages("logout")</a></li>
+                <li><a href="@routes.RegisteredHomeController.signout()">ログアウト</a></li>
+            </ul>
+                <!-- Profile nav END -->
+        </div>
+        <li class="create_event">
+            <span id="create-btn" class="glyphicon glyphicon-plus btn btn-default" data-toggle="modal" data-target="#modal"></span>
+        </li>
+    </ul>
+        <!-- App bar extras END -->
+</header>
+    <!-- モーダルウィンドウ表示項目  -->
+<div class="modal fade" id="modal">
+    <div class="modal-dialog" role="dialog">
+        <div class="modal-content validate[group]">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">新しいイベントを作成</h4>
+            </div>
+            <div class="modal-body">
+            @helper.form(action = routes.EventController.create(), 'id -> "create-form"){
+                <div class="form-group">
+                    @helper.inputText(form("title"),
+                        'class -> "form-control validate[required]",
+                        'size -> "20",
+                        'name -> "data[title]",
+                        'placeholder -> "1時間限定タイムセール!!")
+                    <label for="title"><span class="red">*</span>タイトル</label>
+                </div>
+                <div class="form-group">
+                    <label for="body">説明</label>
+                    @helper.textarea(form("body"),
+                        'class -> "form-control",
+                        'size -> "1000",
+                        'name -> "data[body]",
+                        'placeholder -> "1000文字以内")
+                </div>
+                <div class="form-group row">
+                    <div class="col-xs-6">
+                        <label for="upcomingDate.startDate">開始日</label>
+                        @helper.inputText(form("upcomingDate.startDate"),
+                            'class -> "form-control",
+                            'name -> "data[upcomingDate][startDate]")
+                    </div>
+                    <div class="col-xs-6">
+                        <label for="upcomingDate.endDate">終了日</label>
+                        @helper.inputText(form("upcomingDate.endDate"),
+                            'class -> "form-control",
+                            'name -> "data[upcomingDate][endDate]")
+                    </div>
+                </div>
+                <label>開催場所</label>
+                <div class="form-group row">
+                    <div class="col-xs-4">
+                        <div class="input-group">
+                            <span class="input-group-addon" id="place-addon">〒</span>
+                            <input id="zipcode" class="form-control" type="text" maxlength="8" aria-describedby="place-addon" placeholder="520-25XX">
+                        </div>
+                    </div>
+                    <div class="pull-left middle">
+                        <button id="addr-btn" type="button" class="btn btn-default">住所検索</button>
+                    </div>
+                </div>
+                <div class="form-group">
+                @helper.inputText(form("place.name"),
+                    'class -> "form-control",
+                    'name -> "data[plcase][name]")
+                </div>
+
+                <input type="hidden" name="place.lat" id="place.lat" value="12.02154">
+                <input type="hidden" name="place.lng" id="place.lng" value="10.05014">
+                <input type="hidden" name="mail" id="mail" value="example@@example.com">
+                <input type="hidden" name="url" id="url" value="http://yahoo.co.jp">
+                <input type="hidden" name="tel" id="tel" value="090-1234-5678">
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">キャンセル</button>
+                <button type="button" class="btn btn-success" id="create-submit">作成</button>
+            </div>
+            }
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+        $(function () {
+            var opt = {
+                minDate: "moment",
+                toolbarPlacement: "top",
+                format: 'YYYY-MM-DDTHH:mm:ss'
+            };
+            $("#upcomingDate_startDate").datetimepicker(opt);
+            $("#upcomingDate_endDate").datetimepicker(opt);
+            $("#create-submit").on("click", function () {
+                $("#create-form").submit();
+            });
+
+            $("#create-form").validationEngine('attach', {
+                // 以下のパラメータは任意
+                promptPosition: "topRight",//エラー文の表示位置
+                focusFirstField: false,
+                scroll: false,
+                addFailureCssClassToField: "error"
+            });
+
+            $("#zipcode").on("keydown", function (e) {
+                if (e.keyCode === 13) {
+                    $("#addr-btn").trigger("click");
+                }
+            });
+
+            $('#addr-btn').click(function () {
+                var zipcode = $("#zipcode").val().replace("-", "")
+                $.ajax({
+                    url: 'http://api.zipaddress.net?callback=?',
+                    type: "get",
+                    dataType: "json",
+                    data: {'zipcode': zipcode},
+                    success: function (json) {
+                        $('#address').val(json.fullAddress);
+                    }
+                });
+            });
+        });
+</script>

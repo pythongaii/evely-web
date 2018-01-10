@@ -1,3 +1,0 @@
-package dao
-
-class MongoSignUpTokenDAO
