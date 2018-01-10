@@ -13,8 +13,8 @@ import play.api.mvc.{Action, Cookie}
 import tokens.Token
 import utils.ConfigProvider
 
-import scala.concurrent.Future
 import scala.concurrent.ExecutionContext.Implicits.global
+import scala.concurrent.Future
 
 class SignInController @Inject()(val ws: WSClient,
                                  apiAuthenticator: Authenticator,
@@ -26,8 +26,8 @@ class SignInController @Inject()(val ws: WSClient,
   def startSignin = Action.async { implicit request =>
     val optionCookie:Option[Cookie] = request.cookies.get(configProvider.COOKIE_NAME)
     optionCookie match {
-      case Some(_) => Future.successful(Redirect(routes.RegisteredHomeController.index()))
       case None => Future.successful(Ok(views.html.no_secured.signin.signinstart(SignInForm.signInForm)))
+      case Some(_) => Future.successful(Redirect(routes.RegisteredHomeController.index()))
     }
   }
 

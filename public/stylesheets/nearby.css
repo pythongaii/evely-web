@@ -340,6 +340,7 @@ right: 0;
 }
 
 .event-detail {
+    word-wrap: break-word;
     margin-top: 10px;
     margin-left: 7px;
 }

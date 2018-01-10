@@ -44,7 +44,10 @@ class EventController @Inject()(cache: CacheApi,
             Json.parse(res.get.body).validate[List[Event]].get
           }
         }
-        collection.map(collection => Ok(views.html.search_view.search_map_layout(form.keyword)(collection)("t")("t")))
+        request.cookies.get(configProvider.COOKIE_NAME) match {
+          case None => collection.map(collection => Ok(views.html.search_view.search_map_layout(form.keyword)(collection)("")("")))
+          case Some(_) =>         collection.map(collection => Ok(views.html.search_view.search_map_layout(form.keyword)(collection)("t")("t")))
+        }
       }
     )
   }

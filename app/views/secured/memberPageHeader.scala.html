@@ -53,6 +53,7 @@
     </ul>
         <!-- Tab END -->
         <!-- App bar extras START -->
+        @if(userID != ""){
     <ul class="nav-extras right">
 
             <!-- Search box END -->
@@ -77,16 +78,16 @@
                 <li><a href="#">@Messages("help")</a></li>
                 <li><a id="night-mode">@Messages("sleep")</a></li>
                 <li role="separator" class="divider"></li>
-                <li><a href="#">@Messages("logout")</a></li>
                 <li><a href="@routes.RegisteredHomeController.signout()">ログアウト</a></li>
             </ul>
                 <!-- Profile nav END -->
         </div>
+
         <li class="create_event">
             <span id="create-btn" class="glyphicon glyphicon-plus btn btn-default" data-toggle="modal" data-target="#modal"></span>
         </li>
     </ul>
-        <!-- App bar extras END -->
+    }        <!-- App bar extras END -->
 </header>
     <!-- モーダルウィンドウ表示項目  -->
 <div class="modal fade" id="modal">

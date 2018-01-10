@@ -32,7 +32,7 @@
                                     <label class="mdl-textfield__label" for="id">@Messages("signin.userName")</label>
                                 </div>
                                 <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                                    @helper.inputPassword(form("password"), 'class -> "mdl-textfield__input")
+                                    @helper.inputPassword(form("password"), 'class -> "mdl-textfield__input", 'id -> "password")
                                     <label class="mdl-textfield__label" for="password">@Messages("signin.password")</label>
                                 </div>
                                     <a href="#"><span style="display: block; text-align: right; font-size: 0.8rem; margin-right:10px;">@messages("signin.forgotPass")</span></a>
