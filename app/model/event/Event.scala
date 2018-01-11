@@ -16,7 +16,8 @@ case class Event(id: String,
                  url: Option[String],
                  tel: Option[String],
                  mail: Option[String],
-                 topImage: Option[String]
+                 topImage: Option[String],
+
                 )
 
 object Event {
