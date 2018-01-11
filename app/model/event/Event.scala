@@ -1,5 +1,7 @@
 package model.event
 
+import java.util.Date
+
 import model.body.Body
 import model.user.RegisteredUser
 import play.api.libs.json.Reads._
@@ -10,13 +12,16 @@ case class Event(id: String,
                  title: String,
                  host: RegisteredUser,
                  body: Body,
-                 place: Location,
                  updateDate: Option[String],
-                 upcomingDate: List[UpcomingDate],
                  url: Option[String],
                  tel: Option[String],
                  mail: Option[String],
-                 topImage: Option[String]
+                 topImage: Option[String],
+                 createdAt: Date,
+                 noticeRange: Int,
+                 openFlg: Boolean,
+                 plans: List[Plan],
+                 scope: String
                 )
 
 object Event {
@@ -28,13 +33,16 @@ object Event {
           (json \ "title").as[String],
           RegisteredUser((json \ "host" \ "id").as[String],Option.empty,(json \ "host" \ "name").as[String],Option.empty, Option.empty),
           Body((json \ "body").asOpt[String]),
-          Location((json \ "place"\ "name").as[String],"",(json \ "place"\ "lat").as[Double].toString(), (json \ "place"\ "lng").as[Double].toString()),
           (json \ "updateDate").asOpt[String],
-          List[UpcomingDate](UpcomingDate((json \ "upcomingDate"\ "endDate").asOpt[String],(json \ "upcomingDate"\ "endDate").asOpt[String])),
           (json \ "url").asOpt[String],
           (json \ "tel").asOpt[String],
           (json \ "mail").asOpt[String],
-          (json \ "topImage").asOpt[String]
+          (json \ "topImage").asOpt[String],
+          (json \ "createdAt").as[Date],
+          (json \ "noticeRange").as[Int],
+        (json \ "openFlg").as[Boolean],
+        (json \ "plans").as[List[Plan]],
+          (json \ "scope").as[String]
       ))
     }
   }
