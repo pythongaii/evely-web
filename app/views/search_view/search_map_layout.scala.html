@@ -2,7 +2,6 @@
 @(key:String)(eventList: List[Event])(userID: String)(userName: String)(implicit messages: Messages, request: RequestHeader)
 <!DOCTYPE html>
 <html>
-    <fre>
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -65,7 +64,6 @@
                 });
         </script>
     </head>
-</fre>
 
     <body>
             <!-- App bar START -->
@@ -83,7 +81,6 @@
                 <i class="fa fa-arrow-left" aria-hidden="true"></i>
             </div> -->
                     <!-- Event header image -->
-<div class="test2">
                 <div class="side-nav-contents">
                     <div class="detail-box" style="display: none;">
                     </div>
@@ -109,7 +106,7 @@
                         @for(event <- eventList) {
                             @views.html.search_view.search_list_item_hr(event)
                         }
-                            <footer class="test">
+                            <footer class="footer">
                                 @*<hr style="border-top: 1px solid #8e8e8e;">*@
                                 <img src="/assets//images/sample/sample1.jpg" alt="" width="470px" height="195px">
                             </footer>
@@ -117,7 +114,6 @@
                     </div>
                 </div>
                     <!-- Side nav END -->
-            </div>
             </div>
 
         </main>

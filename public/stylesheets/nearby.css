@@ -507,14 +507,11 @@ right: 0;
     .sidenav a {font-size: 18px;}
 }
 
-.test{
+.footer{
     bottom: 0;
     width: 470px;
     position: absolute;
     height: 0px;
-}
-.test3{
-
 }
 
 
