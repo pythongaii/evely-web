@@ -6,6 +6,7 @@ import dao.{AuthModule, PlainDAO}
 import forms.{CreateEventData, CreateEventForm, SearchEventForm}
 import model.body.Body
 import model.event.{Event, Location, UpcomingDate}
+import model.formaction.MailAddress
 import model.user.RegisteredUser
 import play.api.cache.CacheApi
 import play.api.i18n.{I18nSupport, MessagesApi}
@@ -41,14 +42,16 @@ class EventController @Inject()(cache: CacheApi,
       error => Future.successful(Ok("error search")),
       form => {
         val query = Seq(("url", configProvider.EVENT_URL), ("keyword" -> form.keyword), ("limit" -> form.limit), ("offset" -> form.offset))
-        val collection = apiEventDAO.find(query: _*) map {
-          case res => {
-            Json.parse(res.get.body).validate[List[Event]].get
-          }
-        }
-//        val collection = List[Event](Event("1234",
-//                                    "title2",
-//  RegisteredUser("1234", Option("mail"), "kojima", Option("password"),Option("tel")),Body(Option("body")),Location("name", "", "lat", "lng"),Option("u-dapte"), List(UpcomingDate("","")),Option(""),Option.empty,Option.empty,Option.empty))
+//        val collection = apiEventDAO.find(query: _*) map {
+//          case res => {
+//            Json.parse(res.get.body).validate[List[Event]].get
+//          }
+//        }
+        val collection = Future.successful(List[Event](Event("1234",
+                                    "title2",
+  RegisteredUser("1234", Option(MailAddress("mail")), "kojima", Option("password"),Option("tel")),
+  Body(Option("body")),Location("name", "", "lat", "lng"),Option("u-dapte"),
+  List(UpcomingDate(Option(""),Option(""))),Option(""),Option.empty,Option.empty,Option.empty)))
         collection.map(collection => Ok(views.html.search_view.search_map_layout(form.keyword)(collection)("t")("t")))
       }
     )
