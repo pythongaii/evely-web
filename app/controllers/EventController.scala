@@ -4,7 +4,9 @@ import javax.inject.Inject
 
 import dao.{AuthModule, PlainDAO}
 import forms.{CreateEventData, CreateEventForm, SearchEventForm}
-import model.event.Event
+import model.body.Body
+import model.event.{Event, Location, UpcomingDate}
+import model.user.RegisteredUser
 import play.api.cache.CacheApi
 import play.api.i18n.{I18nSupport, MessagesApi}
 import play.api.libs.json.Json
@@ -44,6 +46,9 @@ class EventController @Inject()(cache: CacheApi,
             Json.parse(res.get.body).validate[List[Event]].get
           }
         }
+//        val collection = List[Event](Event("1234",
+//                                    "title2",
+//  RegisteredUser("1234", Option("mail"), "kojima", Option("password"),Option("tel")),Body(Option("body")),Location("name", "", "lat", "lng"),Option("u-dapte"), List(UpcomingDate("","")),Option(""),Option.empty,Option.empty,Option.empty))
         collection.map(collection => Ok(views.html.search_view.search_map_layout(form.keyword)(collection)("t")("t")))
       }
     )

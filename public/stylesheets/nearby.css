@@ -46,7 +46,8 @@
     height: 100%;
     box-sizing: border-box;
     background: #fff;
-    overflow: scroll;
+    overflow-y: scroll;
+    overflow-x: hidden;
     transition: all .2s ease-in-out;
     -webkit-transition: all .2s ease-in-out;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
@@ -504,5 +505,14 @@ right: 0;
     .sidenav {padding-top: 15px;}
     .sidenav a {font-size: 18px;}
 }
+
+.test{
+    bottom: 0;
+
+    position: absolute;
+    height: 0px;
+}
+
+
 
 
