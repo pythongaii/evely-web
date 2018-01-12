@@ -51,7 +51,7 @@
     transition: all .2s ease-in-out;
     -webkit-transition: all .2s ease-in-out;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
-    top: 48px;
+    top: 0;
     left: 0px;
     opacity: 1;
 }
@@ -59,6 +59,7 @@
 .side-nav-contents {
     position: relative;
     width: 392px;
+    top: 48px;
 }
 
 /* イベントの詳細 */
