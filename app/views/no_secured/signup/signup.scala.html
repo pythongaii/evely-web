@@ -74,7 +74,7 @@
 
                             <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
                                 @helper.input(form("password.password2")){ (id,name,value,args) =>
-                                    <input type="text" title="@Messages("signup.passwordFormat")" class="mdl-textfield__input" id="password_password">
+                                    <input type="password" title="@Messages("signup.passwordFormat")" class="mdl-textfield__input" id="password_password" >
                                 }
                                 <label class="mdl-textfield__label" for="sample3">@Messages("signup.password.confirm")</label>
                                 <span class="mdl-textfield__error">@Messages("signup.passError")</span>
