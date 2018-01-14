@@ -1,3 +1,5 @@
+
+
 $(function() {
     $('.search form input').focusin(function() {
         $(this).css({
@@ -81,4 +83,9 @@ $(function() {
     $(".bookmark").on('click', function(){
         $(this).toggleClass('on');
     });
+
+    $('#header-title').on('click',function () {
+       window.location.href="http://localhost:8888/";
+    });
+
 });

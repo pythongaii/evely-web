@@ -4,7 +4,7 @@ GET         /                           controllers.GuestHomeController.index()
 # signup用
 GET         /signup                     controllers.SignUpController.signupStart
 POST        /signup/mail                controllers.SignUpController.signupMail
-GET         /signup/verify_email        controllers.SignUpController.signup(token: String)
+GET         /verify_email               controllers.SignUpController.signup(token: String)
 POST        /signup/confirm             controllers.SignUpController.signupConfirm
 POST        /signup/regist              controllers.SignUpController.signupFinish
 

@@ -1,13 +1,15 @@
-@import forms.SignInData
+@@@import forms.SignInData
 @(form: Form[SignInData])(implicit messages: Messages, requestHeader: RequestHeader)
-@import helpers.PlainHelper.myFields
+@@@import helpers.PlainHelper.myFields
 <!DOCTYPE html>
 <head>
     <title>サインイン</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" href="@routes.Assets.at("/mdl/material.min.css")">
     <link rel="stylesheet" href="@routes.Assets.at("/stylesheets/signinstart.css")">
-    <script defer src="@routes.Assets.at("/mdl/material.min.js")"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="@routes.Assets.at("/javascripts/master.js")" charset="utf-8"></script>
+    <script src="@routes.Assets.at("/mdl/material.min.js")"></script>
 </head>
 <body>
         <!-- Always shows a header, even in smaller screens. -->

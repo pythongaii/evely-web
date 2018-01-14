@@ -1,12 +1,14 @@
-@import forms.SearchEventForm
+@@@import forms.SearchEventForm
 @()(implicit messages: Messages)
-@import helpers.PlainHelper.myFields
+@@@import helpers.PlainHelper.myFields
 @form = @{SearchEventForm.form}
     <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
         <header class="mdl-layout__header">
             <div class="mdl-layout__header-row">
                     <!-- Title -->
-                <span class="mdl-layout-title">@Messages("toppage.title")</span>
+                <div class="mdl-layout-title" id="header-title">
+                <span >@Messages("toppage.title")</span>
+                </div>
                     <!-- Add spacer, to align navigation to the right -->
                 <div class="mdl-layout-spacer"></div>
                 @helper.form(action = routes.EventController.search()) {

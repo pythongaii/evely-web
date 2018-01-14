@@ -40,3 +40,13 @@ hr {
     border-width: 3px;
     width: 100%;
 }
+
+.tooltip-inner {
+    max-width: 300px;
+    width: 600px;
+    padding: 10px 8px;
+    color: #fff;
+    text-align: center;
+    background-color: #000;
+    border-radius: 4px
+}

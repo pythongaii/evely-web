@@ -1,13 +1,36 @@
-@import forms.RegisteredData
+@@@import forms.RegisteredData
 @(form: Form[RegisteredData])(implicit messages: Messages)
-@import helpers.PlainHelper.myFields
+@@@import helpers.PlainHelper.myFields
 <!DOCTYPE html>
 <head>
     <title>サインアップ</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <!-- mdl -->
     <link rel="stylesheet" href="@routes.Assets.at("/mdl/material.min.css")">
+    <script src="@routes.Assets.at("/mdl/material.min.js")"></script>
+    <!-- bootstrap -->
+    <link rel="stylesheet" href="@routes.Assets.at("/bootstrap/3.3.7/css/bootstrap.min.css")">
+    <!-- jQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <!-- original -->
     <link rel="stylesheet" href="@routes.Assets.at("/stylesheets/signup.css")">
-    <script defer src="@routes.Assets.at("/mdl/material.min.js")">
+    <script src="@routes.Assets.at("/javascripts/master.js")"></script>
+    <script src="@routes.Assets.at("/javascripts/tooltip.js")"></script>
+    <script src="@routes.Assets.at("/bootstrap/3.3.7/js/bootstrap.min.js")"></script>
+    <script>
+            $(function () {
+                $(document).on('click', '.sub', function () {
+                    var form = document.getElementById("signupform");
+                    form.password_password2.setCustomValidity("");
+                    var password1 = form.password_password1.value;
+                    var password2 = form.password_password2.value;
+                    if (password1 != password2) {
+                        alert("ok");
+                        form.password_password2.setCustomValidity("error");
+                        form.submit.click();
+                    }
+                });
+            });
     </script>
 </head>
 <body>
@@ -26,7 +49,7 @@
                         </div>
                         @helper.form(action = routes.SignUpController.signupConfirm(), 'id -> "signupform") {
 
-                            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="float: left;">
                                 @helper.inputText(form("id"), 'class -> "mdl-textfield__input")
                                 <label class="mdl-textfield__label" for="sample3">@Messages("signup.userID")</label>
                             </div>
@@ -42,23 +65,30 @@
                             </div>
 
                             <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                                @helper.inputPassword(form("password.password1"), 'class -> "mdl-textfield__input", 'pattern -> "^(?=.*[0-9])(?=.*[A-Z])(?=.*[a-z])[\\.[0-9a-zA-Z]{8,}$")
+                                @helper.input(form("password.password1")){ (id,name,value,args) =>
+                                    <input type="text" title="@Messages("signup.passwordFormat")" class="mdl-textfield__input" id="password_password1">
+                                }
                                 <label class="mdl-textfield__label" for="sample3">@Messages("signup.password")</label>
                                 <span class="mdl-textfield__error">@Messages("signup.passError")</span>
                             </div>
+
                             <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                                @helper.inputPassword(form("password.password2"), 'class -> "mdl-textfield__input")
+                                @helper.input(form("password.password2")){ (id,name,value,args) =>
+                                    <input type="text" title="@Messages("signup.passwordFormat")" class="mdl-textfield__input" id="password_password">
+                                }
                                 <label class="mdl-textfield__label" for="sample3">@Messages("signup.password.confirm")</label>
                                 <span class="mdl-textfield__error">@Messages("signup.passError")</span>
                             </div>
+
                             <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                                @helper.inputText(form("tel"), 'class -> "mdl-textfield__input")
+                                @helper.input(form("tel")){ (id,name,value,args) =>
+                                    <input type="text" title="@Messages("signup.passwordFormat")" class="mdl-textfield__input" id="tel">
+                                }
                                 <label class="mdl-textfield__label" for="sample3">@Messages("signup.tel")</label>
                             </div>
 
-
                             <div id="sub">
-                                <button class="mdl-button mdl-button--raised mdl-js-button mdl-js-ripple-effect" type="submit" name="action">@Messages("signup.submitbutton")</button>
+                                <button class="mdl-button mdl-button--raised mdl-js-button mdl-js-ripple-effect" type="submit" name="action" id="submit">@Messages("signup.submitbutton")</button>
                             </div>
                         }
                     </div>

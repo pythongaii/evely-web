@@ -30,7 +30,7 @@ signup.password.confirm=パスワード(確認用)
 signup.tel=電場番号
 signup.submitbutton=確認画面へ
 signup.mailError=メールアドレスが正しくありません
-signup.passError=8文字以上の半角英数字大文字小文字
+signup.passwordFormat=パスワードは半角英数字8文字以上にし、大文字/小文字/数字を各1文字以上を使用してください。
 
 signupstart.mail_title=メールアドレスで新規会員登録
 signupstart.external_title=他のサービスのアカウントで新規会員登録
