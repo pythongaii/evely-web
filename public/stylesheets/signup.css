@@ -50,3 +50,7 @@ hr {
     background-color: #000;
     border-radius: 4px
 }
+
+label{
+    margin-bottom: 0;
+}

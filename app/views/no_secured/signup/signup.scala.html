@@ -1,6 +1,6 @@
-@@@import forms.RegisteredData
+@import forms.RegisteredData
 @(form: Form[RegisteredData])(implicit messages: Messages)
-@@@import helpers.PlainHelper.myFields
+@import helpers.PlainHelper.myFields
 <!DOCTYPE html>
 <head>
     <title>サインアップ</title>
@@ -14,6 +14,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <!-- original -->
     <link rel="stylesheet" href="@routes.Assets.at("/stylesheets/signup.css")">
+    <link rel="stylesheet" href="@routes.Assets.at("/stylesheets/common.css")">
     <script src="@routes.Assets.at("/javascripts/master.js")"></script>
     <script src="@routes.Assets.at("/javascripts/tooltip.js")"></script>
     <script src="@routes.Assets.at("/bootstrap/3.3.7/js/bootstrap.min.js")"></script>
@@ -35,7 +36,7 @@
 </head>
 <body>
         <!-- Always shows a header, even in smaller screens. -->
-    @views.html.common.header()(messages)
+    @views.html.common.header()
     <main class="mdl-layout__content">
         <div id="page-content">
             <h3>@messages("signup.title")</h3>
@@ -66,7 +67,7 @@
 
                             <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
                                 @helper.input(form("password.password1")){ (id,name,value,args) =>
-                                    <input type="text" title="@Messages("signup.passwordFormat")" class="mdl-textfield__input" id="password_password1">
+                                    <input type="password" title="@Messages("signup.passwordFormat")" class="mdl-textfield__input" id="password_password1" pattern="^(?=.*[0-9])(?=.*[A-Z])(?=.*[a-z])[\\.[0-9a-zA-Z]{8,}$">
                                 }
                                 <label class="mdl-textfield__label" for="sample3">@Messages("signup.password")</label>
                                 <span class="mdl-textfield__error">@Messages("signup.passError")</span>

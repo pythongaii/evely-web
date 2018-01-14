@@ -5,6 +5,7 @@
     left: 0;
     z-index: 1000;
     min-width: 670px;
+
 }
 
 #footer {
@@ -30,6 +31,7 @@
 }
 
 .mdl-layout__content {
+    padding-top: 60px;
     width: 100%;
 }
 
