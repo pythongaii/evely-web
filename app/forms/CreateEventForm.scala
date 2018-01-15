@@ -31,8 +31,8 @@ object CreateEventForm {
           "lng" -> of(doubleFormat)
         )(Location.apply)(Location.unapply),
         "upcomingDate" -> mapping(
-          "endDate" -> optional(text),
-          "statrDate" -> optional(text)
+          "endDate" -> optional(jodaDate("YYYY-MM-DD HH:mm:ss")),
+          "startDate" -> optional(jodaDate("YYYY-MM-DD HH:mm:ss"))
         )(UpcomingDate.apply)(UpcomingDate.unapply)
       )(Plan.apply)(Plan.unapply)),
       "scope" -> text,

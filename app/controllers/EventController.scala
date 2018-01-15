@@ -23,6 +23,7 @@ class EventController @Inject()(cache: CacheApi,
     implicit request =>
       CreateEventForm.createEventForm.bindFromRequest().fold(
         errorForm => {
+          errorForm
           Future.successful(Redirect(routes.GuestHomeController.index()))
         },
         eventData => {
@@ -35,6 +36,7 @@ class EventController @Inject()(cache: CacheApi,
   }
 
   def search = Action.async { implicit request =>
+    val rorm = request.body
     SearchEventForm.form.bindFromRequest().fold(
       error => Future.successful(Ok("error search")),
       form => {
@@ -68,7 +70,7 @@ class EventController @Inject()(cache: CacheApi,
   }
 
   def findOne(uid: String, eventId: String) = Action.async { implicit request =>
-    val query = Seq(("url", configProvider.EVENT_URL),("ids" ,eventId))
+    val query = Seq(("url", configProvider.EVENT_URL + "/detail"),("ids" ,eventId))
 
     apiEventDAO.find(query: _*) map {
       case res => {

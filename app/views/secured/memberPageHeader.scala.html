@@ -118,13 +118,13 @@
                 <div class="form-group row">
                     <div class="col-xs-6">
                         <label for="upcomingDate.startDate">開始日</label>
-                        @helper.inputText(form("upcomingDate.startDate"),
+                        @helper.inputText(form("plans[0].upcomingDate.startDate"),
                             'class -> "form-control",
                             'name -> "data[upcomingDate][startDate]")
                     </div>
                     <div class="col-xs-6">
                         <label for="upcomingDate.endDate">終了日</label>
-                        @helper.inputText(form("upcomingDate.endDate"),
+                        @helper.inputText(form("plans[0].upcomingDate.endDate"),
                             'class -> "form-control",
                             'name -> "data[upcomingDate][endDate]")
                     </div>
@@ -142,13 +142,16 @@
                     </div>
                 </div>
                 <div class="form-group">
-                @helper.inputText(form("place.name"),
+                @helper.inputText(form("plans[0].location.name"),
                     'class -> "form-control",
-                    'name -> "data[plcase][name]")
+                    'name -> "data[location][name]")
                 </div>
 
-                <input type="hidden" name="place.lat" id="place.lat" value="12.02154">
-                <input type="hidden" name="place.lng" id="place.lng" value="10.05014">
+                <input type="hidden" name="noticeRange" value="500"/>
+                <input type="hidden" name="openFlg" value="false"/>
+                <input type="hidden" name="scope" value="public"/>
+                <input type="hidden" name="plans[0].location.lat" id="plans.location.lat" value="12.02154">
+                <input type="hidden" name="plans[0].location.lng" id="plans.location.lng" value="10.05014">
                 <input type="hidden" name="mail" id="mail" value="example@@example.com">
                 <input type="hidden" name="url" id="url" value="http://yahoo.co.jp">
                 <input type="hidden" name="tel" id="tel" value="090-1234-5678">
@@ -167,10 +170,10 @@
             var opt = {
                 minDate: "moment",
                 toolbarPlacement: "top",
-                format: 'YYYY-MM-DDTHH:mm:ss'
+                format: 'YYYY-MM-DD HH:mm:ss'
             };
-            $("#upcomingDate_startDate").datetimepicker(opt);
-            $("#upcomingDate_endDate").datetimepicker(opt);
+            $("#plans_0_upcomingDate_startDate").datetimepicker(opt);
+            $("#plans_0_upcomingDate_endDate").datetimepicker(opt);
             $("#create-submit").on("click", function () {
                 $("#create-form").submit();
             });
@@ -197,7 +200,7 @@
                     dataType: "json",
                     data: {'zipcode': zipcode},
                     success: function (json) {
-                        $('#address').val(json.fullAddress);
+                        $('#plans_0_location_name').val(json.fullAddress);
                     }
                 });
             });
