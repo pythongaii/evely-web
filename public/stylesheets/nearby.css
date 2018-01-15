@@ -1,4 +1,6 @@
-﻿/* Google Map */
+﻿@import "common.css";
+
+/* Google Map */
 
 #map {
     height: 100%;
