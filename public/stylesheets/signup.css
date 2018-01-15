@@ -1,12 +1,7 @@
 @import "common.css";
 
 #step{
-    margin-right: auto;
-    margin-left: auto;
     background: url(../images/signup_step2.png) 0 0 no-repeat;
-    height: 100px;
-    width: 800px;
-    padding-bottom: 20px;
 }
 
 #form_block{
@@ -60,7 +55,3 @@ label{
     margin-top: 10px;
 }
 
-.mdl-layout__content {
-    height: auto;
-    overflow-y: hidden;
-}

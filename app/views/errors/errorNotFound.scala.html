@@ -17,7 +17,21 @@
             <hr>
             <div id="message">
                 <span>@messages(messageKey + ".messa1")<br>
-                @messages(messageKey + ".messa2")</span><br>
+                    @{
+                        if(messageKey == "mailCannotUse") {
+                                    <br/>
+                                    <br/>
+                                <span>
+                                10秒後に自動でトップページで移動します。移動しない場合は
+                                <a href="/">こちら</a>
+                                をクリックしてください。
+                                </span>
+                        } else {
+                            messages(messageKey + ".messa2")
+                        }
+                    }
+                </span><br>
+
             </div>
         </div>
     </main>

@@ -90,10 +90,6 @@ $(function() {
 
     $('input').on('blur', function(e) {
         e.target.parentElement.classList.add("focused");
-        e.target.parentElement.setCustomValidity("");
     });
 
-    // $(window).checkAll = function (form) {
-    //     form.action.disable = !form.checkValidity();
-    // }
 });

@@ -29,6 +29,7 @@
                                 下記の内容で登録します。<br>
                                 よろしければ「登録する」ボタンを押してください。
                             </div>
+                            <div class="table">
                             <div class="header">@messages("signup.mailaddress")</div>
                             <div class="inputvalue">@form("mail").value</div>
                             <div class="header">@messages("signup.name")</div>
@@ -40,6 +41,7 @@
                             <div class="header">@messages("signup.tel")</div>
                             <div class="inputvalue">@form("tel").value</div>
                             <div class="form_bottom_spacer10"></div>
+                            </div>
                             <div id="actionButtons">
                                 <div class="editbutton">
                                 @helper.form(action = routes.SignUpController.signupStart()) {
@@ -54,7 +56,7 @@
                                     <input type="hidden" id="password.password1" name="password.password1" value="@form("password.password1").value"/>
                                     <input type="hidden" id="password.password2" name="password.password2" value="@form("password.password1").value"/>
                                     <input id="tel" name="tel" type="hidden" value="@form("tel").value" />
-                                    <button class="mdl-button mdl-button--raised mdl-js-button mdl-js-ripple-effect" type="submit" name="action">@Messages("signupconfirm.submitbutton")</button>
+                                    <button class="mdl-button mdl-button--raised mdl-button--colored mdl-js-button mdl-js-ripple-effect" type="submit" name="action">@Messages("signupconfirm.submitbutton")</button>
                                 }
                                 </div>
                             </div>

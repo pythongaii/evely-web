@@ -32,6 +32,7 @@ signup.submitbutton=確認画面へ
 signup.mailError=メールアドレスが正しくありません。
 signup.passError=パスワードが正しくありません。
 signup.passwordFormat=パスワードは半角英数字8文字以上にし、大文字/小文字/数字を各1文字以上を使用してください。
+signup.telFormat=電話番号は「-」を含めて入力してください。
 signup.passConfirmError=パスワードが一致しません。
 
 signupstart.mail_title=メールアドレスで新規会員登録
@@ -99,6 +100,7 @@ share=シェア
 
 mailCannotUse.Title=メール送信エラー
 mailCannotUse.messa1=ご入力いただいたメールアドレスはご使用いただけません。
-mailCannotUse.messa2=10秒後にホーム画面へ戻ります。
+mailCannotUse.messa2=10秒後にホーム画面へ戻ります。移動しない場合は<a href="@routes.GuestHomeController.index()">こちら</a>をクリックしてください。
+
 
 error.require=必須項目です。

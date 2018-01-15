@@ -300,3 +300,19 @@ main {
 #header-title:hover {
     cursor: pointer;
 }
+
+.mdl-layout__content {
+    height: auto;
+    overflow-y: hidden;
+}
+
+#step{
+    padding-left: 0;
+    padding-right: 0;
+    margin-right: auto;
+    margin-left: auto;
+    height: 90px;
+    width: 700px;
+    padding-bottom: 20px;
+    background-size: contain;
+}
