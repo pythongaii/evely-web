@@ -8,8 +8,8 @@ header.signUp=Sign up
 footer.contact=お問い合わせ
 
 signin.title=サインイン
-signin.userName=ユーザーネーム
-signin.password=パスワード
+signin.userName=ユーザーネーム*
+signin.password=パスワード*
 signin.forgotPass=パスワードを忘れましたか？
 signin.signInEvely=ユーザーネームとパスワードでサインイン
 signin.signInOthers=他のサービスのアカウントでサインイン
@@ -22,12 +22,12 @@ signupmail.messa3=メール本文には会員登録用のURLが記載されて�
 signupmail.messa4=そのURLをクリックし、会員登録のお手続きをお願いいたします。
 
 signup.title=会員情報の入力
-signup.mailaddress=メールアドレス
-signup.name=氏名
-signup.userID=ユーザーID
-signup.password=パスワード
-signup.password.confirm=パスワード(確認用)
-signup.tel=電場番号
+signup.mailaddress=メールアドレス*
+signup.name=氏名*
+signup.userID=ユーザーID*
+signup.password=パスワード*
+signup.password.confirm=パスワード(確認用)*
+signup.tel=電場番号*
 signup.submitbutton=確認画面へ
 signup.mailError=メールアドレスが正しくありません。
 signup.passError=パスワードが正しくありません。
@@ -47,7 +47,7 @@ signupped.messa1=ご登録が完了致しました。
 signupped.messa2=サインインして、会員機能をご利用下さい。
 
 forgotpassstart.title=パスワードの再発行
-forgotpassstart.mailaddress=メールアドレス
+forgotpassstart.mailaddress=メールアドレス*
 forgotpassstart.submitbutton=メールを送信する
 forgotpassstart.message1=会員登録時に設定したメールアドレスを入力してください。
 forgotpassstart.message2=パスワード再設定ページへのご案内メールを送信いたします。
@@ -60,8 +60,8 @@ forgotpassmail.messa4=そのURLをクリックし、パスワードの再設定�
 
 forgotpassreset.title=新しいパスワードの入力
 forgotpassreset.message1=新しいパスワードを半角英数字大文字小文字を1回以上使用し6文字以上で入力してください。
-forgotpassreset.password=パスワード
-forgotpassreset.confirm=パスワード(確認用)
+forgotpassreset.password=パスワード*
+forgotpassreset.confirm=パスワード(確認用)*
 forgotpassreset.submitbutton=再設定
 
 forgotpass.title=パスワードの再設定完了
@@ -100,3 +100,5 @@ share=シェア
 mailCannotUse.Title=メール送信エラー
 mailCannotUse.messa1=ご入力いただいたメールアドレスはご使用いただけません。
 mailCannotUse.messa2=10秒後にホーム画面へ戻ります。
+
+error.require=必須項目です。

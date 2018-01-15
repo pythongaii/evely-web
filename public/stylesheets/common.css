@@ -261,3 +261,42 @@ main {
     margin: 0 10px;
 }
 
+.mdl-textfield.is-invalid.focused .mdl-textfield__error {
+    visibility: visible
+}
+.mdl-textfield.is-invalid .mdl-textfield__error {
+    visibility: hidden;
+}
+
+.mdl-textfield.is-invalid.focused .mdl-textfield__input {
+    border-color: #d50000;
+    box-shadow: none
+}
+
+.mdl-textfield.is-invalid .mdl-textfield__input {
+    border-color: rgba(0, 0, 0, .12);
+    box-shadow: inset;
+}
+
+.mdl-textfield--floating-label.is-invalid.focused .mdl-textfield__label {
+    color: #d50000;
+    font-size: 12px
+}
+
+.mdl-textfield--floating-label.is-invalid .mdl-textfield__label {
+    color: rgba(0, 0, 0, .26);
+    font-size: 16px;
+}
+
+.mdl-textfield.is-invalid.focused .mdl-textfield__label:after {
+    background-color: #d50000
+}
+
+.mdl-textfield.is-invalid .mdl-textfield__label:after {
+    background:0 0;
+    font-size: inherit;
+}
+
+#header-title:hover {
+    cursor: pointer;
+}

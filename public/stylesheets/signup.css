@@ -32,6 +32,7 @@
 }
 
 .signup_title{
+    font-size: 1.6rem;
     margin-bottom: 10px;
 }
 
@@ -53,4 +54,13 @@ hr {
 
 label{
     margin-bottom: 0;
+}
+
+.mdl-textfield.mdl-js-textfield.mdl-textfield--floating-label {
+    margin-top: 10px;
+}
+
+.mdl-layout__content {
+    height: auto;
+    overflow-y: hidden;
 }
