@@ -3,10 +3,8 @@ package modules
 import com.google.inject.AbstractModule
 import dao._
 import forms.CreateEventData
-import model.event.APIEvent
 import model.user.RegisteredUser
 import net.codingwell.scalaguice.ScalaModule
-import play.api.Configuration
 import utils.{ConfigProvider, ConfigProviderImpl}
 //import service.{UserService, UserServiceImpl}
 import play.api.libs.ws.WSResponse

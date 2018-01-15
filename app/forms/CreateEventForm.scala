@@ -1,17 +1,20 @@
 package forms
 
-import model.event.{APIPlace, UpcomingDate}
+import model.event._
 import play.api.data.Form
 import play.api.data.Forms._
 import play.api.data.format.Formats._
 
 case class CreateEventData(body: String,
-                    mail: Option[String],
-                    place: APIPlace,
-                    tel: Option[String],
-                    title: String,
-                    upcomingDate: UpcomingDate,
-                    url: Option[String])
+                           mail: Option[String],
+                           noticeRange: Int,
+                           openFlg: Boolean,
+                           plans: List[Plan],
+                           scope: String,
+                           tel: Option[String],
+                           title: String,
+                           url: Option[String]
+                          )
 
 object CreateEventForm {
 
@@ -19,17 +22,22 @@ object CreateEventForm {
     mapping(
       "body" -> nonEmptyText(maxLength = 1000),
       "mail" -> optional(text),
-      "place" -> mapping(
-        "lat" -> optional(of(doubleFormat)),
-        "lng" -> optional(of(doubleFormat)),
-        "name" -> nonEmptyText
-      )(APIPlace.apply)(APIPlace.unapply),
+      "noticeRange" -> number,
+      "openFlg" -> boolean,
+      "plans" -> list(mapping(
+        "location" -> mapping(
+          "name" -> nonEmptyText,
+          "lat" -> of(doubleFormat),
+          "lng" -> of(doubleFormat)
+        )(Location.apply)(Location.unapply),
+        "upcomingDate" -> mapping(
+          "endDate" -> optional(text),
+          "statrDate" -> optional(text)
+        )(UpcomingDate.apply)(UpcomingDate.unapply)
+      )(Plan.apply)(Plan.unapply)),
+      "scope" -> text,
       "tel" -> optional(text),
       "title" -> nonEmptyText,
-      "upcomingDate" -> mapping(
-        "endDate" -> optional(nonEmptyText),
-        "startDate" -> optional(nonEmptyText)
-      )(UpcomingDate.apply)(UpcomingDate.unapply),
       "url" -> optional(text)
     )(CreateEventData.apply)(CreateEventData.unapply)
   )

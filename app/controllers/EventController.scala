@@ -68,7 +68,7 @@ class EventController @Inject()(cache: CacheApi,
   }
 
   def findOne(uid: String, eventId: String) = Action.async { implicit request =>
-    val query = Seq(("url", configProvider.EVENT_URL + "/" + uid + "/" + eventId))
+    val query = Seq(("url", configProvider.EVENT_URL),("ids" ,eventId))
 
     apiEventDAO.find(query: _*) map {
       case res => {

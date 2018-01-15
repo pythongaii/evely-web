@@ -1,12 +1,10 @@
 package model.event
 
-import play.api.libs.json.{JsPath, Json, Reads}
 import play.api.libs.json.Reads._
-import play.api.libs.json._
-import play.api.libs.functional.syntax._
+import play.api.libs.json.{Reads, _}
 
 
-case class Location(name: String, address: String = "", lat:String, lng: String)
+case class Location(name: String, lat:Double, lng: Double)
 
 object Location{
   implicit val locationReads:Reads[Location] = new Reads[Location] {
@@ -14,12 +12,13 @@ object Location{
       JsSuccess(
         Location(
           (json \ "name").as[String],
-          "",
-          (json \ "lat").as[String],
-          (json \ "lng").as[String]
+          (json \ "lat").as[Double],
+          (json \ "lng").as[Double]
         )
       )
     }
   }
-  implicit val locationFormat = Json.format[Location]
+  implicit val locationwrite:Writes[Location] = new Writes[Location] {
+    override def writes(o: Location): JsValue = ???
+  }
 }

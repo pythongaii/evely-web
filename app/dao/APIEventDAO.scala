@@ -25,7 +25,7 @@ class APIEventDAO @Inject()(ws: WSClient, configProvider: ConfigProvider) extend
 
   override def remove(request: RequestHeader,key: (String, String)*): Future[Unit] = ???
 
-  override def save(obj: CreateEventData, request: RequestHeader): Future[WSResponse] = {
+  def save(obj: CreateEventData, request: RequestHeader): Future[WSResponse] = {
 
     val optionalCookie = request.cookies.get(configProvider.COOKIE_NAME)
 
@@ -35,19 +35,15 @@ class APIEventDAO @Inject()(ws: WSClient, configProvider: ConfigProvider) extend
         val jsObject = Json.obj(
           "body" -> obj.body,
           "mail" -> obj.mail,
-          "place" ->
-            Json.obj(
-              "lat" -> obj.place.lat,
-              "lng" -> obj.place.lng,
-              "name" -> obj.place.name
-            ),
+          "noticeRange" -> obj.noticeRange,
+          "openFlg" -> obj.openFlg,
+          "plans" ->
+
+            obj.plans
+          ,
+          "scope" -> obj.scope,
           "tel" -> obj.tel,
           "title" -> obj.title,
-          "upcomingDate" ->
-            Json.obj(
-              "endDate" -> obj.upcomingDate.endDate.get.concat("Z"),
-              "startDate" -> obj.upcomingDate.startDate.get.concat("Z")
-            ),
           "url" -> obj.url
         )
 
