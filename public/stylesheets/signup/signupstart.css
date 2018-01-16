@@ -1,9 +1,9 @@
-@import "common.css";
+@import "../common.css";
 
 #step{
     margin-right: auto;
     margin-left: auto;
-    background: url(../images/signup_step1.png) 0 0 no-repeat;
+    background: url(../../images/signup_step1.png) 0 0 no-repeat;
     height: 100px;
     width: 800px;
     padding-bottom: 20px;

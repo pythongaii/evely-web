@@ -1,7 +1,7 @@
-@import "common.css";
+@import "../common.css";
 
 #step{
-    background: url(../images/signup_step2.png) 0 0 no-repeat;
+    background: url(../../images/signup_step2.png) 0 0 no-repeat;
 }
 
 #form_block{
