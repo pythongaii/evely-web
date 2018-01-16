@@ -5,7 +5,7 @@ import dao._
 import forms.CreateEventData
 import model.user.RegisteredUser
 import net.codingwell.scalaguice.ScalaModule
-import utils.{ConfigProvider, ConfigProviderImpl}
+import utils.{APIAuthenticator, Authenticator, ConfigProvider, ConfigProviderImpl}
 //import service.{UserService, UserServiceImpl}
 import play.api.libs.ws.WSResponse
 

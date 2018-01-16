@@ -1,6 +1,7 @@
-@import forms.RegistringData
-@(form: Form[RegistringData])(implicit messages: Messages, requestHeader: RequestHeader)
+@import forms.SignUpForm
+@()(implicit messages: Messages, requestHeader: RequestHeader)
 @import helpers.PlainHelper.myFields
+@signupForm = @{SignUpForm.registringDataForm}
 <!DOCTYPE html>
 <head>
     <title>サインアップ</title>
@@ -30,7 +31,7 @@
                             <div class="form_bottom_spacer22"></div>
                                                         @helper.form(action = routes.SignUpController.signupMail()) {
                                 <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                                    @helper.input(form("mail")){ (id,name,value,args) =>
+                                    @helper.input(signupForm("mail")){ (id,name,value,args) =>
                                         <input type="text" class="mdl-textfield__input" id="mail" required name="@name">
                                     }
                                     <label class="mdl-textfield__label" for="sample3" >@Messages("signup.mailaddress")</label>

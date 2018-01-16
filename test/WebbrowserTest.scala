@@ -1,11 +1,10 @@
-import dao.APIAuthenticator
 import forms.{SignInData, SignInForm}
 import org.scalatest.mockito.MockitoSugar
 import org.scalatestplus.play._
 import play.api.mvc.Results
 import play.api.mvc.{Result, Results}
 import play.api.test.Helpers._
-import utils.ConfigProvider
+import utils.{APIAuthenticator, ConfigProvider}
 
 import scala.concurrent.Await
 import scala.concurrent.duration.Duration

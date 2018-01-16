@@ -1,11 +1,10 @@
-package dao
+package utils
 
 import javax.inject.Inject
 
 import forms.SignInData
 import play.api.libs.json.Json
 import play.api.libs.ws.{WSClient, WSResponse}
-import utils.ConfigProvider
 
 import scala.concurrent.Future
 

@@ -2,7 +2,7 @@ package controllers
 
 import javax.inject.Inject
 
-import dao.{AuthModule, PlainDAO}
+import dao.PlainDAO
 import forms.{CreateEventData, CreateEventForm, SearchEventForm}
 import model.event.Event
 import play.api.cache.CacheApi
@@ -10,7 +10,7 @@ import play.api.i18n.{I18nSupport, MessagesApi}
 import play.api.libs.json.Json
 import play.api.libs.ws.WSResponse
 import play.api.mvc._
-import utils.ConfigProvider
+import utils.{AuthModule, ConfigProvider}
 
 import scala.concurrent.ExecutionContext.Implicits.global
 import scala.concurrent.Future
@@ -23,7 +23,6 @@ class EventController @Inject()(cache: CacheApi,
     implicit request =>
       CreateEventForm.createEventForm.bindFromRequest().fold(
         errorForm => {
-          errorForm
           Future.successful(Redirect(routes.GuestHomeController.index()))
         },
         eventData => {
@@ -48,7 +47,7 @@ class EventController @Inject()(cache: CacheApi,
         }
         request.cookies.get(configProvider.COOKIE_NAME) match {
           case None => collection.map(collection => Ok(views.html.search_view.search_map_layout(form.keyword)(collection)("")("")))
-          case Some(_) =>         collection.map(collection => Ok(views.html.search_view.search_map_layout(form.keyword)(collection)("t")("t")))
+          case Some(_) => collection.map(collection => Ok(views.html.search_view.search_map_layout(form.keyword)(collection)("t")("t")))
         }
       }
     )
@@ -70,7 +69,7 @@ class EventController @Inject()(cache: CacheApi,
   }
 
   def findOne(uid: String, eventId: String) = Action.async { implicit request =>
-    val query = Seq(("url", configProvider.EVENT_URL + "/detail"),("ids" ,eventId))
+    val query = Seq(("url", configProvider.EVENT_URL + "/detail"), ("ids", eventId))
 
     apiEventDAO.find(query: _*) map {
       case res => {

@@ -37,10 +37,7 @@ class APIEventDAO @Inject()(ws: WSClient, configProvider: ConfigProvider) extend
           "mail" -> obj.mail,
           "noticeRange" -> obj.noticeRange,
           "openFlg" -> obj.openFlg,
-          "plans" ->
-
-            obj.plans
-          ,
+          "plans" -> obj.plans,
           "scope" -> obj.scope,
           "tel" -> obj.tel,
           "title" -> obj.title,

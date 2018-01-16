@@ -1,13 +1,10 @@
-package dao
+package utils
 
 import javax.inject.Inject
 
 import controllers.routes
-import play.api.cache.{Cache, CacheApi}
-import play.api.libs.ws.WSClient
-import play.api.mvc._
-import play.api.mvc.Security
-import utils.ConfigProvider
+import play.api.cache.CacheApi
+import play.api.mvc.{Security, _}
 
 import scala.concurrent.Future
 import scala.concurrent.duration.Duration
