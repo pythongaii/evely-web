@@ -133,7 +133,7 @@
     position:absolute;
     height: 15px;
     width: 15px;
-    background: url(../images/ic_clock.png);
+    background: url(../../images/ic_clock.png);
     background-size:contain;
 }
 
@@ -141,7 +141,7 @@
     position:absolute;
     height: 15px;
     width: 15px;
-    background-image: url(../images/ic_location.png);
+    background-image: url(../../images/ic_location.png);
     background-size:contain;
 }
 
