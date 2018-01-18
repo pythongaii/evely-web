@@ -188,9 +188,8 @@ main {
 /* プロフィールナビ */
 .profile-nav {
     height: 100%;
-    width: 44px;
     position: relative;
-    display: flex;
+    display: inline-block;
     justify-content: center;
     align-items: center;
 }
