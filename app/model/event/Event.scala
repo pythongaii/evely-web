@@ -18,10 +18,11 @@ case class Event(id: String,
                  mail: Option[String],
                  topImage: Option[String],
                  createdAt: Option[Date],
-                 noticeRange: Int,
-                 openFlg: Boolean,
-                 plans: List[Plan],
-                 scope: String
+                 noticeRange: Option[Int],
+                 openFlg: Option[Boolean],
+                 schedules: List[Plan],
+                 scope: Option[String],
+                 isReviewed: Option[Boolean]
                 )
 
 object Event {
@@ -39,10 +40,11 @@ object Event {
           (json \ "mail").asOpt[String],
           (json \ "topImage").asOpt[String],
           (json \ "createdAt").asOpt[Date],
-          (json \ "noticeRange").as[Int],
-        (json \ "openFlg").as[Boolean],
-        (json \ "plans").as[List[Plan]],
-          (json \ "scope").as[String]
+          (json \ "noticeRange").asOpt[Int],
+        (json \ "openFlg").asOpt[Boolean],
+        (json \ "schedules").as[List[Plan]],
+          (json \ "scope").asOpt[String],
+          (json \ "isReviewed").asOpt[Boolean]
       ))
     }
   }

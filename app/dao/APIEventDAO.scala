@@ -10,20 +10,44 @@ import play.api.mvc.RequestHeader
 import utils.ConfigProvider
 
 import scala.concurrent.ExecutionContext.Implicits.global
-import scala.concurrent.Future
+import scala.concurrent.duration.Duration
+import scala.concurrent.{Await, Future}
 
 class APIEventDAO @Inject()(ws: WSClient, configProvider: ConfigProvider) extends PlainDAO[CreateEventData, WSResponse] {
 
-  override def find(key: (String,String)*): Future[Option[WSResponse]] = {
-    val response = ws.url(key.head._2).
-      withQueryString(key.tail:_*).get()
+  override def find(requestHeader: RequestHeader, key: (String, String)*): Future[Option[WSResponse]] = {
 
-    response
-      .filter(res => res.status == OK)
-      .flatMap(res => Future.successful(Option(res)))
+    val optionalCookie = requestHeader.cookies.get(configProvider.COOKIE_NAME)
+
+    optionalCookie match {
+      case Some(cookie) => {
+        val tokenString = cookie.value
+        val response = ws.url(key.head._2).
+          withQueryString(key.tail: _*).
+          withHeaders(("Authorization", "Bearer " + tokenString)).
+          get()
+        val f = Await.result(response, Duration.Inf)
+
+        response
+          .filter(res => res.status == OK)
+          .flatMap(res => {
+            res
+            Future.successful(Option(res))
+          })
+      }
+      case None => {
+        val response = ws.url(key.head._2).
+          withQueryString(key.tail: _*).
+          get()
+
+        response
+          .filter(res => res.status == OK)
+          .flatMap(res => Future.successful(Option(res)))
+      }
+    }
   }
 
-  override def remove(request: RequestHeader,key: (String, String)*): Future[Unit] = ???
+  override def remove(request: RequestHeader, key: (String, String)*): Future[Unit] = ???
 
   def save(obj: CreateEventData, request: RequestHeader): Future[WSResponse] = {
 
@@ -37,7 +61,7 @@ class APIEventDAO @Inject()(ws: WSClient, configProvider: ConfigProvider) extend
           "mail" -> obj.mail,
           "noticeRange" -> obj.noticeRange,
           "openFlg" -> obj.openFlg,
-          "plans" ->
+          "schedules" ->
 
             obj.plans
           ,

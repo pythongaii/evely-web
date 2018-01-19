@@ -35,20 +35,22 @@ class EventController @Inject()(cache: CacheApi,
       )
   }
 
+
+
   def search = Action.async { implicit request =>
-    val rorm = request.body
     SearchEventForm.form.bindFromRequest().fold(
       error => Future.successful(Ok("error search")),
       form => {
         val query = Seq(("url", configProvider.EVENT_URL), ("keyword" -> form.keyword), ("limit" -> form.limit), ("offset" -> form.offset))
-        val collection = apiEventDAO.find(query: _*) map {
+        val collection = apiEventDAO.find(request,query: _*) map {
           case res => {
+            val k = res.get.body
             Json.parse(res.get.body).validate[List[Event]].get
           }
         }
         request.cookies.get(configProvider.COOKIE_NAME) match {
           case None => collection.map(collection => Ok(views.html.search_view.search_map_layout(form.keyword)(collection)("")("")))
-          case Some(_) =>         collection.map(collection => Ok(views.html.search_view.search_map_layout(form.keyword)(collection)("t")("t")))
+          case Some(_) => collection.map(collection => Ok(views.html.search_view.search_map_layout(form.keyword)(collection)("t")("t")))
         }
       }
     )
@@ -59,7 +61,7 @@ class EventController @Inject()(cache: CacheApi,
       error => Future.successful(Ok("t")),
       form => {
         val query = Seq(("url", configProvider.EVENT_URL), ("keyword" -> form.keyword), ("limit" -> form.limit), ("offset" -> form.offset))
-        val collection = apiEventDAO.find(query: _*) map {
+        val collection = apiEventDAO.find(request,query: _*) map {
           case res => {
             Json.parse(res.get.body).validate[List[Event]].get
           }
@@ -70,13 +72,35 @@ class EventController @Inject()(cache: CacheApi,
   }
 
   def findOne(uid: String, eventId: String) = Action.async { implicit request =>
-    val query = Seq(("url", configProvider.EVENT_URL + "/detail"),("ids" ,eventId))
+    val query = Seq(("url", configProvider.EVENT_URL + "/detail"), ("ids", eventId))
 
-    apiEventDAO.find(query: _*) map {
+    apiEventDAO.find(request,query: _*) map {
       case res => {
         val event = Json.parse(res.get.body).validate[Event].get
         Ok(views.html.search_view.search_detail_item(event))
       }
     }
+  }
+
+  /* TODO
+  first check swagger specification of my event
+  second show creating event list
+  last filter not public event
+
+   */
+
+  def fetchCreatingEvents = withAuth { username => implicit request =>
+        val query = Seq(("url", configProvider.EVENT_URL + "/my_list"), ("limit" -> "10"), ("offset" -> "0"))
+        val collection = apiEventDAO.find(request,query: _*) map {
+          case res => {
+            Json.parse(res.get.body).validate[List[Event]].get
+          }
+        }
+        request.cookies.get(configProvider.COOKIE_NAME) match {
+          case None => collection.map(collection => Ok(views.html.event_management.editting_events(collection)("")("")))
+          case Some(_) => collection.map(collection => Ok(views.html.event_management.editting_events(collection)("t")("t")))
+        }
+
+
   }
 }

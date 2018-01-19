@@ -30,7 +30,7 @@ class APIUserDAO @Inject()(ws: WSClient, configProvider: ConfigProvider) extends
     response.flatMap(res => Future.successful(res))
   }
 
-  override def find(key: (String, String)*): Future[Option[WSResponse]] = ???
+  override def find(requestHeader: RequestHeader,key: (String, String)*): Future[Option[WSResponse]] = ???
 
   override def save(obj: RegisteredUser, request: RequestHeader): Future[WSResponse] = ???
 

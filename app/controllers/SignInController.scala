@@ -43,9 +43,9 @@ class SignInController @Inject()(val ws: WSClient,
             val tokenString = token.validate[Token].get.cookieString
             val jwtObject = JwtJson.decode(tokenString, configProvider.PUBLICKEY,Seq(JwtAlgorithm.RS512))
             val js = Json.parse(jwtObject.get.toJson)
-            val name = (js \ "name").asOpt[String]
+            val id = (js \ "id").asOpt[String]
             cache.set(tokenString + ".userInfo", signInData.id)
-            Future.successful(Ok(views.html.secured.index(CreateEventForm.createEventForm)(signInData.id)(name.get)).withHeaders((AUTHORIZATION, "Bearer " + tokenString)).withCookies(Cookie("evely_auth", tokenString)))
+            Future.successful(Ok(views.html.secured.index(CreateEventForm.createEventForm)(signInData.id)(id.get)).withHeaders((AUTHORIZATION, "Bearer " + tokenString)).withCookies(Cookie("evely_auth", tokenString)))
           }
           case response if response.status == BAD_REQUEST => {
             Future.successful(Ok(views.html.no_secured.signin.signinstart(SignInForm.signInForm)))

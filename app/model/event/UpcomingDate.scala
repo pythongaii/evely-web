@@ -9,8 +9,7 @@ case class UpcomingDate(endDate: Option[DateTime] = Option.empty, startDate: Opt
 
 object UpcomingDate{
   val tz = java.util.TimeZone.getTimeZone("UTC")
-  val df = ISODateTimeFormat.dateTime().withZone(DateTimeZone.getDefault)
-  val dfw = ISODateTimeFormat.dateTime().withZone(DateTimeZone.getDefault)
+  val df = ISODateTimeFormat.dateTimeNoMillis().withZone(DateTimeZone.getDefault)
     implicit val upcomingDateReads:Reads[UpcomingDate] = new Reads[UpcomingDate] {
       override def reads(json: JsValue): JsResult[UpcomingDate] = {
         JsSuccess(
