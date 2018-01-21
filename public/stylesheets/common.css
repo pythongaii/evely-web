@@ -21,6 +21,8 @@ main {
     position: relative;
 }
 
+/* サインインする前 */
+
 .mdl-layout__header{
     position: fixed;
     top: 0;
@@ -63,6 +65,9 @@ main {
     color: red;
 }
 
+/* サインイン後 */
+
+/* 右寄せ */
 .right{
     float: right !important;
     margin-left: 10px !important;
@@ -75,6 +80,11 @@ main {
     background-color: transparent;
     z-index: 10000;
 }
+
+
+/**
+ * イベント作成
+ */
 
 .create_event {
     display: flex;

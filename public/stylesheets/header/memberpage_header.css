@@ -164,6 +164,7 @@ a {
 }
 
 .tab:hover {
+    text-decoration: none;
     cursor: pointer;
     border-bottom: solid 2px red;
 }
@@ -192,6 +193,10 @@ a {
 
 .header-list > a:hover{
     outline: none;
+    text-decoration: none;
+}
+
+.header-tab-text:hover {
     text-decoration: none;
 }
 
