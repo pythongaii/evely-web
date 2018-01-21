@@ -15,8 +15,7 @@ body {
     margin: 0;
 }
 main {
-    height: 100%;
-    padding-top: 48px;
+    margin:5px auto;
     box-sizing: border-box;
     position: relative;
 }

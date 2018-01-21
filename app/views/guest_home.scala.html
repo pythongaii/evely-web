@@ -1,0 +1,126 @@
+@import model.event.Event
+@import forms.SignUpForm
+@(eventList: List[Event])(implicit messages: Messages)
+@import helpers.PlainHelper.myFields
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width,initial-scale=1">
+        <meta name="viewport" content="target-densitydpi=device-dpi, width=1024, maximum-scale=1.0, user-scalable=yes">
+        <title>Evely</title>
+            <!-- MDC -->
+        <link rel="stylesheet" href="https://unpkg.com/material-components-web@@latest/dist/material-components-web.css">
+        <script src="https://unpkg.com/material-components-web@@latest/dist/material-components-web.js"
+        charset="utf-8"></script>
+            <!-- MDL -->
+        <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+        <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-pink.min.css">
+        <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+            <!-- jQuery -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+        <script src="@routes.Assets.at("/javascripts/autoinit.js")"></script>
+        <script src="@routes.Assets.at("/javascripts/guest_home.js")"></script>
+        <link rel="stylesheet" href="@routes.Assets.at("/stylesheets/search_list_item_vr.css")">
+        <link rel="stylesheet" href="@routes.Assets.at("/stylesheets/guest_home.css")">
+    </head>
+
+    <body>
+        <div class="demo-layout-transparent mdl-layout">
+            <header class="mdl-layout__header mdl-layout__header--transparent guest-home-header">
+                <div class="mdl-layout__header-row">
+                        <!-- Title -->
+                    <span class="mdl-layout-title">@Messages("toppage.title")</span>
+                        <!-- Add spacer, to align navigation to the right -->
+                    <div class="mdl-layout-spacer"></div>
+                        <!-- Navigation -->
+                    <nav class="mdl-navigation">
+                        <a class="mdl-navigation__link" href="@routes.SignInController.signin()">@Messages("header.signIn")</a>
+                        <a class="mdl-navigation__link" href="@routes.SignUpController.signupStart()">@Messages("header.signUp")</a>
+                    </nav>
+                </div>
+                <div class="search-box">
+                    <div>
+                        <div class="search-box-message font_style-guest-home-search-box-message">
+                            イベントを探してみよう。
+                        </div>
+                        <div class="mdc-text-field mdc-text-field--box mdc-text-field--with-trailing-icon header-search-textfield font_style-guest-home-search-text-field"
+                        data-mdc-auto-init="MDCTextField">
+                            <input type="text" id="search-field" class="mdc-text-field__input " placeholder="例) スポーツ、大阪、ECC">
+                            <i class="material-icons mdc-text-field__icon header-textfield-icon icon-size-small"
+                            id="search-field-icon"
+                            tabindex="0"></i>
+                        </div>
+                    </div>
+                </div>
+            </header>
+        </div>
+        <main class="guest-home-main">
+            <div class="contents">
+                <div id="my-mdc-tab-bar-scroller" class="mdc-tab-bar-scroller">
+                    <div class="mdc-tab-bar-scroller__indicator mdc-tab-bar-scroller__indicator--back">
+                        <a class="mdc-tab-bar-scroller__indicator__inner material-icons" href="#"
+                        aria-label="scroll back button">
+                            navigate_before
+                        </a>
+                    </div>
+                    <div class="mdc-tab-bar-scroller__scroll-frame">
+                        <nav id="my-scrollable-tab-bar"
+                        class="mdc-tab-bar mdc-tab-bar-scroller__scroll-frame__tabs mdc-tab-bar--icon-tab-bar"
+                        role="tablist">
+                            <a class="mdc-tab entertainment mdc-tab--active" href="#panel-1" role="tab" aria-controls="panel-1">
+                                <i class="icon-entertainment icon-size-small"></i>
+                                <span class="mdc-tab__icon-text icon-text-entertainment">エンタメ</span>
+                            </a>
+                            <a class="mdc-tab music" href="#panel-2" role="tab" aria-controls="panel-2">
+                                <i class="icon-music icon-size-small" aria-label="nearby"></i>
+                                <span class="mdc-tab__icon-text">音楽</span>
+                            </a>
+                            <a class="mdc-tab fes" href="#panel-3" role="tab" aria-controls="panel-3">
+                                <i class="icon-fes icon-size-small" aria-label="nearby"></i>
+                                <span class="mdc-tab__icon-text">お祭り</span>
+                            </a>
+                            <a class="mdc-tab sports" href="#panel-4" role="tab" aria-controls="panel-4">
+                                <i class="icon-sports icon-size-small" aria-label="Favorites"></i>
+                                <span class="mdc-tab__icon-text">スポーツ</span>
+                            </a>
+                            <a class="mdc-tab art" href="#panel-5" role="tab" aria-controls="panel-5">
+                                <i class="icon-art icon-size-small" aria-label="Recents"></i>
+                                <span class="mdc-tab__icon-text">芸術</span>
+                            </a>
+                            <a class="mdc-tab foods" href="#panel-6" role="tab" aria-controls="panel-6">
+                                <i class="icon-foods icon-size-small" aria-label="Recents"></i>
+                                <span class="mdc-tab__icon-text">食べ物</span>
+                            </a>
+                            <a class="mdc-tab bargain" href="#panel-7" role="tab" aria-controls="panel-7">
+                                <i class="icon-size-small icon-bargain" aria-label="Favorites"></i>
+                                <span class="mdc-tab__icon-text">バーゲン</span>
+                            </a>
+                            <a class="mdc-tab volunteer" href="#panel-8" role="tab" aria-controls="panel-8">
+                                <i class="icon-volunteer icon-size-small" aria-label="nearby"></i>
+                                <span class="mdc-tab__icon-text">ボランティア</span>
+                            </a>
+                            <a class="mdc-tab workshop" href="#panel-9" role="tab" aria-controls="panel-9">
+                                <i class="icon-workshop icon-size-small" aria-label="Favorites"></i>
+                                <span class="mdc-tab__icon-text">ワークショップ</span>
+                            </a>
+                            <span class="mdc-tab-bar__indicator"></span>
+                        </nav>
+                    </div>
+                    <div class="mdc-tab-bar-scroller__indicator mdc-tab-bar-scroller__indicator--forward">
+                        <a class="mdc-tab-bar-scroller__indicator__inner material-icons" href="#"
+                        aria-label="scroll forward button">
+                            navigate_next
+                        </a>
+                    </div>
+                </div>
+                <div class="panel">
+                @for(event <- eventList) {
+                    @views.html.search_view.search_list_item_vr(event)
+                }
+                </div>
+            </div>
+        </main>
+        @views.html.common.footer()(messages)
+    </body>
+</html>
