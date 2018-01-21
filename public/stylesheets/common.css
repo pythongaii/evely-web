@@ -1,3 +1,7 @@
+@import "font_size.css";
+@import "icons.css";
+@import "header/memberpage_header.css";
+
 *{
     box-sizing: content-box !important;
 }
@@ -154,8 +158,4 @@ main {
     padding-bottom: 20px;
     background-size: contain;
 }
-
-@import "/assets//font_size.css";
-@import "/assets//icons.css";
-@import "/assets//header/memberpage_header.css";
 
