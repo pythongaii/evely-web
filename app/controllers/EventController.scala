@@ -43,7 +43,6 @@ class EventController @Inject()(cache: CacheApi,
         val query = Seq(("url", configProvider.EVENT_URL), ("keyword" -> form.keyword), ("limit" -> form.limit), ("offset" -> form.offset))
         val collection = apiEventDAO.find(request,query: _*) map {
           case res => {
-            val k = res.get.body
             Json.parse(res.get.body).validate[List[Event]].get
           }
         }
@@ -98,7 +97,6 @@ class EventController @Inject()(cache: CacheApi,
     val query = Seq(("url", configProvider.EVENT_URL + "/detail"), ("ids", eventId))
     apiEventDAO.find(request,query: _*) map {
       case res => {
-        val body = res.get.body
         val events = Json.parse(res.get.body).validate[List[Event]].get
         Ok(views.html.event_management.edit_event(events.head)("test"))
       }

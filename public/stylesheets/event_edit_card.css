@@ -256,14 +256,14 @@ width: 300px;
 /*background-size: 24px;*/
 /*background-size:contain;*/
 /*background-color:white;*/
-/*background-position: top;*/
+/*background-position: guest_home;*/
 /*background-repeat: no-repeat;*/
 /*opacity:0.54;*/
 /*border-bottom-left-radius: 5px;*/
 /*width: 40px;*/
 /*height: 32px;*/
 /*position: absolute;*/
-/*top: 0px;*/
+/*guest_home: 0px;*/
 /*right: 0px;*/
 /*}*/
 
@@ -324,22 +324,22 @@ width: 300px;
 /*font-size:1rem;*/
 /*width:fit-content;*/
 /*height: 16px;*/
-/*top: -16px;*/
+/*guest_home: -16px;*/
 /*left: 17px;*/
 /*margin-left:2px;*/
 /*}*/
 
 /*.event-card-body {*/
 /*margin: 16px 13px 0px 13px; */
-/*border-top: 1px solid #e2e2e2;*/
+/*border-guest_home: 1px solid #e2e2e2;*/
 /*}*/
 
 /*.event-card-body > .detail-container {*/
-/*margin-top: 14px;*/
+/*margin-guest_home: 14px;*/
 /*}*/
 
 /*.event-card-body > .detail-container > .detail {*/
-/*margin-top: 9px;*/
+/*margin-guest_home: 9px;*/
 /*}*/
 
 /*.event-card-body > .detail-container > .detail > .clock {*/
@@ -385,6 +385,6 @@ width: 300px;
 /*}*/
 
 /*.event-card-footer {*/
-/*margin-top: 10px;*/
-/*border-top: 1px solid #e2e2e2;*/
+/*margin-guest_home: 10px;*/
+/*border-guest_home: 1px solid #e2e2e2;*/
 /*}*/
