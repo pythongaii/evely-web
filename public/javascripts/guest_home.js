@@ -5,7 +5,6 @@ $(function () {
     const tabBarScroller = new mdc.tabs.MDCTabBarScroller(scrollerEl);
     /* tab switching */
     var dynamicTabBar = window.dynamicTabBar = new mdc.tabs.MDCTabBar(document.querySelector('#my-scrollable-tab-bar'));
-    var dots = document.querySelector('.dots');
     var panels = document.querySelector('.panels');
 
     dynamicTabBar.tabs.forEach(function(tab) {
@@ -41,20 +40,20 @@ $(function () {
         updateDot(nthChildIndex);
     });
 
-    dots.addEventListener('click', function (evt) {
-        if (!evt.target.classList.contains('dot')) {
-            return;
-        }
-
-        evt.preventDefault();
-
-        var dotIndex = [].slice.call(dots.querySelectorAll('.dot')).indexOf(evt.target);
-
-        if (dotIndex >= 0) {
-            dynamicTabBar.activeTabIndex = dotIndex;
-        }
-
-        updatePanel(dotIndex);
-        updateDot(dotIndex);
-    })
+    // tabs.addEventListener('click', function (evt) {
+    //     if (!evt.target.classList.contains('dot')) {
+    //         return;
+    //     }
+    //
+    //     evt.preventDefault();
+    //
+    //     var dotIndex = [].slice.call(dots.querySelectorAll('.dot')).indexOf(evt.target);
+    //
+    //     if (dotIndex >= 0) {
+    //         dynamicTabBar.activeTabIndex = dotIndex;
+    //     }
+    //
+    //     updatePanel(dotIndex);
+    //     updateDot(dotIndex);
+    // })
 });
