@@ -1,4 +1,4 @@
-@(userID: String)(userName: String)(implicit messages: Messages, request: RequestHeader)
+@(userID: String)(implicit messages: Messages, request: RequestHeader)
 <!DOCTYPE html>
 <html>
     <head>
@@ -16,7 +16,7 @@
     </head>
     <body>
             <!-- App bar START -->
-        @views.html.secured.memberPageHeader("gotohell")(userName)
+        @views.html.secured.memberPageHeader(Option.empty)(userID)
             <!-- App bar END -->
     </body>
 </html>

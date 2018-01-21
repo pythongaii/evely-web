@@ -18,7 +18,7 @@ class RegisteredHomeController @Inject()(cache: CacheApi,
 
   def home = withAuth { username =>
     implicit request =>
-      Future.successful(Ok(views.html.secured.home(username)("name")))
+      Future.successful(Ok(views.html.secured.home(username)))
   }
 
   def index = withAuth { username =>
