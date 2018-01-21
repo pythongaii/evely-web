@@ -26,12 +26,10 @@ class APIEventDAO @Inject()(ws: WSClient, configProvider: ConfigProvider) extend
           withQueryString(key.tail: _*).
           withHeaders(("Authorization", "Bearer " + tokenString)).
           get()
-        val f = Await.result(response, Duration.Inf)
 
         response
           .filter(res => res.status == OK)
           .flatMap(res => {
-            res
             Future.successful(Option(res))
           })
       }

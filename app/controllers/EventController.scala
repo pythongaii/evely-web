@@ -71,7 +71,7 @@ class EventController @Inject()(cache: CacheApi,
     )
   }
 
-  def findOne(uid: String, eventId: String) = Action.async { implicit request =>
+  def findOne(eventId: String) = Action.async { implicit request =>
     val query = Seq(("url", configProvider.EVENT_URL + "/detail"), ("ids", eventId))
 
     apiEventDAO.find(request,query: _*) map {
@@ -100,7 +100,17 @@ class EventController @Inject()(cache: CacheApi,
           case None => collection.map(collection => Ok(views.html.event_management.editting_events(collection)("")("")))
           case Some(_) => collection.map(collection => Ok(views.html.event_management.editting_events(collection)("t")("t")))
         }
+  }
 
+  def editEvent(eventId:String) = Action.async { implicit request =>
+    val query = Seq(("url", configProvider.EVENT_URL + "/detail"), ("ids", eventId))
+    apiEventDAO.find(request,query: _*) map {
+      case res => {
+        val body = res.get.body
+        val events = Json.parse(res.get.body).validate[List[Event]].get
+        Ok(views.html.event_management.edit_event(events.head)("test"))
+      }
+    }
 
   }
 }

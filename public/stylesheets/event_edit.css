@@ -1,0 +1,115 @@
+.mdc-card__supporting-text{
+    position: relative;
+    height: 450px;
+}
+
+.mdc-card__actions{
+    height: 50px;
+    position: relative;
+}
+
+#cancel-button {
+    position: absolute;
+    top:2px;
+    right: 120px;
+}
+
+#save-button {
+    position: absolute;
+    top:2px;
+    right: 15px;
+}
+
+.title-textfield-container {
+    position: absolute;
+    left: 35px;
+    top: 10px;
+}
+
+.sub-textfield-container {
+    position: absolute;
+    left: 35px;
+    top: 83px;
+}
+
+.detail-textfield-container {
+    position: absolute;
+    left: 35px;
+    top: 200px;
+}
+
+.url-textfield-container {
+    position: absolute;
+    right: 35px;
+    top: 225px;
+}
+
+.tel-textfield-container {
+    position: absolute;
+    right: 35px;
+    top: 300px;
+}
+
+.mail-textfield-container {
+    position: absolute;
+    right: 35px;
+    top: 370px;
+}
+
+.spendtime-textfield-container {
+    position: absolute;
+    right: 195px;
+    top: 160px;
+}
+
+.wantpersns-textfield-container {
+    position: absolute;
+    right: 35px;
+    top: 160px;
+}
+
+.image-choose-container {
+    position: absolute;
+
+    width: 1024px;
+    height: 500px;
+}
+
+.category-selector-container {
+    position: absolute;
+    right: 35px;
+    top: 25px;
+}
+
+.target-selector-container {
+    position: absolute;
+    right: 35px;
+    top: 100px;
+}
+
+#postal-code-text-field {
+    width: 100px;
+}
+
+
+.postal-code-textfield-container {
+    position: absolute;
+    left: 35px;
+    top: 0px;
+}
+
+.address-search-button-container{
+    position: absolute;
+    left: 135px;
+    top:30px;
+}
+
+#address-text-field{
+    width: 400px;
+}
+
+.address-textfield-container {
+     position: absolute;
+    left: 35px;
+     top: 50px;
+ }

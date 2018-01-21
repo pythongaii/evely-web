@@ -1,0 +1,53 @@
+/*
+ 全てのCSSフレームワークの指定を打ち消すために!importantを指定している。
+ */
+
+.font_style-edit-card_tab {
+    font-size: 1.5rem !important;
+}
+
+.font_style-edit-card_title-textfield{
+    font-size: 2.0rem !important;
+}
+
+.font_style-edit-card_basic-textfield{
+    font-size: 1.4rem !important;
+}
+
+.font_style-edit-card_basic-selector {
+    font-size: 1.7rem !important;
+}
+
+.font_style-header_search-textfield{
+    font-size: 1.4rem !important;
+}
+
+.font_style-header-tab-texts {
+    font-size: 1.3rem !important;
+}
+
+.font_style-header-title-texts {
+    font-size: 2.5rem !important;
+}
+
+.font_style-search-list_title{
+
+}
+
+.font_style-search-list_upcomingDate{
+
+}
+
+.font_style-search-list_location {
+
+}
+
+.font_style-detail_title{
+
+}
+
+.font_style-detail_body{
+
+}
+
+

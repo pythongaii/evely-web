@@ -24,8 +24,9 @@ GET         /bookmark                   controllers.RegisteredHomeController.boo
 
 GET         /event                      controllers.EventController.search
 GET         /event/findoffset           controllers.EventController.findOffset
-GET         /event/:uid/:eventId              controllers.EventController.findOne(uid:String,eventId:String)
+GET         /event/:eventId        controllers.EventController.findOne(eventId:String)
 GET         /event/my_list/             controllers.EventController.fetchCreatingEvents()
+GET         /event/edit/:eventId        controllers.EventController.editEvent(eventId: String)
 POST        /events                     controllers.EventController.create
 
 # signout用

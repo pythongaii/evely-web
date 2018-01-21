@@ -28,9 +28,10 @@ case class Event(id: String,
 object Event {
   implicit val eventReader:Reads[Event] = new Reads[Event] {
     override def reads(json: JsValue): JsResult[Event] = {
+      val j = json
       JsSuccess(
         Event(
-          (json \ "id").validate[String].get,
+          (json \ "id").as[String],
           (json \ "title").as[String],
           RegisteredUser((json \ "host" \ "id").as[String],Option.empty,(json \ "host" \ "name").as[String],Option.empty, Option.empty),
           Body((json \ "body").asOpt[String]),

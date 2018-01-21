@@ -1,103 +1,89 @@
 @import forms.{CreateEventForm, SearchEventForm}
-@(userID: String)(userName: String)(implicit messages: Messages, request: RequestHeader)
+@(key: Option[String])(userID: String)(implicit messages: Messages, request: RequestHeader)
 @import helpers.PlainHelper.myFields
 @form = @{
     CreateEventForm.createEventForm
 }
-<header class="app-bar row">
-        <!-- Tab START -->
-    <ul class="tab-container">
-            <!-- Home -->
-        <li>
-            <a href="@routes.RegisteredHomeController.home()" class="tab">
-                <i class="fa fa-home" aria-hidden="true"></i><span class="header-messa" media="(max-width: 700px)">@Messages("home")</span>
-            </a>
-        </li>
-            <!-- Pin -->
-        <li>
-            <a href="#" class="tab">
-                <i class="fa fa-map-marker" aria-hidden="true"></i><span class="header-messa">@Messages("nearby")</span>
-            </a>
-        </li>
-            <!-- Bookmark -->
-        <li>
-            <a href="#" class="tab">
-                <i class="fa fa-bookmark" aria-hidden="true"></i><span class="header-messa">@Messages("bookmark")</span>
-            </a>
-        </li>
-            <!-- Notification -->
-        <li>
-            <a href="#" class="tab">
-                <i class="fa fa-bell" aria-hidden="true"></i><span class="header-messa">通知</span>
-            </a>
-        </li>
-            <!-- Nearby -->
-        <li>
-            <div class="dropdown-group profile-nav tab">
-                <i class="fa fa-pencil" aria-hidden="true"></i><span class="header-messa dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">イベント管理</span>
-                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                    <li><a id="create-btn" data-toggle="modal" data-target="#modal">イベント作成</a></li>
-                    <li role="separator" class="divider"></li>
-                    <li ><a href="@routes.EventController.fetchCreatingEvents()">作成中リスト</a></li>
-                    <li><a href="#">公開中リスト</a></li>
-                    <li><a href="#">終了リスト</a></li>
-                </ul>
-                    <!-- Profile nav END -->
+<header class="mdc-toolbar " data-mdc-auto-init="MDCToolbar">
+    <div class="mdc-toolbar__row">
+        <section class="mdc-toolbar__section mdc-toolbar__section--align-start mdc-toolbar__section--shrink-to-fit">
+            <div class="font_style-header-title-texts header-title">Evely</div>
+        </section>
+        <section class="mdc-toolbar__section mdc-toolbar__section--shrink-to-fit">
+            <div class="mdc-text-field mdc-text-field--box mdc-text-field--with-trailing-icon header-search-textfield font_style-header_search-textfield"
+            data-mdc-auto-init="MDCTextField">
+            @helper.form(action = routes.EventController.search(), 'class -> "search_form") {
+                @helper.input(SearchEventForm.form("keyword")){(id,name,value,args)=>
+                    <input type="text" class="mdc-text-field__input" placeholder="イベントを探す。例) スポーツ、大阪、ECC" id="search-field" value="@key.getOrElse("")" name="@name">
+                }
+                <i class="material-icons mdc-text-field__icon header-textfield-icon icon-size-small" id="search-field-icon"
+                tabindex="0"></i>
+                <input type="hidden" name="limit" value="10"/>
+                <input type="hidden" name="offset" value="0"/>
+                @*<button class="mdl-button mdl-js-button mdl-button--icon"*@
+                @*for="waterfall-exp" type="submit" name="action">*@
+                @*<i class="material-icons">search</i>*@
+                @*</button>*@
+            }
             </div>
-        </li>
-    </ul>
+        </section>
+        <section class="mdc-toolbar__section mdc-toolbar__section--align-end mdc-toolbar__section--shrink-to-fit">
+            <a href="#recents" class="tab tab-is-active font_style-header-tab-texts">
+                <i class="nearby-icon icon"></i>
+                <span class="header-tab-text">周辺のイベント</span>
+            </a>
+            <a href="#favorites" class="tab font_style-header-tab-texts">
+                <i class="pin-icon icon"></i>
+                <span class="header-tab-text">ピン</span>
+            </a>
+            <a href="#nearby" class="tab font_style-header-tab-texts">
+                <i class="notification-icon icon"></i>
+                <span class="header-tab-text">通知</span>
+            </a>
+                <!-- Event Menu -->
 
-    <ul class="nav-extras center">
-            <!-- Search box START -->
-        <li class="search">
-        @helper.form(action = routes.EventController.search(), 'class -> "search_form") {
-            @helper.inputText(SearchEventForm.form("keyword"), 'class -> "mdl-textfield__input")
-            <input type="hidden" name="limit" value="10"/>
-            <input type="hidden" name="offset" value="0"/>
-            @*<button class="mdl-button mdl-js-button mdl-button--icon"*@
-            @*for="waterfall-exp" type="submit" name="action">*@
-            @*<i class="material-icons">search</i>*@
-            @*</button>*@
-        }
-        </li>
-    </ul>
-        <!-- Tab END -->
-        <!-- App bar extras START -->
-    @if(userID != "") {
-        <ul class="nav-extras right">
-
-                <!-- Search box END -->
-                <!-- Profile nav START -->
-            <div class="dropdown-group profile-nav">
-                <img class="dropdown-toggle" src="@routes.Assets.at("/images/icon.png")" alt="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                    <li><a href="#">@Messages("iconnameid")</a></li>
-                    <li class="profile-container">
-                        <img src="@routes.Assets.at("/images/icon/icon.png")" alt="">
-                        <div class="profile-info">
-                            <p class="name"></p>
-                            <p class="id">@userID</p>
-                        </div>
-                    </li>
-                    <li role="separator" class="divider"></li>
-                    <li><a href="#">@Messages("home")</a></li>
-                    <li><a href="#">@Messages("profile")</a></li>
-                    <li><a href="#">@Messages("higelite")</a></li>
-                    <li role="separator" class="divider"></li>
-                    <li><a href="#">@Messages("settings")</a></li>
-                    <li><a href="#">@Messages("help")</a></li>
-                    <li><a id="night-mode">@Messages("sleep")</a></li>
-                    <li role="separator" class="divider"></li>
-                    <li><a href="@routes.RegisteredHomeController.signout()">ログアウト</a></li>
-                </ul>
-                    <!-- Profile nav END -->
+            <div id="event-menu-open" class="event-menu-container tab">
+                <i class="event-edit-icon icon"></i>
+                <a class="font_style-header-tab-texts header-tab-text">イベント管理</a>
+                <div class="mdc-simple-menu" tabindex="-1" id="eventMenu">
+                    <ul class="mdc-simple-menu__items mdc-list" role="menu" aria-hidden="true">
+                        <li class="mdc-list-item header-list" role="menuitem" tabindex="0" id="create-btn" data-toggle="modal" data-target="#modal">
+                            イベント作成
+                        </li>
+                        <li class="mdc-list-item header-list" role="menuitem" tabindex="0">
+                            <a href="@routes.EventController.fetchCreatingEvents()">作成中リスト</a>
+                        </li>
+                        <li class="mdc-list-item header-list" role="menuitem" tabindex="0">
+                            公開中リスト
+                        </li>
+                        <li class="mdc-list-item header-list" role="menuitem" tabindex="0">
+                            終了したイベント
+                        </li>
+                    </ul>
+                </div>
             </div>
 
-            <li class="create_event">
-                <span  class="glyphicon glyphicon-plus btn btn-default" ></span>
-            </li>
-        </ul>
-    }        <!-- App bar extras END -->
+            <div class="profile-menu-container" id="openMenu">
+                <i class=""></i>
+                <div class="mdc-simple-menu" tabindex="-1" id="profileMenu">
+                    <ul class="mdc-simple-menu__items mdc-list" role="menu" aria-hidden="true">
+                        <li class="profile-container">
+                            <img src="@routes.Assets.at("/images/icon/icon.png")" alt="">
+                            <div class="profile-info"><p class="id">@userID</p></div>
+                        </li>
+                        <li role="separator" class="divider"></li>
+                        <li class="mdc-list-item header-list" role="menuitem" tabindex="0"><a href="#">@Messages("home")</a></li>
+                        <li class="mdc-list-item header-list" role="menuitem" tabindex="0"><a href="#">@Messages("profile")</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li class="mdc-list-item header-list" role="menuitem" tabindex="0"><a href="#">@Messages("settings")</a></li>
+                        <li class="mdc-list-item header-list" role="menuitem" tabindex="0"><a href="#">@Messages("help")</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li class="mdc-list-item header-list" role="menuitem" tabindex="0"><a href="@routes.RegisteredHomeController.signout()">ログアウト</a></li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+    </div>
 </header>
     <!-- モーダルウィンドウ表示項目  -->
 <div class="modal fade" id="modal">
