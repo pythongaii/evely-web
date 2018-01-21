@@ -2,7 +2,7 @@ package controllers
 
 import javax.inject.Inject
 
-import dao.{AuthModule, PlainDAO}
+import dao.PlainDAO
 import forms.{CreateEventData, CreateEventForm, SearchEventForm}
 import model.event.Event
 import play.api.cache.CacheApi
@@ -10,7 +10,7 @@ import play.api.i18n.{I18nSupport, MessagesApi}
 import play.api.libs.json.Json
 import play.api.libs.ws.WSResponse
 import play.api.mvc._
-import utils.ConfigProvider
+import utils.{AuthModule, ConfigProvider}
 
 import scala.concurrent.ExecutionContext.Implicits.global
 import scala.concurrent.Future
@@ -23,7 +23,6 @@ class EventController @Inject()(cache: CacheApi,
     implicit request =>
       CreateEventForm.createEventForm.bindFromRequest().fold(
         errorForm => {
-          errorForm
           Future.successful(Redirect(routes.GuestHomeController.index()))
         },
         eventData => {
@@ -81,13 +80,6 @@ class EventController @Inject()(cache: CacheApi,
       }
     }
   }
-
-  /* TODO
-  first check swagger specification of my event
-  second show creating event list
-  last filter not public event
-
-   */
 
   def fetchCreatingEvents = withAuth { username => implicit request =>
         val query = Seq(("url", configProvider.EVENT_URL + "/my_list"), ("limit" -> "10"), ("offset" -> "0"))

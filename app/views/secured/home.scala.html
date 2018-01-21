@@ -1,6 +1,4 @@
-
-@()(implicit messages: Messages)
-
+@(userID: String)(userName: String)(implicit messages: Messages, request: RequestHeader)
 <!DOCTYPE html>
 <html>
     <head>
@@ -18,53 +16,7 @@
     </head>
     <body>
             <!-- App bar START -->
-        <header class="app-bar">
-                <!-- Tab START -->
-            <ul class="tab-container">
-                    <!-- Home -->
-                <li>
-                    <a href="@routes.RegisteredHomeController.home()" class="tab">
-                        <i class="fa fa-home" aria-hidden="true"></i>@Messages("home")
-                    </a>
-                </li>
-                    <!-- Nearby -->
-                    <!-- <li>
-                <a href="./nearby.html" class="tab">
-                    <i class="fa fa-map-marker" aria-hidden="true"></i>近くのイベント
-                </a>
-            </li> -->
-                    <!-- Bookmark -->
-                <li>
-                    <a href="@routes.RegisteredHomeController.bookmark()" class="tab is-active">
-                        <i class="fa fa-bookmark" aria-hidden="true"></i>@Messages("bookmark")
-                    </a>
-                </li>
-                    <!-- Notification -->
-                <li>
-                    <a href="@routes.RegisteredHomeController.notification()" class="tab">
-                        <i class="fa fa-bell" aria-hidden="true"></i>@Messages("notification")
-                    </a>
-                </li>
-            </ul>                <!-- Tab END -->
-                <!-- App bar extras START -->
-            <div class="nav-extras">
-                    <!-- Search box START -->
-                <div class="search">
-                    <form class="" action="" method="post">
-                        <input type="text" name="" placeholder=@Messages("placeholder")>
-                    </form>
-                </div>
-                    <!-- Search box END -->
-                    <!-- Profile nav START -->
-                <div class="profile-nav">
-                    <a href="@routes.RegisteredHomeController.index()">
-                        <img src="@routes.Assets.at("/images/icon/icon.png")" alt="profile icon">
-                    </a>
-                </div>
-                    <!-- Profile nav END -->
-            </div>
-                <!-- App bar extras END -->
-        </header>
+        @views.html.secured.memberPageHeader("gotohell")(userName)
             <!-- App bar END -->
     </body>
 </html>

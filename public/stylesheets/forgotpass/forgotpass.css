@@ -1,13 +1,4 @@
-@import "common.css";
-
-#step{
-    margin-right: auto;
-    margin-left: auto;
-    background: url(../images/signup_step4.png) 0 0 no-repeat;
-    height: 100px;
-    width: 800px;
-    padding-bottom: 20px;
-}
+@import "../common.css";
 
 #message {
     width: 100%;

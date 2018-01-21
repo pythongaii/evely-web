@@ -1,7 +1,7 @@
 @import forms.{CreateEventForm, SearchEventForm}
 @(key: Option[String])(userID: String)(implicit messages: Messages, request: RequestHeader)
 @import helpers.PlainHelper.myFields
-@form = @{
+@createEventForm = @{
     CreateEventForm.createEventForm
 }
 <header class="mdc-toolbar " data-mdc-auto-init="MDCToolbar">
@@ -93,75 +93,75 @@
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                 <h4 class="modal-title">新しいイベントを作成</h4>
             </div>
-            <div class="modal-body">
-            @helper.form(action = routes.EventController.create(), 'id -> "create-form") {
-                <div class="form-group">
-                    @helper.inputText(form("title"),
-                        'class -> "form-control validate[required]",
-                        'size -> "20",
-                        'name -> "data[title]",
-                        'placeholder -> "1時間限定タイムセール!!")
-                    <label for="title"><span class="red">*</span>タイトル</label>
-                </div>
-                <div class="form-group">
-                    <label for="body">説明</label>
-                    @helper.textarea(form("body"),
-                        'class -> "form-control",
-                        'size -> "1000",
-                        'name -> "data[body]",
-                        'placeholder -> "1000文字以内")
-                </div>
-                <div class="form-group row">
-                    <div class="col-xs-6">
-                        <label for="upcomingDate.startDate">開始日</label>
-                        @helper.inputText(form("plans[0].upcomingDate.startDate"),
-                            'class -> "form-control",
-                            'name -> "data[upcomingDate][startDate]")
+                <div class="modal-body">
+                @helper.form(action = routes.EventController.create(), 'id -> "create-form") {
+                    <div class="form-group">
+                        @helper.inputText(createEventForm("title"),
+                            'class -> "form-control validate[required]",
+                            'size -> "20",
+                            'name -> "data[title]",
+                            'placeholder -> "1時間限定タイムセール!!")
+                        <label for="title"><span class="red">*</span>タイトル</label>
                     </div>
-                    <div class="col-xs-6">
-                        <label for="upcomingDate.endDate">終了日</label>
-                        @helper.inputText(form("plans[0].upcomingDate.endDate"),
+                    <div class="form-group">
+                        <label for="body">説明</label>
+                        @helper.textarea(createEventForm("body"),
                             'class -> "form-control",
-                            'name -> "data[upcomingDate][endDate]")
+                            'size -> "1000",
+                            'name -> "data[body]",
+                            'placeholder -> "1000文字以内")
                     </div>
-                </div>
-                <label>開催場所</label>
-                <div class="form-group row">
-                    <div class="col-xs-4">
-                        <div class="input-group">
-                            <span class="input-group-addon" id="place-addon">〒</span>
-                            <input id="zipcode" class="form-control" type="text" maxlength="8" aria-describedby="place-addon" placeholder="520-25XX">
+                    <div class="form-group row">
+                        <div class="col-xs-6">
+                            <label for="upcomingDate.startDate">開始日</label>
+                            @helper.inputText(createEventForm("plans[0].upcomingDate.startDate"),
+                                'class -> "form-control",
+                                'name -> "data[upcomingDate][startDate]")
+                        </div>
+                        <div class="col-xs-6">
+                            <label for="upcomingDate.endDate">終了日</label>
+                            @helper.inputText(createEventForm("plans[0].upcomingDate.endDate"),
+                                'class -> "form-control",
+                                'name -> "data[upcomingDate][endDate]")
                         </div>
                     </div>
-                    <div class="pull-left middle">
-                        <button id="addr-btn" type="button" class="btn btn-default">住所検索</button>
+                    <label>開催場所</label>
+                    <div class="form-group row">
+                        <div class="col-xs-4">
+                            <div class="input-group">
+                                <span class="input-group-addon" id="place-addon">〒</span>
+                                <input id="zipcode" class="form-control" type="text" maxlength="8" aria-describedby="place-addon" placeholder="520-25XX">
+                            </div>
+                        </div>
+                        <div class="pull-left middle">
+                            <button id="addr-btn" type="button" class="btn btn-default">住所検索</button>
+                        </div>
                     </div>
-                </div>
-                <div class="form-group">
-                @helper.inputText(form("plans[0].location.name"),
-                    'class -> "form-control",
-                    'name -> "data[location][name]")
-                </div>
+                    <div class="form-group">
+                    @helper.inputText(createEventForm("plans[0].location.name"),
+                        'class -> "form-control",
+                        'name -> "data[location][name]")
+                    </div>
 
-                <input type="hidden" name="noticeRange" value="500"/>
-                <input type="hidden" name="openFlg" value="false"/>
-                <input type="hidden" name="scope" value="public"/>
-                <input type="hidden" name="plans[0].location.lat" id="plans.location.lat" value="12.02154">
-                <input type="hidden" name="plans[0].location.lng" id="plans.location.lng" value="10.05014">
-                <input type="hidden" name="mail" id="mail" value="example@@example.com">
-                <input type="hidden" name="url" id="url" value="http://yahoo.co.jp">
-                <input type="hidden" name="tel" id="tel" value="090-1234-5678">
+                    <input type="hidden" name="noticeRange" value="500"/>
+                    <input type="hidden" name="openFlg" value="false"/>
+                    <input type="hidden" name="scope" value="public"/>
+                    <input type="hidden" name="plans[0].location.lat" id="plans.location.lat" value="12.02154">
+                    <input type="hidden" name="plans[0].location.lng" id="plans.location.lng" value="10.05014">
+                    <input type="hidden" name="mail" id="mail" value="example@@example.com">
+                    <input type="hidden" name="url" id="url" value="http://yahoo.co.jp">
+                    <input type="hidden" name="tel" id="tel" value="090-1234-5678">
 
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">キャンセル</button>
+                    <button type="button" class="btn btn-success" id="create-submit">作成</button>
+                </div>
+                }
             </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">キャンセル</button>
-                <button type="button" class="btn btn-success" id="create-submit">作成</button>
-            </div>
-            }
         </div>
     </div>
-</div>
-<script type="text/javascript">
+    <script type="text/javascript">
         $(function () {
             var opt = {
                 minDate: "moment",

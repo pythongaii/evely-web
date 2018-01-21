@@ -30,6 +30,10 @@ main {
     left: 0;
     z-index: 1000;
     min-width: 670px;
+    min-height: 48px !important;
+}
+
+.mdl-layout__header-row {
     height: 48px;
 }
 
@@ -56,7 +60,7 @@ main {
 }
 
 .mdl-layout__content {
-    margin-top: 67px;
+    margin-top: 48px;
     width: 100%;
     padding-bottom: 100px;
 }
@@ -103,6 +107,7 @@ main {
     margin: 0 10px;
 }
 
+/* form validation */
 .mdl-textfield.is-invalid.focused .mdl-textfield__error {
     visibility: visible
 }
@@ -138,6 +143,7 @@ main {
     background:0 0;
     font-size: inherit;
 }
+
 
 #header-title:hover {
     cursor: pointer;

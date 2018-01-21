@@ -1,18 +1,24 @@
 .event-card {
-    display: inline-block;
-    margin: 20px 0 0 20px;
-    width: 276px;
-    height: 405px;
-    box-shadow:
-        0 2px 2px 0 rgba(0,0,0,.14),
-        0 3px 1px -2px rgba(0,0,0,.2),
-        0 1px 5px 0 rgba(0,0,0,.12);
     position: relative;
+    display: inline-block;
+    width: 392px;
+    height: 162px;
+    /*box-shadow:*/
+        /*0 2px 2px 0 rgba(0,0,0,.14),*/
+        /*0 3px 1px -2px rgba(0,0,0,.2),*/
+        /*0 1px 5px 0 rgba(0,0,0,.12);*/
 }
+
+.side-nav-separator3 {
+    width: 100%;
+    border-top: 1px solid #8e8e8e;
+}
+
 
 .event-card .title:hover {
     text-decoration: underline;
     color: #008aff;
+    cursor:pointer;
 }
 
 .acount_info .name:hover{
@@ -47,40 +53,24 @@
     opacity: 0.54;
 }
 
-.event-card-header > .title {
+.event-card-header {
+    height:42px;
+    margin: 0px 13px 0px 13px;
+}
+
+.event-card-header > .list-item-title {
     font-weight: bold;
     font-size:1.8rem;
     opacity: 1;
-    margin: 4px 13px 0px 13px;
+    width:230px;
     white-space: nowrap;
     text-overflow: ellipsis;
     overflow: hidden;
 }
 
-.event-card-header > .title:hover {
-    cursor:pointer;
-}
-
-.event-card-header > .image {
-    height: 155px;
-    overflow: hidden;
-    text-align: center;
-}
-
-.event-card-header > .image > img {
-    width: 100%;
-}
-
 .event-card-header > .acount_info {
-    margin: 10px 13px 0px 13px;
+    margin: 6px 0px 0px 0px;
     height:20px;
-}
-
-.event-card-header > .summary {
-    margin: 4px 13px 0px 13px;
-    font-size: 1.4rem;
-    word-wrap:break-word;
-    opacity:0.54;
 }
 
 .event-card-header > .acount_info > img {
@@ -102,44 +92,64 @@
 }
 
 .event-card-body {
-    margin: 16px 13px 0px 13px; 
-    border-top: 1px solid #e2e2e2;
+    position:absolute;
+    width:368px;
+    height:111px;
+}
+.event-card-body > .detail-container {
+    position:relative;
+    top:-90px;
+    width:274px;
+    height:100px;
+    word-wrap:break-word;
+}
+.event-card-body > .detail-container > .summary {
+    position:relative;
+    top:3px;
+    font-size: 1.4rem;
+    opacity:0.54;
+}
+.event-card-body > .image {
+    position:relative;
+    top:4px;
+    left:278px;
+    height: 90px;
+    width:90px;
+    overflow: hidden;
+    text-align: center;
 }
 
-.event-card-body > .detail-container {
-    margin-top: 14px;
+.event-card-body > .image > img {
+    height:100%;
 }
+
 
 .event-card-body > .detail-container > .detail {
-    margin-top: 9px;
+    margin-top: 12px;
 }
 
 
 .event-card-body > .detail-container > .detail > .clock {
-    position: absolute;
-    height: 20px;
-    width: 20px;
-    background: url(../images/ic_clock.png);
+    position:absolute;
+    height: 15px;
+    width: 15px;
+    background: url(../../images/ic_clock.png);
     background-size:contain;
 }
 
 .event-card-body > .detail-container > .detail > .location {
-    position: absolute;
-    height: 20px;
-    width: 20px;
-    background-image: url(../images/ic_location.png);
+    position:absolute;
+    height: 15px;
+    width: 15px;
+    background-image: url(../../images/ic_location.png);
     background-size:contain;
-
 }
 
 .event-card-body > .detail-container > .detail > .info {
-    margin-left: 28px;
+    margin-left: 24px;
 }
 
 .event-card-body > .detail-container > .detail > .info > p {
-    opacity: 0.54;
-    margin: 0;
-    font-size: 0.9rem;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
@@ -147,17 +157,16 @@
 
 .event-card-body > .detail-container > .detail > .info > p.main {
     opacity: 0.87;
-    font-size: 1.1rem;
+    font-size: 1rem;
 }
 
 .event-card-body > .detail-container > .detail > .info > p > span.other_dates {
     position:relative;
-    opacity: 0.58;
+    opacity: 0.5;
     left:2px;
-    font-size: 1rem;
+    font-size: 0.9rem;
 }
 
 .event-card-footer {
     margin-top: 10px;
-    border-top: 1px solid #e2e2e2;
 }
