@@ -10,7 +10,7 @@ import scala.concurrent.Future
 
 class GuestHomeController @Inject()(ws: WSClient)(implicit val messagesApi: MessagesApi) extends Controller with I18nSupport {
 
-  def index() = Action.async {
+  def index() = Action.async { implicit request =>
     Future.successful(Ok(views.html.top(List("event1", "event2", "event3", "event4"))))
   }
 
