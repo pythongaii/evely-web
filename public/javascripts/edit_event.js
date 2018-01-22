@@ -1,6 +1,5 @@
 $(function () {
 
-    /* MDCの初期化処理 */
     window.mdc.autoInit();
 
     var dynamicTabBar = window.dynamicTabBar = new mdc.tabs.MDCTabBar(document.querySelector('#dynamic-tab-bar'));
@@ -208,5 +207,50 @@ $(function () {
 
 
     }
+
+    $('.image-choose').on('click', function(){
+        $('#fileup').trigger('click');
+    });
+
+    var file;
+    // アップロードするファイルを選択
+    $('input[type=file]').change(function() {
+        file = $(this).prop('files')[0];
+
+        // 画像以外は処理を停止
+        if (! file.type.match('image.*')) {
+            // クリア
+            $(this).val('');
+            $('span').html('');
+            return;
+        }
+
+        // 画像表示
+        var reader = new FileReader();
+        reader.onload = function() {
+            var img_src = $('<img>').attr('src', reader.result);
+            $('.image-choose').html(img_src);
+        }
+        reader.readAsDataURL(file);
+    });
+
+    $('#image-up-form').on('submit', function(event){
+        event.preventDefault();
+        var formData = new FormData($(this).get()[0]);
+        $.ajax({
+            url:$(this).attr('action'),
+            type:'POST',
+            dataType:'json',
+            data:formData,
+            processData:false,
+            contentType:false
+        }).done(function (res) {
+            res
+        }).fail(function( jqXHR, textStatus, errorThrown ) {
+            // しっぱい！
+            console.log( 'ERROR', jqXHR, textStatus, errorThrown );
+        });
+        return false;
+    });
 
 });

@@ -34,8 +34,6 @@ class EventController @Inject()(cache: CacheApi,
       )
   }
 
-
-
   def search = Action.async { implicit request =>
     SearchEventForm.form.bindFromRequest().fold(
       error => Future.successful(Ok("error search")),
