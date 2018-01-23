@@ -1,6 +1,5 @@
 $(function () {
 
-    /* MDCの初期化処理 */
     window.mdc.autoInit();
 
     var dynamicTabBar = window.dynamicTabBar = new mdc.tabs.MDCTabBar(document.querySelector('#dynamic-tab-bar'));
@@ -208,5 +207,57 @@ $(function () {
 
 
     }
+
+    $('.image-choose').on('click', function(){
+        $('#fileup').trigger('click');
+    });
+
+    var file;
+    // アップロードするファイルを選択
+    $('input[type=file]').change(function() {
+        file = $(this).prop('files')[0];
+
+        // 画像以外は処理を停止
+        if (! file.type.match('image.*')) {
+            // クリア
+            $(this).val('');
+            $('span').html('');
+            return;
+        }
+
+        // 画像表示
+        var reader = new FileReader();
+        reader.onload = function() {
+            var img_src = $('<img>').attr('src', reader.result);
+            $('.image-choose').html(img_src);
+        }
+        reader.readAsDataURL(file);
+    });
+
+    $('#save-button').on('click', function(){
+        $('#image-up-form').submit();
+    })
+    $('#image-up-form').on('submit', function(event){
+        var form = $(this);
+        var formdata = new FormData();
+        formdata.append('image', $('input[type=file]')[0].files[0])
+
+        alert("hi");
+        var formAction = form.attr('action');
+        $.ajax({
+            url:formAction,
+            type:'POST',
+            data:formdata,
+            enctype: 'multipart/form-data',
+            processData:false,
+            contentType:false
+        }).done(function (res) {
+            alert(hi);
+        }).fail(function( jqXHR, textStatus, errorThrown ) {
+            // しっぱい！
+            console.log( 'ERROR', jqXHR, textStatus, errorThrown );
+        });
+        return false;
+    });
 
 });

@@ -4,6 +4,7 @@ import javax.inject.Inject
 
 import controllers.routes
 import play.api.cache.CacheApi
+import play.api.libs.Files
 import play.api.mvc.{Security, _}
 
 import scala.concurrent.Future
@@ -48,6 +49,11 @@ class AuthModule @Inject()(val cache: CacheApi, configProvider: ConfigProvider) 
   def withAuth(f: => String => Request[AnyContent] => Future[Result]) = {
     Security.Authenticated(username, onUnauthorized) { user =>
       Action.async(request => f(user)(request))
+    }
+  }
+  def withAuth(parser: BodyParser[MultipartFormData[Files.TemporaryFile]])(f: => String => Request[MultipartFormData[Files.TemporaryFile]] => Future[Result]) = {
+    Security.Authenticated(username, onUnauthorized) { user =>
+      Action.async(parser)(request => f(user)(request))
     }
   }
 }

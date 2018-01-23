@@ -30,6 +30,8 @@ GET         /event/edit/:eventId        controllers.EventController.editEvent(ev
 POST        /events                     controllers.EventController.create
 GET         /event/:eventId             controllers.EventController.findOneGridSearch(eventId:String)
 
+POST        /file/upload                controllers.FileUploadController.fileUpload
+
 # signout用
 GET         /signout                    controllers.RegisteredHomeController.signout
 

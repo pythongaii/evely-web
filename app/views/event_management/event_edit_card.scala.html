@@ -1,245 +1,254 @@
 @import model.event.Event
 @import helper._
 @(event: Event)(implicit messages: Messages)
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="utf-8">
-<!-- Bootstrap -->
-        <!--<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>-->
-        <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">-->
-        <!--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>-->
-        <!-- Font Awesome -->
-        <!--<link rel="stylesheet" href="../vendor/font-awesome-4.7.0/css/font-awesome.min.css">-->
-        <!-- My javascript & css files -->
-        <!--<script src="../js/master.js" charset="utf-8"></script>-->
-        <!--<link rel="stylesheet" href="../css/master.css">-->
-        <!--<link rel="stylesheet" href="../css/nearby.css">-->
-        <!--<link rel="stylesheet" href="../css/search_list_item_vr.css">-->
-        <link rel="stylesheet" href="@routes.Assets.at("/stylesheets/event_edit_card.css")">
-        <link rel="stylesheet" href="@routes.Assets.at("/stylesheets/event_edit.css")">
-    </head>
-    <body>
-        <div class="event-edit-card-container">
-            <div class="mdc-card font_style-edit-card">
+<div class="event-edit-card-container">
+    <div class="mdc-card font_style-edit-card">
 
-                <section class="mdc-card__primary mdc-theme--primary-light-bg">
-                    <h1 class="mdc-card__title mdc-card__title--large">@event.title</h1>
-                    <h2 class="mdc-card__subtitle"></h2>
-                </section>
+        <section class="mdc-card__primary mdc-theme--primary-light-bg">
+            <h1 class="mdc-card__title mdc-card__title--large font_style-edit-card_card-title-text">@event.title</h1>
+            <h2 class="mdc-card__subtitle"></h2>
+        </section>
 
-                <nav id="dynamic-tab-bar" class="mdc-tab-bar mdc-tab-bar--indicator-accent" role="tablist">
-                    <a class="mdc-tab mdc-tab--active font_style-edit-card_tab " href="#panel-1">基本項目*</a>
-                    <a class="mdc-tab font_style-edit-card_tab" href="#panel-2">開催時間・場所*</a>
-                    <a class="mdc-tab font_style-edit-card_tab" href="#panel-3">画像</a>
-                    <span class="mdc-tab-bar__indicator"></span>
-                </nav>
+        <nav id="dynamic-tab-bar" class="mdc-tab-bar mdc-tab-bar--indicator-accent" role="tablist">
+            <a class="mdc-tab mdc-tab--active font_style-edit-card_tab " href="#panel-1">基本項目*</a>
+            <a class="mdc-tab font_style-edit-card_tab" href="#panel-2">開催時間・場所*</a>
+            <a class="mdc-tab font_style-edit-card_tab" href="#panel-3">画像</a>
+            <span class="mdc-tab-bar__indicator"></span>
+        </nav>
 
-                <section class="mdc-card__supporting-text">
+        <section class="mdc-card__supporting-text">
 
-                    <div class="panels">
-                        <div class="panel active" id="panel-1" role="tabpanel" aria-hidden="false">
-                                <!-- Title -->
-                            <div class="title-textfield-container">
-                                <div class="mdc-text-field" data-mdc-auto-init="MDCTextField">
-                                    <input type="text" id="title-text-field" class="mdc-text-field__input font_style-edit-card_title-textfield" value="@event.title">
-                                    <label class="mdc-text-field__label font_style-edit-card_title-textfield" id="title-text-field-label" for="title-text-field" value="@event.title">Title*</label>
-                                    <div class="mdc-text-field__bottom-line"></div>
-                                </div>
-                            </div>
-
-                                <!-- Summary -->
-                            <div class="sub-textfield-container">
-                                <div class="mdc-text-field mdc-text-field--textarea" data-mdc-auto-init="MDCTextField">
-                                    <textarea type="text" id="subscription-text-field" class="mdc-text-field__input font_style-edit-card_summary-textfield"
-                                    rows="2"></textarea>
-                                    <label class="mdc-text-field__label font_style-edit-card_basic-textfield" for="subscription-text-field">Summary</label>
-                                </div>
-                            </div>
-
-                                <!-- Detail -->
-                            <div class="detail-textfield-container">
-                                <div class="mdc-text-field mdc-text-field--textarea" data-mdc-auto-init="MDCTextField">
-                                    <textarea type="text" id="detail-text-field" class="mdc-text-field__input font_style-edit-card_basic-textfield"
-                                    rows="8" >@event.body.body.getOrElse("")</textarea>
-                                    <label class="mdc-text-field__label font_style-edit-card_Detail-textfield" for="detail-text-field">Detail*(1000)</label>
-                                </div>
-                            </div>
-                                <!-- URL -->
-                            <div class="url-textfield-container">
-                                <div class="mdc-text-field" data-mdc-auto-init="MDCTextField">
-                                    <input type="text" id="url-text-field" class="mdc-text-field__input font_style-edit-card_basic-textfield" value="@event.url.getOrElse("")">
-                                    <label class="mdc-text-field__label font_style-edit-card_basic-textfield" for="url-text-field">Url</label>
-                                    <div class="mdc-text-field__bottom-line"></div>
-                                </div>
-                            </div>
-
-                                <!-- Tel -->
-                            <div class="tel-textfield-container">
-                                <div class="mdc-text-field" data-mdc-auto-init="MDCTextField">
-                                    <input type="text" id="tel-text-field" class="mdc-text-field__input font_style-edit-card_basic-textfield" value="@event.tel.getOrElse("")">
-                                    <label class="mdc-text-field__label font_style-edit-card_basic-textfield" for="tel-text-field">TelephoneNumber</label>
-                                    <div class="mdc-text-field__bottom-line"></div>
-                                </div>
-                            </div>
-
-                                <!-- MailAddress -->
-                            <div class="mail-textfield-container">
-                                <div class="mdc-text-field" data-mdc-auto-init="MDCTextField">
-                                    <input type="text" id="mail-text-field" class="mdc-text-field__input font_style-edit-card_basic-textfield" value="@event.mail.getOrElse("")">
-                                    <label class="mdc-text-field__label font_style-edit-card_basic-textfield" for="mail-text-field">MailAddress</label>
-                                    <div class="mdc-text-field__bottom-line"></div>
-                                </div>
-                            </div>
-
-
-                                <!-- Spending Time -->
-                            <div class="spendtime-textfield-container">
-                                <div class="mdc-text-field" data-mdc-auto-init="MDCTextField">
-                                    <input type="text" id="spending-time-text-field" class="mdc-text-field__input font_style-edit-card_basic-textfield">
-                                    <label class="mdc-text-field__label font_style-edit-card_basic-textfield" for="spending-time-text-field">Spending Time</label>
-                                    <div class="mdc-text-field__bottom-line"></div>
-                                </div>
-                            </div>
-
-                                <!-- Wanted Persons -->
-                            <div class="wantpersns-textfield-container">
-                                <div class="mdc-text-field" data-mdc-auto-init="MDCTextField">
-                                    <input type="text" id="wanted-persons-text-field" class="mdc-text-field__input font_style-edit-card_basic-textfield">
-                                    <label class="mdc-text-field__label font_style-edit-card_basic-textfield" for="wanted-persons-text-field">Wanted Persons</label>
-                                    <div class="mdc-text-field__bottom-line"></div>
-                                </div>
-                            </div>
-
-                                <!-- Category -->
-                            <div class="category-selector-container">
-                                <div class="mdc-select" role="listbox" data-mdc-auto-init="MDCSelect">
-                                    <div class="mdc-select__surface" tabindex="0">
-                                        <div class="mdc-select__label font_style-edit-card_basic-selector">Category</div>
-                                        <div class="mdc-select__selected-text"></div>
-                                        <div class="mdc-select__bottom-line"></div>
-                                    </div>
-                                    <div class="mdc-simple-menu mdc-select__menu">
-                                        <ul class="mdc-list mdc-simple-menu__items">
-                                            <li class="mdc-list-item font_style-edit-card_basic-selector" role="option" tabindex="0">Sports</li>
-                                            <li class="mdc-list-item font_style-edit-card_basic-selector" role="option" tabindex="0">Workshop</li>
-                                            <li class="mdc-list-item font_style-edit-card_basic-selector" role="option" tabindex="0">Food</li>
-                                            <li class="mdc-list-item font_style-edit-card_basic-selector" role="option" tabindex="0">Volunteer</li>
-                                            <li class="mdc-list-item font_style-edit-card_basic-selector" role="option" tabindex="0">Bargain</li>
-                                            <li class="mdc-list-item font_style-edit-card_basic-selector" role="option" tabindex="0">Music</li>
-                                            <li class="mdc-list-item font_style-edit-card_basic-selector" role="option" tabindex="0">Art</li>
-                                            <li class="mdc-list-item font_style-edit-card_basic-selector" role="option" tabindex="0">other</li>
-                                            <li class="mdc-list-item font_style-edit-card_basic-selector" role="option" tabindex="0">Bargain</li>
-                                            <li class="mdc-list-item font_style-edit-card_basic-selector" role="option" tabindex="0">Music</li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-
-                                <!-- Target -->
-                            <div class="target-selector-container">
-                                <div class="mdc-select" role="listbox" data-mdc-auto-init="MDCSelect">
-                                    <div class="mdc-select__surface" tabindex="0">
-                                        <div class="mdc-select__label font_style-edit-card_basic-selector">Targets</div>
-                                        <div class="mdc-select__selected-text"></div>
-                                        <div class="mdc-select__bottom-line"></div>
-                                    </div>
-                                    <div class="mdc-simple-menu mdc-select__menu">
-                                        <ul class="mdc-list mdc-simple-menu__items">
-                                            <li class="mdc-list-item font_style-edit-card_basic-selector" role="option" tabindex="0">Couple</li>
-                                            <li class="mdc-list-item font_style-edit-card_basic-selector" role="option" tabindex="0">Child</li>
-                                            <li class="mdc-list-item font_style-edit-card_basic-selector" role="option" tabindex="0">Men</li>
-                                            <li class="mdc-list-item font_style-edit-card_basic-selector" role="option" tabindex="0">Women</li>
-                                            <li class="mdc-list-item font_style-edit-card_basic-selector" role="option" tabindex="0">Business Man</li>
-                                            <li class="mdc-list-item font_style-edit-card_basic-selector" role="option" tabindex="0">Homeworker</li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
+            <div class="panels">
+                <div class="panel active" id="panel-1" role="tabpanel" aria-hidden="false">
+                        <!-- Title -->
+                    <div class="title-textfield-container">
+                        <div class="mdc-text-field" data-mdc-auto-init="MDCTextField">
+                            <input type="text" id="title-text-field" class="mdc-text-field__input font_style-edit-card_title-textfield" value="@event.title">
+                            <label class="mdc-text-field__label font_style-edit-card_title-textfield" id="title-text-field-label" for="title-text-field" value="@event.title">
+                                Title*</label>
+                            <div class="mdc-text-field__bottom-line"></div>
                         </div>
-                        <div class="panel" id="panel-2" role="tabpanel" aria-hidden="true">
-                            <div class="date-list-container">
-                                <ul class="mdc-list">
-                                    @count = @{0}
-                                    @for(schedule <- event.schedules) {
-                                        count++
-                                        <li class="mdc-list-item font_style-edit-card_basic-textfield">
-                                            <div class="icons mdc-theme--secondary-light-bg">count</div>
-                                            <div class="date-list-item">
-                                                    <!-- Start Date -->
-                                                <div class="start-date-textfield-container">
-                                                    <div class="mdc-text-field" data-mdc-auto-init="MDCTextField">
-                                                        <input type="text" id="start-date-text-field" class="mdc-text-field__input font_style-edit-card_basic-textfield" value="@schedule.upcomingDate.startDate">
-                                                        <label class="mdc-text-field__label font_style-edit-card_basic-textfield" id="start-date-text-field-label"
-                                                        for="start-date-text-field">Start Date*</label>
-                                                        <div class="mdc-text-field__bottom-line"></div>
-                                                    </div>
-                                                </div>
-                                                    <!-- End Date -->
-                                                <div class="end-date-textfield-container">
-                                                    <div class="mdc-text-field" data-mdc-auto-init="MDCTextField">
-                                                        <input type="text" id="end-date-text-field2" class="mdc-text-field__input font_style-edit-card_basic-textfield" value="@schedule.upcomingDate.endDate">
-                                                        <label class="mdc-text-field__label font_style-edit-card_basic-textfield" id="end-date-text-field-label"
-                                                        for="end-date-text-field">End Date*</label>
-                                                        <div class="mdc-text-field__bottom-line"></div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </li>
-                                    }
+                    </div>
+
+                        <!-- Summary -->
+                    <div class="sub-textfield-container">
+                        <div class="mdc-text-field mdc-text-field--textarea" data-mdc-auto-init="MDCTextField">
+                            <textarea type="text" id="subscription-text-field" class="mdc-text-field__input font_style-edit-card_summary-textfield"
+                            rows="2"></textarea>
+                            <label class="mdc-text-field__label font_style-edit-card_basic-textfield" for="subscription-text-field">
+                                Summary</label>
+                        </div>
+                    </div>
+
+                        <!-- Detail -->
+                    <div class="detail-textfield-container">
+                        <div class="mdc-text-field mdc-text-field--textarea" data-mdc-auto-init="MDCTextField">
+                            <textarea type="text" id="detail-text-field" class="mdc-text-field__input font_style-edit-card_basic-textfield"
+                            rows="8" >@event.body.body.getOrElse("")</textarea>
+                            <label class="mdc-text-field__label font_style-edit-card_Detail-textfield" for="detail-text-field">
+                                Detail*(1000)</label>
+                        </div>
+                    </div>
+                        <!-- URL -->
+                    <div class="url-textfield-container">
+                        <div class="mdc-text-field" data-mdc-auto-init="MDCTextField">
+                            <input type="text" id="url-text-field" class="mdc-text-field__input font_style-edit-card_basic-textfield" value="@event.url.getOrElse("")">
+                            <label class="mdc-text-field__label font_style-edit-card_basic-textfield" for="url-text-field">
+                                Url</label>
+                            <div class="mdc-text-field__bottom-line"></div>
+                        </div>
+                    </div>
+
+                        <!-- Tel -->
+                    <div class="tel-textfield-container">
+                        <div class="mdc-text-field" data-mdc-auto-init="MDCTextField">
+                            <input type="text" id="tel-text-field" class="mdc-text-field__input font_style-edit-card_basic-textfield" value="@event.tel.getOrElse("")">
+                            <label class="mdc-text-field__label font_style-edit-card_basic-textfield" for="tel-text-field">
+                                TelephoneNumber</label>
+                            <div class="mdc-text-field__bottom-line"></div>
+                        </div>
+                    </div>
+
+                        <!-- MailAddress -->
+                    <div class="mail-textfield-container">
+                        <div class="mdc-text-field" data-mdc-auto-init="MDCTextField">
+                            <input type="text" id="mail-text-field" class="mdc-text-field__input font_style-edit-card_basic-textfield" value="@event.mail.getOrElse("")">
+                            <label class="mdc-text-field__label font_style-edit-card_basic-textfield" for="mail-text-field">
+                                MailAddress</label>
+                            <div class="mdc-text-field__bottom-line"></div>
+                        </div>
+                    </div>
+
+
+                        <!-- Spending Time -->
+                    <div class="spendtime-textfield-container">
+                        <div class="mdc-text-field" data-mdc-auto-init="MDCTextField">
+                            <input type="text" id="spending-time-text-field" class="mdc-text-field__input font_style-edit-card_basic-textfield">
+                            <label class="mdc-text-field__label font_style-edit-card_basic-textfield" for="spending-time-text-field">
+                                Spending Time</label>
+                            <div class="mdc-text-field__bottom-line"></div>
+                        </div>
+                    </div>
+
+                        <!-- Wanted Persons -->
+                    <div class="wantpersns-textfield-container">
+                        <div class="mdc-text-field" data-mdc-auto-init="MDCTextField">
+                            <input type="text" id="wanted-persons-text-field" class="mdc-text-field__input font_style-edit-card_basic-textfield">
+                            <label class="mdc-text-field__label font_style-edit-card_basic-textfield" for="wanted-persons-text-field">
+                                Wanted Persons</label>
+                            <div class="mdc-text-field__bottom-line"></div>
+                        </div>
+                    </div>
+
+                        <!-- Category -->
+                    <div class="category-selector-container">
+                        <div class="mdc-select" role="listbox" data-mdc-auto-init="MDCSelect">
+                            <div class="mdc-select__surface" tabindex="0">
+                                <div class="mdc-select__label font_style-edit-card_basic-selector">Category</div>
+                                <div class="mdc-select__selected-text"></div>
+                                <div class="mdc-select__bottom-line"></div>
+                            </div>
+                            <div class="mdc-simple-menu mdc-select__menu">
+                                <ul class="mdc-list mdc-simple-menu__items">
+                                    <li class="mdc-list-item font_style-edit-card_basic-selector" role="option" tabindex="0">
+                                        Sports</li>
+                                    <li class="mdc-list-item font_style-edit-card_basic-selector" role="option" tabindex="0">
+                                        Workshop</li>
+                                    <li class="mdc-list-item font_style-edit-card_basic-selector" role="option" tabindex="0">
+                                        Food</li>
+                                    <li class="mdc-list-item font_style-edit-card_basic-selector" role="option" tabindex="0">
+                                        Volunteer</li>
+                                    <li class="mdc-list-item font_style-edit-card_basic-selector" role="option" tabindex="0">
+                                        Bargain</li>
+                                    <li class="mdc-list-item font_style-edit-card_basic-selector" role="option" tabindex="0">
+                                        Music</li>
+                                    <li class="mdc-list-item font_style-edit-card_basic-selector" role="option" tabindex="0">
+                                        Art</li>
+                                    <li class="mdc-list-item font_style-edit-card_basic-selector" role="option" tabindex="0">
+                                        other</li>
+                                    <li class="mdc-list-item font_style-edit-card_basic-selector" role="option" tabindex="0">
+                                        Bargain</li>
+                                    <li class="mdc-list-item font_style-edit-card_basic-selector" role="option" tabindex="0">
+                                        Music</li>
                                 </ul>
                             </div>
-                            <div class="map-container">
-                                    <!-- Postal Code -->
-                                <div class="postal-code-textfield-container">
-                                    <div class="mdc-text-field" data-mdc-auto-init="MDCTextField">
-                                        <input type="text" id="postal-code-text-field" class="mdc-text-field__input font_style-edit-card_basic-textfield">
-                                        <label class="mdc-text-field__label font_style-edit-card_basic-textfield" id="postal-code-text-field-label"
-                                        for="postal-code-text-field">Postal Code*</label>
-                                        <div class="mdc-text-field__bottom-line"></div>
-                                    </div>
-                                </div>
-                                <div class="address-search-button-container">
-                                    <button class="mdc-button font_style-edit-card_basic-textfield">
-                                        <i></i>
-                                        Search
-                                    </button>
-                                </div>
-                                    <!-- Address -->
-                                <div class="address-textfield-container">
-                                    <div class="mdc-text-field" data-mdc-auto-init="MDCTextField">
-                                        <input type="text" id="address-text-field" class="mdc-text-field__input font_style-edit-card_basic-textfield">
-                                        <label class="mdc-text-field__label font_style-edit-card_basic-textfield" id="address-text-field-label"
-                                        for="address-text-field">Address*</label>
-                                        <div class="mdc-text-field__bottom-line"></div>
-                                    </div>
-                                </div>
-                                <div id="map">
-                                </div>
-                            </div>
                         </div>
-                        <div class="panel" id="panel-3" role="tabpanel" aria-hidden="true">
-                            <div class="image-choose-container">
-                                <div class="image-choose">
-                                    <div class="image-asset"></div>
-                                    <div class="msg font_style-edit-card_basic-textfield">クリックで画像を追加</div>
-                                </div>
-                            </div>
+                    </div>
 
+                        <!-- Target -->
+                    <div class="target-selector-container">
+                        <div class="mdc-select" role="listbox" data-mdc-auto-init="MDCSelect">
+                            <div class="mdc-select__surface" tabindex="0">
+                                <div class="mdc-select__label font_style-edit-card_basic-selector">Targets</div>
+                                <div class="mdc-select__selected-text"></div>
+                                <div class="mdc-select__bottom-line"></div>
+                            </div>
+                            <div class="mdc-simple-menu mdc-select__menu">
+                                <ul class="mdc-list mdc-simple-menu__items">
+                                    <li class="mdc-list-item font_style-edit-card_basic-selector" role="option" tabindex="0">
+                                        Couple</li>
+                                    <li class="mdc-list-item font_style-edit-card_basic-selector" role="option" tabindex="0">
+                                        Child</li>
+                                    <li class="mdc-list-item font_style-edit-card_basic-selector" role="option" tabindex="0">
+                                        Men</li>
+                                    <li class="mdc-list-item font_style-edit-card_basic-selector" role="option" tabindex="0">
+                                        Women</li>
+                                    <li class="mdc-list-item font_style-edit-card_basic-selector" role="option" tabindex="0">
+                                        Business Man</li>
+                                    <li class="mdc-list-item font_style-edit-card_basic-selector" role="option" tabindex="0">
+                                        Homeworker</li>
+                                </ul>
+                            </div>
                         </div>
                     </div>
-                    <div class="dots">
-                        <a class="dot active" data-trigger="panel-1" href="#panel-1"></a>
-                        <a class="dot" data-trigger="panel-2" href="#panel-2"></a>
-                        <a class="dot" data-trigger="panel-3" href="#panel-3"></a>
+                </div>
+                <div class="panel" id="panel-2" role="tabpanel" aria-hidden="true">
+                    <div class="date-list-container">
+                        <ul class="mdc-list">
+                            @count = @{
+                                0
+                            }
+
+                            @for(schedule <- event.schedules) {
+                                count++
+                                <li class="mdc-list-item font_style-edit-card_basic-textfield">
+                                    <div class="icons mdc-theme--secondary-light-bg">count</div>
+                                    <div class="date-list-item">
+                                            <!-- Start Date -->
+                                        <div class="start-date-textfield-container">
+                                            <div class="mdc-text-field" data-mdc-auto-init="MDCTextField">
+                                                <input type="text" id="start-date-text-field" class="mdc-text-field__input font_style-edit-card_basic-textfield" value="@schedule.upcomingDate.startDate">
+                                                <label class="mdc-text-field__label font_style-edit-card_basic-textfield" id="start-date-text-field-label"
+                                                for="start-date-text-field">Start Date*</label>
+                                                <div class="mdc-text-field__bottom-line"></div>
+                                            </div>
+                                        </div>
+                                            <!-- End Date -->
+                                        <div class="end-date-textfield-container">
+                                            <div class="mdc-text-field" data-mdc-auto-init="MDCTextField">
+                                                <input type="text" id="end-date-text-field2" class="mdc-text-field__input font_style-edit-card_basic-textfield" value="@schedule.upcomingDate.endDate">
+                                                <label class="mdc-text-field__label font_style-edit-card_basic-textfield" id="end-date-text-field-label"
+                                                for="end-date-text-field">End Date*</label>
+                                                <div class="mdc-text-field__bottom-line"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                            }
+                        </ul>
                     </div>
-                </section>
-                <section class="mdc-card__actions">
-                    <button id="save-button" class="mdc-button mdc-button--raised mdc-card__action mdc-theme--secondary-bg font_style-edit-card_basic-textfield">保存する</button>
-                    <button id="cancel-button" class="mdc-button  mdc-card__action font_style-edit-card_basic-textfield">キャンセル</button>
-                </section>
+                    <div class="map-container">
+                            <!-- Postal Code -->
+                        <div class="postal-code-textfield-container">
+                            <div class="mdc-text-field" data-mdc-auto-init="MDCTextField">
+                                <input type="text" id="postal-code-text-field" class="mdc-text-field__input font_style-edit-card_basic-textfield">
+                                <label class="mdc-text-field__label font_style-edit-card_basic-textfield" id="postal-code-text-field-label"
+                                for="postal-code-text-field">Postal Code*</label>
+                                <div class="mdc-text-field__bottom-line"></div>
+                            </div>
+                        </div>
+                        <div class="address-search-button-container">
+                            <button class="mdc-button font_style-edit-card_basic-textfield">
+                                <i></i>
+                                Search
+                            </button>
+                        </div>
+                            <!-- Address -->
+                        <div class="address-textfield-container">
+                            <div class="mdc-text-field" data-mdc-auto-init="MDCTextField">
+                                <input type="text" id="address-text-field" class="mdc-text-field__input font_style-edit-card_basic-textfield">
+                                <label class="mdc-text-field__label font_style-edit-card_basic-textfield" id="address-text-field-label"
+                                for="address-text-field">Address*</label>
+                                <div class="mdc-text-field__bottom-line"></div>
+                            </div>
+                        </div>
+                        <div id="map">
+                        </div>
+                    </div>
+                </div>
+                <div class="panel" id="panel-3" role="tabpanel" aria-hidden="true">
+                    <form id="image-up-form" action="/file/upload" enctype="multipart/form-data" method="post">
+                        <input type="file" name="userfile" accept="image/*" id="fileup">
+                    </form>
+                    <div class="image-choose-container">
+                        <div class="image-choose">
+                            <div class="image-asset"></div>
+                            <div class="msg font_style-edit-card_basic-textfield">クリックで画像を追加</div>
+                        </div>
+                    </div>
+
+                </div>
             </div>
-        </div>
-
-    </body>
-</html>
+            <div class="dots">
+                <a class="dot active" data-trigger="panel-1" href="#panel-1"></a>
+                <a class="dot" data-trigger="panel-2" href="#panel-2"></a>
+                <a class="dot" data-trigger="panel-3" href="#panel-3"></a>
+            </div>
+        </section>
+        <section class="mdc-card__actions">
+            <button id="save-button" class="mdc-button mdc-button--raised mdc-card__action mdc-theme--secondary-bg font_style-edit-card_basic-textfield">
+                保存する</button>
+            <button id="cancel-button" class="mdc-button  mdc-card__action font_style-edit-card_basic-textfield">キャンセル</button>
+        </section>
+    </div>
+</div>

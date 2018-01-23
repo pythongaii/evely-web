@@ -2,8 +2,11 @@
  全てのCSSフレームワークの指定を打ち消すために!importantを指定している。
  */
 
-
 /* cards style */
+.font_style-edit-card_card-title-text{
+    font-size: 2.5rem !important;
+}
+
 .font_style-edit-card_tab {
     font-size: 1.5rem !important;
 }
