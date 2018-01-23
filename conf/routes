@@ -29,6 +29,8 @@ GET         /event/my_list/             controllers.EventController.fetchCreatin
 GET         /event/edit/:eventId        controllers.EventController.editEvent(eventId: String)
 POST        /events                     controllers.EventController.create
 
+POST        /file/upload                controllers.FileUploadController.fileUpload
+
 # signout用
 GET         /signout                    controllers.RegisteredHomeController.signout
 

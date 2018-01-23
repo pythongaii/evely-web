@@ -234,18 +234,25 @@ $(function () {
         reader.readAsDataURL(file);
     });
 
+    $('#save-button').on('click', function(){
+        $('#image-up-form').submit();
+    })
     $('#image-up-form').on('submit', function(event){
-        event.preventDefault();
-        var formData = new FormData($(this).get()[0]);
+        var form = $(this);
+        var formdata = new FormData();
+        formdata.append('image', $('input[type=file]')[0].files[0])
+
+        alert("hi");
+        var formAction = form.attr('action');
         $.ajax({
-            url:$(this).attr('action'),
+            url:formAction,
             type:'POST',
-            dataType:'json',
-            data:formData,
+            data:formdata,
+            enctype: 'multipart/form-data',
             processData:false,
             contentType:false
         }).done(function (res) {
-            res
+            alert(hi);
         }).fail(function( jqXHR, textStatus, errorThrown ) {
             // しっぱい！
             console.log( 'ERROR', jqXHR, textStatus, errorThrown );
