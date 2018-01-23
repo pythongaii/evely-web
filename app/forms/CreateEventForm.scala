@@ -24,15 +24,15 @@ object CreateEventForm {
       "mail" -> optional(text),
       "noticeRange" -> number,
       "openFlg" -> boolean,
-      "plans" -> list(mapping(
+      "schedules" -> list(mapping(
         "location" -> mapping(
           "name" -> nonEmptyText,
           "lat" -> of(doubleFormat),
           "lng" -> of(doubleFormat)
         )(Location.apply)(Location.unapply),
         "upcomingDate" -> mapping(
-          "endDate" -> optional(jodaDate("YYYY-MM-DD HH:mm:ss")),
-          "startDate" -> optional(jodaDate("YYYY-MM-DD HH:mm:ss"))
+          "endDate" -> jodaDate("YYYY-MM-DD HH:mm:ss"),
+          "startDate" -> jodaDate("YYYY-MM-DD HH:mm:ss")
         )(UpcomingDate.apply)(UpcomingDate.unapply)
       )(Plan.apply)(Plan.unapply)),
       "scope" -> text,

@@ -26,6 +26,7 @@ class EventController @Inject()(cache: CacheApi,
           Future.successful(Redirect(routes.GuestHomeController.index()))
         },
         eventData => {
+          eventData
           apiEventDAO.save(eventData, request).map {
             case res => Redirect(routes.RegisteredHomeController.index())
             case _ => Redirect(routes.GuestHomeController.index())
@@ -33,8 +34,6 @@ class EventController @Inject()(cache: CacheApi,
         }
       )
   }
-
-
 
   def search = Action.async { implicit request =>
     SearchEventForm.form.bindFromRequest().fold(
@@ -71,13 +70,23 @@ class EventController @Inject()(cache: CacheApi,
 
   def findOne(eventId: String) = Action.async { implicit request =>
     val query = Seq(("url", configProvider.EVENT_URL + "/detail"), ("ids", eventId))
-
     apiEventDAO.find(request,query: _*) map {
       case res => {
         val event = Json.parse(res.get.body).validate[Event].get
         Ok(views.html.search_view.search_detail_item(event))
       }
     }
+  }
+
+  def findOneGridSearch(eventId: String) = Action.async { implicit request =>
+    val query = Seq(("url", configProvider.EVENT_URL + "/detail"), ("ids", eventId))
+//    apiEventDAO.find(request,query: _*) map {
+//      case res => {
+//        val event = Json.parse(res.get.body).validate[Event].get
+//        Ok(views.html.search_view.grid_search_detail(event))
+//      }
+//    }
+    Future.successful(Ok(views.html.search_view.grid_search_detail()))
   }
 
   def fetchCreatingEvents = withAuth { username => implicit request =>

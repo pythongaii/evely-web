@@ -221,7 +221,7 @@
 }
 
 #event-pin {
-    background: url("../images/icon/ic_pin/ic_pin.png") no-repeat;
+    background: url("../../images/icon/ic_pin/ic_pin.png") no-repeat;
     background-size: contain;
 }
 
@@ -230,17 +230,17 @@
 }
 
 #mail-icon {
-    background: url("../images/icon/ic_mail/ic_mail_tinted.png");
+    background: url("../../images/icon/ic_mail/ic_mail_tinted.png");
     background-size: contain;
 }
 
 #tel-icon {
-    background: url("../images/icon/ic_phone/ic_call.png");
+    background: url("../../images/icon/ic_phone/ic_call.png");
     background-size: contain;
 }
 
 #url-icon {
-    background: url("../images/icon/ic_ticket/ic_ticket_tinted.png");
+    background: url("../../images/icon/ic_ticket/ic_ticket_tinted.png");
     background-size: contain;
 }
 

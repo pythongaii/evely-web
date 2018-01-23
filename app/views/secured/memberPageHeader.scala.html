@@ -1,5 +1,5 @@
 @import forms.{CreateEventForm, SearchEventForm}
-@(key: Option[String])(userID: String)(implicit messages: Messages, request: RequestHeader)
+@(key: Option[String])(userID: String)(implicit messages: Messages)
 @import helpers.PlainHelper.myFields
 @createEventForm = @{
     CreateEventForm.createEventForm
@@ -94,14 +94,14 @@
                 <h4 class="modal-title">新しいイベントを作成</h4>
             </div>
                 <div class="modal-body">
-                @helper.form(action = routes.EventController.create(), 'id -> "create-form") {
+                @helper.form(action = routes.EventController.create(), 'id -> "create-form", 'class -> "modal-form-container") {
                     <div class="form-group">
+                        <label for="title"><span class="red">*</span>タイトル</label>
                         @helper.inputText(createEventForm("title"),
                             'class -> "form-control validate[required]",
                             'size -> "20",
                             'name -> "data[title]",
                             'placeholder -> "1時間限定タイムセール!!")
-                        <label for="title"><span class="red">*</span>タイトル</label>
                     </div>
                     <div class="form-group">
                         <label for="body">説明</label>
@@ -114,13 +114,13 @@
                     <div class="form-group row">
                         <div class="col-xs-6">
                             <label for="upcomingDate.startDate">開始日</label>
-                            @helper.inputText(createEventForm("plans[0].upcomingDate.startDate"),
+                            @helper.inputText(createEventForm("schedules[0].upcomingDate.startDate"),
                                 'class -> "form-control",
                                 'name -> "data[upcomingDate][startDate]")
                         </div>
                         <div class="col-xs-6">
                             <label for="upcomingDate.endDate">終了日</label>
-                            @helper.inputText(createEventForm("plans[0].upcomingDate.endDate"),
+                            @helper.inputText(createEventForm("schedules[0].upcomingDate.endDate"),
                                 'class -> "form-control",
                                 'name -> "data[upcomingDate][endDate]")
                         </div>
@@ -138,7 +138,7 @@
                         </div>
                     </div>
                     <div class="form-group">
-                    @helper.inputText(createEventForm("plans[0].location.name"),
+                    @helper.inputText(createEventForm("schedules[0].location.name"),
                         'class -> "form-control",
                         'name -> "data[location][name]")
                     </div>
@@ -146,8 +146,8 @@
                     <input type="hidden" name="noticeRange" value="500"/>
                     <input type="hidden" name="openFlg" value="false"/>
                     <input type="hidden" name="scope" value="public"/>
-                    <input type="hidden" name="plans[0].location.lat" id="plans.location.lat" value="12.02154">
-                    <input type="hidden" name="plans[0].location.lng" id="plans.location.lng" value="10.05014">
+                    <input type="hidden" name="schedules[0].location.lat" id="schedules.location.lat" value="12.02154">
+                    <input type="hidden" name="schedules[0].location.lng" id="schedules.location.lng" value="10.05014">
                     <input type="hidden" name="mail" id="mail" value="example@@example.com">
                     <input type="hidden" name="url" id="url" value="http://yahoo.co.jp">
                     <input type="hidden" name="tel" id="tel" value="090-1234-5678">
@@ -165,15 +165,17 @@
         $(function () {
             var opt = {
                 minDate: "moment",
-                toolbarPlacement: "guest_home",
+                toolbarPlacement: "top",
                 format: 'YYYY-MM-DD HH:mm:ss'
             };
-            $("#plans_0_upcomingDate_startDate").datetimepicker(opt);
-            $("#plans_0_upcomingDate_endDate").datetimepicker(opt);
-            $("#create-submit").on("click", function () {
+            $("#schedules_0_upcomingDate_startDate").datetimepicker(opt);
+            $("#schedules_0_upcomingDate_endDate").datetimepicker(opt);
+            alert("hi");
+            $("#create-submit").on("click",  function () {
                 $("#create-form").submit();
+                alert("hi");
             });
-
+            alert("hi2");
             $("#create-form").validationEngine('attach', {
                 // 以下のパラメータは任意
                 promptPosition: "topRight",//エラー文の表示位置
@@ -196,7 +198,7 @@
                     dataType: "json",
                     data: {'zipcode': zipcode},
                     success: function (json) {
-                        $('#plans_0_location_name').val(json.fullAddress);
+                        $('#schedules_0_location_name').val(json.fullAddress);
                     }
                 });
             });

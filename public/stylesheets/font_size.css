@@ -2,6 +2,8 @@
  全てのCSSフレームワークの指定を打ち消すために!importantを指定している。
  */
 
+
+/* cards style */
 .font_style-edit-card_tab {
     font-size: 1.5rem !important;
 }
@@ -18,6 +20,61 @@
     font-size: 1.7rem !important;
 }
 
+.font_style-detail-card_title-text {
+    font-size: 4.0rem !important;
+    line-height: 4.2rem !important;
+}
+
+.font_style--detail-card_host-info-header {
+    font-size: 1.2rem !important;
+}
+
+.font_style--detail-card_detail {
+    font-size: 1.8rem !important;
+    line-height: 1.8rem;
+}
+
+.font_style-detail-card_host-info {
+    font-size: 1.6rem !important;
+    line-height: 1.6rem;
+}
+
+.font_style--detail-card_schedule-header-title{
+    font-size: 2.5rem !important;
+    line-height: 2.7rem !important;
+    font-weight: 500 !important;
+}
+
+.font_style-detail-card_schedule-info-label {
+    font-size: 1.7rem !important;
+    line-height: 1.7rem !important;
+}
+
+.font_style-detail-card_schedule-info-text {
+    font-size: 1.8rem !important;
+    line-height: 1.8rem;
+}
+
+.font_style-detail-card_schedules-tab-text {
+    font-size: 2.5rem !important;
+    line-height: 2.7rem !important;
+}
+
+.font_style--detail-card_contact-info-header-title {
+    font-size: 2.5rem !important;
+    line-height: 2.7rem;
+}
+
+.font_style-detail-card_contact-info-item {
+    font-size: 1.8rem !important;
+    line-height: 2.0rem;
+}
+
+.font_style-detail-card_contact-info-item-header {
+    font-size: 1.7rem !important;
+    line-height: 1.7rem;
+}
+
 .font_style-header_search-textfield{
     font-size: 1.4rem !important;
 }
@@ -28,6 +85,14 @@
 
 .font_style-header-title-texts {
     font-size: 2.5rem !important;
+}
+
+.font_style-guest-home-search-text-field{
+    font-size: 2.0rem !important;
+}
+
+.font_style-guest-home-search-box-message{
+    font-size: 2.0rem !important;
 }
 
 .font_style-search-list_title{

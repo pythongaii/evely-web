@@ -22,7 +22,9 @@ case class Event(id: String,
                  openFlg: Option[Boolean],
                  schedules: List[Plan],
                  scope: Option[String],
-                 isReviewed: Option[Boolean]
+                 isReviewed: Option[Boolean],
+                 files:Option[List[String]],
+                 image:Option[String]
                 )
 
 object Event {
@@ -45,7 +47,9 @@ object Event {
         (json \ "openFlg").asOpt[Boolean],
         (json \ "schedules").as[List[Plan]],
           (json \ "scope").asOpt[String],
-          (json \ "isReviewed").asOpt[Boolean]
+          (json \ "isReviewed").asOpt[Boolean],
+          (json \ "files").asOpt[List[String]],
+          (json \ "image").asOpt[String]
       ))
     }
   }

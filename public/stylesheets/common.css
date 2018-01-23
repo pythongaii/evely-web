@@ -20,6 +20,30 @@ main {
     position: relative;
 }
 
+.modal-form-container {
+    margin: 0 10px;
+}
+
+#body {
+    width: 100%;
+    min-width: 100%;
+    max-width: 100%;
+    height: 10em;
+    min-height: 10em;
+    max-height: 20em;
+}
+
+
+.divider {
+    width: 100%;
+    border-top: solid 1px rgba(0,0,0,0.12);
+}
+
+.main-content {
+    margin: 0 auto;
+    width: 1024px;
+}
+
 /* サインインする前 */
 
 .mdl-layout__header{

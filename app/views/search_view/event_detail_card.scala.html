@@ -1,3 +1,176 @@
 @import helper._
-@()
-    
+@import model.event.Event
+@()(implicit messages: Messages)
+<div class="main-content">
+    <div class="mdc-card">
+
+        <section class="mdc-card__primary">
+            <div id="event-header-left">
+                <div class="mdc-card__title mdc-card__title--large font_style-detail-card_title-text">Title goes
+                    here
+                </div>
+                <div class="mdc-card__subtitle">
+                    <div class="subtitle-icon">
+                        <a id="host-icon"><img class="host-icon host-icon_img" src="@routes.Assets.at("/images/icon/ic_person/ic_person_tinted.png")" alt="ホスト情報を見る" title="主催者情報を見る"></a>
+                    </div>
+                    <div id="host-info-container">
+                        <div id="host-info-header" class="font_style--detail-card_host-info-header" title="主催者情報を見る">
+                            主催者</div>
+                        <div class="subtitle-host-info font_style-detail-card_host-info" title="主催者情報を見る">
+                            hostname heres</div>
+                    </div>
+                </div>
+            </div>
+            <div id="event-header-right">
+                <div id="event-pin" class="icon-size-very-big">
+                </div>
+            </div>
+            <div class="review-rate">
+
+            </div>
+        </section>
+
+        <section id="event-img" class="mdc-card__media">
+            <img src="@routes.Assets.at("/images/sample/sample1.jpg")">
+        </section>
+
+        <section class="mdc-card__supporting-text">
+
+
+            <div class="section-detail font_style--detail-card_detail">
+                あああああああああああああああああああああああああああああ
+                あああああああああああああああああああああああああああああ
+                あああああああああああああああああああああああああああああ
+                あああああああああああああああああああああああああああああ
+                あああああああああああああああああああああああああああああ
+                あああああああああああああああああああああああああああああ
+                あああああああああああああああああああああああああああああ
+                あああああああああああああああああああああああああああああ
+                あああああああああああああああああああああああああああああ
+                あああああああああああああああああああああああああああああ
+                あああああああああああああああああああああああああああああ
+                あああああああああああああああああああああああああああああ
+                あああああああああああああああああああああああああああああ
+                あああああああああああああああああああああああああああああ
+                あああああああああああああああああああああああああああああ
+                あああああああああああああああああああああああああああああ
+                あああああああああああああああああああああああああああああ
+                あああああああああああああああああああああああああああああ
+                あああああああああああああああああああああああああああああ
+                あああああああああああああああああああああああああああああ
+                あああああああああああああああああああああああああああああ
+                あああああああああああああああああああああああああああああ
+                ああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああ
+            </div>
+
+            <div class="divider"></div>
+
+            <div class="section-schedules">
+                <div id="schedules-header" class="font_style--detail-card_schedule-header-title">
+                    開催日程
+                </div>
+                <div id="my-mdc-tab-bar-scroller" class="mdc-tab-bar-scroller">
+                    <div class="mdc-tab-bar-scroller__indicator mdc-tab-bar-scroller__indicator--back">
+                        <a class="mdc-tab-bar-scroller__indicator__inner material-icons" href="#"
+                        aria-label="scroll back button">
+                            navigate_before
+                        </a>
+                    </div>
+                    <div class="mdc-tab-bar-scroller__scroll-frame">
+                        <nav id="my-scrollable-tab-bar"
+                        class="mdc-tab-bar mdc-tab-bar-scroller__scroll-frame__tabs mdc-tab-bar--icon-tab-bar"
+                        role="tablist">
+                            <a class="mdc-tab entertainment mdc-tab--active" href="#panel-1" role="tab"
+                            aria-controls="panel-1">
+                                <i class="icon-entertainment icon-size-small"></i>
+                                <span class="mdc-tab__icon-text icon-text-entertainment font_style-detail-card_schedules-tab-text">
+                                    8月20日</span>
+                            </a>
+                            <a class="mdc-tab entertainment mdc-tab--active" href="#panel-2" role="tab"
+                            aria-controls="panel-2">
+                                <i class="icon-entertainment icon-size-small"></i>
+                                <span class="mdc-tab__icon-text icon-text-entertainment font_style-detail-card_schedules-tab-text">
+                                    エンタメ</span>
+                            </a>
+                            <span class="mdc-tab-bar__indicator"></span>
+                        </nav>
+                    </div>
+                    <div class="mdc-tab-bar-scroller__indicator mdc-tab-bar-scroller__indicator--forward">
+                        <a class="mdc-tab-bar-scroller__indicator__inner material-icons" href="#"
+                        aria-label="scroll forward button">
+                            navigate_next
+                        </a>
+                    </div>
+                </div>
+                <div class="panels">
+                    <div class="panel active" id="panel-1" role="tabpanel" aria-hidden="true">
+                        <div class="map-container">
+                            <div class="schedule-info-container">
+                                <div class="map-container_label font_style-detail-card_schedule-info-label">
+                                    開始時刻
+                                </div>
+                                <span class="schedule-info-text font_style-detail-card_schedule-info-text">2018年02月03日</span>
+                            </div>
+                            <div class="schedule-info-container">
+                                <div class="map-container_label font_style-detail-card_schedule-info-label">
+                                    終了時刻
+                                </div>
+                                <span class="schedule-info-text font_style-detail-card_schedule-info-text">2018年02月03日</span>
+                            </div>
+                                <!-- Address -->
+                            <div class="schedule-info-container">
+                                <div class="map-container_label font_style-detail-card_schedule-info-label">
+                                    開催場所
+                                </div>
+                                <span class="schedule-info-text font_style-detail-card_schedule-info-text">
+                                    大阪府大阪市北区22222222222222222222222222222222222222222222222222222222222222222222222222222222</span>
+                            </div>
+                            <div id="map">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel" id="panel-2" role="tabpanel" aria-hidden="true">
+                    </div>
+                    <div class="panel" id="panel-3" role="tabpanel" aria-hidden="true">
+                    </div>
+                </div>
+                <div class="dots">
+                    <a class="dot active" data-trigger="panel-1" href="#panel-1"></a>
+                    <a class="dot" data-trigger="panel-2" href="#panel-2"></a>
+                    <a class="dot" data-trigger="panel-3" href="#panel-3"></a>
+                </div>
+            </div>
+
+            <div class="divider"></div>
+
+            <div class="section-contact-info">
+                <div id="contact-info-header" class="font_style--detail-card_contact-info-header-title">
+                    お問い合わせ
+                </div>
+                <div class="contact-info-item">
+                    <div id="tel-icon" class="contact-info-icon icon-size-small"></div>
+                    <div class="contact-info-content">
+                        <div class="font_style-detail-card_contact-info-item">072-227-5237</div>
+                        <div class="font_style-detail-card_contact-info-item-header">電話番号</div>
+                    </div>
+                </div>
+                <div class="contact-info-item">
+                    <div id="mail-icon" class="contact-info-icon icon-size-small"></div>
+                    <div class="contact-info-content">
+                        <div class="font_style-detail-card_contact-info-item">mailaddress@@exapmle.com</div>
+                        <div class="font_style-detail-card_contact-info-item-header">メールアドレス</div>
+                    </div>
+                </div>
+                <div class="contact-info-item">
+                    <div id="url-icon" class="contact-info-icon icon-size-medium"></div>
+                    <div class="contact-info-content-url">
+                        <div class="font_style-detail-card_contact-info-item"><a href="http://exapmle.com">
+                            http://example.com</a></div>
+                        <div class="font_style-detail-card_contact-info-item-header">Webサイト</div>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+    </div>
+</div>
