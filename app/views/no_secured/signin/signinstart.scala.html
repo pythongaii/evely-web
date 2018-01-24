@@ -10,6 +10,16 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <script src="@routes.Assets.at("/javascripts/master.js")" charset="utf-8"></script>
     <script src="@routes.Assets.at("/mdl/material.min.js")"></script>
+    <script type="text/javascript">
+            <!--
+            $(function(){
+                var elm = document.getElementById("password");
+                elm.focus();
+
+                document.getElementById("id").focus();
+            });
+            // -->
+    </script>
 </head>
 <body>
         <!-- Always shows a header, even in smaller screens. -->
@@ -28,13 +38,13 @@
                             <div class="signin_title" >
                                 @messages("signin.signInEvely")
                             </div>
-                            @helper.form(action = routes.SignInController.signin()) {
+                            @helper.form(action = routes.SignInController.signin(), 'id -> "fm", 'name -> "fm"){
                                 <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
                                     @helper.inputText(form("id"), 'class -> "mdl-textfield__input")
                                     <label class="mdl-textfield__label" for="id">@Messages("signin.userName")</label>
                                 </div>
                                 <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                                    @helper.inputPassword(form("password"), 'class -> "mdl-textfield__input", 'id -> "password")
+                                    @helper.inputPassword(form("password"), 'class -> "mdl-textfield__input", 'id -> "password", 'autocomplete -> "off")
                                     <label class="mdl-textfield__label" for="password">@Messages("signin.password")</label>
                                 </div>
                                     <a href="#"><span style="display: block; text-align: right; font-size: 0.8rem; margin-right:10px;">@messages("signin.forgotPass")</span></a>
