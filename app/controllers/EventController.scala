@@ -80,13 +80,12 @@ class EventController @Inject()(cache: CacheApi,
 
   def findOneGridSearch(eventId: String) = Action.async { implicit request =>
     val query = Seq(("url", configProvider.EVENT_URL + "/detail"), ("ids", eventId))
-//    apiEventDAO.find(request,query: _*) map {
-//      case res => {
-//        val event = Json.parse(res.get.body).validate[Event].get
-//        Ok(views.html.search_view.grid_search_detail(event))
-//      }
-//    }
-    Future.successful(Ok(views.html.search_view.grid_search_detail()))
+    apiEventDAO.find(request,query: _*) map {
+      case res => {
+        val events = Json.parse(res.get.body).validate[List[Event]].get
+        Ok(views.html.search_view.grid_search_detail(events.head))
+      }
+    }
   }
 
   def fetchCreatingEvents = withAuth { username => implicit request =>
@@ -97,8 +96,8 @@ class EventController @Inject()(cache: CacheApi,
           }
         }
         request.cookies.get(configProvider.COOKIE_NAME) match {
-          case None => collection.map(collection => Ok(views.html.event_management.editting_events(collection)("")("")))
-          case Some(_) => collection.map(collection => Ok(views.html.event_management.editting_events(collection)("t")("t")))
+          case None => collection.map(collection => Ok(views.html.event_management.editting_events(collection)(username)("")))
+          case Some(_) => collection.map(collection => Ok(views.html.event_management.editting_events(collection)(username)("t")))
         }
   }
 
@@ -110,6 +109,21 @@ class EventController @Inject()(cache: CacheApi,
         Ok(views.html.event_management.edit_event(events.head)("test"))
       }
     }
+  }
 
+  def updateEvent = withAuth { username =>
+    implicit request =>
+      CreateEventForm.createEventForm.bindFromRequest().fold(
+        errorForm => {
+          Future.successful(Redirect(routes.GuestHomeController.index()))
+        },
+        eventData => {
+          eventData
+          apiEventDAO.update(eventData, request).map {
+            case res => Redirect(routes.RegisteredHomeController.index())
+            case _ => Redirect(routes.GuestHomeController.index())
+          }
+        }
+      )
   }
 }

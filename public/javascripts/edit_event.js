@@ -212,10 +212,9 @@ $(function () {
         $('#fileup').trigger('click');
     });
 
-    var file;
     // アップロードするファイルを選択
     $('input[type=file]').change(function() {
-        file = $(this).prop('files')[0];
+        var file = $(this).prop('files')[0];
 
         // 画像以外は処理を停止
         if (! file.type.match('image.*')) {
@@ -228,8 +227,7 @@ $(function () {
         // 画像表示
         var reader = new FileReader();
         reader.onload = function() {
-            var img_src = $('<img>').attr('src', reader.result);
-            $('.image-choose').html(img_src);
+            $('.image-choose').attr('src', reader.result);
         }
         reader.readAsDataURL(file);
     });
@@ -242,7 +240,6 @@ $(function () {
         var formdata = new FormData();
         formdata.append('image', $('input[type=file]')[0].files[0])
 
-        alert("hi");
         var formAction = form.attr('action');
         $.ajax({
             url:formAction,
@@ -252,9 +249,9 @@ $(function () {
             processData:false,
             contentType:false
         }).done(function (res) {
-            alert(hi);
+            $('#image').val(res.replace("[\"", "").replace("\"]", "").replace(/\r?\n/g,""))
+            $('#updateForm').submit()
         }).fail(function( jqXHR, textStatus, errorThrown ) {
-            // しっぱい！
             console.log( 'ERROR', jqXHR, textStatus, errorThrown );
         });
         return false;

@@ -66,7 +66,9 @@ class APIEventDAO @Inject()(ws: WSClient, configProvider: ConfigProvider) extend
           "scope" -> obj.scope,
           "tel" -> obj.tel,
           "title" -> obj.title,
-          "url" -> obj.url
+          "url" -> obj.url,
+          "images" -> "",
+          "files" -> List("")
         )
 
         val response = ws.url(configProvider.EVENT_URL).
@@ -82,5 +84,36 @@ class APIEventDAO @Inject()(ws: WSClient, configProvider: ConfigProvider) extend
 
   override def add(obj: CreateEventData, request: RequestHeader): Future[WSResponse] = ???
 
-  override def update(obj: CreateEventData, request: RequestHeader): Future[WSResponse] = ???
+  override def update(obj: CreateEventData, request: RequestHeader): Future[WSResponse] = {
+    val optionalCookie = request.cookies.get(configProvider.COOKIE_NAME)
+
+    optionalCookie match {
+      case Some(cookie) => {
+        val tokenString = cookie.value
+        val jsObject = Json.obj(
+          "body" -> obj.body,
+          "mail" -> obj.mail,
+          "noticeRange" -> obj.noticeRange,
+          "openFlg" -> obj.openFlg,
+          "schedules" ->
+            obj.plans
+          ,
+          "scope" -> obj.scope,
+          "tel" -> obj.tel,
+          "title" -> obj.title,
+          "url" -> obj.url,
+          "files" -> List(""),
+          "image" -> obj.image.get
+        )
+
+        val response = ws.url(configProvider.EVENT_URL + "/" + obj.id.get).
+          withHeaders(("Content-Type" -> "application/json"), ("Authorization", "Bearer " + tokenString)).
+          put(jsObject)
+
+        response
+          .filter(res => res.status == OK)
+          .flatMap(res => Future.successful(res))
+      }
+    }
+  }
 }

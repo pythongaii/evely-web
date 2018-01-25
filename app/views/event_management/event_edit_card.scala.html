@@ -1,6 +1,11 @@
 @import model.event.Event
 @import helper._
+@import forms.CreateEventForm
 @(event: Event)(implicit messages: Messages)
+@import helpers.PlainHelper.myFields
+@createEventForm = @{
+    CreateEventForm.createEventForm
+}
 <div class="event-edit-card-container">
     <div class="mdc-card font_style-edit-card">
 
@@ -18,12 +23,16 @@
 
         <section class="mdc-card__supporting-text">
 
+        @helper.form(action = routes.EventController.updateEvent(), 'id -> "updateForm") {
+
             <div class="panels">
                 <div class="panel active" id="panel-1" role="tabpanel" aria-hidden="false">
                         <!-- Title -->
                     <div class="title-textfield-container">
                         <div class="mdc-text-field" data-mdc-auto-init="MDCTextField">
-                            <input type="text" id="title-text-field" class="mdc-text-field__input font_style-edit-card_title-textfield" value="@event.title">
+                            @input(createEventForm("title")) { (id, name, value, args) =>
+                                <input type="text" id="title-text-field" class="mdc-text-field__input font_style-edit-card_title-textfield" value="@event.title" name="@name">
+                            }
                             <label class="mdc-text-field__label font_style-edit-card_title-textfield" id="title-text-field-label" for="title-text-field" value="@event.title">
                                 Title*</label>
                             <div class="mdc-text-field__bottom-line"></div>
@@ -43,8 +52,10 @@
                         <!-- Detail -->
                     <div class="detail-textfield-container">
                         <div class="mdc-text-field mdc-text-field--textarea" data-mdc-auto-init="MDCTextField">
-                            <textarea type="text" id="detail-text-field" class="mdc-text-field__input font_style-edit-card_basic-textfield"
-                            rows="8" >@event.body.body.getOrElse("")</textarea>
+                            @input(createEventForm("body")) { (id, name, value, args) =>
+                                <textarea type="text" id="detail-text-field" class="mdc-text-field__input font_style-edit-card_basic-textfield" name="@name"
+                                rows="8" >@event.body.body.getOrElse("")</textarea>
+                            }
                             <label class="mdc-text-field__label font_style-edit-card_Detail-textfield" for="detail-text-field">
                                 Detail*(1000)</label>
                         </div>
@@ -52,7 +63,9 @@
                         <!-- URL -->
                     <div class="url-textfield-container">
                         <div class="mdc-text-field" data-mdc-auto-init="MDCTextField">
-                            <input type="text" id="url-text-field" class="mdc-text-field__input font_style-edit-card_basic-textfield" value="@event.url.getOrElse("")">
+                            @input(createEventForm("url")) { (id, name, value, args) =>
+                                <input type="text" id="url-text-field" class="mdc-text-field__input font_style-edit-card_basic-textfield" value="@event.url.getOrElse("")" name="@name">
+                            }
                             <label class="mdc-text-field__label font_style-edit-card_basic-textfield" for="url-text-field">
                                 Url</label>
                             <div class="mdc-text-field__bottom-line"></div>
@@ -62,8 +75,9 @@
                         <!-- Tel -->
                     <div class="tel-textfield-container">
                         <div class="mdc-text-field" data-mdc-auto-init="MDCTextField">
-                            <input type="text" id="tel-text-field" class="mdc-text-field__input font_style-edit-card_basic-textfield" value="@event.tel.getOrElse("")">
-                            <label class="mdc-text-field__label font_style-edit-card_basic-textfield" for="tel-text-field">
+                        @input(createEventForm("tel")) { (id, name, value, args) =>
+                            <input type="text" id="tel-text-field" class="mdc-text-field__input font_style-edit-card_basic-textfield" value="@event.tel.getOrElse("")" name="@name">
+                        }   <label class="mdc-text-field__label font_style-edit-card_basic-textfield" for="tel-text-field">
                                 TelephoneNumber</label>
                             <div class="mdc-text-field__bottom-line"></div>
                         </div>
@@ -72,8 +86,9 @@
                         <!-- MailAddress -->
                     <div class="mail-textfield-container">
                         <div class="mdc-text-field" data-mdc-auto-init="MDCTextField">
-                            <input type="text" id="mail-text-field" class="mdc-text-field__input font_style-edit-card_basic-textfield" value="@event.mail.getOrElse("")">
-                            <label class="mdc-text-field__label font_style-edit-card_basic-textfield" for="mail-text-field">
+                        @input(createEventForm("mail")) { (id, name, value, args) =>
+                            <input type="text" id="mail-text-field" class="mdc-text-field__input font_style-edit-card_basic-textfield" value="@event.mail.getOrElse("")" name="@name">
+                        }  <label class="mdc-text-field__label font_style-edit-card_basic-textfield" for="mail-text-field">
                                 MailAddress</label>
                             <div class="mdc-text-field__bottom-line"></div>
                         </div>
@@ -165,20 +180,17 @@
                 <div class="panel" id="panel-2" role="tabpanel" aria-hidden="true">
                     <div class="date-list-container">
                         <ul class="mdc-list">
-                            @count = @{
-                                0
-                            }
 
                             @for(schedule <- event.schedules) {
-                                count++
                                 <li class="mdc-list-item font_style-edit-card_basic-textfield">
                                     <div class="icons mdc-theme--secondary-light-bg">count</div>
                                     <div class="date-list-item">
                                             <!-- Start Date -->
                                         <div class="start-date-textfield-container">
                                             <div class="mdc-text-field" data-mdc-auto-init="MDCTextField">
-                                                <input type="text" id="start-date-text-field" class="mdc-text-field__input font_style-edit-card_basic-textfield" value="@schedule.upcomingDate.startDate">
-                                                <label class="mdc-text-field__label font_style-edit-card_basic-textfield" id="start-date-text-field-label"
+                                            @input(createEventForm("schedules[0].upcomingDate.startDate")) { (id, name, value, args) =>
+                                                <input type="text" id="start-date-text-field" class="mdc-text-field__input font_style-edit-card_basic-textfield" value="@schedule.upcomingDate.startDate.toString("yyyy-MM-dd HH:mm")" name="@name">
+                                            }    <label class="mdc-text-field__label font_style-edit-card_basic-textfield" id="start-date-text-field-label"
                                                 for="start-date-text-field">Start Date*</label>
                                                 <div class="mdc-text-field__bottom-line"></div>
                                             </div>
@@ -186,8 +198,9 @@
                                             <!-- End Date -->
                                         <div class="end-date-textfield-container">
                                             <div class="mdc-text-field" data-mdc-auto-init="MDCTextField">
-                                                <input type="text" id="end-date-text-field2" class="mdc-text-field__input font_style-edit-card_basic-textfield" value="@schedule.upcomingDate.endDate">
-                                                <label class="mdc-text-field__label font_style-edit-card_basic-textfield" id="end-date-text-field-label"
+                                            @input(createEventForm("schedules[0].upcomingDate.endDate")) { (id, name, value, args) =>
+                                                <input type="text" id="end-date-text-field2" class="mdc-text-field__input font_style-edit-card_basic-textfield" value="@schedule.upcomingDate.endDate.toString("yyyy-MM-dd HH:mm")" name="@name">
+                                            }    <label class="mdc-text-field__label font_style-edit-card_basic-textfield" id="end-date-text-field-label"
                                                 for="end-date-text-field">End Date*</label>
                                                 <div class="mdc-text-field__bottom-line"></div>
                                             </div>
@@ -216,8 +229,9 @@
                             <!-- Address -->
                         <div class="address-textfield-container">
                             <div class="mdc-text-field" data-mdc-auto-init="MDCTextField">
-                                <input type="text" id="address-text-field" class="mdc-text-field__input font_style-edit-card_basic-textfield">
-                                <label class="mdc-text-field__label font_style-edit-card_basic-textfield" id="address-text-field-label"
+                            @input(createEventForm("schedules[0].location.name")) { (id, name, value, args) =>
+                                <input type="text" id="address-text-field" class="mdc-text-field__input font_style-edit-card_basic-textfield" value="@event.schedules.head.location.name" name="@name">
+                            }  <label class="mdc-text-field__label font_style-edit-card_basic-textfield" id="address-text-field-label"
                                 for="address-text-field">Address*</label>
                                 <div class="mdc-text-field__bottom-line"></div>
                             </div>
@@ -226,24 +240,37 @@
                         </div>
                     </div>
                 </div>
+
                 <div class="panel" id="panel-3" role="tabpanel" aria-hidden="true">
-                    <form id="image-up-form" action="/file/upload" enctype="multipart/form-data" method="post">
-                        <input type="file" name="userfile" accept="image/*" id="fileup">
-                    </form>
-                    <div class="image-choose-container">
-                        <div class="image-choose">
+                    <div class="image-choose-container" >
+                        <image class="image-choose" src="@event.image">
                             <div class="image-asset"></div>
                             <div class="msg font_style-edit-card_basic-textfield">クリックで画像を追加</div>
-                        </div>
+                        </image>
                     </div>
 
                 </div>
+                <!-- optional settings -->
+                @*<input type="hidden" name="files[0]"*@
+                <input type="hidden" name="image" id="image" value="">
+                <input type="hidden" name="id" value="@event.id">
+                <input type="hidden" name="schedules[0].location.lat" id="schedules.location.lat" value="12.02154">
+                <input type="hidden" name="schedules[0].location.lng" id="schedules.location.lng" value="10.05014">
+                <input type="hidden" name="noticeRange" value="500"/>
+                <input type="hidden" name="openFlg" value="false"/>
+                <input type="hidden" name="scope" value="public"/>
+
             </div>
             <div class="dots">
                 <a class="dot active" data-trigger="panel-1" href="#panel-1"></a>
                 <a class="dot" data-trigger="panel-2" href="#panel-2"></a>
                 <a class="dot" data-trigger="panel-3" href="#panel-3"></a>
             </div>
+        }
+            <form id="image-up-form" action="/file/upload" enctype="multipart/form-data" method="post">
+                <input type="file" name="userfile" accept="image/*" id="fileup">
+            </form>
+
         </section>
         <section class="mdc-card__actions">
             <button id="save-button" class="mdc-button mdc-button--raised mdc-card__action mdc-theme--secondary-bg font_style-edit-card_basic-textfield">

@@ -20,9 +20,11 @@
     justify-content: center;
     align-items: center;
     background-color: rgba(0,0,0,0.04);
+    width: 992px;
 }
 
 #event-img img {
+    width: inherit;
     width: inherit;
 }
 
@@ -221,7 +223,8 @@
 }
 
 #event-pin {
-    background: url("../../images/icon/ic_pin/ic_pin.png") no-repeat;
+    background: no-repeat;
+    background-image: url("../../images/icon/ic_pin/ic_pin.png");
     background-size: contain;
 }
 

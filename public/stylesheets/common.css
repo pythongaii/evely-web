@@ -20,6 +20,10 @@ main {
     position: relative;
 }
 
+:root{
+    --mdc-theme-primary: white;
+}
+
 .modal-form-container {
     margin: 0 10px;
 }

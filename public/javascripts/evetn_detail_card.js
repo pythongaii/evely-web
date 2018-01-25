@@ -12,10 +12,10 @@ $(function () {
 
     pin.addEventListener('click', function(){
         var image = this.style.backgroundImage;
-        if(image == 'url("../images/icon/ic_pin/ic_pin_tinted.png")'){
-            this.style.backgroundImage = 'url("../images/icon/ic_pin/ic_pin.png")';
+        if(image == 'url("/assets/images/icon/ic_pin/ic_pin_tinted.png")'){
+            this.style.backgroundImage = 'url("/assets/images/icon/ic_pin/ic_pin.png")';
         } else {
-            this.style.backgroundImage = 'url("../images/icon/ic_pin/ic_pin_tinted.png")';
+            this.style.backgroundImage = 'url("/assets/images/icon/ic_pin/ic_pin_tinted.png")';
         }
     });
 

@@ -5,6 +5,7 @@ import javax.inject.Inject
 import akka.stream.scaladsl.{FileIO, Source}
 import dao.PlainDAO
 import forms.{CreateEventData, CreateEventForm}
+import play.api.Logger
 import play.api.cache.CacheApi
 import play.api.i18n.{I18nSupport, MessagesApi}
 import play.api.libs.Files
@@ -25,8 +26,7 @@ class FileUploadController @Inject()(cache: CacheApi,
   def fileUpload = withAuth(parse.multipartFormData){ username:String =>
     implicit request:Request[MultipartFormData[Files.TemporaryFile]] =>
       request.body.file("image").map {picture =>
-        val res = fileUploader.upload(picture,request)
-        Future.successful(Ok(res.toString()));
+        fileUploader.upload(picture,request).map(res => Ok(res.body))
       }.getOrElse {
         Future.successful(Redirect(routes.GuestHomeController.index).flashing(
           "error" -> "Mossing file"

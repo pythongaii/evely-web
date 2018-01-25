@@ -9,3 +9,18 @@
     width: 14px;
     height: 14px;
 }
+
+.icon-size-medium {
+    width: 35px;
+    height: 35px;
+}
+
+.icon-size-big {
+    width: 46px;
+    height: 46px;
+}
+
+.icon-size-very-big {
+     width: 58px;
+     height: 58px;
+ }

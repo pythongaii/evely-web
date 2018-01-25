@@ -148,7 +148,7 @@
                     <input type="hidden" name="scope" value="public"/>
                     <input type="hidden" name="schedules[0].location.lat" id="schedules.location.lat" value="12.02154">
                     <input type="hidden" name="schedules[0].location.lng" id="schedules.location.lng" value="10.05014">
-                    <input type="hidden" name="mail" id="mail" value="example@@example.com">
+                    <input type="hidden" name="mail" id="mail" value="example@@000.com">
                     <input type="hidden" name="url" id="url" value="http://yahoo.co.jp">
                     <input type="hidden" name="tel" id="tel" value="090-1234-5678">
 
@@ -170,12 +170,10 @@
             };
             $("#schedules_0_upcomingDate_startDate").datetimepicker(opt);
             $("#schedules_0_upcomingDate_endDate").datetimepicker(opt);
-            alert("hi");
             $("#create-submit").on("click",  function () {
                 $("#create-form").submit();
                 alert("hi");
             });
-            alert("hi2");
             $("#create-form").validationEngine('attach', {
                 // 以下のパラメータは任意
                 promptPosition: "topRight",//エラー文の表示位置

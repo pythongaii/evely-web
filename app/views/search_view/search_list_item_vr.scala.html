@@ -5,7 +5,7 @@
             <div class="bookmark on"></div>
             <div class="event-card-header">
                 <div class="image">
-                    <img src="@routes.Assets.at("/images/sample/sample1.jpg")" alt="">
+                    <img src="@event.image.getOrElse("")" alt="">
                 </div>
                 <div class="acount_info">
                     <img src="@routes.Assets.at("/images/sample/sample2.jpg")" alt="">
@@ -52,4 +52,3 @@
             </div>
         </div>
 </body>
-</html>

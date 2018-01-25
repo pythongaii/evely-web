@@ -1,6 +1,6 @@
 @import helper._
 @import model.event.Event
-@()(implicit messages:Messages)
+@(event:Event)(implicit messages:Messages)
 
 <!DOCTYPE html>
 <html>
@@ -35,7 +35,7 @@
     <body>
         @views.html.secured.memberPageHeader(Option.empty)("")(messages)
         <main>
-            @views.html.search_view.event_detail_card()(messages)
+            @views.html.search_view.event_detail_card(event)(messages)
         </main>
     </body>
 </html>

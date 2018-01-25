@@ -112,6 +112,7 @@ $(function () {
             url: '/event/' + uid + '/' + eventid,
             type: 'GET'
         }).done(function (html) {
+
             $('.detail-box').replaceWith(html);
             showDetail();
             history.pushState('','','event/' +uid + '/' + eventid);

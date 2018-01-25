@@ -5,7 +5,9 @@ import org.joda.time.{DateTime, DateTimeZone}
 import play.api.libs.json.Reads._
 import play.api.libs.json.{Json, Reads, _}
 
-case class UpcomingDate(endDate: DateTime, startDate: DateTime)
+case class UpcomingDate(endDate: DateTime, startDate: DateTime) {
+  val startMonthAndDay = startDate.toString("MM月dd日")
+}
 
 object UpcomingDate{
   val tz = java.util.TimeZone.getTimeZone("UTC")
