@@ -5,7 +5,7 @@
     <div class="bookmark on"></div>
     <div class="event-card-header">
         <div class="acount_info">
-            <img src="@routes.Assets.at("/images/sample/sample2.jpg")" alt="">
+            <img src="@event.image" alt="">
             <div class="name">
                 <p class="main">@event.host.name</p>
             </div>
@@ -15,7 +15,7 @@
         </div>
         <div class="event-card-body">
             <div class="image">
-                <img src="@routes.Assets.at("/images/sample/sample1.jpg")" alt="">
+                <img src="@event.image" alt="">
             </div>
             <div class="detail-container">
                 <div class="summary">
@@ -29,13 +29,13 @@
                 <div class="detail">
                     <div class="clock"></div>
                     <div class="info">
-                        <p class="main">@event.plans.head.upcomingDate.startDate.get.toString("yyyy年MM月dd日HH時mm分")<span class="other_dates" id="other_dates" data-html="true">他5件</span></p>
+                        <p class="main">@event.schedules.head.upcomingDate.startDate.toString("yyyy年MM月dd日HH時mm分")<span class="other_dates" id="other_dates" data-html="true">他5件</span></p>
                     </div>
                 </div>
                 <div class="detail">
                     <div class="location"></div>
                     <div class="info">
-                        <p class="main">@event.plans.head.location.name</p>
+                        <p class="main">@event.schedules.head.location.name</p>
                     </div>
                 </div>
             </div>

@@ -1,93 +1,89 @@
 @import forms.{CreateEventForm, SearchEventForm}
-@(userID: String)(userName: String)(implicit messages: Messages, request: RequestHeader)
+@(key: Option[String])(userID: String)(implicit messages: Messages)
 @import helpers.PlainHelper.myFields
-@form = @{CreateEventForm.createEventForm}
-    <header class="app-bar row">
-        <!-- Tab START -->
-    <ul class="tab-container">
-            <!-- Home -->
-        <li>
-            <a href="@routes.RegisteredHomeController.home()" class="tab">
-                <i class="fa fa-home" aria-hidden="true"></i><span class="header-messa" media="(max-width: 700px)">@Messages("home")</span>
+@createEventForm = @{
+    CreateEventForm.createEventForm
+}
+<header class="mdc-toolbar mdc-toolbar--fixed" data-mdc-auto-init="MDCToolbar">
+    <div class="mdc-toolbar__row">
+        <section class="mdc-toolbar__section mdc-toolbar__section--align-start mdc-toolbar__section--shrink-to-fit">
+            <div class="font_style-header-title-texts header-title">Evely</div>
+        </section>
+        <section class="mdc-toolbar__section mdc-toolbar__section--shrink-to-fit">
+            <div class="mdc-text-field mdc-text-field--box mdc-text-field--with-trailing-icon header-search-textfield font_style-header_search-textfield"
+            data-mdc-auto-init="MDCTextField">
+            @helper.form(action = routes.EventController.search(), 'class -> "search_form") {
+                @helper.input(SearchEventForm.form("keyword")){(id,name,value,args)=>
+                    <input type="text" class="mdc-text-field__input" placeholder="イベントを探す。例) スポーツ、大阪、ECC" id="search-field" value="@key.getOrElse("")" name="@name">
+                }
+                <i class="material-icons mdc-text-field__icon header-textfield-icon icon-size-small" id="search-field-icon"
+                tabindex="0"></i>
+                <input type="hidden" name="limit" value="10"/>
+                <input type="hidden" name="offset" value="0"/>
+                @*<button class="mdl-button mdl-js-button mdl-button--icon"*@
+                @*for="waterfall-exp" type="submit" name="action">*@
+                @*<i class="material-icons">search</i>*@
+                @*</button>*@
+            }
+            </div>
+        </section>
+        <section class="mdc-toolbar__section mdc-toolbar__section--align-end mdc-toolbar__section--shrink-to-fit">
+            <a href="#recents" class="tab tab-is-active font_style-header-tab-texts">
+                <i class="nearby-icon icon"></i>
+                <span class="header-tab-text">周辺のイベント</span>
             </a>
-        </li>
-            <!-- Nearby -->
-            <!-- <li>
-                <a href="./nearby.html" class="tab">
-                    <i class="fa fa-map-marker" aria-hidden="true"></i>近くのイベント
-                </a>
-            </li> -->
-            <!-- Pin -->
-        <li>
-            <a href="#" class="tab">
-                <i class="fa fa-map-marker" aria-hidden="true"></i><span class="header-messa">@Messages("nearby")</span>
+            <a href="#favorites" class="tab font_style-header-tab-texts">
+                <i class="pin-icon icon"></i>
+                <span class="header-tab-text">ピン</span>
             </a>
-        </li>
-            <!-- Bookmark -->
-        <li>
-            <a href="#" class="tab">
-                <i class="fa fa-bookmark" aria-hidden="true"></i><span class="header-messa">@Messages("bookmark")</span>
+            <a href="#nearby" class="tab font_style-header-tab-texts">
+                <i class="notification-icon icon"></i>
+                <span class="header-tab-text">通知</span>
             </a>
-        </li>
-            <!-- Notification -->
-        <li>
-            <a href="#" class="tab">
-                <i class="fa fa-bell" aria-hidden="true"></i><span class="header-messa">通知</span>
-            </a>
-        </li>
-    </ul>
+                <!-- Event Menu -->
 
-    <ul class="nav-extras center">
-            <!-- Search box START -->
-        <li class="search">
-        @helper.form(action = routes.EventController.search(), 'class -> "search_form") {
-            @helper.inputText(SearchEventForm.form("keyword"), 'class -> "mdl-textfield__input")
-            <input type="hidden" name="limit" value="10"/>
-            <input type="hidden" name="offset" value="0"/>
-            @*<button class="mdl-button mdl-js-button mdl-button--icon"*@
-            @*for="waterfall-exp" type="submit" name="action">*@
-            @*<i class="material-icons">search</i>*@
-            @*</button>*@
-        }
-        </li>
-    </ul>
-        <!-- Tab END -->
-        <!-- App bar extras START -->
-        @if(userID != ""){
-    <ul class="nav-extras right">
+            <div id="event-menu-open" class="event-menu-container tab">
+                <i class="event-edit-icon icon"></i>
+                <a class="font_style-header-tab-texts header-tab-text">イベント管理</a>
+                <div class="mdc-simple-menu" tabindex="-1" id="eventMenu">
+                    <ul class="mdc-simple-menu__items mdc-list" role="menu" aria-hidden="true">
+                        <li class="mdc-list-item header-list" role="menuitem" tabindex="0" id="create-btn" data-toggle="modal" data-target="#modal">
+                            イベント作成
+                        </li>
+                        <li class="mdc-list-item header-list" role="menuitem" tabindex="0">
+                            <a href="@routes.EventController.fetchCreatingEvents()">作成中リスト</a>
+                        </li>
+                        <li class="mdc-list-item header-list" role="menuitem" tabindex="0">
+                            公開中リスト
+                        </li>
+                        <li class="mdc-list-item header-list" role="menuitem" tabindex="0">
+                            終了したイベント
+                        </li>
+                    </ul>
+                </div>
+            </div>
 
-            <!-- Search box END -->
-            <!-- Profile nav START -->
-        <div class="dropdown-group profile-nav">
-            <img class="dropdown-toggle" src="@routes.Assets.at("/images/icon.png")" alt="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                <li><a href="#">@Messages("iconnameid")</a></li>
-                <li class="profile-container">
-                    <img src="@routes.Assets.at("/images/icon/icon.png")" alt="">
-                    <div class="profile-info">
-                        <p class="name"></p>
-                        <p class="id">@userID</p>
-                    </div>
-                </li>
-                <li role="separator" class="divider"></li>
-                <li><a href="#">@Messages("home")</a></li>
-                <li><a href="#">@Messages("profile")</a></li>
-                <li><a href="#">@Messages("higelite")</a></li>
-                <li role="separator" class="divider"></li>
-                <li><a href="#">@Messages("settings")</a></li>
-                <li><a href="#">@Messages("help")</a></li>
-                <li><a id="night-mode">@Messages("sleep")</a></li>
-                <li role="separator" class="divider"></li>
-                <li><a href="@routes.RegisteredHomeController.signout()">ログアウト</a></li>
-            </ul>
-                <!-- Profile nav END -->
-        </div>
-
-        <li class="create_event">
-            <span id="create-btn" class="glyphicon glyphicon-plus btn btn-default" data-toggle="modal" data-target="#modal"></span>
-        </li>
-    </ul>
-    }        <!-- App bar extras END -->
+            <div class="profile-menu-container" id="openMenu">
+                <i class=""></i>
+                <div class="mdc-simple-menu" tabindex="-1" id="profileMenu">
+                    <ul class="mdc-simple-menu__items mdc-list" role="menu" aria-hidden="true">
+                        <li class="profile-container">
+                            <img src="@routes.Assets.at("/images/icon/icon.png")" alt="">
+                            <div class="profile-info"><p class="id">@userID</p></div>
+                        </li>
+                        <li role="separator" class="divider"></li>
+                        <li class="mdc-list-item header-list" role="menuitem" tabindex="0"><a href="#">@Messages("home")</a></li>
+                        <li class="mdc-list-item header-list" role="menuitem" tabindex="0"><a href="#">@Messages("profile")</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li class="mdc-list-item header-list" role="menuitem" tabindex="0"><a href="#">@Messages("settings")</a></li>
+                        <li class="mdc-list-item header-list" role="menuitem" tabindex="0"><a href="#">@Messages("help")</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li class="mdc-list-item header-list" role="menuitem" tabindex="0"><a href="@routes.RegisteredHomeController.signout()">ログアウト</a></li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+    </div>
 </header>
     <!-- モーダルウィンドウ表示項目  -->
 <div class="modal fade" id="modal">
@@ -97,87 +93,87 @@
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                 <h4 class="modal-title">新しいイベントを作成</h4>
             </div>
-            <div class="modal-body">
-            @helper.form(action = routes.EventController.create(), 'id -> "create-form"){
-                <div class="form-group">
-                    @helper.inputText(form("title"),
-                        'class -> "form-control validate[required]",
-                        'size -> "20",
-                        'name -> "data[title]",
-                        'placeholder -> "1時間限定タイムセール!!")
-                    <label for="title"><span class="red">*</span>タイトル</label>
-                </div>
-                <div class="form-group">
-                    <label for="body">説明</label>
-                    @helper.textarea(form("body"),
-                        'class -> "form-control",
-                        'size -> "1000",
-                        'name -> "data[body]",
-                        'placeholder -> "1000文字以内")
-                </div>
-                <div class="form-group row">
-                    <div class="col-xs-6">
-                        <label for="upcomingDate.startDate">開始日</label>
-                        @helper.inputText(form("plans[0].upcomingDate.startDate"),
-                            'class -> "form-control",
-                            'name -> "data[upcomingDate][startDate]")
+                <div class="modal-body">
+                @helper.form(action = routes.EventController.create(), 'id -> "create-form", 'class -> "modal-form-container") {
+                    <div class="form-group">
+                        <label for="title"><span class="red">*</span>タイトル</label>
+                        @helper.inputText(createEventForm("title"),
+                            'class -> "form-control validate[required]",
+                            'size -> "20",
+                            'name -> "data[title]",
+                            'placeholder -> "1時間限定タイムセール!!")
                     </div>
-                    <div class="col-xs-6">
-                        <label for="upcomingDate.endDate">終了日</label>
-                        @helper.inputText(form("plans[0].upcomingDate.endDate"),
+                    <div class="form-group">
+                        <label for="body">説明</label>
+                        @helper.textarea(createEventForm("body"),
                             'class -> "form-control",
-                            'name -> "data[upcomingDate][endDate]")
+                            'size -> "1000",
+                            'name -> "data[body]",
+                            'placeholder -> "1000文字以内")
                     </div>
-                </div>
-                <label>開催場所</label>
-                <div class="form-group row">
-                    <div class="col-xs-4">
-                        <div class="input-group">
-                            <span class="input-group-addon" id="place-addon">〒</span>
-                            <input id="zipcode" class="form-control" type="text" maxlength="8" aria-describedby="place-addon" placeholder="520-25XX">
+                    <div class="form-group row">
+                        <div class="col-xs-6">
+                            <label for="upcomingDate.startDate">開始日</label>
+                            @helper.inputText(createEventForm("schedules[0].upcomingDate.startDate"),
+                                'class -> "form-control",
+                                'name -> "data[upcomingDate][startDate]")
+                        </div>
+                        <div class="col-xs-6">
+                            <label for="upcomingDate.endDate">終了日</label>
+                            @helper.inputText(createEventForm("schedules[0].upcomingDate.endDate"),
+                                'class -> "form-control",
+                                'name -> "data[upcomingDate][endDate]")
                         </div>
                     </div>
-                    <div class="pull-left middle">
-                        <button id="addr-btn" type="button" class="btn btn-default">住所検索</button>
+                    <label>開催場所</label>
+                    <div class="form-group row">
+                        <div class="col-xs-4">
+                            <div class="input-group">
+                                <span class="input-group-addon" id="place-addon">〒</span>
+                                <input id="zipcode" class="form-control" type="text" maxlength="8" aria-describedby="place-addon" placeholder="520-25XX">
+                            </div>
+                        </div>
+                        <div class="pull-left middle">
+                            <button id="addr-btn" type="button" class="btn btn-default">住所検索</button>
+                        </div>
                     </div>
-                </div>
-                <div class="form-group">
-                @helper.inputText(form("plans[0].location.name"),
-                    'class -> "form-control",
-                    'name -> "data[location][name]")
-                </div>
+                    <div class="form-group">
+                    @helper.inputText(createEventForm("schedules[0].location.name"),
+                        'class -> "form-control",
+                        'name -> "data[location][name]")
+                    </div>
 
-                <input type="hidden" name="noticeRange" value="500"/>
-                <input type="hidden" name="openFlg" value="false"/>
-                <input type="hidden" name="scope" value="public"/>
-                <input type="hidden" name="plans[0].location.lat" id="plans.location.lat" value="12.02154">
-                <input type="hidden" name="plans[0].location.lng" id="plans.location.lng" value="10.05014">
-                <input type="hidden" name="mail" id="mail" value="example@@example.com">
-                <input type="hidden" name="url" id="url" value="http://yahoo.co.jp">
-                <input type="hidden" name="tel" id="tel" value="090-1234-5678">
+                    <input type="hidden" name="noticeRange" value="500"/>
+                    <input type="hidden" name="openFlg" value="false"/>
+                    <input type="hidden" name="scope" value="public"/>
+                    <input type="hidden" name="schedules[0].location.lat" id="schedules.location.lat" value="12.02154">
+                    <input type="hidden" name="schedules[0].location.lng" id="schedules.location.lng" value="10.05014">
+                    <input type="hidden" name="mail" id="mail" value="example@@000.com">
+                    <input type="hidden" name="url" id="url" value="http://yahoo.co.jp">
+                    <input type="hidden" name="tel" id="tel" value="090-1234-5678">
 
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">キャンセル</button>
+                    <button type="button" class="btn btn-success" id="create-submit">作成</button>
+                </div>
+                }
             </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">キャンセル</button>
-                <button type="button" class="btn btn-success" id="create-submit">作成</button>
-            </div>
-            }
         </div>
     </div>
-</div>
-<script type="text/javascript">
+    <script type="text/javascript">
         $(function () {
             var opt = {
                 minDate: "moment",
                 toolbarPlacement: "top",
                 format: 'YYYY-MM-DD HH:mm:ss'
             };
-            $("#plans_0_upcomingDate_startDate").datetimepicker(opt);
-            $("#plans_0_upcomingDate_endDate").datetimepicker(opt);
-            $("#create-submit").on("click", function () {
+            $("#schedules_0_upcomingDate_startDate").datetimepicker(opt);
+            $("#schedules_0_upcomingDate_endDate").datetimepicker(opt);
+            $("#create-submit").on("click",  function () {
                 $("#create-form").submit();
+                alert("hi");
             });
-
             $("#create-form").validationEngine('attach', {
                 // 以下のパラメータは任意
                 promptPosition: "topRight",//エラー文の表示位置
@@ -200,7 +196,7 @@
                     dataType: "json",
                     data: {'zipcode': zipcode},
                     success: function (json) {
-                        $('#plans_0_location_name').val(json.fullAddress);
+                        $('#schedules_0_location_name').val(json.fullAddress);
                     }
                 });
             });

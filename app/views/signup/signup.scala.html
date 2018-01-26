@@ -1,0 +1,118 @@
+@import forms.RegisteredData
+@(form: Form[RegisteredData])(implicit messages: Messages)
+@import helpers.PlainHelper.myFields
+<!DOCTYPE html>
+<head>
+    <title>サインアップ</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <!-- mdl -->
+    <link rel="stylesheet" href="@routes.Assets.at("/mdl/material.min.css")">
+    <script src="@routes.Assets.at("/mdl/material.min.js")"></script>
+    <!-- bootstrap -->
+    <link rel="stylesheet" href="@routes.Assets.at("/bootstrap/3.3.7/css/bootstrap.min.css")">
+    <!-- jQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <!-- original -->
+    <link rel="stylesheet" href="@routes.Assets.at("/stylesheets/signup/signup.css")">
+    <link rel="stylesheet" href="@routes.Assets.at("/stylesheets/common.css")">
+    <script src="@routes.Assets.at("/javascripts/master.js")"></script>
+    <script src="@routes.Assets.at("/javascripts/tooltip.js")"></script>
+    <script src="@routes.Assets.at("/bootstrap/3.3.7/js/bootstrap.min.js")"></script>
+    <script>
+            $(function () {
+                $('#signupform').keyup(function () {
+                    var form = document.getElementById("signupform");
+                    var password1 = form.password_password1.value;
+                    var password2 = form.password_password2.value;
+                    var not_same = password1 != password2;
+                    if (not_same) {
+                        form.password_password2.parentElement.classList.add("is-invalid");
+                    } else {
+                        form.password_password2.parentElement.classList.remove("is-invalid");
+                    }
+                    var d = !form.checkValidity();
+                    document.getElementById("submit").disabled = d || not_same;
+                });
+
+                $(window).checkAll = function (form) {
+                    form.action.disable = !form.checkValidity();
+                }
+
+            });
+    </script>
+</head>
+<body>
+        <!-- Always shows a header, even in smaller screens. -->
+    @views.html.common.header()
+    <main class="mdl-layout__content">
+        <div id="page-content">
+            <h3>@messages("signup.title")</h3>
+            <hr>
+            <div id="step"></div>
+            <div id="form_block">
+                <div class="mdl-card mdl-shadow--6dp">
+                    <div class="mdl-card__supporting-text">
+                        <div class="signup_title" >
+                            すべての項目を入力してください。
+                        </div>
+                        @helper.form(action = routes.SignUpController.signupConfirm(), 'id -> "signupform") {
+
+                            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                                @helper.input(form("id")){ (id,name,value,args) =>
+                                    <input type="text" class="mdl-textfield__input" id="@id" required autofocus name="@name">
+                                }
+                                <label class="mdl-textfield__label" for="sample3">@Messages("signup.userID")</label>
+                                <span class="mdl-textfield__error">@Messages("error.require")</span>
+                            </div>
+
+                            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                                @helper.input(form("mail")){ (id,name,value,args) =>
+                                    <input type="text" class="mdl-textfield__input" id="@id" readonly="readonly" name="@name" value="@form("mail").value.get" required>
+                                }
+                                <label class="mdl-textfield__label" for="sample3">@Messages("signup.mailaddress")</label>
+                                <span class="mdl-textfield__error">@Messages("error.require")</span>
+                            </div>
+
+                            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                                @helper.input(form("name")){ (id,name,value,args) =>
+                                    <input type="text" class="mdl-textfield__input" id="@id" required name="@name">
+                                }
+                                <label class="mdl-textfield__label" for="sample3">@Messages("signup.name")</label>
+                                <span class="mdl-textfield__error">@Messages("error.require")</span>
+                            </div>
+
+                            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                                @helper.input(form("password.password1")){ (id,name,value,args) =>
+                                    <input type="password" title="@Messages("signup.passwordFormat")" name="@name" class="mdl-textfield__input" id="password_password1" pattern="^(?=.*[0-9])(?=.*[A-Z])(?=.*[a-z])[\\.[0-9a-zA-Z]{8,}$" required>
+                                }
+                                <label class="mdl-textfield__label" for="sample3">@Messages("signup.password")</label>
+                                <span class="mdl-textfield__error">@Messages("signup.passError")</span>
+                            </div>
+
+                            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                                @helper.input(form("password.password2")){ (id,name,value,args) =>
+                                    <input type="password" title="@Messages("signup.passwordFormat")" name="@name" class="mdl-textfield__input" id="password_password2" required>
+                                }
+                                <label class="mdl-textfield__label" for="sample3">@Messages("signup.password.confirm")</label>
+                                <span class="mdl-textfield__error">@Messages("signup.passConfirmError")</span>
+                            </div>
+
+                            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                                @helper.input(form("tel")){ (id,name,value,args) =>
+                                    <input type="text" title="@Messages("signup.telFormat")" class="mdl-textfield__input" id="tel" name="@name" required pattern="\d{2,4}-\d{3,4}-\d{3,4}">
+                                }
+                                <label class="mdl-textfield__label" for="sample3">@Messages("signup.tel")</label>
+                                <span class="mdl-textfield__error">@Messages("error.require")</span>
+                            </div>
+
+                            <div id="sub">
+                                <button class="mdl-button mdl-button--raised mdl-js-button mdl-js-ripple-effect" type="submit" name="action" id="submit">@Messages("signup.submitbutton")</button>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    @views.html.common.footer()(messages)
+</body>

@@ -1,0 +1,171 @@
+@import "common.css";
+
+/*<!-- Uses a transparent header that draws on top of the layout's background -->*/
+
+.guest-home-header {
+    width: 1024px;
+    position: relative;
+    right: 0;
+    left: 0;
+    margin: 0 auto;
+}
+
+.guest-home-main {
+    margin-top: 5px;
+    position: relative;
+    width: 100%;
+}
+
+main .contents{
+    position: relative;
+    right: 0;
+    left: 0;
+    margin: 0 auto;
+    padding: 0;
+    width: 1024px;
+}
+
+.icon-entertainment {
+    display: inline-block;
+    background: url('../images/icon/ic_mic/ic_mic.png') no-repeat;
+    background-size: contain;
+}
+
+.icon-music {
+    display: inline-block;
+    background: url('../images/icon/ic_music/ic_music.png') no-repeat;
+    background-size: contain;
+}
+
+.icon-fes {
+    display: inline-block;
+    background: url('../images/icon/ic_balloon/ic_balloon.png') no-repeat;
+    background-size: contain;
+}
+
+.icon-sports {
+    display: inline-block;
+    background: url('../images/icon/ic_shoes/ic_shoes.png') no-repeat;
+    background-size: contain;
+}
+
+.icon-art {
+    display: inline-block;
+    background: url('../images/icon/ic_art/ic_art.png') no-repeat;
+    background-size: contain;
+}
+
+.icon-foods {
+    display: inline-block;
+    background: url('../images/icon/ic_foods/ic_foods.png') no-repeat;
+    background-size: contain;
+}
+
+.icon-bargain {
+    display: inline-block;
+    background: url('../images/icon/ic_coin/ic_coin.png') no-repeat;
+    background-size: contain;
+}
+
+.icon-volunteer {
+    display: inline-block;
+    background: url('../images/icon/ic_heart/ic_heart.png') no-repeat;
+    background-size: contain;
+}
+
+.icon-workshop {
+    display: inline-block;
+    background: url('../images/icon/ic_/ic_balloon.png') no-repeat;
+    background-size: contain;
+}
+
+#my-scrollable-tab-bar{
+    display: flex;
+    width: 2088px;
+}
+
+.mdc-tab {
+    width: 232px;
+}
+
+.panel {
+    position: relative;
+    right:0;
+    left: 0;
+    width: 900px;
+    margin: 0 auto;
+    display: block;
+}
+
+ .demo-layout-transparent {
+     position:  relative;
+     background: url('../images/toppageheader.jpg') center / cover;
+     background-position: bottom;
+     height: 450px;
+     z-index: 0;
+     overflow: hidden;
+ }
+
+.demo-layout-transparent:before{
+    content: '';
+    background: inherit;/*.bgImageで設定した背景画像を継承する*/
+    -webkit-filter: blur(3px);
+    -moz-filter: blur(3px);
+    -o-filter: blur(3px);
+    -ms-filter: blur(3px);
+    filter: blur(3px);
+    position: absolute;
+    /*ブラー効果で画像の端がボヤけた分だけ位置を調整*/
+    top: -5px;
+    left: -5px;
+    right: -5px;
+    bottom: -5px;
+    z-index: -1;/*重なり順序を一番下にしておく*/
+}
+
+.demo-layout-transparent .mdl-layout__header,
+.demo-layout-transparent .mdl-layout__drawer-button {
+    /* This background is dark, so we set text to white. Use 87% black instead if
+       your background is light. */
+    color: white;
+}
+
+.mdl-layout__header {
+    height:  450px;
+    display: block;
+}
+
+.search-box {
+    position:  relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 1024px;
+    height: 386px;
+}
+
+#search-field {
+    width: 400px;
+    height: 100%;
+    background: white;
+    border-bottom: none;
+    opacity: 0.5;
+}
+
+#search-field:focus {
+    opacity: 0.85;
+}
+
+.header-search-textfield{
+    border-radius: 0.87%;
+}
+
+#search-field-icon{
+    background: url('../images/icon/ic_search/ic_search.png') no-repeat;
+    background-size: contain;
+    outline: none;
+}
+
+.search-box-message {
+    color: white;
+}

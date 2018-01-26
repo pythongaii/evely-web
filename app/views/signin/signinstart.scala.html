@@ -1,0 +1,79 @@
+@import forms.SignInForm
+@()(implicit messages: Messages, requestHeader: RequestHeader)
+@import helpers.PlainHelper.myFields
+@signInForm = @{SignInForm.signInForm}
+<!DOCTYPE html>
+<head>
+    <title>サインイン</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="@routes.Assets.at("/mdl/material.min.css")">
+    <link rel="stylesheet" href="@routes.Assets.at("/stylesheets/signinstart.css")">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="@routes.Assets.at("/javascripts/master.js")" charset="utf-8"></script>
+    <script src="@routes.Assets.at("/mdl/material.min.js")"></script>
+    <script type="text/javascript">
+            <!--
+            $(function(){
+                var elm = document.getElementById("password");
+                elm.focus();
+
+                document.getElementById("id").focus();
+            });
+            // -->
+    </script>
+</head>
+<body>
+        <!-- Always shows a header, even in smaller screens. -->
+    @views.html.common.header()(messages)
+    @requestHeader.flash.get("error").map { msg =>
+        @errors.alert(msg, "error")
+    }
+    <main class="mdl-layout__content">
+        <div id="page-content">
+            <h3>@messages("signin.title")</h3>
+            <hr>
+            <div id="form_block">
+                <div class="mdl-card mdl-shadow--6dp">
+                    <div class="mdl-card__supporting-text">
+                        <div id="form_column1">
+                            <div class="signin_title" >
+                                @messages("signin.signInEvely")
+                            </div>
+                            @helper.form(action = routes.SignInController.signin(), 'id -> "fm", 'name -> "fm"){
+                                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                                    @helper.inputText(signInForm("id"), 'class -> "mdl-textfield__input")
+                                    <label class="mdl-textfield__label" for="id">@Messages("signin.userName")</label>
+                                </div>
+                                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+
+                                    @helper.inputPassword(signInForm("password"), 'class -> "mdl-textfield__input", 'id -> "password")
+                                    <label class="mdl-textfield__label" for="password">@Messages("signin.password")</label>
+                                </div>
+                                    <a href="#"><span style="display: block; text-align: right; font-size: 0.8rem; margin-right:10px;">@messages("signin.forgotPass")</span></a>
+                                <div>
+                                    <button class="mdl-button mdl-button--raised mdl-js-button mdl-js-ripple-effect" type="submit" name="action">@Messages("signin.submitbutton")</button>
+                                </div>
+                            }
+                        </div>
+                        <div id="form_column2">
+                            <div>
+                            @Messages("signin.signInOthers")
+                            </div>
+                            <div class="form_bottom_spacer50"></div>
+                            <div>
+                                <button class="mdl-button mdl-button--raised mdl-js-button mdl-js-ripple-effect" type="submit" name="action">
+                                    Twitter</button>
+                            </div>
+                            <div class="form_bottom_spacer10"></div>
+                            <div>
+                                <button class="mdl-button mdl-button--raised mdl-js-button mdl-js-ripple-effect" type="submit" name="action">
+                                    Facebook</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    @views.html.common.footer()(messages)
+</body>

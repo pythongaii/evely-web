@@ -1,0 +1,172 @@
+.event-card {
+    position: relative;
+    display: inline-block;
+    width: 392px;
+    height: 162px;
+    /*box-shadow:*/
+        /*0 2px 2px 0 rgba(0,0,0,.14),*/
+        /*0 3px 1px -2px rgba(0,0,0,.2),*/
+        /*0 1px 5px 0 rgba(0,0,0,.12);*/
+}
+
+.side-nav-separator3 {
+    width: 100%;
+    border-top: 1px solid #8e8e8e;
+}
+
+
+.event-card .title:hover {
+    text-decoration: underline;
+    color: #008aff;
+    cursor:pointer;
+}
+
+.acount_info .name:hover{
+    text-decoration:underline;
+    cursor:pointer;
+}
+.acount_info img:hover{
+    cursor:pointer;
+}
+
+.event-card > .bookmark {
+    background-image: url(../images/ic_pin.png);
+    background-size: 24px;
+    background-size:contain;
+    background-color:white;
+    background-position: top;
+    background-repeat: no-repeat;
+    opacity:0.54;
+    border-bottom-left-radius: 5px;
+    width: 40px;
+    height: 32px;
+    position: absolute;
+    top: 0px;
+    right: 0px;
+}
+
+.bookmark.on {
+    background-image: url(../images/ic_pin_tinted.png);
+}
+
+.event-card > .bookmark:hover {
+    opacity: 0.54;
+}
+
+.event-card-header {
+    height:42px;
+    margin: 0px 13px 0px 13px;
+}
+
+.event-card-header > .list-item-title {
+    font-weight: bold;
+    font-size:1.8rem;
+    opacity: 1;
+    width:230px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+.event-card-header > .acount_info {
+    margin: 6px 0px 0px 0px;
+    height:20px;
+}
+
+.event-card-header > .acount_info > img {
+    position: relative;
+    height: 16px;
+    width: 16px;
+    left:1px;
+    border-radius: 50%;
+}
+
+.event-card-header > .acount_info > .name {
+    position: relative;
+    font-size:1rem;
+    width:fit-content;
+    height: 16px;
+    top: -16px;
+    left: 17px;
+    margin-left:2px;
+}
+
+.event-card-body {
+    position:absolute;
+    width:368px;
+    height:111px;
+}
+.event-card-body > .detail-container {
+    position:relative;
+    top:-90px;
+    width:274px;
+    height:100px;
+    word-wrap:break-word;
+}
+.event-card-body > .detail-container > .summary {
+    position:relative;
+    top:3px;
+    font-size: 1.4rem;
+    opacity:0.54;
+}
+.event-card-body > .image {
+    position:relative;
+    top:4px;
+    left:278px;
+    height: 90px;
+    width:90px;
+    overflow: hidden;
+    text-align: center;
+}
+
+.event-card-body > .image > img {
+    height:100%;
+}
+
+
+.event-card-body > .detail-container > .detail {
+    margin-top: 12px;
+}
+
+
+.event-card-body > .detail-container > .detail > .clock {
+    position:absolute;
+    height: 15px;
+    width: 15px;
+    background: url(../../images/ic_clock.png);
+    background-size:contain;
+}
+
+.event-card-body > .detail-container > .detail > .location {
+    position:absolute;
+    height: 15px;
+    width: 15px;
+    background-image: url(../../images/ic_location.png);
+    background-size:contain;
+}
+
+.event-card-body > .detail-container > .detail > .info {
+    margin-left: 24px;
+}
+
+.event-card-body > .detail-container > .detail > .info > p {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.event-card-body > .detail-container > .detail > .info > p.main {
+    opacity: 0.87;
+    font-size: 1rem;
+}
+
+.event-card-body > .detail-container > .detail > .info > p > span.other_dates {
+    position:relative;
+    opacity: 0.5;
+    left:2px;
+    font-size: 0.9rem;
+}
+
+.event-card-footer {
+    margin-top: 10px;
+}

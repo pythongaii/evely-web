@@ -32,7 +32,7 @@ class SignUpController @Inject()(val mailer: Mailer,
 
   // 仮登録メール送信画面の表示
   def signupStart = Action.async { implicit request =>
-    Future.successful(Ok(views.html.no_secured.signup.signupstart(SignUpForm.registringDataForm)))
+    Future.successful(Ok(views.html.signup.signupstart()))
   }
 
   // 仮登録メールの送信確認画面の表示
@@ -50,7 +50,7 @@ class SignUpController @Inject()(val mailer: Mailer,
         ))
         request.post(jsonObject).flatMap {
           case res if res.status == OK => {
-            Future.successful(Ok(views.html.no_secured.signup.signupmailsent()))
+            Future.successful(Ok(views.html.signup.signupmailsent()))
           }
           case res if res.status == BAD_REQUEST => Future.successful(Ok(views.html.errors.errorNotFound("mailCannotUse")))
         }
@@ -66,7 +66,7 @@ class SignUpController @Inject()(val mailer: Mailer,
       case res if (res.status == OK) => {
         val body = res.body
         val email = Json.parse(body).validate((JsPath \ "email").read[String]).get
-        Future.successful(Ok(views.html.no_secured.signup.signup(SignUpForm.registeredDataForm.bind(Map("mail" -> email)))))
+        Future.successful(Ok(views.html.signup.signup(SignUpForm.registeredDataForm.bind(Map("mail" -> email)))))
       }
       case _ => Future.successful(Ok(views.html.errors.errorNotFound("mailCannotUse")))
     }
@@ -80,7 +80,7 @@ class SignUpController @Inject()(val mailer: Mailer,
         Future.successful(Redirect(routes.GuestHomeController.index()))
       },
       requestForm => {
-        Future.successful(Ok(views.html.no_secured.signup.signupconfirm(form.fill(requestForm))))
+        Future.successful(Ok(views.html.signup.signupconfirm(form.fill(requestForm))))
       }
     )
   }
@@ -100,7 +100,7 @@ class SignUpController @Inject()(val mailer: Mailer,
             val js = Json.parse(jwtObject.get.toJson)
             val id = (js \ "id").asOpt[String]
             cache.set(tokenString + ".userInfo", id.get)
-            Future.successful(Ok(views.html.no_secured.signup.signupped()))
+            Future.successful(Ok(views.html.signup.signupped()))
           }
         }
       }

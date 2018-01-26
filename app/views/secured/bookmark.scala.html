@@ -1,6 +1,4 @@
-
-@()(implicit messages: Messages)
-
+@(userID: String)(userName: String)(implicit messages: Messages, request: RequestHeader)
 <!DOCTYPE html>
 <html>
     <head>
@@ -19,7 +17,7 @@
         <script src="@routes.Assets.at("/javascripts/master.js")" charset="utf-8"></script>
         <link rel="stylesheet" href="@routes.Assets.at("/stylesheets/common.css")">
         <link rel="stylesheet" href="@routes.Assets.at("/stylesheets/nearby.css")">
-        <link rel="stylesheet" href="@routes.Assets.at("/stylesheets/bookmark.css")">
+        <link rel="stylesheet" href="@routes.Assets.at("../../../public/stylesheets/pin.css")">
     </head>
     <body>
             <!-- App bar START -->

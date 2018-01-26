@@ -16,20 +16,23 @@ case class Event(id: String,
                  url: Option[String],
                  tel: Option[String],
                  mail: Option[String],
-                 topImage: Option[String],
                  createdAt: Option[Date],
-                 noticeRange: Int,
-                 openFlg: Boolean,
-                 plans: List[Plan],
-                 scope: String
+                 noticeRange: Option[Int],
+                 openFlg: Option[Boolean],
+                 schedules: List[Plan],
+                 scope: Option[String],
+                 isReviewed: Option[Boolean],
+                 files:Option[List[String]],
+                 image:Option[String]
                 )
 
 object Event {
   implicit val eventReader:Reads[Event] = new Reads[Event] {
     override def reads(json: JsValue): JsResult[Event] = {
+      val j = json
       JsSuccess(
         Event(
-          (json \ "id").validate[String].get,
+          (json \ "id").as[String],
           (json \ "title").as[String],
           RegisteredUser((json \ "host" \ "id").as[String],Option.empty,(json \ "host" \ "name").as[String],Option.empty, Option.empty),
           Body((json \ "body").asOpt[String]),
@@ -37,12 +40,14 @@ object Event {
           (json \ "url").asOpt[String],
           (json \ "tel").asOpt[String],
           (json \ "mail").asOpt[String],
-          (json \ "topImage").asOpt[String],
           (json \ "createdAt").asOpt[Date],
-          (json \ "noticeRange").as[Int],
-        (json \ "openFlg").as[Boolean],
-        (json \ "plans").as[List[Plan]],
-          (json \ "scope").as[String]
+          (json \ "noticeRange").asOpt[Int],
+        (json \ "openFlg").asOpt[Boolean],
+        (json \ "schedules").as[List[Plan]],
+          (json \ "scope").asOpt[String],
+          (json \ "isReviewed").asOpt[Boolean],
+          (json \ "files").asOpt[List[String]],
+          (json \ "image").asOpt[String]
       ))
     }
   }
