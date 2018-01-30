@@ -4,24 +4,59 @@
     --mdc-theme-primary-dark:#9E9E9E;
     --mdc-theme-background:#CFD8DC;
     --mdc-theme-secondary:#a3a2a2;
-
+    border-color: #cccbcb;
 }
-
-/*<!-- Style Colors-->*/
-     /*<color name="colorPrimary">@android:color/white</color>*/
-/*<color name="colorPrimaryDark">#9E9E9E</color>*/
+.text_title_body{
+    color: black;
+    opacity: 0.87;
+}
+.text_secondary{
+    color: black;
+    opacity: 0.54;
+}
+.registerlabel{
+    color: #71000000;
+}
+.music{
+    color: #02477e;
+}
+.sports{
+    color: #3788ac;
+}
+.volunteer{
+    color: #618733;
+}
+.workshop{
+    color: #607d8b;
+}
+.festival{
+    color: #e29422;
+}
+.entertainment{
+    color: #4b3573;
+}
+.arts{
+    color: black;
+    opacity: 0.87;
+}
+.food{
+    color: #795548;
+}
+.bargain{
+    color: #dca827;
+}
+.bookmark{
+    color: #d9b310;
+}
 /*<color name="colorAccent1">#2bc7dc</color>*/
 /*<color name="colorAccent1Disabled">#4cc9da</color>*/
 /*<color name="colorAccent2">#108c90</color>*/
 /*<color name="colorProgressTint" >@color/colorAccent1</color>*/
-/*<color name="colorBackground">#CFD8DC</color>*/
 
 /*<color name="colorTintSecondary">#a3a2a2</color>*/
-/*<color name="colorBorder">#cccbcb</color>*/
 /*<color name="colorContentEmpty">#bdbdbd</color>*/
 /*<color name="colorContentEmptyDark">#9E9E9E</color>*/
 /*<color name="colorComponentBackground">@android:color/white</color>*/
-/*<color name="colorActionBookmarked">#D9B310</color>*/
 /*<color name="colorBackgroundEventSmallDefault">#FFFDE7</color>*/
 /*<color name="colorBackgroundRegistering">@color/colorComponentBackground</color>*/
 
@@ -33,20 +68,3 @@
 /*<color name="blackOpacity54">#89000000</color>*/
 /*<color name="whiteOpacity87">#deffffff</color>*/
 /*<color name="whiteOpacity54">#89ffffff</color>*/
-
-/*<!-- Text Colors -->*/
-/*<color name="colorTextTitle">@color/blackOpacity87</color>*/
-/*<color name="colorTextBody">@color/blackOpacity87</color>*/
-/*<color name="colorTextActionSecondary">@color/blackOpacity54</color>*/
-/*<color name="colorRegisteringLabel">#71000000</color>*/
-
-/*<color name="colorCategoryMusic">#02477e</color>*/
-/*<color name="colorCategorySports">#3788ac</color>*/
-/*<color name="colorCategoryVolunteer">#618733</color>*/
-/*<color name="colorCategoryWorkshopConference">#607D8B</color>*/
-/*<color name="colorCategoryFestival">#e29422</color>*/
-/*<color name="colorCategoryEntertainment">#4b3573</color>*/
-/*<color name="colorCategoryArts">@color/blackOpacity87</color>*/
-/*<color name="colorCategoryFoodDrink">#795548</color>*/
-/*<color name="colorCategoryBargain">#dca827</color>*/
-/*</resources>*/
